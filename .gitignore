@@ -1,0 +1,10 @@
+# Dependency directory
+node_modules
+bower_components
+
+# Generated files
+build
+
+# IDE
+.idea
+*.iml
