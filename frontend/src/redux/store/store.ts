@@ -1,16 +1,19 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {createLogger} from "redux-logger";
-import { SampleStore } from "./sampleStore";
+import promise from "redux-promise-middleware";
+import thunk from "redux-thunk";
 
-import sampleReducer from "../reducers/sampleReducer";
+import { MyWalletStore } from "./myWalletStore";
 
-const middleware =  applyMiddleware(createLogger());
+import myWalletReducer from "../reducers/myWalletReducer";
+
+const middleware =  applyMiddleware(promise(), thunk, createLogger());
 const reducers = combineReducers({
-    sample: sampleReducer,
+    myWallet: myWalletReducer,
 });
 
 export interface ApplicationStore {
-    sample: SampleStore;
+    myWallet: MyWalletStore;
 }
 
 export default createStore(reducers, middleware) as Store<ApplicationStore>;

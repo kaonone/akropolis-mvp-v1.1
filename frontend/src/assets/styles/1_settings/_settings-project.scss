@@ -1,0 +1,29 @@
+/*------------------------------------*\
+  #PROJECT VARIABLES
+\*------------------------------------*/
+
+// Colors
+$color-grey-dark:           #424242;
+
+$text-default-color:        $color-grey-dark;
+
+// Fonts
+$font-family:               'Roboto', Arial, sans-serif;
+
+// Font
+$font-size-large:           26px;
+$font-size-base:            14px;
+$font-size-small:           13px;
+
+$font-light:                300;
+$font-regular:              400;
+$font-black:                900;
+
+// Spacing
+$spacing-default:           8px;
+
+// Heights
+$header-height:             $spacing-default * 10;
+
+//Transition
+$transition-default:        all 300ms ease;

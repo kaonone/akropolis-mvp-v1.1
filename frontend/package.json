@@ -13,9 +13,9 @@
   "author": "Akropolis",
   "license": "",
   "devDependencies": {
-    "@types/lodash": "4.14.110",
     "@types/react": "16.4.1",
     "@types/react-dom": "16.0.6",
+    "@types/react-intl": "2.3.8",
     "@types/react-redux": "6.0.2",
     "@types/react-router": "4.0.26",
     "@types/react-router-dom": "4.2.7",
@@ -25,6 +25,7 @@
     "awesome-typescript-loader": "5.1.1",
     "copy-webpack-plugin": "4.5.1",
     "css-loader": "0.28.11",
+    "node-sass": "4.9.0",
     "path": "0.12.7",
     "sass-loader": "7.0.3",
     "sass-mq": "5.0.0",
@@ -40,15 +41,16 @@
     "webpack-dev-server": "3.1.4"
   },
   "dependencies": {
-    "lodash": "4.17.10",
     "react": "16.4.1",
     "react-dom": "16.4.1",
+    "react-intl": "2.4.0",
     "react-redux": "5.0.7",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-promise-middleware": "5.1.1",
+    "redux-thunk": "2.3.0",
     "web3": "1.0.0-beta.34"
   }
 }
