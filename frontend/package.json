@@ -10,7 +10,7 @@
     "serve": "webpack-dev-server --hot --inline --config webpack.config.js",
     "tslint": "tslint -c tslint.json --format verbose 'src/**/*.{ts,tsx}'"
   },
-  "author": "Sparkbit",
+  "author": "Akropolis",
   "license": "",
   "devDependencies": {
     "@types/lodash": "4.14.110",
