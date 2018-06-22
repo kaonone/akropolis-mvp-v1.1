@@ -1,0 +1,86 @@
+/*------------------------------------*\
+  #WIDTHS
+\*------------------------------------*/
+
+// A mixin to spit out our width classes. Pass in the columns we want the widths
+// to have, and an optional suffix for responsive widths. E.g. to create thirds
+// and quarters for a small breakpoint:
+//
+// @include widths(3 4, -sm);
+
+@mixin widths($widths-columns, $widths-breakpoint: null) {
+
+  // Loop through the number of columns for each denominator of our fractions.
+  @each $widths-denominator in $widths-columns {
+
+    // Begin creating a numberator for our fraction up until we hit the
+    // denominator.
+    @for $widths-numerator from 1 through $widths-denominator {
+
+      // Build a class in the format `.u-3/4` or `.u-3-of-4`.
+      .u-#{$widths-numerator}\/#{$widths-denominator}#{$widths-breakpoint} {
+        width: ($widths-numerator / $widths-denominator) * 100% !important;
+      }
+
+      .u-push-#{$widths-numerator}\/#{$widths-denominator}#{$widths-breakpoint} {
+        position: relative;
+        left: ($widths-numerator / $widths-denominator) * 100% !important;
+      }
+
+      .u-pull-#{$widths-numerator}\/#{$widths-denominator}#{$widths-breakpoint} {
+        position: relative;
+        right: ($widths-numerator / $widths-denominator) * 100% !important;
+      }
+
+    }
+
+  }
+
+}
+
+/**
+ * A series of width helper classes that you can use to size things like grid
+ * systems. Classes can take a fraction-like format (e.g. `.u-2/3`) or a spoken-
+ * word format (e.g. `.u-2-of-3`). Use these in your markup:
+ *
+ * <div class="u-7/12">
+ */
+
+@include widths(1 2 3 4 5 6);
+
+//@include mq($from: small) {
+//
+//  @include widths(1 2 3 4 5 6, \@sm);
+//
+//}
+//
+//@include mq($from: medium) {
+//
+//  @include widths(1 2 3 4 5 6, \@md);
+//
+//}
+//
+//@include mq($from: large) {
+//
+//  @include widths(1 2 3 4 5 6, \@lg);
+//
+//}
+
+.u-row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 ($spacing-default * -1.5);
+
+  > [class*='u-'] {
+    padding: 0 ($spacing-default * 1.5);
+    margin-bottom: $spacing-default * 3;
+  }
+
+  //> .u-1\/1:first-child:not(:last-child) {
+  //
+  //  @include mq($until: small) {
+  //    margin-bottom: $spacing-default * 3;
+  //  }
+  //}
+}

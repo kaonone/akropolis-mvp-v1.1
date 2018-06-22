@@ -1,5 +1,7 @@
+import * as constants from "../../constants/actions/myWalletActions";
+
 export type ActionType =
-    "SAMPLE_ACTION_1" | "SAMPLE_ACTION_2";
+    constants.FETCH_SAMPLE_DATA;
 
 export interface Action<Type extends ActionType, Payload> {
     type: Type;
