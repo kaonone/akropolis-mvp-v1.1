@@ -11,7 +11,7 @@ import LayoutWrapper from "./wrappers/LayoutWrapper";
 
 import store from "./redux/store/store";
 
-import "./style.scss";
+import "./style.css";
 
 import messages from "./intl/messages";
 

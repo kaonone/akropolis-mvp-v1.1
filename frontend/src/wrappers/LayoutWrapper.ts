@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
-import LayoutComponent from "../components/layout/LayoutComponent";
 import { ApplicationStore } from "../redux/store/store";
+import LayoutComponent from "../views/layout/LayoutComponent";
 
 export function mapStateToProps({myWallet}: ApplicationStore) {
     return {

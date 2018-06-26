@@ -1,4 +1,4 @@
-import myWallet from "../components/myWallet/intl/en";
+import myWallet from "../views/myWallet/intl/en";
 
 export default {
     "nav.dataUsage": "Data usage",

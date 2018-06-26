@@ -23,3 +23,6 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+src/style.css
+src/**/*.css
+*.lock
