@@ -20,10 +20,18 @@ $font-regular:              400;
 $font-black:                900;
 
 // Spacing
-$spacing-default:           8px;
+$spacing-default:           10px;
 
 // Heights
 $header-height:             $spacing-default * 10;
 
 //Transition
 $transition-default:        all 300ms ease;
+
+// Breakpoints
+$mq-breakpoints: (
+    mobile:  320px,
+    tablet:  740px,
+    desktop: 980px,
+    wide:    1300px
+);
