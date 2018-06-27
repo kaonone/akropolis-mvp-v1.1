@@ -3,12 +3,10 @@ const expectThrow = require('./helpers/expectThrow');
 const AkropolisToken = artifacts.require('./AkropolisToken.sol');
 const AKTFaucet = artifacts.require('./AKTFaucet.sol');
 
-const BigNumber = web3.BigNumber;
+const toBN = web3.toBigNumber;
+const Code = require('code');
+const expect = Code.expect;
 
-const should = require('chai')
-    .use(require('chai-as-promised'))
-    .use(require('chai-bignumber')(BigNumber))
-    .should();
 
 contract('AKTFaucet', function ([owner, holder]) {
 
@@ -22,7 +20,7 @@ contract('AKTFaucet', function ([owner, holder]) {
 
     it('should emit tokens', async function () {
         await faucet.emitAKT(holder);
-        (await token.balanceOf(holder)).should.be.bignumber.equal(100);
+        expect((await token.balanceOf(holder))).to.equal(toBN(100));
     });
 
     it('should NOT emit tokens when paused', async function () {
@@ -37,6 +35,6 @@ contract('AKTFaucet', function ([owner, holder]) {
     it('should be unpausable', async function () {
         await faucet.pause();
         await faucet.unpause();
-        (await faucet.paused()).should.be.false;
+        expect((await faucet.paused())).to.be.false();
     });
 });
