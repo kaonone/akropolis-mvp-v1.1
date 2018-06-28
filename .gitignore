@@ -11,3 +11,5 @@ yarn.lock
 .idea
 *.iml
 *.log
+
+.DS_STORE
