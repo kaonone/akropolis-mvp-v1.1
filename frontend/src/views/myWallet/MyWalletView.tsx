@@ -2,7 +2,9 @@ import * as React from "react";
 import {FormattedMessage} from "react-intl";
 
 export interface Props {
+    account: string;
     message: string;
+    network: number;
 }
 
 export interface PropsFromDispatch {

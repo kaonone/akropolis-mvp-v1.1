@@ -1,5 +1,5 @@
 // import axios from "axios";
-import * as constants from "../../constants/actions/myWalletActions";
+import * as constants from "../../constants/actions";
 import {Action} from "./action";
 
 export function fetchSampleDataAction(): Action<constants.FETCH_SAMPLE_DATA, string> {
