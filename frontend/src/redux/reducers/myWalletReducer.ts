@@ -1,4 +1,4 @@
-import * as constants from "../../constants/actions/myWalletActions";
+import * as constants from "../../constants/actions/index";
 import {Action, ActionType } from "../actions/action";
 import {MyWalletStore} from "../store/myWalletStore";
 
