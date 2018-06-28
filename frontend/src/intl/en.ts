@@ -1,4 +1,5 @@
 import myWallet from "../views/myWallet/intl/en";
+import onboarding from "../views/onboarding/intl/en";
 
 export default {
     "nav.dataUsage": "Data usage",
@@ -6,5 +7,6 @@ export default {
     "nav.myWallet": "My wallet",
     "nav.savingsAndFunds": "Savings and funds",
 
-    ...myWallet
+    ...myWallet,
+    ...onboarding
 };

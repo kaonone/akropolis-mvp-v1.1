@@ -3,35 +3,38 @@
 \*------------------------------------*/
 
 // Colors
-$color-grey-dark:           #424242;
+$color-white: #fff;
+$color-black: #000;
+$color-grey-dark: #424242;
 
-$text-default-color:        $color-grey-dark;
+$text-default-color: $color-grey-dark;
 
 // Fonts
-$font-family:               'Roboto', Arial, sans-serif;
+$font-family: "Roboto", Arial, sans-serif;
 
 // Font
-$font-size-large:           26px;
-$font-size-base:            14px;
-$font-size-small:           13px;
+$font-size-large: 26px;
+$font-size-base: 14px;
+$font-size-small: 13px;
 
-$font-light:                300;
-$font-regular:              400;
-$font-black:                900;
+$font-light: 300;
+$font-regular: 400;
+$font-black: 900;
 
 // Spacing
-$spacing-default:           10px;
+$spacing-default: 10px;
+
+// Paddings
+$padding-default: 5%;
 
 // Heights
-$header-height:             $spacing-default * 10;
+$header-height: $spacing-default * 10;
 
 //Transition
-$transition-default:        all 300ms ease;
+$transition-default: all 300ms ease;
 
 // Breakpoints
-$mq-breakpoints: (
-    mobile:  320px,
-    tablet:  740px,
-    desktop: 980px,
-    wide:    1300px
-);
+$mq-breakpoints: (mobile: 320px, tablet: 740px, desktop: 980px, wide: 1300px);
+
+// Shadows
+$shadow-default: 1px 4px 5px rgba($color-grey-dark, 0.3);

@@ -3,7 +3,7 @@ import {connect, Dispatch} from "react-redux";
 import {fetchSampleDataAction} from "../redux/actions/myWalletAction";
 import {ApplicationStore} from "../redux/store/store";
 
-import {default as MyWalletComponent, Props, PropsFromDispatch} from "../views/myWallet/MyWalletComponent";
+import {default as MyWalletComponent, Props, PropsFromDispatch} from "../views/myWallet/MyWalletView";
 
 export function mapStateToProps({myWallet}: ApplicationStore) {
     return {

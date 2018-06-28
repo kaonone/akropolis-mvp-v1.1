@@ -1,12 +1,12 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 
-export default class DataUsageComponent extends React.Component<{}, {}> {
+export default class MyProductsView extends React.Component<{}, {}> {
 
     public render() {
         return (
             <div>
-                <h1><FormattedMessage id="nav.dataUsage"/></h1>
+                <h1><FormattedMessage id="nav.myProducts"/></h1>
             </div>
         );
     }
