@@ -1,2 +1,0 @@
-export const FETCH_SAMPLE_DATA = "FETCH_SAMPLE_DATA";
-export type FETCH_SAMPLE_DATA = typeof FETCH_SAMPLE_DATA;

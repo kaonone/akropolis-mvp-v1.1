@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
+import AKTBalance from "../../wrappers/ATKBalanceWrapper";
 
 import { NAVIGATION } from "../../constants";
 
@@ -44,7 +45,7 @@ export default class NavbarComponent extends React.Component<Props, {}> {
                             <Link className="c-navbar__add-free-tokens" to="/add-free-test-tokens">Add free test tokens</Link>
                         </li>
                         <li className="c-navbar__item">
-                            <p>AKT balance, 100 AKT</p>
+                            <AKTBalance />
                         </li>
                     </ul>
                 </header>

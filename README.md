@@ -4,6 +4,20 @@
 ### Installation
 ### Running tests
 ### Running locally
+```
+yarn install
+```
+
+Compile smart contracts and copy output into frontend/src/ folder
+```
+yarn build:contracts
+```
+
+Start developer build
+```
+yarn start:frontend
+```
+
 ## License
 
 MIT License

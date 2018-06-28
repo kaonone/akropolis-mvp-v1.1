@@ -5,8 +5,11 @@ bower_components
 # Generated files
 build
 package-lock.json
+yarn.lock
 
 # IDE
 .idea
 *.iml
 *.log
+
+.DS_STORE

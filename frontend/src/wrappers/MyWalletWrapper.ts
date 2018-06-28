@@ -5,15 +5,17 @@ import {ApplicationStore} from "../redux/store/store";
 
 import {default as MyWalletComponent, Props, PropsFromDispatch} from "../views/myWallet/MyWalletView";
 
-export function mapStateToProps({myWallet}: ApplicationStore) {
+export function mapStateToProps({myWallet, web3Accounts, web3Network}: ApplicationStore) {
     return {
+        account: web3Accounts.accountSelected,
         message: myWallet.sampleData,
+        network: web3Network.networkId,
     };
 }
 
 export function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        fetchSampleData: () => dispatch(fetchSampleDataAction())
+        fetchSampleData: () => dispatch(fetchSampleDataAction()),
     };
 }
 
