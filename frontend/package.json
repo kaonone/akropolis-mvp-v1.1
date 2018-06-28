@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/web3": "1.0.0",
+    "bignumber": "1.1.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-intl": "2.4.0",
@@ -13,15 +15,16 @@
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-promise-middleware": "5.1.1",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "web3": "0.18.4"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts-ts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "REACT_APP_STAGE=dev npm-run-all -p watch-css start-js",
     "build-js": "react-scripts-ts build",
-    "build": "npm-run-all build-css build-js",
+    "build": "REACT_APP_STAGE=dev npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",
     "tslint": "tslint -c tslint.json --format verbose 'src/**/*.{ts,tsx}'",
     "eject": "react-scripts-ts eject"
@@ -37,14 +40,12 @@
     "@types/react-router-dom": "4.2.7",
     "@types/redux-logger": "3.0.6",
     "@types/redux-promise-middleware": "0.0.10",
-    "@types/web3": "1.0.0",
     "node-sass": "4.9.0",
     "node-sass-chokidar": "1.2.2",
     "npm-run-all": "4.1.2",
     "sass-mq": "5.0.0",
     "tslint": "5.10.0",
     "tslint-react": "3.6.0",
-    "typescript": "2.9.2",
-    "web3": "1.0.0-beta.34"
+    "typescript": "2.9.2"
   }
 }
