@@ -8,16 +8,18 @@
   },
   "scripts": {
     "test": "truffle test",
+    "test:ci": "npm run test -- --network ci",
     "build:contracts": "truffle compile && yarn contracts:copy && yarn releases:copy && truffle migrate",
     "contracts:copy": "rimraf frontend/src/contracts && cp -R build/contracts/ frontend/src/contracts",
     "releases:copy": "rimraf frontend/src/releases && cp -R releases frontend/src/releases",
     "start:frontend": "cd frontend && yarn start",
-    "build:frontend": "cd frontend && yarn build"
+    "build:frontend": "cd frontend && yarn build",
+    "ganache:cli": "ganache-cli"
   },
   "devDependencies": {
     "code": "5.2.0",
     "fs-extra": "6.0.1",
-    "ganache-cli": "6.1.3",
+    "ganache-cli": "^6.1.3",
     "mkdirp": "0.5.1",
     "solidity-coverage": "0.5.4",
     "truffle": "4.1.11",

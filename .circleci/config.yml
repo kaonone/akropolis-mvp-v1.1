@@ -1,0 +1,93 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:9
+
+  npm_cache_key: &npm_cache_key
+    v1-dependency-npm-{{ checksum "package.json" }}
+  npm_backup_cache_key: &npm_backup_cache_key
+    v1-dependency-npm
+
+  restore_node_modules: &restore_node_modules
+    restore_cache:
+      keys:
+        - *npm_cache_key
+        - *npm_backup_cache_key
+jobs:
+  prepare:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
+            - ./frontend/node_modules
+
+  lint:
+    <<: *container_config
+
+    working_directory: ./frontend
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Lint project
+          command: npm run lint
+
+      - store_artifacts:
+          path: reports/junit
+
+  test:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Run Ganache CLI
+          background: true
+          command: npm run ganache:cli
+
+      - run:
+          name: Test
+          command: npm run test:ci
+
+      - store_test_results:
+          path: reports/junit
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - prepare:
+          context: org-global
+          filters:
+            tags:
+              only: /.*/
+      - lint:
+          context: org-global
+          requires:
+            - prepare
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          context: org-global
+          requires:
+            - prepare
+          filters:
+            tags:
+              only: /.*/
