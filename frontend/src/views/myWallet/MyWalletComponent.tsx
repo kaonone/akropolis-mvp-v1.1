@@ -2,7 +2,9 @@ import * as React from "react";
 import {FormattedMessage} from "react-intl";
 
 export interface Props {
+    account: string;
     message: string;
+    network: number;
 }
 
 export interface PropsFromDispatch {
@@ -12,6 +14,9 @@ export interface PropsFromDispatch {
 interface AllProps extends Props, PropsFromDispatch {}
 
 export default class MyWalletComponent extends React.Component<AllProps, {}> {
+    constructor(props: any) {
+        super(props);
+    }
 
     public componentWillMount() {
         this.props.fetchSampleData();
