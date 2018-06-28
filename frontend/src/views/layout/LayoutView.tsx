@@ -3,21 +3,34 @@ import { Route } from "react-router-dom";
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import { NAVIGATION } from "../../constants";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
-import DataUsageComponent from "../dataUsage/DataUsageComponent";
-import MyProductsComponent from "../myProducts/MyProductsComponent";
+import DataUsageView from "../dataUsage/DataUsageView";
+import MyProductsView from "../myProducts/MyProductsView";
+import OnboardingView from "../onboarding/OnboardingView";
 
-import SavingsAndFundsComponent from "../savingsAndFunds/SavingsAndFundsComponent";
+import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
 interface Props {
     message: string;
 }
 
-export default class LayoutComponent extends React.Component<Props, {}> {
+export default class LayoutView extends React.Component<Props, any> {
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            islogin: false
+        };
+    }
 
     public render() {
+        if (!this.state.islogin) {
+            return <OnboardingView/>;
+        }
         return (
             <div>
-                <NavbarComponent />
+                <NavbarComponent/>
+
                 <Route
                     exact={true}
                     path={`/${NAVIGATION.myWallet}`}
@@ -25,15 +38,15 @@ export default class LayoutComponent extends React.Component<Props, {}> {
                 />
                 <Route
                     path={`/${NAVIGATION.savingsAndFunds}`}
-                    component={SavingsAndFundsComponent}
+                    component={SavingsAndFundsView}
                 />
                 <Route
                     path={`/${NAVIGATION.myProducts}`}
-                    component={MyProductsComponent}
+                    component={MyProductsView}
                 />
                 <Route
                     path={`/${NAVIGATION.dataUsage}`}
-                    component={DataUsageComponent}
+                    component={DataUsageView}
                 />
             </div>
         );

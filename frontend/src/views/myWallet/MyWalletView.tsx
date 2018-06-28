@@ -11,7 +11,7 @@ export interface PropsFromDispatch {
 
 interface AllProps extends Props, PropsFromDispatch {}
 
-export default class MyWalletComponent extends React.Component<AllProps, {}> {
+export default class MyWalletView extends React.Component<AllProps, {}> {
 
     public componentWillMount() {
         this.props.fetchSampleData();

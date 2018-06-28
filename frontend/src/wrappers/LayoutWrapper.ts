@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { ApplicationStore } from "../redux/store/store";
-import LayoutComponent from "../views/layout/LayoutComponent";
+import LayoutView from "../views/layout/LayoutView";
 
 export function mapStateToProps({myWallet}: ApplicationStore) {
     return {
@@ -9,4 +9,4 @@ export function mapStateToProps({myWallet}: ApplicationStore) {
     };
 }
 
-export default connect(mapStateToProps)(LayoutComponent);
+export default connect(mapStateToProps)(LayoutView);

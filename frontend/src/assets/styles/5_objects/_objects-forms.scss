@@ -1,0 +1,13 @@
+.o-form {
+    
+    &__input {
+        background-color: rgba($color-grey-dark, 0.3);
+        border: unset;
+        outline: 0;
+        padding: $spacing-default / 2 $spacing-default;
+        height: $spacing-default * 3;
+        display: block;
+        overflow: hidden;
+        width: 100%;
+    }
+}
