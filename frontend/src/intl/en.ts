@@ -1,3 +1,4 @@
+import AKTBalance from "../components/AKTBalance/intl/en";
 import myWallet from "../views/myWallet/intl/en";
 import onboarding from "../views/onboarding/intl/en";
 
@@ -7,6 +8,7 @@ export default {
     "nav.myWallet": "My wallet",
     "nav.savingsAndFunds": "Savings and funds",
 
+    ...AKTBalance,
     ...myWallet,
-    ...onboarding
+    ...onboarding,
 };
