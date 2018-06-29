@@ -23,7 +23,7 @@ interface State {
 export default class CreatingPortfolioPartTwo extends React.Component<Props, State> {
     public readonly state: State = {
         form: {
-            age: 0,
+            age: 65,
             annualReturn: 0,
             inflation: 0,
         }
@@ -84,7 +84,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
                         <FormattedMessage id="onboarding.retirementAge"/>
                         <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
-                    <InputRange value={this.state.form.age} max={20000} min={0} onChange={this.handleRangeChange("age")}/>
+                    <InputRange value={this.state.form.age} max={100} min={0} onChange={this.handleRangeChange("age")}/>
                 </div>
                 <div className="v-onboarding__section v-onboarding__section--inline">
                     <div className="v-onboarding__section-title">
