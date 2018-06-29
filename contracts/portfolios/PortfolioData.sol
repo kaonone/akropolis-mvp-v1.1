@@ -29,17 +29,17 @@ contract PortfolioData is Ownable, Portfolio {
   mapping(address => Allocation[]) public user_allocations;
 
   function createNewUserAllocation(address _userAddress, uint[] _pc, uint[] _eth, address[] _fund) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
     Allocation[] memory array;
     for (uint i = 0; i < _pc.length; i++) {
       array[i] = Allocation(_pc[i], _eth[i], _fund[i]);
       user_allocations[_userAddress][i] = Allocation(_pc[i], _eth[i], _fund[i]);
     }
-    emit Created(_userAddress, array, msg.sender);
+    emit Created(_userAddress, array, tx.origin);
   }
 
   function updateUserAllocation(address _userAddress, uint[] _pc, uint[] _eth, address[] _fund) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
     Allocation[] memory array;
     for (uint i = 0; i < _pc.length; i++) {
       array[i] = Allocation(_pc[i], _eth[i], _fund[i]);
@@ -49,8 +49,8 @@ contract PortfolioData is Ownable, Portfolio {
   }
 
   function deleteUserAllocation(address _userAddress) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
     delete user_allocations[_userAddress];
-    emit Deleted(_userAddress, msg.sender);
+    emit Deleted(_userAddress, tx.origin);
   }
 }

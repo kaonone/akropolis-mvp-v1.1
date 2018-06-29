@@ -14,28 +14,28 @@ contract FundData is Ownable {
   event Updated(address indexed userAccount, uint balance, address indexed authorisingAccount);
 
   function createNewBalance(address _userAddress, uint _balance) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
 
     users_balances[_userAddress] = _balance;
 
-    emit Created(_userAddress, _balance, msg.sender);
+    emit Created(_userAddress, _balance, tx.origin);
   }
 
   function updateBalance(address _userAddress, uint _balanceChange) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
 
     uint balance = users_balances[_userAddress];
     uint total = SafeMath.add(balance, _balanceChange);
     users_balances[_userAddress] = balance;
 
-    emit Updated(_userAddress, total, msg.sender);
+    emit Updated(_userAddress, total, tx.origin);
   }
 
   function deleteBalance(address _userAddress) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
 
     delete users_balances[_userAddress];
-    emit Deleted(_userAddress, msg.sender);
+    emit Deleted(_userAddress, tx.origin);
   }
 }
 

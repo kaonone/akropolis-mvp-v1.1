@@ -22,7 +22,7 @@ contract PortfolioFunctional is Ownable, Portfolio {
   // they are just to demonstrate the separation of concerns
   // into functional and data contracts.
   function createNewUserPortfolio(address _userAddress, address[] _funds, uint[] _pc, uint[] _investmentAmounts) public {
-    require(msg.sender == owner || msg.sender == _userAddress);
+    require(tx.origin == owner || tx.origin == _userAddress);
 
     // Needs rest of portfolio flow in theory, just abstracting out
     // the parts not dealing with the data contract for now
