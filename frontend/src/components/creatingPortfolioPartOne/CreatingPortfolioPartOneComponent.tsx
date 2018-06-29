@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
-import { calcultePlanValuesService } from "../../services/planService";
+import { calculatePlanValuesService } from "../../services/planService";
 import { Props } from "../../views/onboarding/OnboardingView";
 
 import InputRange from "../inputRange/InputRangeComponent";
@@ -10,7 +10,7 @@ import InputRange from "../inputRange/InputRangeComponent";
 interface State {
     ageAtRetirement: number;
     currentAge: number;
-    desiredAnualIncome: number;
+    desiredAnnualIncome: number;
     existingPension: number;
     savingPerMonth: number;
     form: {
@@ -25,7 +25,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
     public readonly state: State = {
         ageAtRetirement: 0,
         currentAge: 0,
-        desiredAnualIncome: 0,
+        desiredAnnualIncome: 0,
         existingPension: 0,
         form: {
             range1: 0,
@@ -87,8 +87,8 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 <button
                     onClick={() => {
                         this.props.changeSlide(3);
-                        if (calcultePlanValuesService(this.state) && this.props.calcultePlanValuesServiceProps) {
-                            this.props.calcultePlanValuesServiceProps(calcultePlanValuesService(this.state));
+                        if (calculatePlanValuesService(this.state) && this.props.calcultePlanValuesServiceProps) {
+                            this.props.calcultePlanValuesServiceProps(calculatePlanValuesService(this.state));
                         }
                     }}
                     className="o-btn v-onboarding__btn"

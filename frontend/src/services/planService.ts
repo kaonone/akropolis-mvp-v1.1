@@ -1,7 +1,7 @@
 export interface PlanValues {
     ageAtRetirement: number;
     currentAge: number;
-    desiredAnualIncome: number;
+    desiredAnnualIncome: number;
     existingPension: number;
     savingPerMonth: number;
 }
@@ -12,7 +12,7 @@ export interface PlanAfterCalculate {
     projectReturns: number;
 }
 
-export function calcultePlanValuesService(planValues: PlanValues): PlanAfterCalculate {
+export function calculatePlanValuesService(planValues: PlanValues): PlanAfterCalculate {
     return {
         needToSave: 777,
         pensionValue: 15000,

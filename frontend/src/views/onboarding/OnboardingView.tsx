@@ -7,7 +7,7 @@ import { PlanAfterCalculate } from "../../services/planService";
 import "./v-onboarding.css";
 
 interface State {
-    desiredAnualIncome: string;
+    desiredAnnualIncome: string;
     numberOfSlide: number;
     planAfterCalculate: PlanAfterCalculate;
 }
@@ -21,7 +21,7 @@ export interface Props {
 export default class OnboardingView extends React.Component<any, State> {
 
     public readonly state: State = {
-        desiredAnualIncome: "",
+        desiredAnnualIncome: "",
             numberOfSlide: 1,
             planAfterCalculate: {
                 needToSave: 0,
