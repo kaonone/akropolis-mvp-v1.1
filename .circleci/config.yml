@@ -75,6 +75,8 @@ workflows:
       - prepare:
           context: org-global
           filters:
+            branches:
+              only: /.*/
             tags:
               only: /.*/
       - lint:
@@ -82,6 +84,8 @@ workflows:
           requires:
             - prepare
           filters:
+            branches:
+              only: /.*/
             tags:
               only: /.*/
       - test:
@@ -89,5 +93,7 @@ workflows:
           requires:
             - prepare
           filters:
+            branches:
+              only: /.*/
             tags:
               only: /.*/
