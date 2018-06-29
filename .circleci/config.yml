@@ -1,0 +1,102 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:9
+
+  npm_cache_key: &npm_cache_key
+    v2-dependency-npm-{{ checksum "package.json" }}
+
+  restore_node_modules: &restore_node_modules
+    restore_cache:
+      keys:
+        - *npm_cache_key
+
+jobs:
+  prepare:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Install truffle dependencies
+          command: npm install
+
+      - run:
+          name: Install frontend dependencies
+          working_directory: ./frontend
+          command: npm install
+
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
+            - ./frontend/node_modules
+
+  lint:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Lint project
+          working_directory: ./frontend
+          command: |
+            mkdir -p reports/junit
+            npm run tslint:ci
+
+      - store_test_results:
+          path: reports/junit
+
+  test:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *restore_node_modules
+
+      - run:
+          name: Run Ganache CLI
+          background: true
+          command: npm run ganache:cli
+
+      - run:
+          name: Test
+          command: |
+            mkdir -p reports/junit
+            npm run test:ci
+
+      - store_test_results:
+          path: reports/junit
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - prepare:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - lint:
+          requires:
+            - prepare
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - prepare
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/

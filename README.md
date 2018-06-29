@@ -1,5 +1,7 @@
 # Akropolis PoC
 
+[![CircleCI](https://circleci.com/gh/akropolisio/akropolis-poc.svg?style=shield&circle-token=1c036c16b034cd36ffb33011c518a2ec6af2d2dc)](https://circleci.com/gh/akropolisio/akropolis-poc)
+
 ### Overview
 ### Installation
 ### Running tests

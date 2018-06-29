@@ -22,6 +22,11 @@ module.exports = {
             port: 8543,
             network_id: '*' // Match any network id
         },
+        ci: {
+            host: 'localhost',
+            port: 8545,
+            network_id: '*'
+        },
         testenv: {
             provider: function () {
                 return new HDWalletProvider(config.mnemonic, "http://ganache.sparkbit.pl:8545")
