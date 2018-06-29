@@ -73,14 +73,12 @@ workflows:
   main:
     jobs:
       - prepare:
-          context: org-global
           filters:
             branches:
               only: /.*/
             tags:
               only: /.*/
       - lint:
-          context: org-global
           requires:
             - prepare
           filters:
@@ -89,7 +87,6 @@ workflows:
             tags:
               only: /.*/
       - test:
-          context: org-global
           requires:
             - prepare
           filters:
