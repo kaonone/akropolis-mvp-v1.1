@@ -46,9 +46,7 @@ export default class InputRangeComponent extends React.Component<Props, State> {
                 <input type="range"  className="c-input-range__range"
                        ref={(c: HTMLInputElement) => {this.range = c; }}
                        max={this.state.max} min={this.state.min} value={this.state.value} onChange={this.onChange}/>
-                {this.props.symbol ? (
-                    <span className="c-input-range__symbol">{this.props.symbol}</span>
-                ) : null}
+                <span className="c-input-range__symbol">{this.props.symbol}</span>
                 <input type="number" className="o-form__input c-input-range__input"
                        value={this.state.value} onChange={this.onChange}/>
             </div>
