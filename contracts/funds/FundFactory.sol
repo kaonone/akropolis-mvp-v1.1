@@ -2,12 +2,20 @@ pragma solidity ^0.4.24;
 
 import './FundData.sol';
 import './FundFunctional.sol';
+import './FundRegistry.sol';
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 
 contract FundFactory is Ownable {
-  function createNewFund(string _fundName) onlyOwner public returns(FundFunctional) {
+  FundRegistry public fundRegistry;
+
+  constructor(address _fundRegistry) public {
+    fundRegistry = FundRegistry(_fundRegistry);
+  }
+
+  function createNewFund(address _fundOwner, string _fundName) onlyOwner public returns(FundFunctional) {
     FundData fundData = new FundData();
     FundFunctional fund = new FundFunctional(fundData, _fundName);
+    fundRegistry.createNewFund(_fundOwner, fund, _fundName);
     return fund;
   }
 }
