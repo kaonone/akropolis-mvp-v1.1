@@ -1,5 +1,5 @@
 .o-form {
-    
+
     &__input {
         background-color: rgba($color-grey-dark, 0.3);
         border: unset;
@@ -9,5 +9,46 @@
         display: block;
         overflow: hidden;
         width: 100%;
+    }
+
+    &__checkbox {
+        position: relative;
+        cursor: pointer;
+
+        &:before {
+            content: "";
+            width: $spacing-default * 2;
+            height: $spacing-default * 2;
+            background-color: $color-white;
+            border: 1px solid $color-black;
+            border-radius: $radius-small;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: $transition-default;
+        }
+
+        &:after {
+            content: "";
+            height: $spacing-default;
+            width: $spacing-default;
+            position: absolute;
+            left: $spacing-default;
+            top: $spacing-default;
+            opacity: 0;
+            transition: $transition-default;
+        }
+
+        &:checked {
+
+            &:before {
+                border: 1px solid $color-black;
+                background-color: $color-black;
+            }
+
+            &:after {
+                opacity: 1;
+            }
+        }
     }
 }
