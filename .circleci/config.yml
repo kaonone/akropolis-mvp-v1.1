@@ -36,14 +36,13 @@ jobs:
   lint:
     <<: *container_config
 
-    working_directory: ./frontend
-
     steps:
       - checkout
       - *restore_node_modules
 
       - run:
           name: Lint project
+          working_directory: ./frontend
           command: npm run lint
 
       - store_artifacts:
