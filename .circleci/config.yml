@@ -45,7 +45,7 @@ jobs:
           working_directory: ./frontend
           command: npm run tslint:ci
 
-      - store_artifacts:
+      - store_test_results:
           path: reports/junit
 
   test:
