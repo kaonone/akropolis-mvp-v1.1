@@ -31,13 +31,20 @@ export default class InputRangeComponent extends React.Component<Props, State> {
         this.onChange = this.onChange.bind(this);
     }
 
-    public componentWillMount() {
+    public componentDidMount() {
+        const max = this.props.max || 100;
+        const min = this.props.min || 0;
+        const value = this.props.value;
         this.setState({
             ...this.state,
-            max: this.props.max || 100,
-            min: this.props.min || 0,
-            value: this.props.value,
+            max,
+            min,
+            value,
         });
+
+        if (value !== 0) {
+            this.setRangeBackground(value, min, max);
+        }
     }
 
     public render() {
@@ -58,15 +65,19 @@ export default class InputRangeComponent extends React.Component<Props, State> {
         const max = parseInt(this.range.max, 0);
         const parsedValue = parseFloat(event.target.value) || 0;
         const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
-        const val = (value - min) / (max - min);
 
         this.setState({
             ...this.state,
             value,
         });
 
-        this.range.style.backgroundImage = "-webkit-gradient(linear, left top, right top, color-stop(" + val + ", #484848), color-stop(" + val + ", #e4e4e4))";
+        this.setRangeBackground(value, min, max);
 
         this.props.onChange(value);
+    }
+
+    private setRangeBackground(value: number, min: number, max: number) {
+        const val = ((value - min) / (max - min)) * 100;
+        this.range.style.background = "linear-gradient(to right, #484848, #484848 " + val + "%, #e4e4e4 " + val + "%)";
     }
 }
