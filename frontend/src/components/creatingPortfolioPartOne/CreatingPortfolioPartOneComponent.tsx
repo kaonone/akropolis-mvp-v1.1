@@ -4,66 +4,55 @@ import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
 import { Props } from "../../views/onboarding/OnboardingView";
 
-export default class CreatingPortfolioPartOneComponent extends React.Component<Props, {}> {
+import InputRange from "../inputRange/InputRangeComponent";
+
+interface State {
+    form: {
+        range1: number;
+        range2: number;
+        range3: number;
+    };
+}
+
+export default class CreatingPortfolioPartOneComponent extends React.Component<Props, State> {
+
+    public readonly state: State = {
+        form: {
+            range1: 0,
+            range2: 0,
+            range3: 0,
+        }
+    };
+
+    constructor(props: any) {
+        super(props);
+
+        this.handleRangeChange = this.handleRangeChange.bind(this);
+    }
 
     public render() {
-
         return (
             <div className="v-onboarding__create-portfolio-first-step-slide">
                 <h2 className="v-onboarding__headline">
                     <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio" />
                 </h2>
                 <div className="v-onboarding__section">
-                    <div className="v-onboarding__wrapper-inputs">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement" />
-                                </p>
-                            </div>
-                            <input className="v-onboarding__input-range o-form__input" type="range" />
-                        </div>
-                        <div className="v-onboarding__wrapper-input">
-                            <span className="v-onboarding__currency">£</span>
-                            <input className="o-form__input" type="text" />
-                        </div>
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement"/>
                     </div>
+                    <InputRange value={this.state.form.range1} max={20000} min={0} symbol="£" onChange={this.handleRangeChange("range1")}/>
                 </div>
                 <div className="v-onboarding__section">
-                    <div className="v-onboarding__wrapper-inputs">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.valueOfMyExistingPensionPots" />
-                                </p>
-                            </div>
-                            <input
-                                type="range"
-                                name="desiredAnualIncome"
-                                className="v-onboarding__input-range o-form__input"
-                            />
-                        </div>
-                        <div className="v-onboarding__wrapper-input">
-                            <span className="v-onboarding__currency">£</span>
-                            <input className="o-form__input" type="text" />
-                        </div>
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.valueOfMyExistingPensionPots"/>
                     </div>
+                    <InputRange value={this.state.form.range2} max={20000} min={0} symbol="£" onChange={this.handleRangeChange("range2")}/>
                 </div>
                 <div className="v-onboarding__section">
-                    <div className="v-onboarding__wrapper-inputs">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.howMuchIAmSavingPerMonth" />
-                                </p>
-                            </div>
-                            <input className="v-onboarding__input-range o-form__input" type="range" />
-                        </div>
-                        <div className="v-onboarding__wrapper-input">
-                            <span className="v-onboarding__currency">£</span>
-                            <input className="o-form__input" type="text" />
-                        </div>
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>
                     </div>
+                    <InputRange value={this.state.form.range3} max={20000} min={0} symbol="£" onChange={this.handleRangeChange("range3")}/>
                 </div>
                 <div className="v-onboarding__wrapper-age-inputs">
                     <div className="v-onboarding__wrapper-age-input">
@@ -89,5 +78,16 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 </button>
             </div>
         );
+    }
+
+    private handleRangeChange(field: string) {
+        return (value: number) => {
+            const form = this.state.form;
+            form[field] = value;
+            this.setState({
+                ...this.state,
+                form,
+            });
+        };
     }
 }
