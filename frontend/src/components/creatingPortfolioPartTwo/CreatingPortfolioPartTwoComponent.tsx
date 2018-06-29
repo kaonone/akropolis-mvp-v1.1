@@ -10,6 +10,8 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, {}>
 
     public render() {
 
+        const planAfterCalculate = this.props.planAfterCalculate;
+
         return (
             <div className="v-onboarding__create-portfolio-second-step-slide">
                 <h2 className="v-onboarding__headline">
@@ -22,7 +24,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, {}>
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <span className="v-onboarding__final-value-currency">£</span>
-                            <div className="v-onboarding__value">777</div>
+                            <div className="v-onboarding__value">{planAfterCalculate ? planAfterCalculate.needToSave : ""}</div>
                             <span className="v-onboarding__period">/mo</span>
                         </div>
                     </div>
@@ -32,7 +34,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, {}>
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <span className="v-onboarding__final-value-currency">£</span>
-                            <div className="v-onboarding__value v-onboarding__value--smaller">15 000</div>
+                            <div className="v-onboarding__value v-onboarding__value--smaller">{planAfterCalculate ? planAfterCalculate.pensionValue : ""}</div>
                         </div>
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
@@ -40,7 +42,9 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, {}>
                             <FormattedMessage id="onboarding.projectedReturns" />
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
-                            <div className="v-onboarding__value v-onboarding__value--smaller">7</div>
+                            <div className="v-onboarding__value v-onboarding__value--smaller">
+                                {planAfterCalculate ? planAfterCalculate.projectReturns : ""}
+                            </div>
                             <span className="v-onboarding__period">%</span>
                         </div>
                     </div>
