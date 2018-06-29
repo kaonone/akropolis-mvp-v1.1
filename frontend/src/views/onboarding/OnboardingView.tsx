@@ -14,7 +14,7 @@ interface State {
 
 export interface Props {
     changeSlide: (value: number) => void;
-    calcultePlanValuesServiceProps?: (value: any) => PlanAfterCalculate | void;
+    calculatePlanValuesServiceProps?: (value: any) => PlanAfterCalculate | void;
     planAfterCalculate?: PlanAfterCalculate;
 }
 
@@ -43,7 +43,7 @@ export default class OnboardingView extends React.Component<any, State> {
                 {this.state.numberOfSlide === 2 &&
                     <CreatingPortfolioPartOneComponent
                         changeSlide={this.changeSlide}
-                        calcultePlanValuesServiceProps={this.handleCalcultePlanValuesService}
+                        calculatePlanValuesServiceProps={this.handleCalcultePlanValuesService}
                     />
                 }
 
