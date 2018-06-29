@@ -27,7 +27,7 @@
     "build": "REACT_APP_STAGE=dev npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",
     "tslint": "tslint -c tslint.json --format verbose 'src/**/*.{ts,tsx}'",
-    "tslint:ci": "tslint -o reports/junit -c tslint.json --format junit 'src/**/*.{ts,tsx}'",
+    "tslint:ci": "tslint -o reports/junit/test-results.xml -c tslint.json --format junit 'src/**/*.{ts,tsx}'",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
