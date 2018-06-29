@@ -87,8 +87,8 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 <button
                     onClick={() => {
                         this.props.changeSlide(3);
-                        if (calculatePlanValuesService(this.state) && this.props.calcultePlanValuesServiceProps) {
-                            this.props.calcultePlanValuesServiceProps(calculatePlanValuesService(this.state));
+                        if (calculatePlanValuesService(this.state) && this.props.calculatePlanValuesServiceProps) {
+                            this.props.calculatePlanValuesServiceProps(calculatePlanValuesService(this.state));
                         }
                     }}
                     className="o-btn v-onboarding__btn"
