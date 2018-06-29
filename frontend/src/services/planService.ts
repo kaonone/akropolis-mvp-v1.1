@@ -1,16 +1,4 @@
-export interface PlanValues {
-    ageAtRetirement: number;
-    currentAge: number;
-    desiredAnnualIncome: number;
-    existingPension: number;
-    savingPerMonth: number;
-}
-
-export interface PlanAfterCalculate {
-    needToSave: number;
-    pensionValue: number;
-    projectReturns: number;
-}
+import {PlanAfterCalculate, PlanValues} from "../models/Onboarding";
 
 export function calculatePlanValuesService(planValues: PlanValues): PlanAfterCalculate {
     return {
