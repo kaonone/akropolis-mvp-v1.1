@@ -11,8 +11,8 @@
     "build:contracts": "truffle compile && yarn contracts:copy && yarn releases:copy && truffle migrate",
     "contracts:copy": "rimraf frontend/src/contracts && cp -R build/contracts/ frontend/src/contracts",
     "releases:copy": "rimraf frontend/src/releases && cp -R releases frontend/src/releases",
-    "start:frontend": "cd frontend && yarn start",
-    "build:frontend": "cd frontend && yarn build"
+    "start:frontend": "cd frontend && npm run start",
+    "build:frontend": "cd frontend && npm run build"
   },
   "devDependencies": {
     "code": "5.2.0",

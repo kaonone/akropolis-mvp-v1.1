@@ -14,15 +14,15 @@ interface Props {
     message: string;
 }
 
-export default class LayoutView extends React.Component<Props, any> {
+interface State {
+    isLogin: boolean;
+}
 
-    constructor(props: any) {
-        super(props);
+export default class LayoutView extends React.Component<Props, State> {
 
-        this.state = {
-            isLogin: false,
-        };
-    }
+    public readonly state: State = {
+        isLogin: false,
+    };
 
     public render() {
         if (!this.state.isLogin) {

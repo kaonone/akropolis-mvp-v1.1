@@ -4,6 +4,7 @@
 @import "assets/styles/5_objects/all";
 
 .v-onboarding {
+    $c: &;
 
     @include globalPadding;
 
@@ -25,6 +26,22 @@
 
         &--last {
             margin-bottom: unset;
+        }
+
+        &--inline {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #{$c}__section--inline & {
+            flex: 2;
+            margin-right: $spacing-default * 2;
         }
     }
 
@@ -168,5 +185,22 @@
         font-size: $spacing-default * 2;
         margin-bottom: $spacing-default * 2;
         display: inline-block;
+    }
+
+    &__symbol {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba($color-grey-dark, 0.3);
+        height: $spacing-default * 3;
+        min-width: $spacing-default * 3;
+        padding: 0 $spacing-default / 2;
+    }
+
+    &__input {
+
+        #{$c}__section--inline & {
+            flex: 1;
+        }
     }
 }

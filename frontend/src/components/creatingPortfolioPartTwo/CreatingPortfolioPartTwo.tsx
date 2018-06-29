@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
 import { Props } from "../../views/onboarding/OnboardingView";
 
+import InputRange from "../inputRange/InputRangeComponent";
+
 export default class CreatingPortfolioPartTwo extends React.Component<Props, {}> {
 
     public render() {
@@ -47,51 +49,44 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, {}>
                         <FormattedMessage id="onboarding.correctBasics" />
                 </Link>
                 <div className="v-onboarding__section">
-                    <div className="v-onboarding__wrapper-inputs">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.retirementAge" />
-                                </p>
-                                <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
-                            </div>
-                            <input className="v-onboarding__input-range o-form__input" type="range" />
-                        </div>
-                        <input className="o-form__input" type="text" />
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.retirementAge"/>
+                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
+                    <InputRange value={0} max={20000} min={0} symbol="£" onChange={this.handleRangeChange("range1")}/>
                 </div>
-                <div className="v-onboarding__section">
-                    <div className="v-onboarding__wrapper-inputs v-onboarding__wrapper-inputs--align-center">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.annualReturnAssumption" />
-                                </p>
-                                <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
-                            </div>
-                        </div>
-                        <span className="v-onboarding__currency">%</span>
-                        <input className="o-form__input" type="text" />
+                <div className="v-onboarding__section v-onboarding__section--inline">
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.annualReturnAssumption"/>
+                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
+                    <span className="v-onboarding__symbol">%</span>
+                    <input className="o-form__input v-onboarding__input" type="text" />
                 </div>
-                <div className="v-onboarding__section v-onboarding__section--last">
-                    <div className="v-onboarding__wrapper-inputs v-onboarding__wrapper-inputs--align-center">
-                        <div className="v-onboarding__wrapper-range">
-                            <div className="v-onboarding__wrappper-input-label">
-                                <p>
-                                    <FormattedMessage id="onboarding.inflationCalculationValue" />
-                                </p>
-                                <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
-                            </div>
-                        </div>
-                        <span className="v-onboarding__currency">%</span>
-                        <input className="o-form__input" type="text" />
+                <div className="v-onboarding__section v-onboarding__section--inline">
+                    <div className="v-onboarding__section-title">
+                        <FormattedMessage id="onboarding.inflationCalculationValue"/>
+                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
+                    <span className="v-onboarding__symbol">%</span>
+                    <input className="o-form__input v-onboarding__input" type="text" />
                 </div>
+
                 <button className="o-btn v-onboarding__btn">
                     <FormattedMessage id="onboarding.startSaving" />
                 </button>
             </div>
         );
+    }
+
+    private handleRangeChange(field: string) {
+        return (value: number) => {
+            // const form = this.state.form;
+            // form[field] = value;
+            // this.setState({
+            //     ...this.state,
+            //     form,
+            // });
+        };
     }
 }
