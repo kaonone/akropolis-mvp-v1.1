@@ -1,5 +1,6 @@
-@import "assets/styles/1_settings/all";
-@import "assets/styles/2_tools/all";
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-paddings";
+@import "assets/styles/2_tools/tools-mq";
 
 .c-navbar {
 
@@ -40,8 +41,8 @@
     &__toggle {
         background-color: transparent;
         display: block;
-        width: $spacing-default * 24/10;
-        height: $spacing-default * 24/10;
+        width: $spacing-default * 2;
+        height: $spacing-default * 2;
         position: relative;
         cursor: pointer;
         box-shadow: inset 0px 2px 0 0 $color-grey-dark;
@@ -53,8 +54,8 @@
 
         &:before,
         &:after {
-            width: $spacing-default * 24/10;
-            height: $spacing-default / 5; 
+            width: $spacing-default * 2;
+            height: $spacing-default / 4; 
             background-color: $color-grey-dark;
             position: absolute;
             left: 0;
@@ -63,21 +64,23 @@
 
         &:before {
             content: "";
-            top: $spacing-default * 8/10;
+            top: $spacing-default / 2;
+            transform-origin: center;  
 
             #{$c}--show-mobile-menu & {
-                transform: rotate(45deg);
-            }
+                transform: rotate(-45deg);
+            } 
         }
 
         &:after {
             content: "";
-            top: $spacing-default * 16/10;  
+            top: $spacing-default + 1;
+            transform-origin: center;  
 
             #{$c}--show-mobile-menu & {
-                transform: rotate(-45deg);
-                top: $spacing-default * 8/10;
-            }          
+                transform: rotate(45deg);
+                top: $spacing-default / 2; 
+            }         
         }
 
         @include mq($from: tablet) {

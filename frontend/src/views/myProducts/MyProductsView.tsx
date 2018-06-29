@@ -1,5 +1,6 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
+import ProductRowComponent from "../../components/productRowComponent/ProductRowComponent";
 
 export default class MyProductsView extends React.Component<{}, {}> {
 
@@ -7,6 +8,7 @@ export default class MyProductsView extends React.Component<{}, {}> {
         return (
             <div>
                 <h1><FormattedMessage id="nav.myProducts"/></h1>
+                <ProductRowComponent />
             </div>
         );
     }
