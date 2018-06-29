@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Lint project
           working_directory: ./frontend
-          command: npm run lint
+          command: npm run tslint:ci
 
       - store_artifacts:
           path: reports/junit
