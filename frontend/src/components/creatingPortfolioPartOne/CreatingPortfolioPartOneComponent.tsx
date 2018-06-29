@@ -42,6 +42,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
     }
 
     public render() {
+
         return (
             <div className="v-onboarding__create-portfolio-first-step-slide">
                 <h2 className="v-onboarding__headline">
@@ -71,7 +72,12 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                             <FormattedMessage id="onboarding.myCurrentAge" />
                         </p>
                         <FormattedMessage id="onboarding.enterAge">
-                            {(enterAge: string) => <input className="o-form__input v-onboarding__input" type="text" placeholder={enterAge} />}
+                            {(enterAge: string) => <input value={this.state.currentAge}
+                                onChange={this.onChange}
+                                className="o-form__input v-onboarding__input"
+                                type="number"
+                                name="currentAge"
+                                placeholder={enterAge} />}
                         </FormattedMessage>
                     </div>
                     <div className="v-onboarding__wrapper-age-input">
@@ -81,7 +87,14 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                             </p>
                             <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                         </div>
-                        <input className="o-form__input v-onboarding__input" type="text" />
+                        <FormattedMessage id="onboarding.ageAtRetirement">
+                            {(ageAtRetirement: string) => <input value={this.state.ageAtRetirement}
+                                onChange={this.onChange}
+                                className="o-form__input v-onboarding__input"
+                                type="number"
+                                name="ageAtRetirement"
+                                placeholder={ageAtRetirement} />}
+                        </FormattedMessage>
                     </div>
                 </div>
                 <button
@@ -108,5 +121,13 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 form,
             });
         };
+    }
+
+    private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const parsedValue = parseFloat(event.target.value) || 0;
+        this.setState({
+            ...this.state,
+            [event.target.name]: parsedValue
+        });
     }
 }
