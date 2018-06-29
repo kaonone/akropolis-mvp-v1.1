@@ -46,7 +46,9 @@ jobs:
       - run:
           name: Lint project
           working_directory: ./frontend
-          command: npm run tslint:ci
+          command: |
+            mkdir -p reports/junit
+            npm run tslint:ci
 
       - store_test_results:
           path: reports/junit
@@ -65,7 +67,9 @@ jobs:
 
       - run:
           name: Test
-          command: npm run test:ci
+          command: |
+            mkdir -p reports/junit
+            npm run test:ci
 
       - store_test_results:
           path: reports/junit
