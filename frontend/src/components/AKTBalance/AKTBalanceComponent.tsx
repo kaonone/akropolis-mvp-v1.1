@@ -11,13 +11,10 @@ interface State {
 }
 
 export default class AKTBalanceComponent extends React.Component<Props, State> {
-    constructor(props: any) {
-        super(props);
 
-        this.state = {
-            balance: "0",
-        };
-    }
+    public readonly state: State = {
+        balance: "0",
+    };
 
     public componentWillReceiveProps(nextProps: Props) {
         if (this.props.account !== nextProps.account) {

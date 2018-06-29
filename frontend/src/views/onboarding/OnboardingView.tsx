@@ -16,13 +16,10 @@ export interface Props {
 
 export default class OnboardingView extends React.Component<any, State> {
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            desiredAnualIncome: "",
-            numberOfSlide: 1
-        };
-    }
+    public readonly state: State = {
+        desiredAnualIncome: "",
+        numberOfSlide: 1
+    };
 
     public render() {
 
