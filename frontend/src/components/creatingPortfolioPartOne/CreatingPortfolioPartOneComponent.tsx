@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
-import {PlanValues} from "../../models/Onboarding";
+import { PlanValues } from "../../models/Onboarding";
 import { calculatePlanValuesService } from "../../services/planService";
 import { Props } from "../../views/onboarding/OnboardingView";
 
@@ -19,10 +19,10 @@ interface State extends PlanValues {
 export default class CreatingPortfolioPartOneComponent extends React.Component<Props, State> {
 
     public readonly state: State = {
-        ageAtRetirement: undefined,
-        currentAge: undefined,
-        desiredAnnualIncome: undefined,
-        existingPension: undefined,
+        ageAtRetirement: 0,
+        currentAge: 0,
+        desiredAnnualIncome: 0,
+        existingPension: 0,
         form: {
             range1: 0,
             range2: 0,
@@ -68,7 +68,10 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                             <FormattedMessage id="onboarding.myCurrentAge" />
                         </p>
                         <FormattedMessage id="onboarding.enterAge">
-                            {(enterAge: string) => <input value={this.state.currentAge}
+                            {(enterAge: string) => <input
+                                min="0"
+                                max="100"
+                                value={this.state.currentAge}
                                 onChange={this.onChange}
                                 className="o-form__input v-onboarding__input"
                                 type="number"
@@ -84,7 +87,10 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                             <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                         </div>
                         <FormattedMessage id="onboarding.ageAtRetirement">
-                            {(ageAtRetirement: string) => <input value={this.state.ageAtRetirement}
+                            {(ageAtRetirement: string) => <input
+                                min="0"
+                                max="100"
+                                value={this.state.ageAtRetirement}
                                 onChange={this.onChange}
                                 className="o-form__input v-onboarding__input"
                                 type="number"
@@ -120,10 +126,12 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
     }
 
     private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const min = parseInt(event.target.min, 0);
+        const max = parseInt(event.target.max, 0);
         const parsedValue = parseFloat(event.target.value) || 0;
         this.setState({
             ...this.state,
-            [event.target.name]: parsedValue
+            [event.target.name]: parsedValue > max ? max : (parsedValue < min ? min : parsedValue)
         });
     }
 }
