@@ -7,17 +7,19 @@
 ### Running tests
 ### Running locally
 ```
-yarn install
+npm install
 ```
 
 Compile smart contracts and copy output into frontend/src/ folder
 ```
-yarn build:contracts
+npm run build:contracts
 ```
 
-Start developer build
+Install dependencies and start application
 ```
-yarn start:frontend
+cd frontend
+npm install
+npm run start
 ```
 
 ## License

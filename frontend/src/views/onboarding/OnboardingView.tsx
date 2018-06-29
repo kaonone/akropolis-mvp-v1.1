@@ -1,51 +1,83 @@
 import * as React from "react";
-import logoAkropolis from "../../assets/images/logo-akropolis.svg";
-import BenefitsComponent from "../../components/benefits/BenefitsComponent";
+
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
-import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwo"; 
+import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
+import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
+import {PlanAfterCalculate} from "../../models/Onboarding";
+
+import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
 
 interface State {
-    desiredAnualIncome: string;
-    numberOfSlide: number;
+    desiredAnnualIncome: string;
+    numberOfSlide: 1 | 2 | 3;
+    plan: PlanAfterCalculate;
+    secondForm: {};
 }
 
 export interface Props {
     changeSlide: (value: number) => void;
+    calculatePlanValuesServiceProps?: (value: any) => PlanAfterCalculate | void;
+    planAfterCalculate?: PlanAfterCalculate;
 }
 
-export default class OnboardingView extends React.Component<any, State> {
+export interface PropsFromDispatch {
+    saveData: (plan: PlanAfterCalculate) => void;
+}
+
+export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
+
+    public readonly state: State = {
+        desiredAnnualIncome: "",
+        numberOfSlide: 1,
+        plan: {
+            needToSave: 0,
+            pensionValue: 0,
+            projectReturns: 0,
+        },
+        secondForm: {}
+    };
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            desiredAnualIncome: "",
-            numberOfSlide: 1
-        };
+
+        this.handleSave = this.handleSave.bind(this);
     }
 
     public render() {
 
         return (
             <div className="v-onboarding">
-                <img className="v-onboarding__logo" src={logoAkropolis} />
+                <img className="v-onboarding__logo" src={logoAkropolis}/>
 
                 {this.state.numberOfSlide === 1 &&
-                    <BenefitsComponent changeSlide={this.changeSlide} />
+                <SlideOneComponent changeSlide={this.changeSlide}/>
                 }
 
                 {this.state.numberOfSlide === 2 &&
-                    <CreatingPortfolioPartOneComponent changeSlide={this.changeSlide} />
+                <CreatingPortfolioPartOneComponent
+                    changeSlide={this.changeSlide}
+                    calculatePlanValuesServiceProps={this.handleCalculatePlanValuesService}
+                />
                 }
 
                 {this.state.numberOfSlide === 3 &&
-                    <CreatingPortfolioPartTwo changeSlide={this.changeSlide} />
+                <CreatingPortfolioPartTwo plan={this.state.plan} changeSlide={this.changeSlide} onSave={this.handleSave}/>
                 }
             </div>
         );
     }
 
-    private changeSlide = (value: number) => {
-        this.setState({ numberOfSlide: value });
+    private changeSlide = (value: 1 | 2 | 3) => {
+        this.setState({numberOfSlide: value});
+    }
+
+    private handleCalculatePlanValuesService = (val: PlanAfterCalculate) => {
+        this.setState({plan: val});
+    }
+
+    private handleSave() {
+        localStorage.setItem("userData", JSON.stringify(this.state.plan));
+        this.props.saveData(this.state.plan);
     }
 }

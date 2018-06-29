@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { ApplicationStore } from "../redux/store/store";
 import LayoutView from "../views/layout/LayoutView";
 
-export function mapStateToProps({myWallet}: ApplicationStore) {
+export function mapStateToProps({userData}: ApplicationStore) {
     return {
-        message: myWallet.sampleData,
+        userData,
     };
 }
 

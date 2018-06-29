@@ -1,7 +1,6 @@
 export const NAVIGATION = {
     dataUsage: "data-usage",
     myProducts: "my-products",
-    myWallet: "my-wallet",
-    onboarding: "",
+    myWallet: "",
     savingsAndFunds: "savings-and-funds",
 };

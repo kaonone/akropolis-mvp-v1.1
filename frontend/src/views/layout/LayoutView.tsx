@@ -4,24 +4,45 @@ import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/web3ProviderComponent";
 import { NAVIGATION } from "../../constants";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
+import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
 import MyProductsView from "../myProducts/MyProductsView";
-import OnboardingView from "../onboarding/OnboardingView";
+
+import {PlanAfterCalculate} from "../../models/Onboarding";
 
 import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
 interface Props {
-    message: string;
+    userData: PlanAfterCalculate;
 }
 
-export default class LayoutView extends React.Component<Props, any> {
+interface State {
+    isLogin: boolean;
+}
 
-    constructor(props: any) {
-        super(props);
+export default class LayoutView extends React.Component<Props, State> {
 
-        this.state = {
-            isLogin: false,
-        };
+    public readonly state: State = {
+        isLogin: false,
+    };
+
+    public componentWillMount() {
+        const userData = localStorage.getItem("userData");
+        if (userData) {
+            this.setState({
+                ...this.state,
+                isLogin: true,
+            });
+        }
+    }
+
+    public componentWillReceiveProps(nextProps: Props) {
+        if (this.props.userData.pensionValue !== nextProps.userData.pensionValue) {
+            this.setState({
+                ...this.state,
+                isLogin: true,
+            });
+        }
     }
 
     public render() {
@@ -29,7 +50,7 @@ export default class LayoutView extends React.Component<Props, any> {
             return (
                 <div>
                     <Web3Provider />
-                    <OnboardingView/>
+                    <OnboardingWrapper/>
                 </div>
             );
         }

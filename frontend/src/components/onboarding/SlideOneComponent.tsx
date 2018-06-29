@@ -1,13 +1,15 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+
+import { Props } from "../../views/onboarding/OnboardingView";
+
 import cupIcon from "../../assets/images/cup-icon.svg";
 import LockIcon from "../../assets/images/lock-icon.svg";
 import loupeIcon from "../../assets/images/loupe-icon.svg";
 
-export default class BenefitsComponent extends React.Component<any, {}> {
+export default class SlideOneComponent extends React.Component<Props, {}> {
 
     public render() {
-
         return (
             <div className="v-onboarding__benefits-slide">
                 <div className="v-onboarding__section">
@@ -35,7 +37,6 @@ export default class BenefitsComponent extends React.Component<any, {}> {
                     <FormattedMessage id="onboarding.createAPlan" />
                 </button>
             </div>
-
         );
     }
 }
