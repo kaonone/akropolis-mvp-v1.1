@@ -2,23 +2,32 @@ import * as React from "react";
 import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import BenefitsComponent from "../../components/benefits/BenefitsComponent";
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
-import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwo"; 
+import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
+import { PlanAfterCalculate } from "../../services/planService";
 import "./v-onboarding.css";
 
 interface State {
     desiredAnualIncome: string;
     numberOfSlide: number;
+    planAfterCalculate: PlanAfterCalculate;
 }
 
 export interface Props {
     changeSlide: (value: number) => void;
+    calcultePlanValuesServiceProps?: (value: any) => PlanAfterCalculate | void;
+    planAfterCalculate?: PlanAfterCalculate;
 }
 
 export default class OnboardingView extends React.Component<any, State> {
 
     public readonly state: State = {
         desiredAnualIncome: "",
-        numberOfSlide: 1
+            numberOfSlide: 1,
+            planAfterCalculate: {
+                needToSave: 0,
+                pensionValue: 0,
+                projectReturns: 0,
+            }
     };
 
     public render() {
@@ -32,11 +41,14 @@ export default class OnboardingView extends React.Component<any, State> {
                 }
 
                 {this.state.numberOfSlide === 2 &&
-                    <CreatingPortfolioPartOneComponent changeSlide={this.changeSlide} />
+                    <CreatingPortfolioPartOneComponent
+                        changeSlide={this.changeSlide}
+                        calcultePlanValuesServiceProps={this.handleCalcultePlanValuesService}
+                    />
                 }
 
                 {this.state.numberOfSlide === 3 &&
-                    <CreatingPortfolioPartTwo changeSlide={this.changeSlide} />
+                    <CreatingPortfolioPartTwo planAfterCalculate={this.state.planAfterCalculate} changeSlide={this.changeSlide} />
                 }
             </div>
         );
@@ -44,5 +56,9 @@ export default class OnboardingView extends React.Component<any, State> {
 
     private changeSlide = (value: number) => {
         this.setState({ numberOfSlide: value });
+    }
+
+    private handleCalcultePlanValuesService = (val: PlanAfterCalculate) => {
+        this.setState({ planAfterCalculate: val });
     }
 }
