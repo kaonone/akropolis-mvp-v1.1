@@ -6,15 +6,13 @@ references:
       - image: circleci/node:9
 
   npm_cache_key: &npm_cache_key
-    v1-dependency-npm-{{ checksum "package.json" }}
-  npm_backup_cache_key: &npm_backup_cache_key
-    v1-dependency-npm
+    v2-dependency-npm-{{ checksum "package.json" }}
 
   restore_node_modules: &restore_node_modules
     restore_cache:
       keys:
         - *npm_cache_key
-        - *npm_backup_cache_key
+
 jobs:
   prepare:
     <<: *container_config
