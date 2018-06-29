@@ -122,11 +122,11 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
             });
         };
     }
-
+    
     private handleChange(field: string) {
         return (event: React.ChangeEvent<HTMLInputElement>) => {
             const form = this.state.form;
-            form[field] = event.target.value;
+            form[field] = parseFloat(event.target.value) || 0;
             this.setState({
                 ...this.state,
                 form,
