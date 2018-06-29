@@ -24,7 +24,12 @@ jobs:
       - *restore_node_modules
 
       - run:
-          name: Install dependencies
+          name: Install truffle dependencies
+          command: npm install
+
+      - run:
+          name: Install frontend dependencies
+          working_directory: ./frontend
           command: npm install
 
       - save_cache:
