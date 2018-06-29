@@ -92,7 +92,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
                         <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
                     <span className="v-onboarding__symbol">%</span>
-                    <input className="o-form__input v-onboarding__input" type="number"
+                    <input className="o-form__input v-onboarding__input" type="number" min="0" max="100"
                            value={this.state.form.annualReturn} onChange={this.handleChange("annualReturn")} />
                 </div>
                 <div className="v-onboarding__section v-onboarding__section--inline">
@@ -101,7 +101,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
                         <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
                     <span className="v-onboarding__symbol">%</span>
-                    <input className="o-form__input v-onboarding__input" type="number"
+                    <input className="o-form__input v-onboarding__input" type="number" min="0" max="100"
                            value={this.state.form.inflation} onChange={this.handleChange("inflation")} />
                 </div>
 
@@ -125,8 +125,11 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
     
     private handleChange(field: string) {
         return (event: React.ChangeEvent<HTMLInputElement>) => {
+            const min = parseInt(event.target.min, 0);
+            const max = parseInt(event.target.max, 0);
+            const parsedValue = parseFloat(event.target.value) || 0;
             const form = this.state.form;
-            form[field] = parseFloat(event.target.value) || 0;
+            form[field] = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
             this.setState({
                 ...this.state,
                 form,
