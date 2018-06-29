@@ -2,17 +2,13 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
+import {PlanValues} from "../../models/Onboarding";
 import { calculatePlanValuesService } from "../../services/planService";
 import { Props } from "../../views/onboarding/OnboardingView";
 
 import InputRange from "../inputRange/InputRangeComponent";
 
-interface State {
-    ageAtRetirement: number;
-    currentAge: number;
-    desiredAnnualIncome: number;
-    existingPension: number;
-    savingPerMonth: number;
+interface State extends PlanValues {
     form: {
         range1: number;
         range2: number;
@@ -23,10 +19,10 @@ interface State {
 export default class CreatingPortfolioPartOneComponent extends React.Component<Props, State> {
 
     public readonly state: State = {
-        ageAtRetirement: 0,
-        currentAge: 0,
-        desiredAnnualIncome: 0,
-        existingPension: 0,
+        ageAtRetirement: undefined,
+        currentAge: undefined,
+        desiredAnnualIncome: undefined,
+        existingPension: undefined,
         form: {
             range1: 0,
             range2: 0,
