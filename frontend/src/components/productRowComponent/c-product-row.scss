@@ -1,0 +1,60 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-mq";
+@import "assets/styles/4_elements/elements-html";
+@import "assets/styles/4_elements/elements-heading";
+
+.c-product-row {
+    box-shadow: $shadow-default;
+    border-radius: $radius-default;
+    border: 1px solid $color-black;
+    padding: $spacing-default * 3/2 $spacing-default * 2 $spacing-default $spacing-default * 2;
+
+    &__wrapper-headline {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__headline {
+        font-weight: $font-regular;
+        margin-bottom: $spacing-default * 3/2;
+    }
+
+    &__describe {
+        color: $color-grey;
+        position: relative;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: $spacing-default;
+
+        &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: $gradient-transparent-to-white;
+            width: $spacing-default * 10;
+            height: 100%;
+        }
+    }
+
+    &__fund-value {
+        color: $color-grey;
+        font-weight: $font-regular;
+    }
+
+    &__wrapper-fund-value {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__describe-fund-value {
+        color: $color-secondary;
+        font-weight: $font-regular;
+    }
+
+    &__icon {
+        margin-right: $spacing-default / 2;
+    }
+}
