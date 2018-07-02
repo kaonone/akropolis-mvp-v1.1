@@ -1,33 +1,34 @@
 'use strict';
 
 const FundFactory = artifacts.require('./funds/FundFactory.sol');
-const FundRegistry = artifacts.require('/funds/FundRegistry.sol');
+const FundRegistry = artifacts.require('./funds/FundRegistry.sol');
 const PortfolioData = artifacts.require('./portfolios/PortfolioData.sol');
 const PortfolioFunctional = artifacts.require('.portfolios/PortfolioFunctional.sol');
 const releaser = require('../contracts/releaser');
 
-module.exports = (deployer, network) => {
-  deployer.then(async () => {
-    await deployer.deploy(PortfolioData);
-    await deployer.deploy(PortfolioFunctional, PortfolioData.address);
-    await deployer.deploy(FundRegistry);
-    // deploying 3 funds for demonstration
-    await deployer.deploy(FundFactory, FundRegistry.address);
-
-    let factory = await FundFactory.deployed();
-    let fundA = factory.createNewFund("test 1");
-    let fundB = factory.createNewFund("test 2");
-    let fundC = factory.createNewFund("test 3");
-
-    process.deployment = {
-      "PortfolioData": PortfolioData.address,
-      "PortfolioFunctional": PortfolioFunctional.address,
-      "FundFactory": FundFactory.address,
-      "fundA": fundA.address,
-      "fundB": fundB.address,
-      "fundC": fundC.address
-    };
-
-    await releaser(process.deployment, network);
-  });
+module.exports = (deployer, network, accounts) => {
+    deployer.then(async () => {
+        let owner = accounts[0];
+        await deployer.deploy(PortfolioData);
+        await deployer.deploy(PortfolioFunctional, PortfolioData.address);
+        await deployer.deploy(FundFactory);
+        let factory = await FundFactory.deployed();
+        let registry = FundRegistry.at(await factory.fundRegistry());
+        await factory.createNewFund(owner, "Crude Oil Fund", {from: owner});
+        await factory.createNewFund(owner, "Gold Investment", {from: owner});
+        await factory.createNewFund(owner, "US State Bonds", {from: owner});
+        let count = await registry.getFundCount();
+        let funds = [];
+        for (let i = 0; i < count; i++) {
+            funds.push(await registry.getFundAt(i));
+        }
+        process.deployment = {
+            "PortfolioData": PortfolioData.address,
+            "PortfolioFunctional": PortfolioFunctional.address,
+            "FundFactory": FundFactory.address,
+            "FundRegistry": registry.address,
+            "deployedFunds": funds
+        };
+        await releaser(process.deployment, network);
+    });
 };
