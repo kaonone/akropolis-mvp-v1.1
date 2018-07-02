@@ -31,9 +31,9 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         desiredAnnualIncome: "",
         numberOfSlide: 1,
         plan: {
-            needToSave: 0,
-            pensionValue: 0,
-            projectReturns: 0,
+            needToSave: 7,
+            pensionValue: 7,
+            projectReturns: 7,
         },
         secondForm: {}
     };

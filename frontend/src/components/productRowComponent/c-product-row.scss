@@ -8,6 +8,7 @@
     border-radius: $radius-default;
     border: 1px solid $color-black;
     padding: $spacing-default * 3/2 $spacing-default * 2 $spacing-default $spacing-default * 2;
+    margin-bottom: $spacing-default * 2;
 
     &__wrapper-headline {
         display: flex;
