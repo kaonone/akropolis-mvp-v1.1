@@ -11,7 +11,7 @@ export default class MyProductsView extends React.Component<any, any> {
     public render() {
         
         const listOfProducts = listOfProductsMockData.map((product: Product, index: number) => {
-            return <ProductRowComponent productData={product} key={index} className="v-products__product-row" />;
+            return <ProductRowComponent productData={product} key={index}/>;
         });
 
         return (
