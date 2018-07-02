@@ -1,1 +1,22 @@
-{"AkropolisToken":"0xc573f5a5156449b739d302587c231ed29ab14ada","AKTFaucet":"0x179c32627876c41c526232943edded798baf534a"}
+{
+  "AkropolisToken": "0x033f6435dcb62ebe55a97f440497adec57a68b96",
+  "AKTFaucet": "0x98ed05415d05f10f7cce58369f8a56b3f9ce3107",
+  "PortfolioData": "0xdf3fe23fc7f714b34fe767b150a6238275c96107",
+  "PortfolioFunctional": "0xbe2f81ca012fdfb758df45195433699692d3e5d3",
+  "FundFactory": "0xa9e957ac5d6fff407d73eb51385814ce790f77fb",
+  "FundRegistry": "0x18c16ea22ad782a909332a76166d27960835b5b0",
+  "deployedFunds": [
+    [
+      "Crude Oil Fund",
+      "0x814a55dead9c646e128ed75288bb13bfb08ebfee"
+    ],
+    [
+      "Gold Investment",
+      "0xdeecfe4395c82de74319265978b1417c29934268"
+    ],
+    [
+      "US State Bonds",
+      "0x6fc2696cd954e898f9a5e2372128fd852fb4a6bd"
+    ]
+  ]
+}

@@ -29,7 +29,7 @@ module.exports = {
         },
         testenv: {
             provider: function () {
-                return new HDWalletProvider(config.mnemonic, "http://ganache.sparkbit.pl:8545")
+                return new HDWalletProvider(config.mnemonic, "http://akro-test.sparkbit.pl:8545")
             },
             network_id: '*' // Match any network id
         }

@@ -5,8 +5,15 @@ module.exports = function (deployment, network) {
         return;
     }
     const dir = 'releases/' + network;
-    return fse.ensureDir(dir).then(() => {
-        console.log("ensure");
-        return fse.writeFile(dir + '/deployment.json', JSON.stringify(deployment), 'utf8');
+
+    return fse.readFile(dir + '/deployment.json', 'utf8', function (err, data) {
+        let previousDeployment = {};
+        if (!err) {
+            previousDeployment = JSON.parse(data);
+        }
+        return fse.ensureDir(dir).then(() => {
+            let finalDeployment = {...previousDeployment, ...deployment};
+            return fse.writeFile(dir + '/deployment.json', JSON.stringify(finalDeployment), 'utf8');
+        });
     });
 };

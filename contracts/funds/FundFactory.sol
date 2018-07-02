@@ -8,8 +8,8 @@ import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 contract FundFactory is Ownable {
   FundRegistry public fundRegistry;
 
-  constructor(address _fundRegistry) public {
-    fundRegistry = FundRegistry(_fundRegistry);
+  constructor() public {
+    fundRegistry = new FundRegistry();
   }
 
   function createNewFund(address _fundOwner, string _fundName) onlyOwner public returns(FundFunctional) {
