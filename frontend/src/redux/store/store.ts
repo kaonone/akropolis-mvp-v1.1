@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {createLogger} from "redux-logger";
-import promise from "redux-promise-middleware";
+import promise from "redux-promise-middleware"; 
 import thunk from "redux-thunk";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";

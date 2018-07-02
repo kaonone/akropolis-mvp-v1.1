@@ -1,0 +1,12 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-mq";
+@import "assets/styles/2_tools/tools-paddings";
+
+.v-products {
+
+    @include globalPadding;
+
+    &__headline {
+        margin-bottom: $spacing-default * 2;
+    }
+}
