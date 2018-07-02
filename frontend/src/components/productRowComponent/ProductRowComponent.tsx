@@ -1,4 +1,6 @@
+/* tslint:disable:no-implicit-dependencies */
 import IconStar from "-!svg-react-loader?name=Icon!../../assets/images/star-icon.svg";
+/* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import "./c-product-row.css";
 
