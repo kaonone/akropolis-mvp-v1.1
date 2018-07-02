@@ -3,10 +3,10 @@ import { Route } from "react-router-dom";
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/web3ProviderComponent";
 import { NAVIGATION } from "../../constants";
+import MyProductsWrapper from "../../wrappers/MyProductsWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
-import MyProductsView from "../myProducts/MyProductsView";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
 
@@ -69,7 +69,7 @@ export default class LayoutView extends React.Component<Props, State> {
                 />
                 <Route
                     path={`/${NAVIGATION.myProducts}`}
-                    component={MyProductsView}
+                    component={MyProductsWrapper}
                 />
                 <Route
                     path={`/${NAVIGATION.dataUsage}`}
