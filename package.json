@@ -9,7 +9,7 @@
   "scripts": {
     "test": "truffle test",
     "test:ci": "npm run test -- --network ci",
-    "build:contracts": "truffle compile && yarn contracts:copy && yarn releases:copy && truffle migrate",
+    "build:contracts": "truffle compile && yarn contracts:copy && yarn releases:copy",
     "contracts:copy": "rimraf frontend/src/contracts && cp -R build/contracts/ frontend/src/contracts",
     "releases:copy": "rimraf frontend/src/releases && cp -R releases frontend/src/releases",
     "start:frontend": "cd frontend && npm run start",
