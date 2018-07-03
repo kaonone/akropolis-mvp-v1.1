@@ -110,17 +110,37 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 ...this.state,
             };
             newState[field] = value;
-            this.setState(newState);
+            this.setState({
+                ...this.state,
+                ...newState,
+            });
         };
     }
 
     private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const min = parseInt(event.target.min, 0);
-        const max = parseInt(event.target.max, 0);
-        const parsedValue = parseFloat(event.target.value) || 0;
-        this.setState({
+        const newState = {
             ...this.state,
-            [event.target.name]: parsedValue > max ? max : (parsedValue < min ? min : parsedValue)
-        });
+        };
+        if (event.target.value) {
+            const min = parseInt(event.target.min, 0);
+            const max = parseInt(event.target.max, 0);
+            const parsedValue = parseFloat(event.target.value) || 0;
+
+            newState[event.target.name] = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
+            if (newState.currentAge && newState.ageAtRetirement && newState.currentAge >= newState.ageAtRetirement ||
+                newState.currentAge && !newState.ageAtRetirement) {
+                newState.ageAtRetirement = newState.currentAge + 1;
+            }
+            this.setState({
+                ...this.state,
+                ...newState,
+            });
+        } else {
+            newState[event.target.name] = undefined;
+            this.setState({
+                ...this.state,
+                ...newState,
+            });
+        }
     }
 }
