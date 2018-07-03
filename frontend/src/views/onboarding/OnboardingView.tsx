@@ -3,16 +3,16 @@ import * as React from "react";
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
 import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
-import {PlanAfterCalculate} from "../../models/Onboarding";
+import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
+import {calculatePlanValuesService} from "../../services/PlanService";
 
 import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
 
 interface State {
-    desiredAnnualIncome: string;
     numberOfSlide: 1 | 2 | 3;
     plan: PlanAfterCalculate;
-    secondForm: {};
+    planValues: PlanValues;
 }
 
 export interface Props {
@@ -27,27 +27,34 @@ export interface PropsFromDispatch {
 
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
-    public initStateOfPlan = {
+    public readonly initStateOfPlan: PlanAfterCalculate = {
         needToSave: 0,
         pensionValue: 0,
         projectReturns: 5,
     };
+
+    public readonly initStateOfPlanValues: PlanValues = {
+        ageAtRetirement: 65,
+        currentAge: 0,
+        desiredAnnualIncome: 15000,
+        existingPension: 0,
+        savingPerMonth: 0
+    };
     
     public readonly state: State = {
-        desiredAnnualIncome: "",
         numberOfSlide: 1,
-        plan: this.initStateOfPlan,
-        secondForm: {}
+        plan: {...this.initStateOfPlan},
+        planValues: {...this.initStateOfPlanValues},
     };
 
     constructor(props: any) {
         super(props);
 
+        this.handleSlideUpdate = this.handleSlideUpdate.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
     public render() {
-        
         return (
             <div className="v-onboarding">
                 <img className="v-onboarding__logo" src={logoAkropolis}/>
@@ -58,24 +65,37 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
 
                 {this.state.numberOfSlide === 2 &&
                 <CreatingPortfolioPartOneComponent
-                    changeSlide={this.changeSlide}
-                    calculatePlanValuesServiceProps={this.handleCalculatePlanValuesService}
+                    planValues={this.state.planValues}
+                    onSave={this.handleSlideUpdate}
                 />
                 }
 
                 {this.state.numberOfSlide === 3 &&
-                <CreatingPortfolioPartTwo plan={this.state.plan} changeSlide={this.changeSlide} onSave={this.handleSave}/>
+                <CreatingPortfolioPartTwo planValues={this.state.planValues} plan={this.state.plan}
+                                          changeSlide={this.changeSlide}
+                                          onChange={this.handleSlideUpdate}
+                                          onSave={this.handleSave}/>
                 }
             </div>
         );
     }
 
     private changeSlide = (value: 1 | 2 | 3) => {
-        this.setState({numberOfSlide: value, plan: this.initStateOfPlan});
+        this.setState({
+            ...this.state,
+            numberOfSlide: value,
+            planValues: value === 2 ? {...this.initStateOfPlanValues} : {...this.state.planValues},
+        });
     }
 
-    private handleCalculatePlanValuesService = (val: PlanAfterCalculate) => {
-        this.setState({plan: val});
+    private handleSlideUpdate(planValues: PlanValues) {
+        const plan = calculatePlanValuesService(planValues);
+        this.setState({
+            ...this.state,
+            numberOfSlide: 3,
+            plan,
+            planValues
+        });
     }
 
     private handleSave() {

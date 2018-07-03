@@ -3,16 +3,19 @@ import {FormattedMessage} from "react-intl";
 import {Link} from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
 import {PlanValues} from "../../models/Onboarding";
-import {calculatePlanValuesService} from "../../services/PlanService";
-import {Props} from "../../views/onboarding/OnboardingView";
 
 import InputRange from "../inputRange/InputRangeComponent";
+
+interface Props {
+    onSave: (planValues: PlanValues) => void;
+    planValues: PlanValues;
+}
 
 export default class CreatingPortfolioPartOneComponent extends React.Component<Props, PlanValues> {
 
     public readonly state: PlanValues = {
-        ageAtRetirement: 66,
-        currentAge: 65,
+        ageAtRetirement: 65,
+        currentAge: 0,
         desiredAnnualIncome: 15000,
         existingPension: 0,
         savingPerMonth: 0
@@ -22,6 +25,10 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
         super(props);
 
         this.handleRangeChange = this.handleRangeChange.bind(this);
+    }
+
+    public componentWillMount() {
+        this.setState({...this.props.planValues});
     }
 
     public render() {
@@ -93,10 +100,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 </div>
                 <button
                     onClick={() => {
-                        this.props.changeSlide(3);
-                        if (calculatePlanValuesService(this.state) && this.props.calculatePlanValuesServiceProps) {
-                            this.props.calculatePlanValuesServiceProps(calculatePlanValuesService(this.state));
-                        }
+                        this.props.onSave(this.state);
                     }}
                     className="o-btn v-onboarding__btn"
                 >
@@ -117,7 +121,6 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 ...newState,
             });
         };
-
     }
 
     private onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
