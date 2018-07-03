@@ -27,7 +27,7 @@ export interface PropsFromDispatch {
 
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
-    public initStateOfPlan = {
+    public initStateOfPlan: PlanAfterCalculate = {
         needToSave: 0,
         pensionValue: 0,
         projectReturns: 5,

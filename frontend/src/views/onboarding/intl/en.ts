@@ -3,6 +3,7 @@ export default {
     "onboarding.annualReturnAssumption": "Annual return assumption",
     "onboarding.briefExplanationOfWhatRewardPointsAre": `Brief explanation of what reward points are, 
     consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna.`,
+    "onboarding.continue": "Continue",
     "onboarding.correctBasics": "Correct basics",
     "onboarding.createAPlan": "Create a plan",
     "onboarding.enterAge": "Enter age",
@@ -16,9 +17,8 @@ export default {
     "onboarding.rewardForStickingToSavingGoals": "Reward for sticking to saving goals",
     "onboarding.secureOwnership": "Secure ownership",
     "onboarding.startSaving": "Start saving",
-    "onboarding.toEndUpWithAPensionValueOf": "to end up with a pension value of",
+    "onboarding.toEndUpWithAnAnnualPensionOf": "to end up with an annual pension of",
     "onboarding.transparentReputationOfFundManagers": "Transparent reputation of fund managers",
-    "onboarding.tweakGoals": "Tweak goals",
     "onboarding.valueOfMyExistingPensionPots": "Value of my existing pension pots",
     "onboarding.youNeedToSave": "You need to save",
 };
