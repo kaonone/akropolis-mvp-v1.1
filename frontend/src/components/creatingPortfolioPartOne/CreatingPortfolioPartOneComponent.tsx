@@ -63,6 +63,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                                 max="100"
                                 value={this.state.currentAge}
                                 onChange={this.onChange}
+                                onKeyDown={this.onKeyDown}
                                 className="o-form__input v-onboarding__input"
                                 type="number"
                                 name="currentAge"
@@ -82,6 +83,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                                 max="100"
                                 value={this.state.ageAtRetirement}
                                 onChange={this.onChange}
+                                onKeyDown={this.onKeyDown}
                                 className="o-form__input v-onboarding__input"
                                 type="number"
                                 name="ageAtRetirement"
@@ -115,6 +117,13 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 ...newState,
             });
         };
+
+    }
+
+    private onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.which === 69) {
+            event.preventDefault();
+        }
     }
 
     private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
