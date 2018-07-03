@@ -1,6 +1,6 @@
 import * as React from "react";
-import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
+import {FormattedMessage} from "react-intl";
+import {Link} from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
 import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
 
@@ -20,6 +20,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
         currentAge: 0,
         desiredAnnualIncome: 15000,
         existingPension: 0,
+        projectedReturns: undefined,
         savingPerMonth: 0
     };
 
@@ -41,12 +42,12 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
         return (
             <div className="v-onboarding__create-portfolio-second-step-slide">
                 <h2 className="v-onboarding__headline">
-                    <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio" />
+                    <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio"/>
                 </h2>
                 <div className="v-onboarding__wrapper-final-values">
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.youNeedToSave" />
+                            <FormattedMessage id="onboarding.youNeedToSave"/>
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <span className="v-onboarding__final-value-currency">$</span>
@@ -56,7 +57,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.toEndUpWithAnAnnualPensionOf" />
+                            <FormattedMessage id="onboarding.toEndUpWithAnAnnualPensionOf"/>
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <span className="v-onboarding__final-value-currency">$</span>
@@ -65,7 +66,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.projectedReturns" />
+                            <FormattedMessage id="onboarding.projectedReturns"/>
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <div className="v-onboarding__value v-onboarding__value--smaller">
@@ -75,18 +76,20 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                         </div>
                     </div>
                 </div>
-                <Link onClick={this.props.changeSlide.bind(this, 2)} className="v-onboarding__correct-basics" to="">&#60;
-                    <FormattedMessage id="onboarding.correctBasics" />
+                <Link onClick={this.props.changeSlide.bind(this, 2)} className="v-onboarding__correct-basics"
+                      to="">&#60;
+                    <FormattedMessage id="onboarding.correctBasics"/>
                 </Link>
                 <div className="v-onboarding__section">
                     <div className="v-onboarding__section-title">
                         <FormattedMessage id="onboarding.retirementAge"/>
-                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
+                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon}/></Link>
                     </div>
-                    <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement} onChange={this.handleRangeChange("ageAtRetirement")}/>
+                    <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement}
+                                onChange={this.handleRangeChange("ageAtRetirement")}/>
                 </div>
                 <button className="o-btn v-onboarding__btn" onClick={this.save}>
-                    <FormattedMessage id="onboarding.startSaving" />
+                    <FormattedMessage id="onboarding.startSaving"/>
                 </button>
             </div>
         );

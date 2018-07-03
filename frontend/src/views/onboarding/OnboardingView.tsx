@@ -38,9 +38,10 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         currentAge: 0,
         desiredAnnualIncome: 15000,
         existingPension: 0,
+        projectedReturns: undefined,
         savingPerMonth: 0
     };
-    
+
     public readonly state: State = {
         numberOfSlide: 1,
         plan: {...this.initStateOfPlan},
