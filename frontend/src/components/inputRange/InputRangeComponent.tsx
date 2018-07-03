@@ -5,7 +5,7 @@ import "./c-input-range.css";
 interface Props {
     max?: number;
     min?: number;
-    value: number;
+    value: number | undefined;
     symbol?: string;
     onChange: (value: number) => void;
 }
@@ -34,7 +34,7 @@ export default class InputRangeComponent extends React.Component<Props, State> {
     public componentDidMount() {
         const max = this.props.max || 100;
         const min = this.props.min || 0;
-        const value = this.props.value;
+        const value = parseFloat(this.props.value + "");
         this.setState({
             ...this.state,
             max,
