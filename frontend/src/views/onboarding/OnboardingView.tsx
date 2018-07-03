@@ -27,14 +27,16 @@ export interface PropsFromDispatch {
 
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
+    public initStateOfPlan = {
+        needToSave: 0,
+        pensionValue: 0,
+        projectReturns: 5,
+    };
+    
     public readonly state: State = {
         desiredAnnualIncome: "",
         numberOfSlide: 1,
-        plan: {
-            needToSave: 7,
-            pensionValue: 7,
-            projectReturns: 5,
-        },
+        plan: this.initStateOfPlan,
         secondForm: {}
     };
 
@@ -45,7 +47,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     }
 
     public render() {
-
+        
         return (
             <div className="v-onboarding">
                 <img className="v-onboarding__logo" src={logoAkropolis}/>
@@ -69,7 +71,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     }
 
     private changeSlide = (value: 1 | 2 | 3) => {
-        this.setState({numberOfSlide: value});
+        this.setState({numberOfSlide: value, plan: this.initStateOfPlan});
     }
 
     private handleCalculatePlanValuesService = (val: PlanAfterCalculate) => {
