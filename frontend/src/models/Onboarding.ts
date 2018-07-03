@@ -4,6 +4,7 @@ export interface PlanValues {
     desiredAnnualIncome: number | undefined;
     existingPension: number | undefined;
     savingPerMonth: number | undefined;
+    projectedReturns: number | undefined;
 }
 
 export interface PlanAfterCalculate {
