@@ -34,7 +34,7 @@ export default class InputRangeComponent extends React.Component<Props, State> {
     public componentDidMount() {
         const max = this.props.max || 100;
         const min = this.props.min || 0;
-        const value = parseFloat(this.props.value + "");
+        const value = this.props.value || 0;
         this.setState({
             ...this.state,
             max,
