@@ -11,7 +11,7 @@ import InputRange from "../inputRange/InputRangeComponent";
 export default class CreatingPortfolioPartOneComponent extends React.Component<Props, PlanValues> {
 
     public readonly state: PlanValues = {
-        ageAtRetirement: 0,
+        ageAtRetirement: 66,
         currentAge: 65,
         desiredAnnualIncome: 15000,
         existingPension: 0,
