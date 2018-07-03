@@ -19,7 +19,7 @@ export function calculatePlanValuesService(planValues: PlanValues): PlanAfterCal
     let coefficient = projectedAnnualReturn > 0 ?
         (1 - Math.pow(1 + projectedAnnualReturn, yearsOfSavingLeft - 1)) / (-projectedAnnualReturn)
         : yearsOfSavingLeft;
-    if (coefficient == 0) {
+    if (coefficient === 0) {
         coefficient = 1;
     }
     const needToSaveAnnually = Math.max(0, sumOfNeededSavings - existingPension
