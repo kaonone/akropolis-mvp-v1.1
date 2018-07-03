@@ -13,7 +13,7 @@ interface Props {
 interface State {
     max: number;
     min: number;
-    value: number;
+    value: number | undefined;
 }
 
 export default class InputRangeComponent extends React.Component<Props, State> {
@@ -55,25 +55,56 @@ export default class InputRangeComponent extends React.Component<Props, State> {
                        max={this.state.max} min={this.state.min} value={this.state.value} onChange={this.onChange}/>
                 <span className="c-input-range__symbol">{this.props.symbol}</span>
                 <input type="number" className="o-form__input c-input-range__input"
-                       value={this.state.value} onChange={this.onChange}/>
+                       value={this.state.value} onChange={this.onChange} onKeyDown={this.onKeyDown} onBlur={this.onBlur}/>
             </div>
         );
     }
 
+    private onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.value) {
+            const min = parseInt(this.range.min, 0);
+            const max = parseInt(this.range.max, 0);
+            const parsedValue = parseFloat(event.target.value) || 0;
+            const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
+
+            this.setState({
+                ...this.state,
+                value,
+            });
+
+            this.setRangeBackground(value, min, max);
+
+            this.props.onChange(value);
+        }
+    }
+
+    private onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.which === 69) {
+            event.preventDefault();
+        }
+    }
+
     private onChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const min = parseInt(this.range.min, 0);
-        const max = parseInt(this.range.max, 0);
-        const parsedValue = parseFloat(event.target.value) || 0;
-        const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
+        if (event.target.value) {
+            const min = parseInt(this.range.min, 0);
+            const max = parseInt(this.range.max, 0);
+            const parsedValue = parseFloat(event.target.value) || 0;
+            const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
 
-        this.setState({
-            ...this.state,
-            value,
-        });
+            this.setState({
+                ...this.state,
+                value,
+            });
 
-        this.setRangeBackground(value, min, max);
+            this.setRangeBackground(value, min, max);
 
-        this.props.onChange(value);
+            this.props.onChange(value);
+        } else {
+            this.setState({
+                ...this.state,
+                value: undefined,
+            });
+        }
     }
 
     private setRangeBackground(value: number, min: number, max: number) {
