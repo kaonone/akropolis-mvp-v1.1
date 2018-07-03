@@ -50,17 +50,17 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
                             <FormattedMessage id="onboarding.youNeedToSave" />
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
-                            <span className="v-onboarding__final-value-currency">£</span>
+                            <span className="v-onboarding__final-value-currency">$</span>
                             <div className="v-onboarding__value">{plan.needToSave}</div>
                             <span className="v-onboarding__period">/mo</span>
                         </div>
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.toEndUpWithAPensionValueOf" />
+                            <FormattedMessage id="onboarding.toEndUpWithAnAnnualPensionOf" />
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
-                            <span className="v-onboarding__final-value-currency">£</span>
+                            <span className="v-onboarding__final-value-currency">$</span>
                             <div className="v-onboarding__value v-onboarding__value--smaller">{plan.pensionValue}</div>
                         </div>
                     </div>
