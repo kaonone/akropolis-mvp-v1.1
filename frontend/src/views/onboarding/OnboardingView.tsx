@@ -3,7 +3,7 @@ import * as React from "react";
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
 import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
-import {PlanAfterCalculate} from "../../models/Onboarding";
+import { PlanAfterCalculate } from "../../models/Onboarding";
 
 import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
@@ -27,14 +27,16 @@ export interface PropsFromDispatch {
 
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
+    public initStateOfPlan: PlanAfterCalculate = {
+        needToSave: 0,
+        pensionValue: 0,
+        projectReturns: 5,
+    };
+
     public readonly state: State = {
         desiredAnnualIncome: "",
         numberOfSlide: 1,
-        plan: {
-            needToSave: 7,
-            pensionValue: 7,
-            projectReturns: 5,
-        },
+        plan: this.initStateOfPlan,
         secondForm: {}
     };
 
@@ -45,35 +47,35 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     }
 
     public render() {
-
+        
         return (
             <div className="v-onboarding">
-                <img className="v-onboarding__logo" src={logoAkropolis}/>
+                <img className="v-onboarding__logo" src={logoAkropolis} />
 
                 {this.state.numberOfSlide === 1 &&
-                <SlideOneComponent changeSlide={this.changeSlide}/>
+                    <SlideOneComponent changeSlide={this.changeSlide} />
                 }
 
                 {this.state.numberOfSlide === 2 &&
-                <CreatingPortfolioPartOneComponent
-                    changeSlide={this.changeSlide}
-                    calculatePlanValuesServiceProps={this.handleCalculatePlanValuesService}
-                />
+                    <CreatingPortfolioPartOneComponent
+                        changeSlide={this.changeSlide}
+                        calculatePlanValuesServiceProps={this.handleCalculatePlanValuesService}
+                    />
                 }
 
                 {this.state.numberOfSlide === 3 &&
-                <CreatingPortfolioPartTwo plan={this.state.plan} changeSlide={this.changeSlide} onSave={this.handleSave}/>
+                    <CreatingPortfolioPartTwo plan={this.state.plan} changeSlide={this.changeSlide} onSave={this.handleSave} />
                 }
             </div>
         );
     }
 
     private changeSlide = (value: 1 | 2 | 3) => {
-        this.setState({numberOfSlide: value});
+        this.setState({ numberOfSlide: value, plan: this.initStateOfPlan });
     }
 
     private handleCalculatePlanValuesService = (val: PlanAfterCalculate) => {
-        this.setState({plan: val});
+        this.setState({ plan: val });
     }
 
     private handleSave() {
