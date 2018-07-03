@@ -2,31 +2,25 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
-import {PlanAfterCalculate} from "../../models/Onboarding";
+import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
 
 import InputRange from "../inputRange/InputRangeComponent";
 
 interface Props {
     changeSlide: (value: 1 | 2 | 3) => void;
     plan: PlanAfterCalculate;
+    planValues: PlanValues;
+    onChange: (planValues: PlanValues) => void;
     onSave: () => void;
 }
 
-interface State {
-    form: {
-        age: number;
-        annualReturn: number;
-        inflation: number;
-    };
-}
-
-export default class CreatingPortfolioPartTwo extends React.Component<Props, State> {
-    public readonly state: State = {
-        form: {
-            age: 65,
-            annualReturn: 0,
-            inflation: 0,
-        }
+export default class CreatingPortfolioPartTwo extends React.Component<Props, PlanValues> {
+    public readonly state: PlanValues = {
+        ageAtRetirement: 65,
+        currentAge: 0,
+        desiredAnnualIncome: 15000,
+        existingPension: 0,
+        savingPerMonth: 0
     };
 
     constructor(props: any) {
@@ -35,9 +29,14 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
         this.save = this.save.bind(this);
     }
 
+    public componentWillMount() {
+        this.setState({...this.props.planValues});
+    }
+
     public render() {
 
         const {plan} = this.props;
+        const minAgeAtRetirement = this.state.currentAge ? this.state.currentAge + 1 : 0;
 
         return (
             <div className="v-onboarding__create-portfolio-second-step-slide">
@@ -84,7 +83,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
                         <FormattedMessage id="onboarding.retirementAge"/>
                         <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
-                    <InputRange value={this.state.form.age} max={100} min={0} onChange={this.handleRangeChange("age")}/>
+                    <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement} onChange={this.handleRangeChange("ageAtRetirement")}/>
                 </div>
                 <button className="o-btn v-onboarding__btn" onClick={this.save}>
                     <FormattedMessage id="onboarding.startSaving" />
@@ -95,12 +94,9 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Sta
 
     private handleRangeChange(field: string) {
         return (value: number) => {
-            const form = this.state.form;
-            form[field] = value;
-            this.setState({
-                ...this.state,
-                form,
-            });
+            const newState = {...this.state};
+            newState[field] = value;
+            this.props.onChange(newState);
         };
     }
 
