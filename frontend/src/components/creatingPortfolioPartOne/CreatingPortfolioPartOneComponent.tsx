@@ -12,8 +12,8 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
 
     public readonly state: PlanValues = {
         ageAtRetirement: 0,
-        currentAge: 0,
-        desiredAnnualIncome: 0,
+        currentAge: 65,
+        desiredAnnualIncome: 15000,
         existingPension: 0,
         savingPerMonth: 0
     };
@@ -35,21 +35,21 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                     <div className="v-onboarding__section-title">
                         <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement"/>
                     </div>
-                    <InputRange value={this.state.desiredAnnualIncome} max={20000} min={0} symbol="£"
+                    <InputRange value={this.state.desiredAnnualIncome} max={200000} min={0} symbol="$"
                                 onChange={this.handleRangeChange("desiredAnnualIncome")}/>
                 </div>
                 <div className="v-onboarding__section">
                     <div className="v-onboarding__section-title">
                         <FormattedMessage id="onboarding.valueOfMyExistingPensionPots"/>
                     </div>
-                    <InputRange value={this.state.existingPension} max={20000} min={0} symbol="£"
+                    <InputRange value={this.state.existingPension} max={2000000} min={0} symbol="$"
                                 onChange={this.handleRangeChange("existingPension")}/>
                 </div>
                 <div className="v-onboarding__section">
                     <div className="v-onboarding__section-title">
                         <FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>
                     </div>
-                    <InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="£"
+                    <InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="$"
                                 onChange={this.handleRangeChange("savingPerMonth")}/>
                 </div>
                 <div className="v-onboarding__wrapper-age-inputs">
@@ -98,7 +98,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                     }}
                     className="o-btn v-onboarding__btn"
                 >
-                    <FormattedMessage id="onboarding.tweakGoals"/>
+                    <FormattedMessage id="onboarding.continue"/>
                 </button>
             </div>
         );

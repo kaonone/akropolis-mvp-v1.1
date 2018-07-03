@@ -33,7 +33,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         plan: {
             needToSave: 7,
             pensionValue: 7,
-            projectReturns: 7,
+            projectReturns: 5,
         },
         secondForm: {}
     };
