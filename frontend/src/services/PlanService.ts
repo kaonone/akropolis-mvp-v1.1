@@ -13,12 +13,18 @@ export function calculatePlanValuesService(planValues: PlanValues): PlanAfterCal
             projectReturns: 0,
         };
     }
-    const projectedAnnualReturn = 0.07;
+    const projectedAnnualReturn = planValues.projectedReturns == null ? 0.05 : planValues.projectedReturns;
     const yearsOnPension = 20;
     const sumOfNeededSavings = yearsOnPension * desiredAnnualIncome;
+    let coefficient = projectedAnnualReturn > 0 ?
+        (1 - Math.pow(1 + projectedAnnualReturn, yearsOfSavingLeft - 1)) / (-projectedAnnualReturn)
+        : yearsOfSavingLeft;
+    if (coefficient == 0) {
+        coefficient = 1;
+    }
     const needToSaveAnnually = Math.max(0, sumOfNeededSavings - existingPension
         * Math.pow(1 + projectedAnnualReturn, yearsOfSavingLeft))
-        * (-projectedAnnualReturn) / (1 - Math.pow(1 + projectedAnnualReturn, yearsOfSavingLeft - 1));
+        / coefficient;
     return {
         needToSave: Math.round(needToSaveAnnually / 12),
         pensionValue: desiredAnnualIncome,

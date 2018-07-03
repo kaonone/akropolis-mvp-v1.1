@@ -25,7 +25,7 @@
     "start": "REACT_APP_STAGE=dev npm-run-all -p watch-css start-js",
     "build-js": "react-scripts-ts build",
     "build": "REACT_APP_STAGE=dev npm-run-all build-css build-js",
-    "test": "react-scripts-ts test --env=jsdom",
+    "test": "jest",
     "tslint": "tslint -c tslint.json --format verbose 'src/**/*.{ts,tsx}'",
     "tslint:ci": "tslint -o reports/junit/test-results.xml -c tslint.json --format junit 'src/**/*.{ts,tsx}'",
     "eject": "react-scripts-ts eject"
@@ -49,5 +49,19 @@
     "tslint": "5.10.0",
     "tslint-react": "3.6.0",
     "typescript": "2.9.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
