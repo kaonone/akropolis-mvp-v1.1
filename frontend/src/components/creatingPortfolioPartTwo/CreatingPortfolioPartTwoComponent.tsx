@@ -1,6 +1,7 @@
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
-import {Link} from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import infoIcon from "../../assets/images/info-icon.svg";
 import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
 
@@ -89,7 +90,8 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                                 onChange={this.handleRangeChange("ageAtRetirement")}/>
                 </div>
                 <button className="o-btn v-onboarding__btn" onClick={this.save}>
-                    <FormattedMessage id="onboarding.startSaving"/>
+                    <FormattedMessage id="onboarding.startSaving" />
+                    <Redirect to="/my-product" />
                 </button>
             </div>
         );
