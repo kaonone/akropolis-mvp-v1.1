@@ -24,7 +24,7 @@ contract('FundRegistry', function ([owner, holder]) {
     });
 
     it('should disallow adding funds by non-owners', async function () {
-        expectThrow(registry.createNewFund(owner, owner, "TEST1", 0, 0, 0, "Test", {from: holder}));
+        await expectThrow(registry.createNewFund(owner, owner, "TEST1", 0, 0, 0, "Test", {from: holder}));
     });
 
     it('should return fund by name', async function () {
@@ -66,7 +66,7 @@ contract('FundRegistry', function ([owner, holder]) {
         let idx = await registry.getFundIndex("TEST1");
         let fund = await registry.funds(idx);
         let newDescription = "This is a really good investment";
-        expectThrow(registry.updateFund(idx, owner, fund[1], 100, -5, 10, newDescription,
+        await expectThrow(registry.updateFund(idx, owner, fund[1], 100, -5, 10, newDescription,
             {from: holder}));
     });
 });
