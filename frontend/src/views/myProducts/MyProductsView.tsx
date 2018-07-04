@@ -49,7 +49,7 @@ export default class MyProductsView extends React.Component<AllProps, State> {
             (
                 <>
                     <div className="v-products__wrapper-options"><FormattedMessage id="myProducts.upTo" />
-                        <h1 className="v-products__value-of-options">{checkedProduct[0].fundPercent}% </h1>
+                        <h1 className="v-products__value-of-options">{checkedProduct[0].fundPastReturns}% </h1>
                         <FormattedMessage id="myProducts.returns" />
                     </div>
                     <FormattedMessage id="myProducts.makeInitialContribution">
