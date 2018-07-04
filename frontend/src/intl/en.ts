@@ -1,4 +1,5 @@
 import AKTBalance from "../components/AKTBalance/intl/en";
+import web3 from "../components/web3/intl/en";
 import myWallet from "../views/myWallet/intl/en";
 import onboarding from "../views/onboarding/intl/en";
 
@@ -9,6 +10,7 @@ export default {
     "nav.savingsAndFunds": "Savings and funds",
 
     ...AKTBalance,
+    ...web3,
     ...myWallet,
     ...onboarding,
 };

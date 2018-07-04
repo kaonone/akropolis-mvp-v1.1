@@ -2,7 +2,7 @@ import * as React from "react";
 
 import ErrorAccount from "./ErrorAccount";
 import ErrorEthereum from "./ErrorEthereum";
-// import ErrorNetwork from "./ErrorNetwork";
+import ErrorNetwork from "./ErrorNetwork";
 
 import {isntEthereumBrowser} from "../../services/Web3Service";
 
@@ -22,9 +22,9 @@ const ErrorWeb3: any = (account: Web3AccountsStore, network: Web3NetworkStore) =
         error = <ErrorAccount/>;
     }
 
-    // if (!failed && network.networkFetched && network.networkId && network.networkId !== "testenv") {
-    //     error = <ErrorNetwork />;
-    // }
+    if (!failed && network.networkFetched && network.networkId && network.networkId !== "testenv") {
+        error = <ErrorNetwork />;
+    }
 
     return error;
 };

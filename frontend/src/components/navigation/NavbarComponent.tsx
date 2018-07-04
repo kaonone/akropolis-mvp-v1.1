@@ -42,7 +42,7 @@ export default class NavbarComponent extends React.Component<Props, {}> {
                             </NavLink>
                         </li>
                         <li className="c-navbar__item">
-                            <Link className="c-navbar__add-free-tokens" to="/add-free-test-tokens">Add free test tokens</Link>
+                            <a className="c-navbar__add-free-tokens" href="http://faucet.ropsten.be:3001/" target="_blank">Add free test tokens</a>
                         </li>
                         <li className="c-navbar__item">
                             <AKTBalance />
