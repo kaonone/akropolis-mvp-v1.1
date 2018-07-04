@@ -1,4 +1,4 @@
 export interface Web3NetworkStore {
-    networkId: number;
+    networkId: string;
     networkFetched: boolean;
 }

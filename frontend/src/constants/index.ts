@@ -4,3 +4,5 @@ export const NAVIGATION = {
     myWallet: "",
     savingsAndFunds: "savings-and-funds",
 };
+
+export const NO_ETHEREUM = "no-ethereum";
