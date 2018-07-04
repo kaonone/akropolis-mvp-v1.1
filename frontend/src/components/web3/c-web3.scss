@@ -1,0 +1,16 @@
+@import "../../assets/styles/1_settings/settings-project";
+
+.c-web3 {
+
+  &__error {
+    margin: $spacing-default * 10 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: $spacing-default * 3;
+    text-align: center;
+  }
+
+  &__error-title {
+    margin-bottom: $spacing-default * 3;
+  }
+}

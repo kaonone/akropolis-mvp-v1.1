@@ -7,9 +7,9 @@ import {default as MyWalletComponent, Props, PropsFromDispatch} from "../views/m
 
 export function mapStateToProps({myWallet, web3Accounts, web3Network}: ApplicationStore) {
     return {
-        account: web3Accounts.accountSelected,
         message: myWallet.sampleData,
-        network: web3Network.networkId,
+        web3Accounts,
+        web3Network,
     };
 }
 
