@@ -14,13 +14,13 @@ module.exports = (deployer, network, accounts) => {
         await deployer.deploy(FundFactory);
         let factory = await FundFactory.deployed();
         let registry = FundRegistry.at(await factory.fundRegistry());
-        await factory.createNewFund(owner, "Crude Oil Fund", {from: owner});
-        await factory.createNewFund(owner, "Gold Investment", {from: owner});
-        await factory.createNewFund(owner, "US State Bonds", {from: owner});
+        await factory.createNewFund(owner, "S&P500 Index", 100, 20, 50, "S&P500 index, capital + dividends", {from: owner});
+        await factory.createNewFund(owner, "Gold Investment", 20, 7, 80, "London gold fix in USD", {from: owner});
+        await factory.createNewFund(owner, "US State Bonds", 5, 3, 100, "US 10-year Treasury Bonds", {from: owner});
         let count = await registry.getFundCount();
         let funds = [];
         for (let i = 0; i < count; i++) {
-            funds.push(await registry.getFundAt(i));
+            funds.push(await registry.funds(i));
         }
         process.deployment = {
             "PortfolioData": PortfolioData.address,
