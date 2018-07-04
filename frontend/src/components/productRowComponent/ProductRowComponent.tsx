@@ -23,13 +23,12 @@ export default class ProductRowComponent extends React.Component<Props, any> {
         const isChecked = this.props.idOfcheckedProduct === id ? true : false;
         
         return (
-            <div className={`c-product-row ${isChecked ? "c-product-row--checked" : ""}`}>
+            <div onClick={() => {
+                this.props.onClickProduct(id);
+            }
+            } className={`c-product-row ${isChecked ? "c-product-row--checked" : ""}`}>
                 <div className="c-product-row__wrapper-headline">
                     <h4 className="c-product-row__headline">{fundName}</h4>
-                    <input checked={isChecked} className="o-form__checkbox" type="checkbox" onChange={() => {
-                        this.props.onClickProduct(id);
-                    }
-                    } />
                 </div>
                 <p className={`c-product-row__describe ${isChecked ? "c-product-row__describe--all-decribe" : ""}`}>{fundDescription}</p>
                 <div className="c-product-row__wrapper-fund-value">
