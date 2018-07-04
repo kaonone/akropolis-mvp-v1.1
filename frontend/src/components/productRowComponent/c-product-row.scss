@@ -4,11 +4,24 @@
 @import "assets/styles/4_elements/elements-heading";
 
 .c-product-row {
+
+    $c: &;
+
     box-shadow: $shadow-default;
     border-radius: $radius-default;
     border: 1px solid $color-black;
     padding: $spacing-default * 3/2 $spacing-default * 2 $spacing-default $spacing-default * 2;
     margin-bottom: $spacing-default * 2;
+    cursor: pointer;
+    transition: $transition-default;
+
+    &:hover {
+        background-color: $color-grey-light;
+    }
+
+    &--checked {
+        background-color: $color-grey-light;
+    }
 
     &__wrapper-headline {
         display: flex;
@@ -20,7 +33,7 @@
         margin-bottom: $spacing-default * 3/2;
     }
 
-    &__describe {
+    &__describe { 
         color: $color-grey;
         position: relative;
         white-space: nowrap;
@@ -29,14 +42,8 @@
         width: 100%;
         margin-bottom: $spacing-default;
 
-        &:after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: $gradient-transparent-to-white;
-            width: $spacing-default * 10;
-            height: 100%;
+        &--all-decribe {
+            white-space: unset;
         }
     }
 

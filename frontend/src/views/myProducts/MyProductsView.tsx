@@ -15,7 +15,15 @@ export interface PropsFromDispatch {
 
 interface AllProps extends Props, PropsFromDispatch { }
 
-export default class MyProductsView extends React.Component<AllProps, any> {
+interface State {
+    idOfcheckedProduct: number | undefined;
+}
+
+export default class MyProductsView extends React.Component<AllProps, State> {
+
+    public readonly state: State = {
+        idOfcheckedProduct: undefined,
+    };
 
     public componentWillMount() {
         this.props.fetchProductsData();
@@ -24,7 +32,13 @@ export default class MyProductsView extends React.Component<AllProps, any> {
     public render() {
 
         const listOfProducts = this.props.data.map((product: Product, index: number) => {
-            return <ProductRowComponent productData={product} key={index} />;
+            return (
+                <ProductRowComponent
+                    productData={product} key={index}
+                    onClickProduct={this.handleOnClickProduct}
+                    idOfcheckedProduct={this.state.idOfcheckedProduct}
+                />
+            );
         });
 
         return (
@@ -33,5 +47,12 @@ export default class MyProductsView extends React.Component<AllProps, any> {
                 {listOfProducts}
             </div>
         );
+    }
+
+    private handleOnClickProduct = (id: number) => {
+        this.setState({
+            ...this.state,
+            idOfcheckedProduct: id
+        });
     }
 }

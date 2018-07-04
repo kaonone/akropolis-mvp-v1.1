@@ -1,0 +1,3 @@
+@mixin gradients($color-start: transparent, $color-stop: $color-white) {
+    background: linear-gradient(to right, $color-start 0%, $color-stop 100%);
+}
