@@ -102,7 +102,8 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement}
                         onChange={this.handleRangeChange("ageAtRetirement")} />
                 </div>
-                <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save} className="o-btn v-onboarding__btn">
+                <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save}
+                className={`o-btn v-onboarding__btn ${plan.needToSave === 0 ? "o-btn--disabled" : ""}`}>
                     <FormattedMessage id="onboarding.startSaving" />
                 </Link>
             </div>
