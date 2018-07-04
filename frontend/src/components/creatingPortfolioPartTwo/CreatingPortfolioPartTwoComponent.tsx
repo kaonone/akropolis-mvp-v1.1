@@ -7,6 +7,8 @@ import { NAVIGATION } from "../../constants";
 import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
 import InputRange from "../inputRange/InputRangeComponent";
 
+import infoIcon from "../../assets/images/info-icon.svg";
+
 interface Props {
     changeSlide: (value: 1 | 2 | 3) => void;
     plan: PlanAfterCalculate;
@@ -32,33 +34,46 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
     }
 
     public componentWillMount() {
-        this.setState({...this.props.planValues});
+        this.setState({ ...this.props.planValues });
     }
 
     public render() {
 
-        const {plan} = this.props;
+        const { plan } = this.props;
         const minAgeAtRetirement = this.state.currentAge ? this.state.currentAge + 1 : 0;
+
+        const planNeedToSave = plan.needToSave > 0 ?
+            (
+                <div className="v-onboarding__wrapper-final-value">
+                    <span className="v-onboarding__final-value-currency">$</span>
+                    <div className="v-onboarding__value">{plan.needToSave}</div>
+                    <span className="v-onboarding__period">/mo</span>
+                </div>
+            )
+            :
+            (
+                <div className="v-onboarding__wrapper-final-value">
+                    <span className="v-onboarding__final-value-currency">
+                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything" />
+                    </span>
+                </div>
+            );
 
         return (
             <div className="v-onboarding__create-portfolio-second-step-slide">
                 <h2 className="v-onboarding__headline">
-                    <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio"/>
+                    <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio" />
                 </h2>
                 <div className="v-onboarding__wrapper-final-values">
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.youNeedToSave"/>
+                            <FormattedMessage id="onboarding.youNeedToSave" />
                         </p>
-                        <div className="v-onboarding__wrapper-final-value">
-                            <span className="v-onboarding__final-value-currency">$</span>
-                            <div className="v-onboarding__value">{plan.needToSave}</div>
-                            <span className="v-onboarding__period">/mo</span>
-                        </div>
+                        {planNeedToSave}
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.toEndUpWithAnAnnualPensionOf"/>
+                            <FormattedMessage id="onboarding.toEndUpWithAnAnnualPensionOf" />
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <span className="v-onboarding__final-value-currency">$</span>
@@ -67,7 +82,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     </div>
                     <div className="v-onboarding__wrapper-final-value-item">
                         <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.projectedReturns"/>
+                            <FormattedMessage id="onboarding.projectedReturns" />
                         </p>
                         <div className="v-onboarding__wrapper-final-value">
                             <div className="v-onboarding__value v-onboarding__value--smaller">
@@ -78,16 +93,16 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     </div>
                 </div>
                 <Link onClick={this.props.changeSlide.bind(this, 2)} className="v-onboarding__correct-basics"
-                      to="">&#60;
-                    <FormattedMessage id="onboarding.correctBasics"/>
+                    to="">&#60;
+                    <FormattedMessage id="onboarding.correctBasics" />
                 </Link>
                 <div className="v-onboarding__section">
                     <div className="v-onboarding__section-title">
-                        <FormattedMessage id="onboarding.retirementAge"/>
-                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon}/></Link>
+                        <FormattedMessage id="onboarding.retirementAge" />
+                        <Link to=""><img className="v-onboarding__icon--info" src={infoIcon} /></Link>
                     </div>
                     <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement}
-                                onChange={this.handleRangeChange("ageAtRetirement")}/>
+                        onChange={this.handleRangeChange("ageAtRetirement")} />
                 </div>
                 <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save} className="o-btn v-onboarding__btn">
                     <FormattedMessage id="onboarding.startSaving" />
@@ -98,7 +113,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
 
     private handleRangeChange(field: string) {
         return (value: number) => {
-            const newState = {...this.state};
+            const newState = { ...this.state };
             newState[field] = value;
             this.props.onChange(newState);
         };
