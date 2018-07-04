@@ -1,16 +1,18 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
-import NavbarComponent from "../../components/navigation/NavbarComponent";
-import Web3Provider from "../../components/web3/web3ProviderComponent";
+
 import { NAVIGATION } from "../../constants";
+
+import NavbarComponent from "../../components/navigation/NavbarComponent";
+import Web3Provider from "../../components/web3/Web3ProviderComponent";
+
 import MyProductsWrapper from "../../wrappers/MyProductsWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
-
-import {PlanAfterCalculate} from "../../models/Onboarding";
-
 import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
+
+import { PlanAfterCalculate } from "../../models/Onboarding";
 
 interface Props {
     userData: PlanAfterCalculate;
@@ -46,35 +48,38 @@ export default class LayoutView extends React.Component<Props, State> {
     }
 
     public render() {
+        let content = null;
         if (!this.state.isLogin) {
-            return (
+            content = <OnboardingWrapper/>;
+        } else {
+            content = (
                 <div>
-                    <Web3Provider />
-                    <OnboardingWrapper/>
+                    <NavbarComponent />
+                    <Route
+                        exact={true}
+                        path={`/${NAVIGATION.myWallet}`}
+                        component={MyWalletWrapper}
+                    />
+                    <Route
+                        path={`/${NAVIGATION.savingsAndFunds}`}
+                        component={SavingsAndFundsView}
+                    />
+                    <Route
+                        path={`/${NAVIGATION.myProducts}`}
+                        component={MyProductsWrapper}
+                    />
+                    <Route
+                        path={`/${NAVIGATION.dataUsage}`}
+                        component={DataUsageView}
+                    />
                 </div>
             );
         }
+
         return (
             <div>
                 <Web3Provider />
-                <NavbarComponent />
-                <Route
-                    exact={true}
-                    path={`/${NAVIGATION.myWallet}`}
-                    component={MyWalletWrapper}
-                />
-                <Route
-                    path={`/${NAVIGATION.savingsAndFunds}`}
-                    component={SavingsAndFundsView}
-                />
-                <Route
-                    path={`/${NAVIGATION.myProducts}`}
-                    component={MyProductsWrapper}
-                />
-                <Route
-                    path={`/${NAVIGATION.dataUsage}`}
-                    component={DataUsageView}
-                />
+                {content}
             </div>
         );
     }
