@@ -1,0 +1,52 @@
+@mixin elementsFundAccount {
+    
+    &__wrapper-balances {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: $spacing-default * 6;
+    }
+
+    &__wrapper-balance {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-left: $spacing-default * 4;
+        margin-right: $spacing-default * 4;
+        flex: 1 0 0;
+        position: relative;
+    }
+
+    &__label {
+        color: $color-grey;
+    }
+
+    &__balance {
+        border: 0;
+        outline: 0;
+        border-bottom: 1px solid $color-grey;
+        margin-bottom: $spacing-default;
+        padding: $spacing-default;
+        font-size: $font-size-h1;
+        text-align: center;
+    }
+
+    &__unit {
+        text-transform: uppercase;
+        font-size: $font-size-base;
+        margin-left: $spacing-default;
+    }
+
+    &__info-balance {
+        font-size: $font-size-micro;
+        color: $color-secondary;  
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+    }
+
+    &__icon-info {
+        margin-right: $spacing-default / 2;
+        margin-top: $spacing-default / 4;
+    }
+}

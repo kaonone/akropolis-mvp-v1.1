@@ -42,6 +42,11 @@ export default class NavbarComponent extends React.Component<Props, {}> {
                             </NavLink>
                         </li>
                         <li className="c-navbar__item">
+                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active" to={`/${NAVIGATION.fundAccount}`}>
+                                <FormattedMessage id="nav.fundAccount" />
+                            </NavLink>
+                        </li>
+                        <li className="c-navbar__item">
                             <Link className="c-navbar__add-free-tokens" to="/add-free-test-tokens">Add free test tokens</Link>
                         </li>
                         <li className="c-navbar__item">
