@@ -1,5 +1,16 @@
+import { NO_ETHEREUM } from "../constants";
+
+export const isntEthereumBrowser = () => {
+    // @ts-ignore
+    const { web3 } = window;
+    return !web3;
+};
+
 export const fetchNetwork = () => {
     return new Promise((resolve, reject) => {
+        if (isntEthereumBrowser()) {
+            reject(NO_ETHEREUM);
+        }
         // @ts-ignore
         const { web3 } = window;
 
@@ -15,6 +26,9 @@ export const fetchNetwork = () => {
 
 export const fetchAccounts = () => {
     return new Promise((resolve, reject) => {
+        if (isntEthereumBrowser()) {
+            reject(NO_ETHEREUM);
+        }
         // @ts-ignore
         const { web3 } = window;
         const ethAccounts = getAccounts();

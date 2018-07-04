@@ -4,7 +4,7 @@ import {Web3NetworkStore} from "../store/web3NetworkStore";
 
 const initialState: Web3NetworkStore = {
     networkFetched: false,
-    networkId: 0,
+    networkId: "",
 };
 
 export default function reducer(state: Web3NetworkStore = initialState, action: Action<ActionType, any>): Web3NetworkStore {
@@ -19,7 +19,7 @@ export default function reducer(state: Web3NetworkStore = initialState, action: 
             return {
                 ...state,
                 networkFetched: false,
-                networkId: 0,
+                networkId: "",
             };
         default:
             return state;
