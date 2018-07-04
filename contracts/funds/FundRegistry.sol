@@ -5,57 +5,69 @@ import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 contract FundRegistry is Ownable {
     struct Fund {
         string name;
+        address owner;
         address currentAddress;
-        // any other needed data
+        uint32 riskRating;
+        int32 pastAnnualReturns;
+        uint32 reputationRating;
+        string description;
+        uint256 index;
     }
 
-    mapping(address => Fund) fund_list;
-    mapping(string => Fund) fund_by_name;
-    string[] funds;
+    struct Indexed {
+        uint256 index;
+        bool isIndexed;
+    }
+
+    mapping(string => Indexed) fund_by_name;
+    mapping(uint256 => Fund) public funds;
+    uint256 fundCount;
 
     event Created(address indexed owner, string fundName, address indexed contractLocation);
     event Deleted(address indexed owner, address indexed);
     event Updated(address indexed owner, string fundName, address indexed contractLocation);
 
-    function createNewFund(address _owner, address _contract, string _name) public onlyOwner {
-        require(fund_by_name[_name].currentAddress == 0);
-        Fund memory fund = Fund(_name, _contract);
-        fund_list[_owner] = fund;
-        fund_by_name[fund.name] = fund;
-        funds.push(fund.name);
+    function createNewFund(address _owner, address _contract,
+        string _name,
+        uint32 _riskRating,
+        int32 _pastAnnualReturns,
+        uint32 _reputationRating,
+        string _description) public onlyOwner {
+        require(fund_by_name[_name].isIndexed == false);
+        Fund memory fund = Fund(_name, _owner, _contract, _riskRating, _pastAnnualReturns, _reputationRating, _description,
+            fundCount);
+        Indexed memory idx = Indexed(fund.index, true);
+        fund_by_name[fund.name] = idx;
+        funds[fundCount] = fund;
+        fundCount += 1;
         emit Created(_owner, _name, _contract);
     }
 
-    function fundToTuple(Fund fund) internal pure returns (string, address) {
-        if (fund.currentAddress == 0) {
-            return ("", address(0));
-        }
-        return (fund.name, fund.currentAddress);
-    }
-
-    function getFundCount() public view returns (uint256) {
-        return funds.length;
-    }
-
-    function getFundAt(uint32 index) public view returns (string, address) {
-        Fund storage fund = fund_by_name[funds[index]];
-        return fundToTuple(fund);
-    }
-
-    function getFund(string name) public view returns (string, address) {
-        Fund storage fund = fund_by_name[name];
-        return fundToTuple(fund);
-    }
-
-    function updateFund(address _owner, address _contract) public onlyOwner {
-        Fund memory fund = fund_list[_owner];
+    function updateFund(uint256 idx,
+        address _owner,
+        address _contract,
+        uint32 _riskRating,
+        int32 _pastAnnualReturns,
+        uint32 _reputationRating,
+        string _description) public onlyOwner {
+        Fund storage fund = funds[idx];
+        require(fund.currentAddress != 0);
+        fund.owner = _owner;
         fund.currentAddress = _contract;
-        fund_list[_owner] = fund;
+        fund.riskRating = _riskRating;
+        fund.pastAnnualReturns = _pastAnnualReturns;
+        fund.reputationRating = _reputationRating;
+        fund.description = _description;
         emit Updated(_owner, fund.name, _contract);
     }
 
-    function deleteFund(address _owner, address _contract) public onlyOwner {
-        delete fund_list[_owner];
-        emit Deleted(_owner, _contract);
+    function getFundCount() public view returns (uint256) {
+        return fundCount;
+    }
+
+    function getFundIndex(string name) public view returns (uint256) {
+        Indexed storage idx = fund_by_name[name];
+        require(idx.isIndexed == true);
+        return idx.index;
     }
 }

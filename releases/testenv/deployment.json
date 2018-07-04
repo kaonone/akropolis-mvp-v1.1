@@ -1,22 +1,40 @@
 {
-  "AkropolisToken": "0x033f6435dcb62ebe55a97f440497adec57a68b96",
-  "AKTFaucet": "0x98ed05415d05f10f7cce58369f8a56b3f9ce3107",
-  "PortfolioData": "0xdf3fe23fc7f714b34fe767b150a6238275c96107",
-  "PortfolioFunctional": "0xbe2f81ca012fdfb758df45195433699692d3e5d3",
-  "FundFactory": "0xa9e957ac5d6fff407d73eb51385814ce790f77fb",
-  "FundRegistry": "0x18c16ea22ad782a909332a76166d27960835b5b0",
+  "AkropolisToken": "0x4599d1ec2f2345b1ac5b021bb4c0a2b9d5fcdd86",
+  "AKTFaucet": "0x5b2fd728731c52c94da7f7e6dc7f78af9cb23dbd",
+  "PortfolioData": "0xe85c026f601050ba9026803ffb4dc6c1c31ec6a4",
+  "PortfolioFunctional": "0x1827fb23216dafccf576662d15c1ebf2a39b3c33",
+  "FundFactory": "0x361c0394fab9d07023a038e922063d9c9b07bf43",
+  "FundRegistry": "0x29ba9fe77f9d70ef4b28faef7e1ad459527ab2f2",
   "deployedFunds": [
     [
-      "Crude Oil Fund",
-      "0x814a55dead9c646e128ed75288bb13bfb08ebfee"
+      "S&P500 Index",
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0x37dcec0c297446075f2bb82f6b3575644d4e9fea",
+      "100",
+      "20",
+      "50",
+      "S&P500 index, capital + dividends",
+      "0"
     ],
     [
       "Gold Investment",
-      "0xdeecfe4395c82de74319265978b1417c29934268"
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0x5dfc687af541c9a7180fc3dca46d307bf79a6726",
+      "20",
+      "7",
+      "80",
+      "London gold fix in USD",
+      "1"
     ],
     [
       "US State Bonds",
-      "0x6fc2696cd954e898f9a5e2372128fd852fb4a6bd"
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0x44ca38a41450104691d492acb669ab7dec4866aa",
+      "5",
+      "3",
+      "100",
+      "US 10-year Treasury Bonds",
+      "2"
     ]
   ]
 }
