@@ -9,4 +9,19 @@
     &__headline {
         margin-bottom: $spacing-default * 2;
     }
+
+    &__wrapper-options {
+        background-color: $color-grey;
+        display: inline-block;
+        padding: $spacing-default $spacing-default * 3;
+        margin: 0 auto $spacing-default;
+        border-radius: $radius-oval;
+        display: table;
+        color: $color-white;
+    }
+
+    &__value-of-options {
+        display: inline-block;
+        margin: 0 $spacing-default;
+    }
 }

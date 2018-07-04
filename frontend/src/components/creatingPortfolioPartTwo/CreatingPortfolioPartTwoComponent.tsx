@@ -63,7 +63,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio" />
                 </h2>
                 <div className="v-onboarding__wrapper-final-values">
-                    <div className="v-onboarding__wrapper-final-value-item">
+                    <div className="v-onboarding__wrapper-final-value-item v-onboarding__wrapper-final-value-item--first">
                         <p className="v-onboarding__describe-value">
                             <FormattedMessage id="onboarding.youNeedToSave" />
                         </p>
@@ -102,9 +102,16 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement}
                         onChange={this.handleRangeChange("ageAtRetirement")} />
                 </div>
-                <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save} className="o-btn v-onboarding__btn">
-                    <FormattedMessage id="onboarding.startSaving" />
-                </Link>
+                {plan.needToSave === 0 ? (
+                    <div className="o-btn v-onboarding__btn o-btn--disabled">
+                        <FormattedMessage id="onboarding.startSaving"/>
+                    </div>
+                ) : (
+                    <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save}
+                          className="o-btn v-onboarding__btn">
+                        <FormattedMessage id="onboarding.startSaving"/>
+                    </Link>
+                )}
             </div>
         );
     }
