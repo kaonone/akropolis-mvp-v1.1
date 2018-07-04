@@ -63,7 +63,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio" />
                 </h2>
                 <div className="v-onboarding__wrapper-final-values">
-                    <div className="v-onboarding__wrapper-final-value-item">
+                    <div className="v-onboarding__wrapper-final-value-item v-onboarding__wrapper-final-value-item--first">
                         <p className="v-onboarding__describe-value">
                             <FormattedMessage id="onboarding.youNeedToSave" />
                         </p>
