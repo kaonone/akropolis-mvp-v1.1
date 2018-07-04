@@ -9,6 +9,7 @@ export default {
     "onboarding.enterAge": "Enter age",
     "onboarding.howMuchIAmSavingPerMonth": "How much I am saving per month",
     "onboarding.inflationCalculationValue": "Inflation calculation value",
+    "onboarding.itSeemsYouDonTNeedToSaveAnything": "It seems you don't need to save anything. Are you sure the input you gave is correct?",
     "onboarding.letSCreateYourFirstPortfolio": "Let’s create your first portfolio!",
     "onboarding.myCurrentAge": "My current age",
     "onboarding.myDesiredAnnualIncomeAfterRetirement": "My desired annual income after retirement",
