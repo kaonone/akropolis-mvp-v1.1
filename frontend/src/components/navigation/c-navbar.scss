@@ -28,7 +28,9 @@
         }
     }
 
-    &__item {}
+    &__item {
+        margin-left: $spacing-default;
+    }
 
     &__link {
 

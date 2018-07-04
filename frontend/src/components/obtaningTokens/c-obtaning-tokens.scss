@@ -1,0 +1,26 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/_tools-elements-fund-account";
+
+.c-obtaning-tokens {
+
+    @include elementsFundAccount;
+
+    &__wrapper-options {
+        text-align: center;
+    }
+
+    &__icon {
+        margin-bottom: $spacing-default * 3;
+    }
+
+    &__btn {
+        margin-bottom: $spacing-default * 2;
+    }
+
+    &__headline {
+        font-weight: normal;
+        display: block;
+        text-align: center;
+        margin-bottom: $spacing-default * 5;
+    }
+}

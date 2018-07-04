@@ -10,9 +10,11 @@ import MyProductsWrapper from "../../wrappers/MyProductsWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
-import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
+import FundAccountView from "../fundAccount/FundAccountView";
 
 import { PlanAfterCalculate } from "../../models/Onboarding";
+
+import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
 interface Props {
     userData: PlanAfterCalculate;
@@ -50,7 +52,7 @@ export default class LayoutView extends React.Component<Props, State> {
     public render() {
         let content = null;
         if (!this.state.isLogin) {
-            content = <OnboardingWrapper/>;
+            content = <OnboardingWrapper />;
         } else {
             content = (
                 <div>
@@ -71,6 +73,10 @@ export default class LayoutView extends React.Component<Props, State> {
                     <Route
                         path={`/${NAVIGATION.dataUsage}`}
                         component={DataUsageView}
+                    />
+                    <Route
+                        path={`/${NAVIGATION.fundAccount}`}
+                        component={FundAccountView}
                     />
                 </div>
             );

@@ -1,0 +1,50 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/_tools-elements-fund-account"; 
+
+.c-make-commitment {
+
+    $c: &;
+
+    @include elementsFundAccount; 
+
+    &__headline {
+        font-weight: normal;
+        display: block;
+        text-align: center;
+        margin-bottom: $spacing-default * 5;
+    }
+
+    &__label-range {
+        margin-bottom: $spacing-default;
+        display: block;
+    }
+
+    &__wrapper-section {
+        margin-bottom: $spacing-default * 5;
+    }
+
+    &__wrapper-period {
+        display: flex;
+        border: 1px solid $color-black;
+        padding: 2px;
+    }
+
+    &__btn-period {
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        width: 100%;
+        font-size: $font-size-h4;
+        padding: $spacing-default;
+
+        &--active {
+            background: $color-black;
+            color: $color-white;
+        }
+    }
+
+    &__description {
+        text-align: center;
+        margin-bottom: $spacing-default * 2;
+    }
+}
