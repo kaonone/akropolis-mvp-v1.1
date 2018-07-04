@@ -1,9 +1,10 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
-import infoIcon from "../../assets/images/info-icon.svg";
-import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
 
+import infoIcon from "../../assets/images/info-icon.svg";
+import { NAVIGATION } from "../../constants";
+import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
 import InputRange from "../inputRange/InputRangeComponent";
 
 interface Props {
@@ -101,9 +102,9 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                     <InputRange value={this.state.ageAtRetirement} max={100} min={minAgeAtRetirement}
                         onChange={this.handleRangeChange("ageAtRetirement")} />
                 </div>
-                <button className="o-btn v-onboarding__btn" onClick={this.save}>
+                <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save} className="o-btn v-onboarding__btn">
                     <FormattedMessage id="onboarding.startSaving" />
-                </button>
+                </Link>
             </div>
         );
     }
