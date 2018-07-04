@@ -1,0 +1,26 @@
+@import "assets/styles/1_settings/settings-project";
+
+.c-downloading-browser {
+
+    &__wrapper-introduction {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+        margin-bottom: $spacing-default * 4;
+    }
+
+    &__icon {
+        margin-bottom: $spacing-default * 3;
+    }
+
+    &__headline {
+        font-weight: normal;
+        display: block;
+        text-align: center;
+    }
+
+    &__btn {
+        margin-bottom: $spacing-default * 2;
+    }
+}
