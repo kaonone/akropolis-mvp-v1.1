@@ -4,4 +4,5 @@ export interface Product {
     fundPercent: string;
     fundRating: string;
     fundValueDescription: string;
+    id: number;
 }
