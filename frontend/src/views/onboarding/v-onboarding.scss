@@ -70,6 +70,7 @@
         margin: ($spacing-default * 6) auto 0;
         width: 100%;
         display: block;
+        text-align: center;
 
         @include mq($from: tablet) {
             width: $spacing-default * 20;
@@ -174,6 +175,11 @@
         width: 100%;
         align-items: baseline;
         margin-bottom: $spacing-default * 2;
+
+        &--first {
+            min-height: $spacing-default * 6;
+            align-items: flex-end;
+        }
 
         &:last-child {
             margin-bottom: unset;
