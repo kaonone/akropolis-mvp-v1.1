@@ -30,6 +30,7 @@ contract PortfolioData is Ownable, Portfolio {
 
   function createNewUserAllocation(address _userAddress, uint[] _pc, uint[] _eth, address[] _fund) public {
     require(tx.origin == owner || tx.origin == _userAddress);
+    require(_pc.length == _eth.length && _pc.length == _fund.length);
     Allocation[] memory array;
     for (uint i = 0; i < _pc.length; i++) {
       array[i] = Allocation(_pc[i], _eth[i], _fund[i]);
@@ -40,6 +41,7 @@ contract PortfolioData is Ownable, Portfolio {
 
   function updateUserAllocation(address _userAddress, uint[] _pc, uint[] _eth, address[] _fund) public {
     require(tx.origin == owner || tx.origin == _userAddress);
+    require(_pc.length == _eth.length && _pc.length == _fund.length);
     Allocation[] memory array;
     for (uint i = 0; i < _pc.length; i++) {
       array[i] = Allocation(_pc[i], _eth[i], _fund[i]);
