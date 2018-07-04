@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
 import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
