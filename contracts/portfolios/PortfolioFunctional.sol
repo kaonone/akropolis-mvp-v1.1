@@ -43,6 +43,7 @@ contract PortfolioFunctional is Accessible, Ownable, Portfolio {
         require(sumOfPercent == 100);
         require(amount == msg.value);
         require(_amountToPay == msg.value);
+        require(token.transferFrom(_userAddress, this, _aktStake));
 
         for (i = 0; i < _funds.length; i++) {
             FundFunctional fund = FundFunctional(_funds[i]);
