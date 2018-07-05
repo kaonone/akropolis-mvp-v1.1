@@ -85,7 +85,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     public render() {
-        console.warn(this.state);
         // const network = "testenv";
 
         if (isntEthereumBrowser()) {
