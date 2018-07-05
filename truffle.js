@@ -12,6 +12,7 @@
  *   },
  */
 let HDWalletProvider = require("truffle-hdwallet-provider");
+// let PrivateKeyProvider = require("truffle-privatekey-provider");
 const config = require('./test-env-config.json');
 
 
