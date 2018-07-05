@@ -2,9 +2,9 @@
 import ArrowBackIcon from "-!svg-react-loader?name=ethIcon!../../../assets/images/arrow-back-icon.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
-import { FormattedMessage } from "react-intl";
+import {FormattedMessage} from "react-intl";
 import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
-import { StepTwo } from "../../../views/fundAccount/FundAccountView";
+import {StepTwo} from "../../../views/fundAccount/FundAccountView";
 
 import "./c-stake-akt.css";
 
@@ -30,6 +30,7 @@ export default class StakeAktComponent extends React.Component<Props, State> {
     public readonly state: State = {
         form: {
             stakeAkt: 1,
+            stakeAktValue: 500
         },
         stakeAkts: [
             {
@@ -47,7 +48,8 @@ export default class StakeAktComponent extends React.Component<Props, State> {
                 id: 2,
                 value: 1000,
             },
-        ]
+        ],
+
     };
 
     constructor(props: any) {
@@ -67,7 +69,7 @@ export default class StakeAktComponent extends React.Component<Props, State> {
         const stakeAkts = this.state.stakeAkts.map((stakeAkt: any, i: number) => {
             return (
                 <div key={i} onClick={() => this.onClick(stakeAkt.id)}
-                    className={`c-stake-akt__box ${stakeAkt.id === this.state.form.stakeAkt ? "c-stake-akt__box--active" : ""}`}>
+                     className={`c-stake-akt__box ${stakeAkt.id === this.state.form.stakeAkt ? "c-stake-akt__box--active" : ""}`}>
                     <div className="c-stake-akt__description">{stakeAkt.description}</div>
                     <div className="c-stake-akt__value">{getValueLabel(stakeAkt.value)}</div>
                 </div>
@@ -75,30 +77,34 @@ export default class StakeAktComponent extends React.Component<Props, State> {
         });
         return (
             <>
-                <button onClick={() => this.props.back()} className="u-arrow__back"><ArrowBackIcon /></button>
+                <button onClick={() => this.props.back()} className="u-arrow__back"><ArrowBackIcon/></button>
                 <FormattedMessage id="fundAccount.makeCommitment">{
-                    (makeCommitment: string) => <SubNavigationComponent title={makeCommitment} spaceForArrow={true} />}
+                    (makeCommitment: string) => <SubNavigationComponent title={makeCommitment} spaceForArrow={true}/>}
                 </FormattedMessage>
                 <h3 className="c-stake-akt__headline">
-                    <FormattedMessage id="fundAccount.getDiscountsOnFeesAccessToPremiumProducts" />
+                    <FormattedMessage id="fundAccount.getDiscountsOnFeesAccessToPremiumProducts"/>
                 </h3>
                 <div className="c-stake-akt__wrapper-stake-akt">
                     {stakeAkts}
                 </div>
                 <p className="c-stake-akt__introduction">
-                    <FormattedMessage id="fundAccount.stakingTokensMeansThatTheyWillBeLockedUp" />
+                    <FormattedMessage id="fundAccount.stakingTokensMeansThatTheyWillBeLockedUp"/>
                 </p>
                 <button onClick={() => this.props.onConfirm(this.state.form)} className="o-btn o-btn--wide">
-                    <FormattedMessage id="fundAccount.confirm" />
+                    <FormattedMessage id="fundAccount.confirm"/>
                 </button>
             </>
         );
     }
+
     private onClick = (id: number) => {
         this.setState({
             ...this.state,
             form: {
                 stakeAkt: id,
+                stakeAktValue: this.state.stakeAkts
+                    .filter((st) => st.id === id)
+                    .map((st) => st.value)[0]
             }
         });
     }
