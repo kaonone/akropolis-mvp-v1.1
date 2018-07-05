@@ -4,6 +4,9 @@ import * as AKTFaucet from "../contracts/AKTFaucet.json";
 
 export const fetchATMBalance = (account: string) => {
     return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
         // @ts-ignore
         const { web3 } = window;
 
@@ -22,6 +25,9 @@ export const fetchATMBalance = (account: string) => {
 
 export const fetchETHBalance = (account: string) => {
     return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
         // @ts-ignore
         const { web3 } = window;
 
@@ -40,6 +46,9 @@ export const fetchETHBalance = (account: string) => {
 
 export const getFreeATMToken = (account: string) => {
     return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
         // @ts-ignore
         const { web3 } = window;
 
