@@ -24,6 +24,7 @@
         width: 100%;
     }
 
+    &[disabled],
     &--disabled {
         background-color: $color-grey-light;
         cursor: not-allowed;
