@@ -14,6 +14,7 @@ export type ActionType =
     constants.FETCH_AKT_BALANCE_REJECTED |
     constants.FETCH_ACCOUNT |
     constants.FETCH_ACCOUNT_FULFILLED |
+    constants.SELECT_PRODUCT |
     constants.FETCH_PRODUCTS_DATA |
     constants.FETCH_ACCOUNT_REJECTED;
 

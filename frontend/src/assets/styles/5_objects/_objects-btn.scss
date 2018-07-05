@@ -5,7 +5,6 @@
     padding: $spacing-default;
     transition: $transition-default;
     cursor: pointer;
-    box-shadow: $shadow-default;
     outline: 0;
     font-size: $font-size-h4;
     text-align: center;
@@ -32,6 +31,10 @@
         &:hover {
             opacity: unset;
         }
+    }
+
+    &--block {
+        display: block;
     }
 
     > svg {

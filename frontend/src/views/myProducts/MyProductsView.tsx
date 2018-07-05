@@ -1,7 +1,10 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 import ProductRowComponent from "../../components/productRowComponent/ProductRowComponent";
 import { Product } from "../../models/Products";
+
+import { NAVIGATION } from "../../constants";
 
 import "./v-products.css";
 
@@ -11,6 +14,7 @@ export interface Props {
 
 export interface PropsFromDispatch {
     fetchProductsData: () => void;
+    selectProduct: (product: Product) => void;
 }
 
 interface AllProps extends Props, PropsFromDispatch { }
@@ -24,6 +28,12 @@ export default class MyProductsView extends React.Component<AllProps, State> {
     public readonly state: State = {
         idOfcheckedProduct: undefined,
     };
+
+    constructor(props: any) {
+        super(props);
+
+        this.selectProduct = this.selectProduct.bind(this);
+    }
 
     public componentWillMount() {
         this.props.fetchProductsData();
@@ -52,9 +62,9 @@ export default class MyProductsView extends React.Component<AllProps, State> {
                         <h1 className="v-products__value-of-options">{checkedProduct[0].fundPastReturns}% </h1>
                         <FormattedMessage id="myProducts.returns" />
                     </div>
-                    <FormattedMessage id="myProducts.makeInitialContribution">
-                        {(makeInitialContribution: string) => <button className="o-btn o-btn--wide">{makeInitialContribution}</button>}
-                    </FormattedMessage>
+                    <Link className="o-btn o-btn--block o-btn--wide" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
+                        <FormattedMessage id="myProducts.makeInitialContribution"/>
+                    </Link>
                 </>
             ) : null;
 
@@ -72,5 +82,10 @@ export default class MyProductsView extends React.Component<AllProps, State> {
             ...this.state,
             idOfcheckedProduct: id
         });
+    }
+
+    private selectProduct() {
+        const product = this.props.data.filter((p: Product) => p.id === this.state.idOfcheckedProduct)[0];
+        this.props.selectProduct(product);
     }
 }
