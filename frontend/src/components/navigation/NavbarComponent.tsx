@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AKTBalance from "../../wrappers/ATKBalanceWrapper";
 
 import { NAVIGATION } from "../../constants";
@@ -18,7 +18,7 @@ export default class NavbarComponent extends React.Component<Props, {}> {
         return (
             <div>
                 <header className="c-navbar">
-                    <Link className="c-navbar__logo-link" to="/">Logo Akropolis</Link>
+                    {/* <Link className="c-navbar__logo-link" to="/">Logo Akropolis</Link> */}
                     <a className="c-navbar__toggle" menu-toggle="true" />
                     <ul className="c-navbar__wrapper">
                         <li className="c-navbar__item">

@@ -2,7 +2,8 @@
 import EthIcon from "-!svg-react-loader?name=ethIcon!../../../assets/images/eth-icon.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from "react-intl";
+import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
 
 import "./c-downloading-browser.css";
 
@@ -12,8 +13,11 @@ export default class DownloadingBrowserComponent extends React.Component<any, an
 
         return (
             <div className="c-downloading-browser">
+                <FormattedMessage id="fundAccount.fundYourAccount">{
+                    (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
+                </FormattedMessage>
                 <div className="c-downloading-browser__wrapper-introduction">
-                    <EthIcon className="c-downloading-browser__icon"/>
+                    <EthIcon className="c-downloading-browser__icon" />
                     <FormattedMessage id="fundAccount.youWillNeedToHaveAnEthereumEnabledBrowserToProceed">{
                         (youWillNeedToHaveAnEthereumEnabledBrowserToProceed: string) =>
                             <h3 className="c-downloading-browser__headline">{youWillNeedToHaveAnEthereumEnabledBrowserToProceed}</h3>

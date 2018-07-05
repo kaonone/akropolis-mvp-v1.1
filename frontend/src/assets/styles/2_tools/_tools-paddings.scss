@@ -1,5 +1,5 @@
 @mixin globalPadding($value: 5%) {
-    padding-left: $value;
-    padding-right: $value;
+    margin-left: $value;
+    margin-right: $value;
     padding-top: $spacing-default * 4;
 }

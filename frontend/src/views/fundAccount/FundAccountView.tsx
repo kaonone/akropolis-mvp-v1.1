@@ -1,6 +1,6 @@
 /* tslint:disable:no-implicit-dependencies */
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
-/* tslint:enable:no-implicit-dependencies */
+/* tslint:enable:no-implicit-dependencies */  
 
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -42,7 +42,7 @@ export interface StepTwo {
 }
 
 interface State {
-    AKTBalance: number;
+    AKTBalance: number;   
     ETHBalance: number;
     isOpenModal: boolean;
     step: 1 | 2;
@@ -137,7 +137,8 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                                      onConfirm={this.handleStepOneConfirm}/>
                         ) : (
                             <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
-                                               form={this.state.stepTwo} />
+                                               form={this.state.stepTwo} 
+                                               back={this.handleBack}/>
                         )}
                         <ConfirmationModalComponent result={this.state.stepOne}
                                                     isOpenProps={this.state.isOpenModal}
@@ -169,5 +170,12 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             isOpenModal: true,
             stepTwo: form,
         });
+    }
+
+    private handleBack = () => {
+        this.setState({
+            ...this.state,
+            step: 1,
+        }); 
     }
 }

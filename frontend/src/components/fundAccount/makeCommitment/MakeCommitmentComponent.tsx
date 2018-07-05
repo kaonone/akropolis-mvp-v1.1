@@ -1,8 +1,10 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
+// import SubNavigationComponent from "../../components/subNavigation/SubNavigationComponent";
 import InputRange from "../../inputRange/InputRangeComponent";
 
-import {StepOne} from "../../../views/fundAccount/FundAccountView";
+import { StepOne } from "../../../views/fundAccount/FundAccountView";
 
 import "./c-make-commitment.css";
 
@@ -51,6 +53,9 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
 
         return (
             <>
+                <FormattedMessage id="fundAccount.makeCommitment">{
+                    (makeCommitment: string) => <SubNavigationComponent title={makeCommitment} spaceForArrow={false} />}
+                </FormattedMessage>
                 <h3 className="c-make-commitment__headline">
                     <FormattedMessage id="fundAccount.makeCommitmentToSaving" />
                 </h3>

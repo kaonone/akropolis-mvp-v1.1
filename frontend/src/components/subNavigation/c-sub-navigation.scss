@@ -1,0 +1,20 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-paddings";
+
+.c-sub-navigation {
+
+    @include globalPadding;
+
+    position: absolute;
+    left: 0;
+    top: -$spacing-default / 4;
+
+    &__headline {
+        margin-top: $spacing-default;
+        font-weight: normal;
+
+        &--margin-extra {
+            margin-left: $spacing-default * 4;
+        }
+    }
+}
