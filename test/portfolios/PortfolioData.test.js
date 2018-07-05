@@ -15,15 +15,17 @@ contract('PortfolioData', function ([owner, holder, fund]) {
 
 
     it('should create a commitment', async function () {
-        await portfolioData.createNewUserCommitment(holder, 0, web3.toWei(10, "ether"), 10);
+        await portfolioData.createNewUserCommitment(holder, 0, web3.toWei(10, "ether"), 10, 1000);
         let commitment = await portfolioData.user_commitment(holder);
         expect(commitment[0]).to.equal(toBN(0));
         expect(commitment[1]).to.equal(toBN(web3.toWei(10, "ether")));
         expect(commitment[2]).to.equal(toBN(10));
+        expect(commitment[3]).to.equal(toBN(1000));
     });
 
     it('should forbid creating a commitment for non-owners', async function () {
-        await expectThrow(portfolioData.createNewUserCommitment(holder, 0, web3.toWei(10, "ether"), 10, {from: holder}));
+        await expectThrow(portfolioData.createNewUserCommitment(holder, 0, web3.toWei(10, "ether"), 10, 1000,
+            {from: holder}));
     });
 
     it('should create allocations', async function () {
