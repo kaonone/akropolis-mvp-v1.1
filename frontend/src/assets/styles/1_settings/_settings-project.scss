@@ -57,7 +57,7 @@ $radius-oval: 50px;
 $mq-breakpoints: (mobile: 320px, tablet: 740px, desktop: 980px, wide: 1300px);
 
 // Shadows
-$shadow-default: none;
+$shadow-default: 0 5px 6px rgba($color-black, 0.3);
 
 // Gradients
 $gradient-transparent-to-white: linear-gradient(to right, transparent 0%, #ffffff 100%);
