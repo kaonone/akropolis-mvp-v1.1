@@ -177,10 +177,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             isOpenModal: true,
             stepTwo: form,
         });
-
-        // const body = document.querySelector("body");
-        // body.style
-
     }
 
     private handleBack = () => {
