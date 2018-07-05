@@ -4,9 +4,9 @@ import {ApplicationStore} from "../redux/store/store";
 
 import {default as Component, Props} from "../components/AKTBalance/AKTBalanceComponent";
 
-export function mapStateToProps({web3Accounts}: ApplicationStore) {
+export function mapStateToProps({web3}: ApplicationStore) {
     return {
-        account: web3Accounts.accountSelected,
+        web3,
     };
 }
 

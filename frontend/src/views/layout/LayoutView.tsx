@@ -6,11 +6,11 @@ import { NAVIGATION } from "../../constants";
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
 
+import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
 import MyProductsWrapper from "../../wrappers/MyProductsWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
-import FundAccountView from "../fundAccount/FundAccountView";
 
 import { PlanAfterCalculate } from "../../models/Onboarding";
 
@@ -76,7 +76,7 @@ export default class LayoutView extends React.Component<Props, State> {
                     />
                     <Route
                         path={`/${NAVIGATION.fundAccount}`}
-                        component={FundAccountView}
+                        component={FundAccountWrapper}
                     />
                 </div>
             );

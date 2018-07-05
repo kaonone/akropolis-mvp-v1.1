@@ -6,6 +6,12 @@ export type ActionType =
     constants.FETCH_NETWORK |
     constants.FETCH_NETWORK_FULFILLED |
     constants.FETCH_NETWORK_REJECTED |
+    constants.FETCH_ETH_BALANCE |
+    constants.FETCH_ETH_BALANCE_FULFILLED |
+    constants.FETCH_ETH_BALANCE_REJECTED |
+    constants.FETCH_AKT_BALANCE |
+    constants.FETCH_AKT_BALANCE_FULFILLED |
+    constants.FETCH_AKT_BALANCE_REJECTED |
     constants.FETCH_ACCOUNT |
     constants.FETCH_ACCOUNT_FULFILLED |
     constants.FETCH_PRODUCTS_DATA |
