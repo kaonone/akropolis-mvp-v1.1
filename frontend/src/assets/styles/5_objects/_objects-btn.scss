@@ -9,9 +9,16 @@
     outline: 0;
     font-size: $font-size-h4;
     text-align: center;
+    box-shadow: $shadow-default;
 
     &:hover {
         opacity: 0.7;
+    }
+
+    &--reverse {
+        background: transparent;
+        color: $color-black;
+        border: 1px solid $color-black;
     }
 
     &--wide {
