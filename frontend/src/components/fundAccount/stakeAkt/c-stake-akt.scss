@@ -1,0 +1,51 @@
+@import "assets/styles/1_settings/settings-project";
+
+.c-stake-akt {
+
+  $c: &;
+
+  &__headline {
+    font-weight: normal;
+    margin-bottom: $spacing-default * 4;
+    font-size: 16px;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid $color-black;
+    padding: $spacing-default * 2;
+    height: $spacing-default * 9;
+    cursor: pointer;
+    margin-bottom: $spacing-default;
+
+    &--active {
+      border: 2px solid;
+      background-color: $color-grey-light;
+    }
+  }
+
+  &__description {
+    font-size: 16px;
+    align-items: center;
+    display: flex;
+  }
+
+  &__value {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    align-items: center;
+    display: flex;
+    text-align: right;
+  }
+
+  &__introduction {
+    text-align: center;
+    margin-bottom: $spacing-default * 4;
+  }
+
+  &__wrapper-stake-akt {
+    margin-bottom: $spacing-default * 8;
+  }
+}

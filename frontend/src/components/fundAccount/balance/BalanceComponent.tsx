@@ -34,7 +34,6 @@ export default class BalanceComponent extends React.Component<Props, State> {
             <div className="c-balance__wrapper-balances">
                 {this.state.ETHBalanceChanged && (
                     <div className="c-balance__info-balance">
-
                         <CheckIcon className="c-balance__icon c-balance__icon-info"/>
                         {ETHBalance}<FormattedMessage id="fundAccount.ethObtainedForTest"/>
                     </div>

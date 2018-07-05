@@ -5,6 +5,8 @@
 
     @include globalPadding;
 
+    margin-bottom: $spacing-default * 3;
+
     &--error {
         text-align: center;
     }

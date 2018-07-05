@@ -40,9 +40,10 @@
         font-size: $font-size-micro;
         color: $color-secondary;  
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         position: absolute;
         width: 100%;
+        padding: 0 $spacing-default * 3;
     }
 
     &__icon-info {
