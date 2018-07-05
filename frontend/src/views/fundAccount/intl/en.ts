@@ -14,14 +14,15 @@ export default {
     "fundAccount.forTest": "Get free {currency} for test",
     "fundAccount.forThePeriodOf": "For the period of",
     "fundAccount.fullAccessToAkropolis": "Full access to Akropolis",
+    "fundAccount.fundYourAccount": "Fund your account",
     "fundAccount.getDiscountsOnFeesAccessToPremiumProducts":
-    "Get discounts on fees, access to premium products and participate in our reward pool by staking AKT tokens.",
+        "Get discounts on fees, access to premium products and participate in our reward pool by staking AKT tokens.",
     "fundAccount.getFreeEth": "Get free",
     "fundAccount.getFreeEthForTest": "Get free ETH for test",
     "fundAccount.iWillMakeARegularPaymentOf": "I will make a regular payment of",
     "fundAccount.incorrectNetwork": "Please switch to {network} network.",
     "fundAccount.longerCommitmentsMeanMoreRewards": `Longer commitments mean more rewards. 
-    If you break your commitment early you will forfeit any rewards accured.`,
+        If you break your commitment early you will forfeit any rewards accured.`,
     "fundAccount.makeCommitment": "Make commitment",
     "fundAccount.makeCommitmentToSaving": "Make commitment to regular saving",
     "fundAccount.month": "Month",

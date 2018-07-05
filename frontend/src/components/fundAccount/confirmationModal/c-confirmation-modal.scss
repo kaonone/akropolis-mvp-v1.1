@@ -1,5 +1,6 @@
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/tools-paddings";
+@import "assets/styles/2_tools/tools-mq";
 
 .c-confirmation-modal {
 
@@ -14,6 +15,7 @@
   right: 0;
   bottom: 0;
   display: none;
+  z-index: 101;
 
   &--show {
     display: block;
@@ -45,6 +47,10 @@
   &__value {
     font-size: $font-size-h1;
     font-weight: bold;
+
+    @include mq($until: tablet) {
+      font-size: $font-size-h2;
+  }
   }
 
   &__unit {

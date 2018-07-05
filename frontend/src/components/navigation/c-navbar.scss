@@ -12,11 +12,13 @@
     justify-content: space-between;
     margin-top: $spacing-default * 2;
     margin-bottom: $spacing-default * 4;
+    position: relative;
 
     &__logo-link {}
 
     &__wrapper {
         display: flex;
+        margin-left: auto;
 
         #{$c}--show-mobile-menu & {
             display: flex;
@@ -45,10 +47,11 @@
         display: block;
         width: $spacing-default * 2;
         height: $spacing-default * 2;
-        position: relative;
+        position: absolute;
         cursor: pointer;
         box-shadow: inset 0px 2px 0 0 $color-grey-dark;
         transition: $transition-default;
+        right: 0;
 
         #{$c}--show-mobile-menu & {
             box-shadow: inset 0px 2px 0 0 transparent;
