@@ -1,0 +1,82 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-paddings";
+
+.c-confirmation-modal {
+
+    $c: &;
+
+    @include globalPadding;
+
+    background-color: rgba($color-white, 0.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+
+    &--show {
+        display: block;
+    }
+
+    &__box {
+        border: 2px solid $color-black;
+        padding: $spacing-default * 4;
+        margin-top: $spacing-default * 7;
+        background-color: $color-white;
+    }
+
+    &__headline {
+        text-align: center;
+        font-weight: normal;
+        margin-bottom: $spacing-default * 4;
+    }
+
+    &__introduction {
+        font-weight: normal;
+        text-align: center;
+        margin-bottom: $spacing-default * 4;
+    }
+
+    &__wrapper-underline {
+        border-bottom: 1px solid $color-black;
+    }
+
+    &__value {
+        font-size: $font-size-h1;
+        font-weight: bold;
+    }
+
+    &__unit {
+        font-size: $font-size-h3;
+        text-transform: uppercase;
+        margin-left: $spacing-default;
+    }
+
+    &__base-text {
+        font-size: $font-size-h3;
+        margin-left: $spacing-default * 2;
+        margin-right: $spacing-default * 2;
+
+        &--lower-case {
+            text-transform: lowercase;
+        }
+    }
+
+    &__wrapper-row {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        margin-bottom: $spacing-default * 2;
+    }
+
+    &__wrapper-description {
+        text-align: center;
+        margin-top: $spacing-default * 2;
+        margin-bottom: $spacing-default * 2;
+    }
+
+    &__btn {
+        margin-bottom: $spacing-default;
+    }
+}
