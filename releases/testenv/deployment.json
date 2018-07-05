@@ -1,15 +1,15 @@
 {
-  "AkropolisToken": "0x4599d1ec2f2345b1ac5b021bb4c0a2b9d5fcdd86",
-  "AKTFaucet": "0x5b2fd728731c52c94da7f7e6dc7f78af9cb23dbd",
-  "PortfolioData": "0xe85c026f601050ba9026803ffb4dc6c1c31ec6a4",
-  "PortfolioFunctional": "0x1827fb23216dafccf576662d15c1ebf2a39b3c33",
-  "FundFactory": "0x361c0394fab9d07023a038e922063d9c9b07bf43",
-  "FundRegistry": "0x29ba9fe77f9d70ef4b28faef7e1ad459527ab2f2",
+  "AkropolisToken": "0xd475b177f194853c3afd6bcea87f23f66409fa9a",
+  "AKTFaucet": "0xb98a737659c044b4fce01cd2e2d927f0cf92696b",
+  "PortfolioData": "0x06630bbe40bd0c9fc3fce67a9129cfccab257c12",
+  "PortfolioFunctional": "0xe87a0a98839cee9d19e7183c20d55837237e8d4c",
+  "FundFactory": "0xc21662e9bb656b733e581917e9dc36c49b898bd9",
+  "FundRegistry": "0x6534dbeca10ae38eb3b1dff2d9c0ffdc8b72b1ad",
   "deployedFunds": [
     [
       "S&P500 Index",
       "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
-      "0x37dcec0c297446075f2bb82f6b3575644d4e9fea",
+      "0x85c78c6a5b9fc2cc6a58abf96c0c4eb17a5a1e89",
       "100",
       "20",
       "50",
@@ -19,7 +19,7 @@
     [
       "Gold Investment",
       "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
-      "0x5dfc687af541c9a7180fc3dca46d307bf79a6726",
+      "0xaaa4c44ad3a5d61fc2d56b1b227855368d3f34fe",
       "20",
       "7",
       "80",
@@ -29,7 +29,7 @@
     [
       "US State Bonds",
       "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
-      "0x44ca38a41450104691d492acb669ab7dec4866aa",
+      "0x1e79f491b2ac75f40140c7707cdf73fb9535143a",
       "5",
       "3",
       "100",

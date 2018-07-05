@@ -19,9 +19,7 @@ contract FundFunctional is Ownable {
   // All the examples do not currently move any actual funds,
   // they are just to demonstrate the separation of concerns
   // into functional and data contracts.
-  function invest(address _userAddress, uint _amount) public payable {
-    require(tx.origin == owner || tx.origin == _userAddress);
-
+  function invest(address _userAddress, uint _amount) public onlyOwner payable {
     fundData.updateBalance(_userAddress, _amount);
 
     // Move money to the fund contract here

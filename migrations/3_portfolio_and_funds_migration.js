@@ -1,5 +1,6 @@
 'use strict';
 
+const AkropolisToken = artifacts.require('./tokens/AkropolisToken.sol');
 const FundFactory = artifacts.require('./funds/FundFactory.sol');
 const FundRegistry = artifacts.require('./funds/FundRegistry.sol');
 const PortfolioData = artifacts.require('./portfolios/PortfolioData.sol');
@@ -10,7 +11,7 @@ module.exports = (deployer, network, accounts) => {
     deployer.then(async () => {
         let owner = accounts[0];
         await deployer.deploy(PortfolioData);
-        await deployer.deploy(PortfolioFunctional, PortfolioData.address);
+        await deployer.deploy(PortfolioFunctional, AkropolisToken.address, PortfolioData.address);
         await deployer.deploy(FundFactory);
         let factory = await FundFactory.deployed();
         let registry = FundRegistry.at(await factory.fundRegistry());

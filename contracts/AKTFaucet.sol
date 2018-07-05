@@ -6,7 +6,7 @@ import "zeppelin-solidity/contracts/lifecycle/Destructible.sol";
 import "./tokens/AkropolisToken.sol";
 /**
  * @title AKTFaucet
- * @dev This contract mints AKT 100 tokens.
+ * @dev This contract transfers AKT 100 tokens to a given address.
  * DEMO USE ONLY
  */
 contract AKTFaucet is Destructible, Pausable {
@@ -20,8 +20,8 @@ contract AKTFaucet is Destructible, Pausable {
     }
 
     function emitAKT(address target) external whenNotPaused {
-        token.increaseApproval(target, 100);
-        token.transfer(target, 100);
-        emit FaucetUsed(target, 100);
+        token.increaseApproval(target, 1000 ether);
+        token.transfer(target, 1000 ether);
+        emit FaucetUsed(target, 1000 ether);
     }
 }
