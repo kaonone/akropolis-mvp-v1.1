@@ -5,8 +5,9 @@ import {ApplicationStore} from "../redux/store/store";
 
 import {default as Component, Props, PropsFromDispatch} from "../views/fundAccount/FundAccountView";
 
-export function mapStateToProps({web3, web3Accounts, web3Network}: ApplicationStore) {
+export function mapStateToProps({myProducts, web3, web3Accounts, web3Network}: ApplicationStore) {
     return {
+        product: myProducts.productSelected,
         web3,
         web3Accounts,
         web3Network,

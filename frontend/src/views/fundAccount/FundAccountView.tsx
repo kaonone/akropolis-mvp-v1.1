@@ -5,7 +5,12 @@ import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-import { isAccountExist, isntEthereumBrowser } from "../../services/Web3Service";
+import {config} from "../../config/config";
+
+import {approveTransfer, createCommitment} from "../../services/DataService";
+import { isAccountExist, isCorrectNetwork, isntEthereumBrowser } from "../../services/Web3Service";
+
+import {Product} from "../../models/Products";
 
 import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
 import { Web3NetworkStore } from "../../redux/store/web3NetworkStore";
@@ -22,6 +27,7 @@ import SubNavigationComponent from "../../components/subNavigation/SubNavigation
 import "./v-fund-account.css";
 
 export interface Props {
+    product: Product | null;
     web3: Web3Store;
     web3Accounts: Web3AccountsStore;
     web3Network: Web3NetworkStore;
@@ -46,6 +52,7 @@ interface State {
     AKTBalance: number;
     ETHBalance: number;
     isOpenModal: boolean;
+    redirect: boolean;
     step: 1 | 2;
     stepOne: StepOne;
     stepTwo: StepTwo;
@@ -59,6 +66,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         AKTBalance: 0,
         ETHBalance: 0,
         isOpenModal: false,
+        redirect: false,
         step: 1,
         stepOne: {
             period: "month",
@@ -86,7 +94,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     public render() {
-        // const network = "testenv";
 
         if (isntEthereumBrowser()) {
             return (
@@ -112,21 +119,21 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             );
         }
 
-        // if (!isCorrectNetwork(this.props.web3Network, network)) {
-        //     return (
-        //         <div className="v-fund-account v-fund-account--error">
-        //             <FormattedMessage id="fundAccount.fundYourAccount">{
-        //                 (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
-        //             </FormattedMessage>
-        //             <SpinnerBlack className="v-fund-account__icon" />
-        //             <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network }}>
-        //                 {(desc: string) => (
-        //                     <p dangerouslySetInnerHTML={{ __html: desc }} />
-        //                 )}
-        //             </FormattedMessage>
-        //         </div>
-        //     );
-        // }
+        if (config.network && !isCorrectNetwork(this.props.web3Network, config.network)) {
+            return (
+                <div className="v-fund-account v-fund-account--error">
+                    <FormattedMessage id="fundAccount.fundYourAccount">{
+                        (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
+                    </FormattedMessage>
+                    <SpinnerBlack className="v-fund-account__icon" />
+                    <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network: config.network }}>
+                        {(desc: string) => (
+                            <p dangerouslySetInnerHTML={{ __html: desc }} />
+                        )}
+                    </FormattedMessage>
+                </div>
+            );
+        }
 
         return (
             <div className="v-fund-account">
@@ -149,7 +156,8 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                             )}
                         <ConfirmationModalComponent result={this.state.stepOne}
                             isOpenProps={this.state.isOpenModal}
-                            onClick={this.handleOnClick} />
+                            onClick={this.handleOnClick}
+                            onClose={this.handleOnClose}/>
                     </>
                 )}
             </div>
@@ -157,9 +165,38 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     private handleOnClick = () => {
+        const data = {...this.state.stepOne, ...this.state.stepTwo, ...this.props.product};
+        if (data.stakeAkt > 0) {
+            approveTransfer(this.props.web3Accounts.accountSelected, 500).then(() => {
+                createCommitment(this.props.web3Accounts.accountSelected, data)
+                    .then(() => {
+                        console.log("ok");
+                        this.setState({
+                            ...this.state,
+                            isOpenModal: false,
+                            redirect: true,
+                        });
+                    })
+                    .catch((err) => console.error(err));
+            });
+        } else {
+            createCommitment(this.props.web3Accounts.accountSelected, data)
+                .then(() => {
+                    console.log("ok");
+                    this.setState({
+                        ...this.state,
+                        isOpenModal: false,
+                        redirect: true,
+                    });
+                })
+                .catch((err) => console.error(err));
+        }
+    }
+
+    private handleOnClose = () => {
         this.setState({
             ...this.state,
-            isOpenModal: false
+            isOpenModal: false,
         });
     }
 

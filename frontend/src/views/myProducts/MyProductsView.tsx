@@ -10,6 +10,7 @@ import "./v-products.css";
 
 export interface Props {
     data: Product[];
+    selectedProduct: Product | null;
 }
 
 export interface PropsFromDispatch {
@@ -37,13 +38,15 @@ export default class MyProductsView extends React.Component<AllProps, State> {
 
     public componentWillMount() {
         this.props.fetchProductsData();
+        if (this.props.selectedProduct && this.props.selectedProduct.id) {
+            this.setState({
+                ...this.state,
+                idOfcheckedProduct: this.props.selectedProduct.id,
+            });
+        }
     }
 
     public render() {
-
-        const checkedProduct: Product[] = this.props.data.filter((product: Product) => {
-            return product.id === this.state.idOfcheckedProduct;
-        });
 
         const listOfProducts = this.props.data.map((product: Product, index: number) => {
             return (
@@ -55,24 +58,37 @@ export default class MyProductsView extends React.Component<AllProps, State> {
             );
         });
 
-        const initialContributionBtn = this.state.idOfcheckedProduct !== undefined ?
-            (
+        const initialContributionBtn = () => {
+            if (!this.state.idOfcheckedProduct) {
+                return null;
+            }
+
+            const checkedProduct: Product = this.props.data.filter((product: Product) => {
+                return product.id === this.state.idOfcheckedProduct;
+            })[0];
+
+            if (!checkedProduct) {
+                return null;
+            }
+
+            return (
                 <>
                     <div className="v-products__wrapper-options"><FormattedMessage id="myProducts.upTo" />
-                        <h1 className="v-products__value-of-options">{checkedProduct[0].fundPastReturns}% </h1>
+                        <h1 className="v-products__value-of-options">{checkedProduct.fundPastReturns}% </h1>
                         <FormattedMessage id="myProducts.returns" />
                     </div>
                     <Link className="o-btn o-btn--block o-btn--wide" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
                         <FormattedMessage id="myProducts.makeInitialContribution"/>
                     </Link>
                 </>
-            ) : null;
+            );
+        };
 
         return (
             <div className="v-products">
                 <h1 className="v-products__headline"><FormattedMessage id="nav.myProducts" /></h1>
                 {listOfProducts}
-                {initialContributionBtn}
+                {initialContributionBtn()}
             </div>
         );
     }
@@ -86,6 +102,7 @@ export default class MyProductsView extends React.Component<AllProps, State> {
 
     private selectProduct() {
         const product = this.props.data.filter((p: Product) => p.id === this.state.idOfcheckedProduct)[0];
+        localStorage.setItem("product", JSON.stringify(product));
         this.props.selectProduct(product);
     }
 }

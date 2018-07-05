@@ -10,7 +10,7 @@ import "./c-stake-akt.css";
 
 interface StakeAkt {
     description: string;
-    value: string;
+    value: number;
     id: number;
 }
 
@@ -35,17 +35,17 @@ export default class StakeAktComponent extends React.Component<Props, State> {
             {
                 description: "Full access to Akropolis",
                 id: 0,
-                value: "free",
+                value: 0,
             },
             {
                 description: "10% discount on fees, premium products & rewards",
                 id: 1,
-                value: "500 AKT",
+                value: 500,
             },
             {
                 description: "20% discount on fees, premium products & rewards",
                 id: 2,
-                value: "1000 AKT",
+                value: 1000,
             },
         ]
     };
@@ -56,12 +56,20 @@ export default class StakeAktComponent extends React.Component<Props, State> {
 
     public render() {
 
+        const getValueLabel = (value: number) => {
+            if (value === 0) {
+                return "Free";
+            } else {
+                return value + " AKT";
+            }
+        };
+
         const stakeAkts = this.state.stakeAkts.map((stakeAkt: any, i: number) => {
             return (
                 <div key={i} onClick={() => this.onClick(stakeAkt.id)}
                     className={`c-stake-akt__box ${stakeAkt.id === this.state.form.stakeAkt ? "c-stake-akt__box--active" : ""}`}>
                     <div className="c-stake-akt__description">{stakeAkt.description}</div>
-                    <div className="c-stake-akt__value">{stakeAkt.value}</div>
+                    <div className="c-stake-akt__value">{getValueLabel(stakeAkt.value)}</div>
                 </div>
             );
         });

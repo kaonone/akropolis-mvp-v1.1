@@ -1,7 +1,11 @@
-import { connect } from "react-redux";
+import {connect, Dispatch} from "react-redux";
 
+import {Product} from "../models/Products";
+
+import {selectProductAction} from "../redux/actions/myProductAction";
 import { ApplicationStore } from "../redux/store/store";
-import LayoutView from "../views/layout/LayoutView";
+
+import {default as Component, Props, PropsFromDispatch} from "../views/layout/LayoutView";
 
 export function mapStateToProps({userData}: ApplicationStore) {
     return {
@@ -9,4 +13,10 @@ export function mapStateToProps({userData}: ApplicationStore) {
     };
 }
 
-export default connect(mapStateToProps)(LayoutView);
+export function mapDispatchToProps(dispatch: Dispatch) {
+    return {
+        selectProduct: (product: Product) => dispatch(selectProductAction(product)),
+    };
+}
+
+export default connect<Props, PropsFromDispatch, {}>(mapStateToProps, mapDispatchToProps)(Component);
