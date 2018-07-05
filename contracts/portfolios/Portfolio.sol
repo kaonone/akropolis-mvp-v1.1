@@ -20,5 +20,6 @@ contract Portfolio {
         Period period;
         uint256 amountToPay;
         uint256 durationInYears;
+        uint256 aktStake;
     }
 }
