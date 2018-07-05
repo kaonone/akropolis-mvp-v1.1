@@ -4,4 +4,12 @@
 .v-fund-account {
 
     @include globalPadding;
+
+    &--error {
+        text-align: center;
+    }
+
+    &__icon {
+        margin-bottom: $spacing-default * 3;
+    }
 }

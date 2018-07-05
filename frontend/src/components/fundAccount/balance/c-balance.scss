@@ -1,0 +1,7 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/_tools-elements-fund-account";
+
+.c-balance {
+
+    @include elementsFundAccount;
+}

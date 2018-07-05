@@ -1,40 +1,19 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
-import {fetchATMBalance} from "../../services/DataService";
+
+import {Web3Store} from "../../redux/store/web3Store";
 
 export interface Props {
-    account: string;
+    web3: Web3Store;
 }
 
-interface State {
-    balance: string;
-}
-
-export default class AKTBalanceComponent extends React.Component<Props, State> {
-
-    public readonly state: State = {
-        balance: "0",
-    };
-
-    public componentWillReceiveProps(nextProps: Props) {
-        if (this.props.account !== nextProps.account) {
-
-            fetchATMBalance(nextProps.account)
-                .then((balance: string) => {
-                    this.setState({
-                        ...this.state,
-                        balance,
-                    });
-                })
-                .catch(() => false);
-        }
-    }
+export default class AKTBalanceComponent extends React.Component<Props, {}> {
 
     public render() {
-        const {balance} = this.state;
+        const {AKTBalance} = this.props.web3;
         return (
             <div>
-                <FormattedMessage id="AKTBalance.desc" values={{balance}}/>
+                <FormattedMessage id="AKTBalance.desc" values={{balance: AKTBalance}}/>
             </div>
         );
     }

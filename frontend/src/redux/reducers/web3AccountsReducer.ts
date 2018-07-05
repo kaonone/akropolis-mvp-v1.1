@@ -4,7 +4,7 @@ import {Web3AccountsStore} from "../store/web3AccountsStore";
 
 const initialState: Web3AccountsStore = {
     accountExists: false,
-    accountSelected: null,
+    accountSelected: "",
     accounts: [],
     accountsFetched: false
 };
@@ -26,7 +26,7 @@ export default function reducer(state: Web3AccountsStore = initialState, action:
             return {
                 ...state,
                 accountExists: false,
-                accountSelected: null,
+                accountSelected: "",
                 accounts: [],
                 accountsFetched: false
             };

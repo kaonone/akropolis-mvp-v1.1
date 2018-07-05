@@ -1,9 +1,20 @@
 import { NO_ETHEREUM } from "../constants";
 
+import {Web3AccountsStore} from "../redux/store/web3AccountsStore";
+import {Web3NetworkStore} from "../redux/store/web3NetworkStore";
+
 export const isntEthereumBrowser = () => {
     // @ts-ignore
     const { web3 } = window;
     return !web3;
+};
+
+export const isAccountExist = (web3Accounts: Web3AccountsStore) => {
+    return web3Accounts.accountsFetched && web3Accounts.accountExists;
+};
+
+export const isCorrectNetwork = (web3Network: Web3NetworkStore, network: string) => {
+    return web3Network.networkFetched && web3Network.networkId === network;
 };
 
 export const fetchNetwork = () => {

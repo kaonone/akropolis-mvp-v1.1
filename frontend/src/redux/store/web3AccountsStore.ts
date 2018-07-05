@@ -1,6 +1,6 @@
 export interface Web3AccountsStore {
-    accounts: any;
+    accounts: string[];
     accountsFetched: boolean;
     accountExists: boolean;
-    accountSelected: any;
+    accountSelected: string;
 }
