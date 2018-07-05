@@ -46,6 +46,8 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
 
     public render() {
         const {ETHBalance} = this.props;
+        const {period, rangeEth, years} = this.state.form;
+        const isNotValid = years === 0 || rangeEth === 0;
 
         return (
             <>
@@ -54,27 +56,28 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
                 </h3>
                 <div className="c-make-commitment__wrapper-section">
                     <label className="c-make-commitment__label-range"><FormattedMessage id="fundAccount.iWillMakeARegularPaymentOf" /></label>
-                    <InputRange symbol="ETH" value={this.state.form.rangeEth} max={ETHBalance} min={0}
+                    <InputRange symbol="ETH" value={rangeEth} max={ETHBalance} min={0}
                         onChange={this.handleRangeChange("rangeEth")} />
                 </div>
                 <div className="c-make-commitment__wrapper-section">
                     <label className="c-make-commitment__label-range"><FormattedMessage id="fundAccount.every" /></label>
                     <div className="c-make-commitment__wrapper-period">
-                        <button className={`c-make-commitment__btn-period ${this.state.form.period === "week" && "c-make-commitment__btn-period--active"}`}
+                        <button className={`c-make-commitment__btn-period ${period === "week" && "c-make-commitment__btn-period--active"}`}
                                 onClick={this.setPeriod("week")}><FormattedMessage id="fundAccount.week" /></button>
-                        <button className={`c-make-commitment__btn-period ${this.state.form.period  === "month" && "c-make-commitment__btn-period--active"}`}
+                        <button className={`c-make-commitment__btn-period ${period  === "month" && "c-make-commitment__btn-period--active"}`}
                                 onClick={this.setPeriod("month")}><FormattedMessage id="fundAccount.month" /></button>
-                        <button className={`c-make-commitment__btn-period ${this.state.form.period  === "quarter" && "c-make-commitment__btn-period--active"}`}
+                        <button className={`c-make-commitment__btn-period ${period  === "quarter" && "c-make-commitment__btn-period--active"}`}
                                 onClick={this.setPeriod("quarter")}><FormattedMessage id="fundAccount.quarter" /></button>
                     </div>
                 </div>
                 <div className="c-make-commitment__wrapper-section">
                     <label className="c-make-commitment__label-range"><FormattedMessage id="fundAccount.forThePeriodOf"/></label>
-                    <InputRange symbol="YEARS" value={this.state.form.years} max={100} min={0}
+                    <InputRange symbol="YEARS" value={years} max={100} min={0}
                         onChange={this.handleRangeChange("years")} />
                 </div>
                 <p className="c-make-commitment__description"><FormattedMessage id="fundAccount.longerCommitmentsMeanMoreRewards" /></p>
-                <button className="o-btn o-btn--wide" onClick={() => this.props.onConfirm(this.state.form)}>
+                <button className="o-btn o-btn--wide"
+                        onClick={() => this.props.onConfirm(this.state.form)} disabled={isNotValid}>
                     <FormattedMessage id="fundAccount.makeCommitment"/>
                 </button>
             </>
