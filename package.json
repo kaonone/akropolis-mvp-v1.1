@@ -24,6 +24,7 @@
     "solidity-coverage": "0.5.4",
     "truffle": "4.1.11",
     "truffle-hdwallet-provider": "0.0.3",
+    "truffle-privatekey-provider": "^0.1.0",
     "web3": "0.18.4"
   },
   "dependencies": {
