@@ -74,7 +74,6 @@ export const approveTransfer = (account: string, AKT: number) => {
         }
         // @ts-ignore
         const {web3} = window;
-
         const wei = web3.toWei(AKT, "ether");
 
         web3.eth.defaultAccount = account;
@@ -119,7 +118,7 @@ export const createCommitment = (account: string, data: any) => {
         }
 
         const eth = web3.toWei(data.rangeEth, "ether");
-        const akt = web3.toWei(data.stakeAkt, "ether");
+        const akt = web3.toWei(data.stakeAktValue, "ether");
 
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
 
