@@ -19,6 +19,8 @@ contract FundFactory is Ownable {
         string _description) onlyOwner public returns (FundFunctional) {
         FundData fundData = new FundData();
         FundFunctional fund = new FundFunctional(fundData, _fundName);
+        fundData.transferOwnership(fund);
+        fund.transferOwnership(msg.sender);
         fundRegistry.createNewFund(_fundOwner, fund, _fundName, _riskRating, _pastAnnualReturns, _reputationRating,
             _description);
         return fund;

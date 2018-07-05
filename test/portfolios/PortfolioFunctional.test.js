@@ -19,6 +19,7 @@ contract('PortfolioFunctional', function ([owner, holder, other]) {
         await token.mint(holder, 100);
         fundData = await FundData.new();
         fundFunctional = await FundFunctional.new(fundData.address, "Test Fund");
+        await fundData.transferOwnership(fundFunctional.address);
         fundAddress = fundFunctional.address;
         portfolioData = await PortfolioData.new();
         portfolioFunctional = await PortfolioFunctional.new(token.address, portfolioData.address);
