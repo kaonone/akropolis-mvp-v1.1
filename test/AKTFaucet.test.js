@@ -15,12 +15,12 @@ contract('AKTFaucet', function ([owner, holder]) {
     beforeEach(async function () {
         token = await AkropolisToken.new();
         faucet = await AKTFaucet.new(token.address);
-        await token.mint(faucet.address, 10000000000);
+        await token.mint(faucet.address, web3.toWei(1000, "ether"));
     });
 
     it('should emit tokens', async function () {
         await faucet.emitAKT(holder);
-        expect((await token.balanceOf(holder))).to.equal(toBN(100));
+        expect((await token.balanceOf(holder))).to.equal(toBN(web3.toWei(1000, "ether")));
     });
 
     it('should NOT emit tokens when paused', async function () {
