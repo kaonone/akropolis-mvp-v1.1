@@ -1,15 +1,15 @@
 /* tslint:disable:no-implicit-dependencies */
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
-/* tslint:enable:no-implicit-dependencies */  
+/* tslint:enable:no-implicit-dependencies */
 
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-import {isAccountExist, isntEthereumBrowser} from "../../services/Web3Service";
+import { isAccountExist, isntEthereumBrowser } from "../../services/Web3Service";
 
-import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
-import {Web3NetworkStore} from "../../redux/store/web3NetworkStore";
-import {Web3Store} from "../../redux/store/web3Store";
+import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
+import { Web3NetworkStore } from "../../redux/store/web3NetworkStore";
+import { Web3Store } from "../../redux/store/web3Store";
 
 import BalanceComponent from "../../components/fundAccount/balance/BalanceComponent";
 import ConfirmationModalComponent from "../../components/fundAccount/confirmationModal/ConfirmationModalComponent";
@@ -17,6 +17,7 @@ import DownloadingBrowserComponent from "../../components/fundAccount/downloadin
 import MakeCommitmentComponent from "../../components/fundAccount/makeCommitment/MakeCommitmentComponent";
 import ObtaningTokensComponent from "../../components/fundAccount/obtaningTokens/ObtaningTokensComponent";
 import StakeAktComponent from "../../components/fundAccount/stakeAkt/StakeAktComponent";
+import SubNavigationComponent from "../../components/subNavigation/SubNavigationComponent";
 
 import "./v-fund-account.css";
 
@@ -42,7 +43,7 @@ export interface StepTwo {
 }
 
 interface State {
-    AKTBalance: number;   
+    AKTBalance: number;
     ETHBalance: number;
     isOpenModal: boolean;
     step: 1 | 2;
@@ -90,7 +91,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         if (isntEthereumBrowser()) {
             return (
                 <div className="v-fund-account">
-                    <DownloadingBrowserComponent/>
+                    <DownloadingBrowserComponent />
                 </div>
             );
         }
@@ -98,10 +99,13 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         if (!isAccountExist(this.props.web3Accounts)) {
             return (
                 <div className="v-fund-account v-fund-account--error">
+                    <FormattedMessage id="fundAccount.fundYourAccount">{
+                        (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
+                    </FormattedMessage>
                     <SpinnerBlack className="v-fund-account__icon" />
                     <FormattedMessage id="web3.errorAccount.desc">
                         {(desc: string) => (
-                            <p dangerouslySetInnerHTML={{__html: desc}} />
+                            <p dangerouslySetInnerHTML={{ __html: desc }} />
                         )}
                     </FormattedMessage>
                 </div>
@@ -111,10 +115,13 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         // if (!isCorrectNetwork(this.props.web3Network, network)) {
         //     return (
         //         <div className="v-fund-account v-fund-account--error">
+        //             <FormattedMessage id="fundAccount.fundYourAccount">{
+        //                 (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
+        //             </FormattedMessage>
         //             <SpinnerBlack className="v-fund-account__icon" />
-        //             <FormattedMessage id="fundAccount.incorrectNetwork" values={{network}}>
+        //             <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network }}>
         //                 {(desc: string) => (
-        //                     <p dangerouslySetInnerHTML={{__html: desc}} />
+        //                     <p dangerouslySetInnerHTML={{ __html: desc }} />
         //                 )}
         //             </FormattedMessage>
         //         </div>
@@ -126,23 +133,23 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                 <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
                 {(this.state.AKTBalance === 0 || this.state.ETHBalance === 0) && (
                     <ObtaningTokensComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}
-                                             account={this.props.web3Accounts.accountSelected} fetchAKTBalance={this.props.fetchAKTBalance} />
+                        account={this.props.web3Accounts.accountSelected} fetchAKTBalance={this.props.fetchAKTBalance} />
                 )}
                 {(this.state.AKTBalance !== 0 && this.state.ETHBalance !== 0) && (
                     <>
                         {this.state.step === 1 ? (
                             <MakeCommitmentComponent AKTBalance={this.state.AKTBalance}
-                                                     ETHBalance={this.state.ETHBalance}
-                                                     form={this.state.stepOne}
-                                                     onConfirm={this.handleStepOneConfirm}/>
+                                ETHBalance={this.state.ETHBalance}
+                                form={this.state.stepOne}
+                                onConfirm={this.handleStepOneConfirm} />
                         ) : (
-                            <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
-                                               form={this.state.stepTwo} 
-                                               back={this.handleBack}/>
-                        )}
+                                <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
+                                    form={this.state.stepTwo}
+                                    back={this.handleBack} />
+                            )}
                         <ConfirmationModalComponent result={this.state.stepOne}
-                                                    isOpenProps={this.state.isOpenModal}
-                                                    onClick={this.handleOnClick}/>
+                            isOpenProps={this.state.isOpenModal}
+                            onClick={this.handleOnClick} />
                     </>
                 )}
             </div>
@@ -170,12 +177,16 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             isOpenModal: true,
             stepTwo: form,
         });
+
+        // const body = document.querySelector("body");
+        // body.style
+
     }
 
     private handleBack = () => {
         this.setState({
             ...this.state,
             step: 1,
-        }); 
+        });
     }
 }
