@@ -14,7 +14,24 @@ export const isAccountExist = (web3Accounts: Web3AccountsStore) => {
 };
 
 export const isCorrectNetwork = (web3Network: Web3NetworkStore, network: string) => {
-    return web3Network.networkFetched && web3Network.networkId === network;
+    const resolveNetwork = (netId: string) => {
+        switch (netId) {
+            case "1":
+                return "MAIN NET";
+            case "2":
+                return "MORDEN";
+            case "3":
+                return "ROPSTEN";
+            case "4":
+                return "RINKEBY";
+            case "42":
+                return "KOVAN";
+            default:
+                return "UNKNOWN";
+        }
+    };
+
+    return web3Network.networkFetched && resolveNetwork(web3Network.networkId) === network;
 };
 
 export const fetchNetwork = () => {

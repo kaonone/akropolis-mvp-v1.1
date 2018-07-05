@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 
 import { NAVIGATION } from "../../constants";
+import {Product} from "../../models/Products";
 
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
@@ -16,15 +17,20 @@ import { PlanAfterCalculate } from "../../models/Onboarding";
 
 import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
-interface Props {
+export interface Props {
     userData: PlanAfterCalculate;
 }
+export interface PropsFromDispatch {
+    selectProduct: (product: Product) => void;
+}
+
+interface AllProps extends Props, PropsFromDispatch { }
 
 interface State {
     isLogin: boolean;
 }
 
-export default class LayoutView extends React.Component<Props, State> {
+export default class LayoutView extends React.Component<AllProps, State> {
 
     public readonly state: State = {
         isLogin: false,
@@ -32,11 +38,16 @@ export default class LayoutView extends React.Component<Props, State> {
 
     public componentWillMount() {
         const userData = localStorage.getItem("userData");
+        const product = localStorage.getItem("product");
         if (userData) {
             this.setState({
                 ...this.state,
                 isLogin: true,
             });
+        }
+        if (product) {
+            const selectedProduct = JSON.parse(product);
+            this.props.selectProduct(selectedProduct);
         }
     }
 

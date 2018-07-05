@@ -9,6 +9,7 @@ import {default as MyProductsView, Props, PropsFromDispatch} from "../views/myPr
 export function mapStateToProps({myProducts}: ApplicationStore) {
     return {
         data: myProducts.products,
+        selectedProduct: myProducts.productSelected,
     };
 }
 

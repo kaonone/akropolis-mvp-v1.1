@@ -3,6 +3,7 @@ export enum ProductRating {
 }
 
 export interface Product {
+    fundAddress: string;
     fundDescription: string;
     fundName: string;
     fundPastReturns: string;
@@ -27,6 +28,7 @@ function reputationRatingToStars(reputation: any): string {
 
 export function tupleToProduct(tuple: any): Product {
     return {
+        fundAddress: tuple[2],
         fundDescription: tuple[6],
         fundName: tuple[0],
         fundPastReturns: tuple[4],

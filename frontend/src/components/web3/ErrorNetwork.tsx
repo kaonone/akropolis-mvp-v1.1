@@ -1,22 +1,7 @@
-// const resolveNetwork = (netId) => {
-//   switch (netId) {
-//     case '1':
-//       return 'MAIN NET';
-//     case '2':
-//       return 'MORDEN';
-//     case '3':
-//       return 'ROPSTEN';
-//     case '4':
-//       return 'RINKEBY';
-//     case '42':
-//       return 'KOVAN';
-//     default:
-//       return 'UNKNOWN';
-//   }
-// };
-
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
+
+import {config} from "../../config/config";
 
 import "./c-web3.css";
 
@@ -28,7 +13,7 @@ const getText = (neededNetwork: string) => (
 );
 
 const ErrorNetwork = () => {
-    const network = "testenv";
+    const network = config.network;
     return getText(network);
 };
 
