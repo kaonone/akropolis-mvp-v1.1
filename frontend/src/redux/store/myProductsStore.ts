@@ -2,7 +2,8 @@
 import { Product } from "../../models/Products";
 
 export interface MyProductsStore {
-    sampleData: Product[];
+    products: Product[];
+    productSelected: Product | null;
     fetching: boolean;
     fetched: boolean;
 }

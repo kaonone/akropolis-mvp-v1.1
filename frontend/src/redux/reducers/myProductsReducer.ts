@@ -5,15 +5,22 @@ import {MyProductsStore} from "../store/myProductsStore";
 const initialState: MyProductsStore = {
     fetched: false,
     fetching: false,
-    sampleData: [],
+    productSelected: null,
+    products: [],
 };
 
 export default function reducer(state: MyProductsStore = initialState, action: Action<ActionType, any>): MyProductsStore {
     switch (action.type) {
         case constants.FETCH_PRODUCTS_DATA:
-            const newState = {...state};
-            newState.sampleData = action.payload;
-            return newState;
+            return {
+                ...state,
+                products: action.payload
+            };
+        case constants.SELECT_PRODUCT:
+            return {
+                ...state,
+                productSelected: action.payload
+            };
         default:
             return state;
     }

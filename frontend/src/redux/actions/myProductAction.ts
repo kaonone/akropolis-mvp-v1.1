@@ -95,3 +95,10 @@ export function fetchProductsDataAction(): Action<constants.FETCH_PRODUCTS_DATA,
         type: constants.FETCH_PRODUCTS_DATA,
     };
 }
+
+export function selectProductAction(product: Product): Action<constants.SELECT_PRODUCT, Product> {
+    return {
+        payload: product,
+        type: constants.SELECT_PRODUCT,
+    };
+}
