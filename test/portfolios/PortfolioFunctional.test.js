@@ -38,6 +38,7 @@ contract('PortfolioFunctional', function ([owner, holder, other]) {
         expect(size).to.equal(toBN(2));
         expect(commitment[2]).to.equal(toBN(20));
         expect(await web3.eth.getBalance(portfolioFunctional.address)).to.equal(toBN(100));
+        expect(await token.balanceOf(holder)).to.equal(toBN(0));
     });
 
     it('should create a portfolio for a user with 0 stake', async function () {
