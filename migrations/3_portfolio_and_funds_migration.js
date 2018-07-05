@@ -26,7 +26,7 @@ module.exports = (deployer, network, accounts) => {
         for (let i = 0; i < count; i++) {
             let f = await registry.funds(i);
             FundFunctional.at(f[2]).transferOwnership(PortfolioFunctional.address);
-            funds.push();
+            funds.push(f);
         }
         process.deployment = {
             "PortfolioData": PortfolioData.address,

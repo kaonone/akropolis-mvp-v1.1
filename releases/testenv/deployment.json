@@ -1,1 +1,40 @@
-{"AkropolisToken":"0x7c59bc351248943bac8b718a94845f83b93b19b9","AKTFaucet":"0xa48d2fe2227158ffa2ffd351ed231ea549f46df8","PortfolioData":"0x5f02f85e386ba14ad116fd70fbc1480e675acbc5","PortfolioFunctional":"0xa8814708acff0a52185a521a261b3150e4925c0d","FundFactory":"0x5434fc9785eac944b03659cc07c7d07a5012b535","FundRegistry":"0xab7b6356e61d824af879b2a9d95cb42b319143d7","deployedFunds":[]}
+{
+  "AkropolisToken": "0x895b559aaa230a3cff97ef68ee3541e4a8966ade",
+  "AKTFaucet": "0xa87e1c077714baf8bcbe8132c44622b73c57bdc5",
+  "PortfolioData": "0xedf6393566c406b8283e163e2bd0283cf44da5b8",
+  "PortfolioFunctional": "0x32676205107787e5784382485b33ceaa2fe5f15e",
+  "FundFactory": "0xc3c002c2a4c1a90dceb3a19340ddb313a115d5f2",
+  "FundRegistry": "0xeacadff438345723dfba628b500e5976f900203a",
+  "deployedFunds": [
+    [
+      "S&P500 Index",
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0xe108462ed6704b9648b7c8dfae102a0cbc80bc8f",
+      "100",
+      "20",
+      "50",
+      "S&P500 index, capital + dividends",
+      "0"
+    ],
+    [
+      "Gold Investment",
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0x998b76b92a4b46d1fe3a861df9e21bfe75e1297a",
+      "20",
+      "7",
+      "80",
+      "London gold fix in USD",
+      "1"
+    ],
+    [
+      "US State Bonds",
+      "0x6ffb9eff3241df47156e7c26eed8f5b952aadf84",
+      "0xc1a170a166cfc8dae76488a34a838cf551746037",
+      "5",
+      "3",
+      "100",
+      "US 10-year Treasury Bonds",
+      "2"
+    ]
+  ]
+}
