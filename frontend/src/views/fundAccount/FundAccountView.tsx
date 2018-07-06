@@ -218,6 +218,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             showModal: true,
             stepTwo: form,
         });
+        window.scrollTo(0, 0);
     }
 
     private handleBack = () => {

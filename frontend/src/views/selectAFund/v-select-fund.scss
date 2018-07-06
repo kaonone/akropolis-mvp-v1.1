@@ -1,0 +1,20 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-mq";
+@import "assets/styles/2_tools/tools-paddings";
+
+.v-select-fund {
+
+    @include globalPadding;
+
+    &__headline {
+        margin-bottom: $spacing-default * 2;
+    }
+
+    &__wrapper-headline {
+        margin-bottom: $spacing-default * 4;
+    }
+
+    &__introduction {
+        font-weight: normal;
+    }
+}

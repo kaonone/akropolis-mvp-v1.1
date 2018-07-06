@@ -2,7 +2,7 @@ import {connect, Dispatch} from "react-redux";
 
 import {Product} from "../models/Products";
 
-import {selectProductAction} from "../redux/actions/myProductAction";
+import {selectProductAction} from "../redux/actions/selectAFundAction";
 import { ApplicationStore } from "../redux/store/store";
 
 import {default as Component, Props, PropsFromDispatch} from "../views/layout/LayoutView";

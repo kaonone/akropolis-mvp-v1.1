@@ -32,8 +32,8 @@ export default class NavbarComponent extends React.Component<Props, {}> {
                             </NavLink>
                         </li >
                         <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active" to={`/${NAVIGATION.myProducts}`}>
-                                <FormattedMessage id="nav.myProducts" />
+                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active" to={`/${NAVIGATION.selectAFund}`}>
+                                <FormattedMessage id="nav.selectAFund" />
                             </NavLink>
                         </li>
                         <li className="c-navbar__item">
