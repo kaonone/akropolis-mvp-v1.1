@@ -74,7 +74,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         stepOne: {
             period: "month",
             rangeEth: 0,
-            years: 0,
+            years: 1,
         },
         stepTwo: {
             stakeAkt: 0,
