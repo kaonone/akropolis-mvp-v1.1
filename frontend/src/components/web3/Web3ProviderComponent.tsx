@@ -1,9 +1,14 @@
 import * as React from "react";
 import {connect, Dispatch} from "react-redux";
 
-import { fetchAccountAction, fetchAKTBalanceAction, fetchETHBalanceAction, fetchNetworkAction } from "../../redux/actions/web3Action";
-import { ApplicationStore } from "../../redux/store/store";
-import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
+import {
+    fetchAccountAction,
+    fetchAKTBalanceAction,
+    fetchETHBalanceAction,
+    fetchNetworkAction
+} from "../../redux/actions/web3Action";
+import {ApplicationStore} from "../../redux/store/store";
+import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
 
 export interface Props {
     web3Accounts: Web3AccountsStore;
@@ -16,10 +21,12 @@ export interface PropsFromDispatch {
     fetchNetwork: () => void;
 }
 
-interface AllProps extends Props, PropsFromDispatch {}
+interface AllProps extends Props, PropsFromDispatch {
+}
 
 const ONE_SECOND = 1000;
-const QUARTER_MINUTE = ONE_SECOND * 15;
+const POOLING_INTERVAL_IN_MS = ONE_SECOND;
+const ETH_NETWORK_POOLING_INTERVAL_IN_MS = ONE_SECOND * 15;
 let interval: any = null;
 let networkInterval: any = null;
 
@@ -54,13 +61,13 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
 
     private initPoll() {
         if (!interval) {
-            interval = setInterval(this.props.fetchAccount, QUARTER_MINUTE);
+            interval = setInterval(this.props.fetchAccount, POOLING_INTERVAL_IN_MS);
         }
     }
 
     private initNetworkPoll() {
         if (!networkInterval) {
-            networkInterval = setInterval(this.props.fetchNetwork, QUARTER_MINUTE);
+            networkInterval = setInterval(this.props.fetchNetwork, ETH_NETWORK_POOLING_INTERVAL_IN_MS);
         }
     }
 

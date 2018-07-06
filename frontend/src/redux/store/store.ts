@@ -1,15 +1,15 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {createLogger} from "redux-logger";
-import promise from "redux-promise-middleware"; 
+import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
 
-import { MyProductsStore } from "./myProductsStore";
-import { MyWalletStore } from "./myWalletStore";
-import { Web3AccountsStore } from "./web3AccountsStore";
-import { Web3NetworkStore } from "./web3NetworkStore";
-import { Web3Store } from "./web3Store";
+import {MyProductsStore} from "./myProductsStore";
+import {MyWalletStore} from "./myWalletStore";
+import {Web3AccountsStore} from "./web3AccountsStore";
+import {Web3NetworkStore} from "./web3NetworkStore";
+import {Web3Store} from "./web3Store";
 
 import myProductsReducer from "../reducers/myProductsReducer";
 import myWalletReducer from "../reducers/myWalletReducer";
@@ -18,7 +18,7 @@ import web3AccountsReducer from "../reducers/web3AccountsReducer";
 import web3NetworkReducer from "../reducers/web3NetworkReducer";
 import web3Reducer from "../reducers/web3Reducer";
 
-const middleware =  applyMiddleware(promise(), thunk, createLogger());
+const middleware = process.env.REACT_APP_STAGE !== "prod" ? applyMiddleware(promise(), thunk, createLogger()) : applyMiddleware(promise(), thunk);
 const reducers = combineReducers({
     myProducts: myProductsReducer,
     myWallet: myWalletReducer,

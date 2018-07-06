@@ -5,6 +5,7 @@ import "./c-input-range.css";
 interface Props {
     max?: number;
     min?: number;
+    step?: number;
     value: number | undefined;
     symbol?: string;
     onChange: (value: number) => void;
@@ -50,12 +51,15 @@ export default class InputRangeComponent extends React.Component<Props, State> {
     public render() {
         return (
             <div className="c-input-range">
-                <input type="range"  className="c-input-range__range"
-                       ref={(c: HTMLInputElement) => {this.range = c; }}
+                <input type="range" className="c-input-range__range"
+                       ref={(c: HTMLInputElement) => {
+                           this.range = c;
+                       }} step={this.props.step}
                        max={this.state.max} min={this.state.min} value={this.state.value} onChange={this.onChange}/>
                 <span className="c-input-range__symbol">{this.props.symbol}</span>
                 <input type="number" className="o-form__input c-input-range__input"
-                       value={this.state.value} onChange={this.onChange} onKeyDown={this.onKeyDown} onBlur={this.onBlur}/>
+                       value={this.state.value} onChange={this.onChange} onKeyDown={this.onKeyDown}
+                       onBlur={this.onBlur}/>
             </div>
         );
     }
