@@ -1,25 +1,7 @@
 @import "assets/styles/1_settings/settings-project";
-@import "assets/styles/2_tools/tools-paddings";
 @import "assets/styles/2_tools/tools-mq";
 
 .c-confirmation-modal {
-
-  $c: &;
-
-  @include globalPadding;
-
-  background-color: rgba($color-white, 0.5);
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
-  z-index: 101;
-
-  &--show {
-    display: block;
-  }
 
   &__box {
     border: 2px solid $color-black;
