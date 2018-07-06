@@ -29,7 +29,7 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
         form: {
             period: "month",
             rangeEth: 0,
-            years: 0,
+            years: 1,
         }
     };
 
@@ -82,7 +82,7 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
                 <div className="c-make-commitment__wrapper-section">
                     <label className="c-make-commitment__label-range"><FormattedMessage
                         id="fundAccount.forThePeriodOf"/></label>
-                    <InputRange symbol="YEARS" value={years} max={100} min={0}
+                    <InputRange symbol="YEARS" value={years} max={5} min={1}
                                 onChange={this.handleRangeChange("years")}/>
                 </div>
                 <p className="c-make-commitment__description"><FormattedMessage
