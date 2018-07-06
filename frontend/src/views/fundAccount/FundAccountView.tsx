@@ -163,7 +163,9 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                             )}
                         {this.state.showModal &&
                             <ModalGlobalComponent onClose={this.handleOnCloseModal}>
-                                <ConfirmationModalComponent result={this.state.stepOne}
+                                <ConfirmationModalComponent 
+                                    resultStepOne={this.state.stepOne}
+                                    resultStepTwo={this.state.stepTwo}
                                     isOpenProps={this.state.isOpenModal}
                                     onClick={this.handleOnClick}
                                     onClose={this.handleOnCloseModal} />

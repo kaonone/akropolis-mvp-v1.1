@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import { StepOne } from "../../../views/fundAccount/FundAccountView";
+import { StepOne, StepTwo } from "../../../views/fundAccount/FundAccountView";
 
 import "./c-confirmation-modal.css";
 
@@ -8,7 +8,8 @@ interface Props {
     isOpenProps: boolean;
     onClick: () => void;
     onClose: () => void;
-    result: StepOne;
+    resultStepOne: StepOne;
+    resultStepTwo: StepTwo;
 }
 
 export default class ConfirmationModalComponent extends React.Component<Props, any> {
@@ -18,7 +19,8 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
     }
 
     public render() {
-        const { rangeEth, period, years } = this.props.result;
+        const { rangeEth, period, years } = this.props.resultStepOne;
+        const { stakeAktValue } = this.props.resultStepTwo;
 
         return (
             <div className="c-confirmation-modal__box">
@@ -60,6 +62,11 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                         <span className="c-confirmation-modal__base-text">
                             <FormattedMessage id="fundAccount.willBePaidImmediately" />
                         </span>
+                    </span>
+                </div>
+                <div className="c-confirmation-modal__wrapper-row">
+                    <span className="c-confirmation-modal__base-text c-confirmation-modal__base-text--center">
+                        <FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />
                     </span>
                 </div>
                 <FormattedMessage id="fundAccount.confirm">{

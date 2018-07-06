@@ -49,13 +49,17 @@
     &--lower-case {
       text-transform: lowercase;
     }
+
+    &--center {
+      text-align: center;
+    }
   }
 
   &__wrapper-row {
     display: flex;
     justify-content: center;
     align-items: baseline;
-    margin-bottom: $spacing-default * 2;
+    margin-bottom: $spacing-default * 3;
   }
 
   &__wrapper-description {

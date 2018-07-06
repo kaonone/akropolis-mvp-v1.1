@@ -19,7 +19,7 @@ export default class SubNavigationComponent extends React.Component<Props, any> 
 
         return (
             <div className="c-sub-navigation">
-                <h1 className={`c-sub-navigation__headline ${spaceForArrow ? "c-sub-navigation__headline--margin-extra" : ""}`}>{title}</h1>
+                <h2 className={`c-sub-navigation__headline ${spaceForArrow ? "c-sub-navigation__headline--margin-extra" : ""}`}>{title}</h2>
             </div>
         );
     }
