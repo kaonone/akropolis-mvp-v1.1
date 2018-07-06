@@ -6,7 +6,7 @@ import { Product } from "../../models/Products";
 
 import { NAVIGATION } from "../../constants";
 
-import "./v-products.css";
+import "./v-select-fund.css";
 
 export interface Props {
     data: Product[];
@@ -24,7 +24,7 @@ interface State {
     idOfcheckedProduct: number | undefined;
 }
 
-export default class MyProductsView extends React.Component<AllProps, State> {
+export default class SelectAFundView extends React.Component<AllProps, State> {
 
     public readonly state: State = {
         idOfcheckedProduct: undefined
@@ -73,20 +73,21 @@ export default class MyProductsView extends React.Component<AllProps, State> {
 
             return (
                 <>
-                    <div className="v-products__wrapper-options"><FormattedMessage id="myProducts.upTo" />
-                        <h1 className="v-products__value-of-options">{checkedProduct.fundPastReturns}% </h1>
-                        <FormattedMessage id="myProducts.returns" />
-                    </div>
                     <Link className="o-btn o-btn--block o-btn--wide" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
-                        <FormattedMessage id="myProducts.makeInitialContribution" />
+                        <FormattedMessage id="selectAFund.makeInitialContribution" />
                     </Link>
                 </>
             );
         };
 
         return (
-            <div className="v-products">
-                <h1 className="v-products__headline"><FormattedMessage id="nav.myProducts" /></h1>
+            <div className="v-select-fund">
+                <div className="v-select-fund__wrapper-headline">
+                    <h1 className="v-select-fund__headline"><FormattedMessage id="nav.selectAFund" /></h1>
+                    <h3 className="v-select-fund__introduction">
+                        <FormattedMessage id="selectAFund.weVePreSelectedTheMostPopularFundChosenByPeopleInYourAgeGroup" />
+                    </h3>
+                </div>
                 {listOfProducts}
                 {initialContributionBtn()}
             </div>

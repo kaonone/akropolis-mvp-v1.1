@@ -8,9 +8,9 @@ import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
 
 import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
-import MyProductsWrapper from "../../wrappers/MyProductsWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
+import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
 
 import { PlanAfterCalculate } from "../../models/Onboarding";
@@ -78,8 +78,8 @@ export default class LayoutView extends React.Component<AllProps, State> {
                         component={SavingsAndFundsView}
                     />
                     <Route
-                        path={`/${NAVIGATION.myProducts}`}
-                        component={MyProductsWrapper}
+                        path={`/${NAVIGATION.selectAFund}`}
+                        component={SelectAFundWrapper}
                     />
                     <Route
                         path={`/${NAVIGATION.dataUsage}`}

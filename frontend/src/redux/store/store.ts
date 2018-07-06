@@ -5,23 +5,22 @@ import thunk from "redux-thunk";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
 
-import {MyProductsStore} from "./myProductsStore";
+import myWalletReducer from "../reducers/myWalletReducer";
+import onboardingReducer from "../reducers/onboardingReducer";
+import selectAFundReducer from "../reducers/selectAFundReducer";
+import web3AccountsReducer from "../reducers/web3AccountsReducer";
+import web3NetworkReducer from "../reducers/web3NetworkReducer";
+import web3Reducer from "../reducers/web3Reducer";
 import {MyWalletStore} from "./myWalletStore";
+import {SelectAFundStore} from "./selectAFundStore";
 import {Web3AccountsStore} from "./web3AccountsStore";
 import {Web3NetworkStore} from "./web3NetworkStore";
 import {Web3Store} from "./web3Store";
 
-import myProductsReducer from "../reducers/myProductsReducer";
-import myWalletReducer from "../reducers/myWalletReducer";
-import onboardingReducer from "../reducers/onboardingReducer";
-import web3AccountsReducer from "../reducers/web3AccountsReducer";
-import web3NetworkReducer from "../reducers/web3NetworkReducer";
-import web3Reducer from "../reducers/web3Reducer";
-
 const middleware = process.env.REACT_APP_STAGE !== "prod" ? applyMiddleware(promise(), thunk, createLogger()) : applyMiddleware(promise(), thunk);
 const reducers = combineReducers({
-    myProducts: myProductsReducer,
     myWallet: myWalletReducer,
+    selectAFund: selectAFundReducer,
     userData: onboardingReducer,
     web3: web3Reducer,
     web3Accounts: web3AccountsReducer,
@@ -30,7 +29,7 @@ const reducers = combineReducers({
 
 export interface ApplicationStore {
     myWallet: MyWalletStore;
-    myProducts: MyProductsStore;
+    selectAFund: SelectAFundStore;
     userData: PlanAfterCalculate;
     web3: Web3Store;
     web3Accounts: Web3AccountsStore;

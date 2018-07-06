@@ -1,15 +1,15 @@
 import * as constants from "../../constants/actions/index";
 import {Action, ActionType } from "../actions/action";
-import {MyProductsStore} from "../store/myProductsStore";
+import {SelectAFundStore} from "../store/selectAFundStore";
 
-const initialState: MyProductsStore = {
+const initialState: SelectAFundStore = {
     fetched: false,
     fetching: false,
     productSelected: null,
     products: [],
 };
 
-export default function reducer(state: MyProductsStore = initialState, action: Action<ActionType, any>): MyProductsStore {
+export default function reducer(state: SelectAFundStore = initialState, action: Action<ActionType, any>): SelectAFundStore {
     switch (action.type) {
         case constants.FETCH_PRODUCTS_DATA:
             return {

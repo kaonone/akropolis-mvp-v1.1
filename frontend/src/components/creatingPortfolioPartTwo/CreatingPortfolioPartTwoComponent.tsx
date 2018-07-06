@@ -107,7 +107,7 @@ export default class CreatingPortfolioPartTwo extends React.Component<Props, Pla
                         <FormattedMessage id="onboarding.startSaving"/>
                     </div>
                 ) : (
-                    <Link to={`/${NAVIGATION.myProducts}`} onClick={this.save}
+                    <Link to={`/${NAVIGATION.selectAFund}`} onClick={this.save}
                           className="o-btn v-onboarding__btn">
                         <FormattedMessage id="onboarding.startSaving"/>
                     </Link>

@@ -19,7 +19,7 @@ export default class ProductRowComponent extends React.Component<Props, any> {
 
     public render() {
 
-        const { fundDescription, fundName, fundPastReturns, fundReputation, fundRiskRating, id } = this.props.productData;
+        const { fundDescription, fundName, fundReputation, fundRiskRating, id } = this.props.productData;
         const isChecked = this.props.idOfcheckedProduct === id ? true : false;
         
         return (
@@ -33,7 +33,6 @@ export default class ProductRowComponent extends React.Component<Props, any> {
                 <p className={`c-product-row__describe ${isChecked ? "c-product-row__describe--all-decribe" : ""}`}>{fundDescription}</p>
                 <div className="c-product-row__wrapper-fund-value">
                     <h4 className="c-product-row__describe-fund-value">{fundRiskRating}</h4>
-                    <h4 className="c-product-row__fund-value">{fundPastReturns}%</h4>
                     <h4 className="c-product-row__fund-value"><IconStar className="c-product-row__icon" />{fundReputation}</h4>
                 </div>
             </div>
