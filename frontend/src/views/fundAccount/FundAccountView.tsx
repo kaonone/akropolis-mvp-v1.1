@@ -1,18 +1,18 @@
 /* tslint:disable:no-implicit-dependencies */
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from "react-intl";
 
-import {config} from "../../config/config";
+import { config } from "../../config/config";
 
-import {approveTransfer, createCommitment} from "../../services/DataService";
-import {isAccountExist, isCorrectNetwork, isntEthereumBrowser} from "../../services/Web3Service";
+import { approveTransfer, createCommitment } from "../../services/DataService";
+import { isAccountExist, isCorrectNetwork, isntEthereumBrowser } from "../../services/Web3Service";
 
-import {Product} from "../../models/Products";
+import { Product } from "../../models/Products";
 
-import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
-import {Web3NetworkStore} from "../../redux/store/web3NetworkStore";
-import {Web3Store} from "../../redux/store/web3Store";
+import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
+import { Web3NetworkStore } from "../../redux/store/web3NetworkStore";
+import { Web3Store } from "../../redux/store/web3Store";
 
 import BalanceComponent from "../../components/fundAccount/balance/BalanceComponent";
 import ConfirmationModalComponent from "../../components/fundAccount/confirmationModal/ConfirmationModalComponent";
@@ -20,10 +20,10 @@ import DownloadingBrowserComponent from "../../components/fundAccount/downloadin
 import MakeCommitmentComponent from "../../components/fundAccount/makeCommitment/MakeCommitmentComponent";
 import ObtaningTokensComponent from "../../components/fundAccount/obtaningTokens/ObtaningTokensComponent";
 import StakeAktComponent from "../../components/fundAccount/stakeAkt/StakeAktComponent";
+import ModalGlobalComponent from "../../components/modalGlobal/ModalGlobalComponent";
 import SubNavigationComponent from "../../components/subNavigation/SubNavigationComponent";
 
 import "./v-fund-account.css";
-
 /* tslint:enable:no-implicit-dependencies */
 
 export interface Props {
@@ -57,6 +57,7 @@ interface State {
     step: 1 | 2;
     stepOne: StepOne;
     stepTwo: StepTwo;
+    showModal: boolean;
 }
 
 interface AllProps extends Props, PropsFromDispatch {
@@ -68,6 +69,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         ETHBalance: 0,
         isOpenModal: false,
         redirect: false,
+        showModal: false,
         step: 1,
         stepOne: {
             period: "month",
@@ -100,7 +102,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         if (isntEthereumBrowser()) {
             return (
                 <div className="v-fund-account">
-                    <DownloadingBrowserComponent/>
+                    <DownloadingBrowserComponent />
                 </div>
             );
         }
@@ -110,12 +112,12 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                 <div className="v-fund-account v-fund-account--error">
                     <FormattedMessage id="fundAccount.fundYourAccount">{
                         (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount}
-                                                                             spaceForArrow={false}/>}
+                            spaceForArrow={false} />}
                     </FormattedMessage>
-                    <SpinnerBlack className="v-fund-account__icon"/>
+                    <SpinnerBlack className="v-fund-account__icon" />
                     <FormattedMessage id="web3.errorAccount.desc">
                         {(desc: string) => (
-                            <p dangerouslySetInnerHTML={{__html: desc}}/>
+                            <p dangerouslySetInnerHTML={{ __html: desc }} />
                         )}
                     </FormattedMessage>
                 </div>
@@ -127,12 +129,12 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                 <div className="v-fund-account v-fund-account--error">
                     <FormattedMessage id="fundAccount.fundYourAccount">{
                         (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount}
-                                                                             spaceForArrow={false}/>}
+                            spaceForArrow={false} />}
                     </FormattedMessage>
-                    <SpinnerBlack className="v-fund-account__icon"/>
-                    <FormattedMessage id="fundAccount.incorrectNetwork" values={{network: config.network}}>
+                    <SpinnerBlack className="v-fund-account__icon" />
+                    <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network: config.network }}>
                         {(desc: string) => (
-                            <p dangerouslySetInnerHTML={{__html: desc}}/>
+                            <p dangerouslySetInnerHTML={{ __html: desc }} />
                         )}
                     </FormattedMessage>
                 </div>
@@ -141,28 +143,32 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
         return (
             <div className="v-fund-account">
-                <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}/>
+                <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
                 {(this.state.AKTBalance === 0 || this.state.ETHBalance === 0) && (
                     <ObtaningTokensComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}
-                                             account={this.props.web3Accounts.accountSelected}
-                                             fetchAKTBalance={this.props.fetchAKTBalance}/>
+                        account={this.props.web3Accounts.accountSelected}
+                        fetchAKTBalance={this.props.fetchAKTBalance} />
                 )}
                 {(this.state.AKTBalance !== 0 && this.state.ETHBalance !== 0) && (
                     <>
                         {this.state.step === 1 ? (
                             <MakeCommitmentComponent AKTBalance={this.state.AKTBalance}
-                                                     ETHBalance={this.state.ETHBalance}
-                                                     form={this.state.stepOne}
-                                                     onConfirm={this.handleStepOneConfirm}/>
+                                ETHBalance={this.state.ETHBalance}
+                                form={this.state.stepOne}
+                                onConfirm={this.handleStepOneConfirm} />
                         ) : (
-                            <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
-                                               form={this.state.stepTwo}
-                                               back={this.handleBack}/>
-                        )}
-                        <ConfirmationModalComponent result={this.state.stepOne}
-                                                    isOpenProps={this.state.isOpenModal}
-                                                    onClick={this.handleOnClick}
-                                                    onClose={this.handleOnClose}/>
+                                <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
+                                    form={this.state.stepTwo}
+                                    back={this.handleBack} />
+                            )}
+                        {this.state.showModal &&
+                            <ModalGlobalComponent onClose={this.handleOnCloseModal}>
+                                <ConfirmationModalComponent result={this.state.stepOne}
+                                    isOpenProps={this.state.isOpenModal}
+                                    onClick={this.handleOnClick}
+                                    onClose={this.handleOnCloseModal} />
+                            </ModalGlobalComponent>
+                        }
                     </>
                 )}
             </div>
@@ -170,8 +176,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     private handleOnClick = () => {
-        const data = {...this.state.stepOne, ...this.state.stepTwo, ...this.props.product};
-        console.log("bla", data);
+        const data = { ...this.state.stepOne, ...this.state.stepTwo, ...this.props.product };
         if (data.stakeAktValue > 0) {
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {
                 createCommitment(this.props.web3Accounts.accountSelected, data)
@@ -199,13 +204,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         }
     }
 
-    private handleOnClose = () => {
-        this.setState({
-            ...this.state,
-            isOpenModal: false,
-        });
-    }
-
     private handleStepOneConfirm = (form: StepOne) => {
         this.setState({
             ...this.state,
@@ -217,7 +215,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     private handleStepTwoConfirm = (form: StepTwo) => {
         this.setState({
             ...this.state,
-            isOpenModal: true,
+            showModal: true,
             stepTwo: form,
         });
     }
@@ -226,6 +224,13 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         this.setState({
             ...this.state,
             step: 1,
+        });
+    }
+
+    private handleOnCloseModal = () => {
+        this.setState({
+            ...this.state,
+            showModal: false
         });
     }
 }

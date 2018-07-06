@@ -27,7 +27,7 @@ interface State {
 export default class MyProductsView extends React.Component<AllProps, State> {
 
     public readonly state: State = {
-        idOfcheckedProduct: undefined,
+        idOfcheckedProduct: undefined
     };
 
     constructor(props: any) {
@@ -78,7 +78,7 @@ export default class MyProductsView extends React.Component<AllProps, State> {
                         <FormattedMessage id="myProducts.returns" />
                     </div>
                     <Link className="o-btn o-btn--block o-btn--wide" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
-                        <FormattedMessage id="myProducts.makeInitialContribution"/>
+                        <FormattedMessage id="myProducts.makeInitialContribution" />
                     </Link>
                 </>
             );
