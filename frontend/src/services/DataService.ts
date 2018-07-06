@@ -40,7 +40,7 @@ export const fetchETHBalance = (account: string) => {
                 reject(err);
             } else {
                 const eth = web3.fromWei(response, "ether");
-                resolve(Math.round(eth.toNumber()));
+                resolve(Math.round(eth.toNumber() * 10000) / 10000);
             }
         });
     });
