@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 
-import { NAVIGATION } from "../../constants";
+import {NAVIGATION} from "../../constants";
 import {Product} from "../../models/Products";
 
 import NavbarComponent from "../../components/navigation/NavbarComponent";
@@ -13,18 +13,20 @@ import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 import DataUsageView from "../dataUsage/DataUsageView";
 
-import { PlanAfterCalculate } from "../../models/Onboarding";
+import {PlanAfterCalculate} from "../../models/Onboarding";
 
 import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
 export interface Props {
     userData: PlanAfterCalculate;
 }
+
 export interface PropsFromDispatch {
     selectProduct: (product: Product) => void;
 }
 
-interface AllProps extends Props, PropsFromDispatch { }
+interface AllProps extends Props, PropsFromDispatch {
+}
 
 interface State {
     isLogin: boolean;
@@ -52,22 +54,20 @@ export default class LayoutView extends React.Component<AllProps, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        if (this.props.userData.pensionValue !== nextProps.userData.pensionValue) {
-            this.setState({
-                ...this.state,
-                isLogin: true,
-            });
-        }
+        this.setState({
+            ...this.state,
+            isLogin: true,
+        });
     }
 
     public render() {
         let content = null;
         if (!this.state.isLogin) {
-            content = <OnboardingWrapper />;
+            content = <OnboardingWrapper/>;
         } else {
             content = (
                 <div>
-                    <NavbarComponent />
+                    <NavbarComponent/>
                     <Route
                         exact={true}
                         path={`/${NAVIGATION.myWallet}`}
@@ -95,7 +95,7 @@ export default class LayoutView extends React.Component<AllProps, State> {
 
         return (
             <div>
-                <Web3Provider />
+                <Web3Provider/>
                 {content}
             </div>
         );
