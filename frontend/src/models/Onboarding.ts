@@ -5,10 +5,13 @@ export interface PlanValues {
     existingPension: number | undefined;
     savingPerMonth: number | undefined;
     projectedReturns: number | undefined;
+    inflation: number;
+    fees: number;
 }
 
 export interface PlanAfterCalculate {
     needToSave: number;
     pensionValue: number;
     projectReturns: number;
+    moreSavingsNeeded: boolean | undefined;
 }

@@ -28,9 +28,10 @@ export interface PropsFromDispatch {
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
     public readonly initStateOfPlan: PlanAfterCalculate = {
+        moreSavingsNeeded : false,
         needToSave: 0,
         pensionValue: 0,
-        projectReturns: 5,
+        projectReturns: 5
     };
 
     public readonly initStateOfPlanValues: PlanValues = {
@@ -38,6 +39,8 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         currentAge: 0,
         desiredAnnualIncome: 15000,
         existingPension: 0,
+        fees: 0.0105,
+        inflation: 0.025,
         projectedReturns: undefined,
         savingPerMonth: 0
     };
