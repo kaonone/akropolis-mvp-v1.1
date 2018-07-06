@@ -10,7 +10,7 @@
     top: -$spacing-default / 4;
 
     &__headline {
-        margin-top: $spacing-default;
+        margin-top: $spacing-default - 2;
         font-weight: normal;
 
         &--margin-extra {
