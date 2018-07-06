@@ -7,6 +7,7 @@ import selectAFund from "../views/selectAFund/intl/en";
 
 export default {
     "nav.dataUsage": "Data usage",
+    "nav.deleteMyData": "Delete my data",
     "nav.fundAccount": "Fund account",
     "nav.myWallet": "My wallet",
     "nav.savingsAndFunds": "Savings and funds",
