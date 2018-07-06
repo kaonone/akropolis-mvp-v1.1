@@ -18,6 +18,8 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
         currentAge: 0,
         desiredAnnualIncome: 15000,
         existingPension: 0,
+        fees: 0.0105,
+        inflation: 0.025,
         projectedReturns: undefined,
         savingPerMonth: 0
     };

@@ -54,10 +54,13 @@ export default class LayoutView extends React.Component<AllProps, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        this.setState({
-            ...this.state,
-            isLogin: true,
-        });
+        if (this.props.userData.pensionValue !== nextProps.userData.pensionValue
+            || this.props.userData.moreSavingsNeeded !== nextProps.userData.moreSavingsNeeded) {
+            this.setState({
+                ...this.state,
+                isLogin: true,
+            });
+        }
     }
 
     public render() {
