@@ -54,7 +54,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             const currency = "AKT";
             return !this.state.waiting ? (
                 <button className="o-btn o-btn--wide c-obtaning-tokens__btn" onClick={this.getFreeAKT}>
-                    <FormattedMessage id="fundAccount.forTest" values={{ currency: "1000 " + currency }} />
+                    <FormattedMessage id="fundAccount.goToEthFaucet" values={{ currency: "1000 " + currency }} />
                 </button>
             ) : (
                     <button className="o-btn o-btn--wide o-btn--disabled c-obtaning-tokens__btn" disabled={true}>
@@ -79,7 +79,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
                     (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
                 </FormattedMessage>
                 <MoneyIcon className="c-obtaning-tokens__icon" />
-                <h3 className="c-obtaning-tokens__headline"><FormattedMessage id="fundAccount.obtainFreeTokensForTest" />
+                <h3 className="c-obtaning-tokens__headline"><FormattedMessage id="fundAccount.youWillNeedSomeTestEtherToFundYourAccount" />
                 </h3>
                 <div>
                     {ETHBalance !== 0 ? getFreeAKTForTest() : getFreeETHForTest()}
