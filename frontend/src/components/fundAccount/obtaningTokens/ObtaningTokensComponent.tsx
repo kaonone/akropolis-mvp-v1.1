@@ -54,7 +54,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             const currency = "AKT";
             return !this.state.waiting ? (
                 <button className="o-btn o-btn--wide c-obtaning-tokens__btn" onClick={this.getFreeAKT}>
-                    <FormattedMessage id="fundAccount.goToEthFaucet" values={{ currency: "1000 " + currency }} />
+                    <FormattedMessage id="fundAccount.forTest" values={{ currency: "1000 " + currency }} />
                 </button>
             ) : (
                     <button className="o-btn o-btn--wide o-btn--disabled c-obtaning-tokens__btn" disabled={true}>
@@ -68,7 +68,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             const currency = "ETH";
             return (
                 <a href="http://faucet.ropsten.be:3001/" target="_blank" className="o-btn o-btn--wide c-obtaning-tokens__btn">
-                    <FormattedMessage id="fundAccount.forTest" values={{ currency }} />
+                    <FormattedMessage id="fundAccount.goToEthFaucet" values={{ currency }} />
                 </a>
             );
         };

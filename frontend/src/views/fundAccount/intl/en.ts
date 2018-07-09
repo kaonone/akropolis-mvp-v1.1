@@ -11,6 +11,7 @@ export default {
     "fundAccount.ethObtainedForTest": "ETH obtained for test",
     "fundAccount.every": "Every",
     "fundAccount.for": "for",
+    "fundAccount.forTest": "Get free {currency} for test",
     "fundAccount.forThePeriodOf": "For the period of",
     "fundAccount.fullAccessToAkropolis": "Full access to Akropolis",
     "fundAccount.fundYourAccount": "Fund your account",
