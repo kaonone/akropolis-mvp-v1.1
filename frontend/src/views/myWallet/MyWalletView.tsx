@@ -1,8 +1,6 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 
-import ErrorWeb3 from "../../components/web3/ErrorWeb3";
-
 import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
 import {Web3NetworkStore} from "../../redux/store/web3NetworkStore";
 
@@ -27,9 +25,8 @@ export default class MyWalletView extends React.Component<AllProps, {}> {
 
     public render() {
         const {message} = this.props;
-        const error = ErrorWeb3(this.props.web3Accounts, this.props.web3Network);
 
-        return error ? error : (
+        return (
             <div className="c-my-wallet">
                 <h1><FormattedMessage id="myWallet.title"/></h1>
                 {message}
