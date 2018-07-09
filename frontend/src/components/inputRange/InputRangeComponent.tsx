@@ -66,8 +66,8 @@ export default class InputRangeComponent extends React.Component<Props, State> {
 
     private onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.value) {
-            const min = parseInt(this.range.min, 0);
-            const max = parseInt(this.range.max, 0);
+            const min = parseFloat(this.range.min);
+            const max = parseFloat(this.range.max);
             const parsedValue = parseFloat(event.target.value) || 0;
             const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
 
@@ -90,8 +90,8 @@ export default class InputRangeComponent extends React.Component<Props, State> {
 
     private onChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (event.target.value) {
-            const min = parseInt(this.range.min, 0);
-            const max = parseInt(this.range.max, 0);
+            const min = parseFloat(this.range.min);
+            const max = parseFloat(this.range.max);
             const parsedValue = parseFloat(event.target.value) || 0;
             const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
 
