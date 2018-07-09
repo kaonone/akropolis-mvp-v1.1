@@ -73,14 +73,26 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             );
         };
 
+        const obtainFreeTokensForTest = () => {
+            if (ETHBalance !== 0) {
+                return (
+                    <h3 className="c-obtaning-tokens__headline"><FormattedMessage id="fundAccount.1obtainFreeTokensForTest" /></h3>
+                );
+            } else {
+                return (
+                    <h3 className="c-obtaning-tokens__headline"><FormattedMessage id="fundAccount.youWillNeedSomeTestEtherToFundYourAccount" /></h3>
+                );
+            }
+            
+        };
+
         return (
             <div className="c-obtaning-tokens__wrapper-options">
                 <FormattedMessage id="fundAccount.fundYourAccount">{
                     (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
                 </FormattedMessage>
                 <MoneyIcon className="c-obtaning-tokens__icon" />
-                <h3 className="c-obtaning-tokens__headline"><FormattedMessage id="fundAccount.youWillNeedSomeTestEtherToFundYourAccount" />
-                </h3>
+                {obtainFreeTokensForTest()}
                 <div>
                     {ETHBalance !== 0 ? getFreeAKTForTest() : getFreeETHForTest()}
                 </div>
