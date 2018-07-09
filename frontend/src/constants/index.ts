@@ -1,4 +1,5 @@
 export const NAVIGATION = {
+    dashboard: "dashboard",
     dataUsage: "data-usage",
     fundAccount: "fund-account",
     myWallet: "",

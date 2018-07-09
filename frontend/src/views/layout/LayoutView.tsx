@@ -11,6 +11,7 @@ import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
 import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
+import DashboardView from "../dashboard/DashboardView";
 import DataUsageView from "../dataUsage/DataUsageView";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
@@ -91,6 +92,10 @@ export default class LayoutView extends React.Component<AllProps, State> {
                     <Route
                         path={`/${NAVIGATION.fundAccount}`}
                         component={FundAccountWrapper}
+                    />
+                    <Route
+                        path={`/${NAVIGATION.dashboard}`}
+                        component={DashboardView}
                     />
                 </div>
             );

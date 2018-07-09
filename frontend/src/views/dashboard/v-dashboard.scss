@@ -1,0 +1,14 @@
+@import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-mq";
+@import "assets/styles/2_tools/tools-paddings";
+
+.v-dashboard {
+
+    @include globalPadding;
+
+    &__wrapper-next-contribution-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -46,6 +46,12 @@ export default class NavbarComponent extends React.Component<Props, {}> {
                             </NavLink>
                         </li>
                         <li className="c-navbar__item">
+                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active"
+                                     to={`/${NAVIGATION.dashboard}`}>
+                                <FormattedMessage id="nav.dashboard"/>
+                            </NavLink>
+                        </li>
+                        <li className="c-navbar__item">
                             <Link className="c-navbar__link c-navbar__link--active" onClick={this.deleteData} to="">
                                 <FormattedMessage id="nav.deleteMyData"/>
                             </Link>
