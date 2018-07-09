@@ -1,4 +1,5 @@
 export default {
+    "fundAccount.1obtainFreeTokensForTest": "Obtain free tokens for test.",
     "fundAccount.akt": "akt",
     "fundAccount.aktBalance": "AKT balance",
     "fundAccount.cancel": `Cancel`,
@@ -31,7 +32,8 @@ export default {
     "fundAccount.stakingTokensMeansThatTheyWillBeLockedUp": "Staking tokens means that they will be locked up for the duration of your commitment period.",
     "fundAccount.theFirstContributionOf": "The first contribution of",
     "fundAccount.thisWillTrigger_2Transactions": `This will trigger 2 transactions. 
-    The first will approve the transfer of the staked {stakeAKTValue} AKT. The second will transfer {eth} ETH as the initial contribution.`,
+    The first will approve the transfer of the staked {stakeAKTValue} AKT. 
+    The second will  transfer {eth} ETH as the initial contribution.`,
     "fundAccount.week": "Week",
     "fundAccount.willBePaidImmediately": "will be paid immediately.",
     "fundAccount.years": "years",
