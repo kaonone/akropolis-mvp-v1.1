@@ -1,6 +1,6 @@
 /* tslint:disable:no-implicit-dependencies */
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
-import * as React from "react";
+import * as React from "react"; 
 import { FormattedMessage } from "react-intl";
 import { Redirect } from "react-router";
 import {NAVIGATION} from "../../constants";
@@ -186,7 +186,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
     private handleOnClick = () => {
         const data = { ...this.state.stepOne, ...this.state.stepTwo, ...this.props.product };
-
         if (data.stakeAktValue > 0) {
             
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {

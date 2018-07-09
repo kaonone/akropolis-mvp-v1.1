@@ -3,8 +3,8 @@ import * as React from "react";
 import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
 import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
-import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
-import {calculatePlanValuesService} from "../../services/PlanService";
+import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
+import { calculatePlanValuesService } from "../../services/PlanService";
 
 import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
@@ -28,7 +28,7 @@ export interface PropsFromDispatch {
 export default class OnboardingView extends React.Component<PropsFromDispatch, State> {
 
     public readonly initStateOfPlan: PlanAfterCalculate = {
-        moreSavingsNeeded : false,
+        moreSavingsNeeded: false,
         needToSave: 0,
         pensionValue: 0,
         projectReturns: 5
@@ -47,8 +47,8 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
 
     public readonly state: State = {
         numberOfSlide: 1,
-        plan: {...this.initStateOfPlan},
-        planValues: {...this.initStateOfPlanValues},
+        plan: { ...this.initStateOfPlan },
+        planValues: { ...this.initStateOfPlanValues },
     };
 
     constructor(props: any) {
@@ -61,26 +61,29 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     public render() {
         return (
             <div className="v-onboarding">
-                <img className="v-onboarding__logo" src={logoAkropolis}/>
-
-                {this.state.numberOfSlide === 1 &&
-                <SlideOneComponent changeSlide={this.changeSlide}/>
+                <img className="v-onboarding__logo" src={logoAkropolis} />
+                
+                {
+                    this.state.numberOfSlide === 1 &&
+                    <SlideOneComponent changeSlide={this.changeSlide} />
                 }
 
-                {this.state.numberOfSlide === 2 &&
-                <CreatingPortfolioPartOneComponent
-                    planValues={this.state.planValues}
-                    onSave={this.handleSlideUpdate}
-                />
+                {
+                    this.state.numberOfSlide === 2 &&
+                    <CreatingPortfolioPartOneComponent
+                        planValues={this.state.planValues}
+                        onSave={this.handleSlideUpdate}
+                    />
                 }
 
-                {this.state.numberOfSlide === 3 &&
-                <CreatingPortfolioPartTwo planValues={this.state.planValues} plan={this.state.plan}
-                                          changeSlide={this.changeSlide}
-                                          onChange={this.handleSlideUpdate}
-                                          onSave={this.handleSave}/>
+                {
+                    this.state.numberOfSlide === 3 &&
+                    <CreatingPortfolioPartTwo planValues={this.state.planValues} plan={this.state.plan}
+                        changeSlide={this.changeSlide}
+                        onChange={this.handleSlideUpdate}
+                        onSave={this.handleSave} />
                 }
-            </div>
+            </div >
         );
     }
 
@@ -88,7 +91,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         this.setState({
             ...this.state,
             numberOfSlide: value,
-            planValues: value === 2 ? {...this.initStateOfPlanValues} : {...this.state.planValues},
+            planValues: value === 2 ? { ...this.initStateOfPlanValues } : { ...this.state.planValues },
         });
     }
 
