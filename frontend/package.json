@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "@types/web3": "1.0.0",
+    "@types/chart.js": "2.7.27",
     "bignumber": "1.1.0",
+    "chart.js": "2.7.2",
     "react": "16.4.1",
+    "react-chartjs-2": "2.7.2",
     "react-dom": "16.4.1",
     "react-intl": "2.4.0",
     "react-redux": "5.0.7",
