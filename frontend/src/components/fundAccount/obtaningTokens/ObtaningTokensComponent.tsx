@@ -20,6 +20,7 @@ interface Props {
 interface State {
     ethBalance: number;
     aktBalance: number;
+    errorMsg: string;
     waiting: boolean;
 }
 
@@ -27,6 +28,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
 
     public readonly state: State = {
         aktBalance: 0,
+        errorMsg: "",
         ethBalance: 0,
         waiting: false,
     };
@@ -96,6 +98,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
                 <div>
                     {ETHBalance !== 0 ? getFreeAKTForTest() : getFreeETHForTest()}
                 </div>
+                {this.state.errorMsg && <p className="c-obtaning-tokens__error">{this.state.errorMsg}</p>}
             </div>
         );
     }
@@ -103,14 +106,16 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
     private getFreeAKT() {
         this.setState({
             ...this.state,
+            errorMsg: "",
             waiting: true,
         });
         getFreeATMToken(this.props.account)
             .then(() => this.props.fetchAKTBalance(this.props.account))
             .catch((err) => {
-                console.error(err);
+                // console.error(err);
                 this.setState({
                     ...this.state,
+                    errorMsg: err.message,
                     waiting: false,
                 });
             });
