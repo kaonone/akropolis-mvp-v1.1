@@ -50,7 +50,6 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
         const {ETHBalance} = this.props;
         const {period, rangeEth, years} = this.state.form;
         const isNotValid = years === 0 || rangeEth === 0;
-
         return (
             <>
                 <FormattedMessage id="fundAccount.makeCommitment">{
@@ -62,7 +61,7 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
                 <div className="c-make-commitment__wrapper-section">
                     <label className="c-make-commitment__label-range"><FormattedMessage
                         id="fundAccount.iWillMakeARegularPaymentOf"/></label>
-                    <InputRange symbol="ETH" value={rangeEth} max={ETHBalance} min={0} step={0.01}
+                    <InputRange symbol="ETH" value={rangeEth} max={ETHBalance} min={0} step={0.0001}
                                 onChange={this.handleRangeChange("rangeEth")}/>
                 </div>
                 <div className="c-make-commitment__wrapper-section">

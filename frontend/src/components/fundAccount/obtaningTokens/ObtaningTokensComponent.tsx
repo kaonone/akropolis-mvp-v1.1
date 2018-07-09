@@ -106,6 +106,13 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             waiting: true,
         });
         getFreeATMToken(this.props.account)
-            .then(() => this.props.fetchAKTBalance(this.props.account));
+            .then(() => this.props.fetchAKTBalance(this.props.account))
+            .catch((err) => {
+                console.error(err);
+                this.setState({
+                    ...this.state,
+                    waiting: false,
+                });
+            });
     }
 }
