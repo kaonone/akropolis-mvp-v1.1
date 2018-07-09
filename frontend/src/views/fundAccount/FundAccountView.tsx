@@ -2,6 +2,8 @@
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+import { Redirect } from "react-router";
+import {NAVIGATION} from "../../constants";
 
 import { config } from "../../config/config";
 
@@ -162,14 +164,19 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                     back={this.handleBack} />
                             )}
                         {this.state.showModal &&
-                            <ModalGlobalComponent onClose={this.handleOnCloseModal}>
-                                <ConfirmationModalComponent 
-                                    resultStepOne={this.state.stepOne}
-                                    resultStepTwo={this.state.stepTwo}
-                                    isOpenProps={this.state.isOpenModal}
-                                    onClick={this.handleOnClick}
-                                    onClose={this.handleOnCloseModal} />
-                            </ModalGlobalComponent>
+                            <>
+                                <ModalGlobalComponent onClose={this.handleOnCloseModal}>
+                                    <ConfirmationModalComponent
+                                        resultStepOne={this.state.stepOne}
+                                        resultStepTwo={this.state.stepTwo}
+                                        isOpenProps={this.state.isOpenModal}
+                                        onClick={this.handleOnClick}
+                                        onClose={this.handleOnCloseModal} />
+                                </ModalGlobalComponent>
+                                {this.state.redirect &&
+                                    <Redirect to={`/${NAVIGATION.dashboard}`} />
+                                }
+                            </>
                         }
                     </>
                 )}
@@ -179,23 +186,26 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
     private handleOnClick = () => {
         const data = { ...this.state.stepOne, ...this.state.stepTwo, ...this.props.product };
+
         if (data.stakeAktValue > 0) {
+            
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {
                 createCommitment(this.props.web3Accounts.accountSelected, data)
                     .then(() => {
-                        console.log("ok");
+                        console.log("data.stakeAktValue > 0");
                         this.setState({
                             ...this.state,
                             isOpenModal: false,
                             redirect: true,
                         });
+                        localStorage.setItem("ConfirmModal", "true");
                     })
                     .catch((err) => console.error(err));
             });
         } else {
             createCommitment(this.props.web3Accounts.accountSelected, data)
                 .then(() => {
-                    console.log("ok");
+                    console.log("else");
                     this.setState({
                         ...this.state,
                         isOpenModal: false,

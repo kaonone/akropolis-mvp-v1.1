@@ -1,11 +1,13 @@
 import AKTBalance from "../components/AKTBalance/intl/en";
 import web3 from "../components/web3/intl/en";
+import dashboard from "../views/dashboard/intl/en";
 import fundAccount from "../views/fundAccount/intl/en";
 import myWallet from "../views/myWallet/intl/en";
 import onboarding from "../views/onboarding/intl/en";
 import selectAFund from "../views/selectAFund/intl/en";
 
 export default {
+    "nav.dashboard": "Dashboard",
     "nav.dataUsage": "Data usage",
     "nav.deleteMyData": "Delete my data",
     "nav.fundAccount": "Fund account",
@@ -19,4 +21,5 @@ export default {
     ...onboarding,
     ...selectAFund,
     ...fundAccount,
+    ...dashboard
 };
