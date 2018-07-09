@@ -57,13 +57,20 @@ export const getFreeATMToken = (account: string) => {
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AKTFaucet.abi).at(config.deployment.AKTFaucet);
-        akropolisToken.emitAKT(account, (err: any, response: any) => {
-            if (err) {
-                reject(err);
+        web3.eth.getGasPrice((error: any, gasPrice: any) => {
+            if (error) {
+                reject(error);
             } else {
-                resolve(response);
+                akropolisToken.emitAKT(account, {gasPrice: gasPrice.toNumber()}, (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(response);
+                    }
+                });
             }
         });
+
     });
 };
 
@@ -79,12 +86,22 @@ export const approveTransfer = (account: string, AKT: number) => {
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AkropolisToken.abi).at(config.deployment.AkropolisToken);
-        akropolisToken.approve(config.deployment.PortfolioFunctional, wei, (err: any, response: any) => {
-            if (err) {
-                reject(err);
+        web3.eth.getGasPrice((error: any, gasPrice: any) => {
+            if (error) {
+                reject(error);
             } else {
-                console.warn(response);
-                resolve(response);
+                akropolisToken.approve(
+                    config.deployment.PortfolioFunctional,
+                    wei,
+                    {gasPrice: gasPrice.toNumber()},
+                    (err: any, response: any) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            console.warn(response);
+                            resolve(response);
+                        }
+                    });
             }
         });
     });
@@ -122,31 +139,27 @@ export const createCommitment = (account: string, data: any) => {
 
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
 
-        console.warn(
-            [100],
-            [eth],
-            [data.fundAddress],
-            period,
-            eth,
-            data.years,
-            akt,
-            {value: eth});
-
-        portfolioFunctional.createNewUserPortfolio(
-            [100],
-            [eth],
-            [data.fundAddress],
-            period,
-            eth,
-            data.years,
-            akt,
-            {value: eth},
-            (err: any, response: any) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(response);
-                }
-            });
+        web3.eth.getGasPrice((error: any, gasPrice: any) => {
+            if (error) {
+                reject(error);
+            } else {
+                portfolioFunctional.createNewUserPortfolio(
+                    [100],
+                    [eth],
+                    [data.fundAddress],
+                    period,
+                    eth,
+                    data.years,
+                    akt,
+                    {value: eth, gasPrice: gasPrice.toNumber()},
+                    (err: any, response: any) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(response);
+                        }
+                    });
+            }
+        });
     });
 };
