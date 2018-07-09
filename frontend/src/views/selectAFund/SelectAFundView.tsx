@@ -21,13 +21,13 @@ export interface PropsFromDispatch {
 interface AllProps extends Props, PropsFromDispatch { }
 
 interface State {
-    idOfcheckedProduct: number | undefined;
+    idOfcheckedProduct: string;
 }
 
 export default class SelectAFundView extends React.Component<AllProps, State> {
 
     public readonly state: State = {
-        idOfcheckedProduct: undefined
+        idOfcheckedProduct: "1"
     };
 
     constructor(props: any) {
@@ -37,6 +37,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
     }
 
     public componentWillMount() {
+        
         this.props.fetchProductsData();
         if (this.props.selectedProduct && this.props.selectedProduct.id) {
             this.setState({
@@ -94,7 +95,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
         );
     }
 
-    private handleOnClickProduct = (id: number) => {
+    private handleOnClickProduct = (id: string) => {
         this.setState({
             ...this.state,
             idOfcheckedProduct: id

@@ -7,8 +7,8 @@ import "./c-product-row.css";
 
 interface Props {
     productData: Product;
-    onClickProduct: (id: number) => void;
-    idOfcheckedProduct: number | undefined;
+    onClickProduct: (id: string) => void;
+    idOfcheckedProduct: string;
 }
 
 export default class ProductRowComponent extends React.Component<Props, any> {

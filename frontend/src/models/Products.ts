@@ -9,7 +9,7 @@ export interface Product {
     fundPastReturns: string;
     fundReputation: string;
     fundRiskRating: string;
-    id: number;
+    id: string;
 }
 
 function riskRatingToProductRating(risk: any) {
