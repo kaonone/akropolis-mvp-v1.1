@@ -32,7 +32,6 @@ export default class DashboardView extends React.Component<any, any> {
                 label: "% of gains",
             }],
             labels: ["commitment start", "commitment end"]
-
         };
 
         if (localStorage.getItem("ConfirmModal") === "true") {
@@ -46,6 +45,15 @@ export default class DashboardView extends React.Component<any, any> {
                     </div>
                     <FormattedMessage id="dashboard.graphOfProjectedPortfolioPerformance" />
                     <Line data={data} />
+                    <h3><FormattedMessage id="dashboard.notifications" /></h3>
+                    <div>
+                        <h4>Fund manager update:  July 2018</h4>
+                        <div>Today</div>
+                    </div>
+                    <div>
+                        <h4>Congratulations, you’ve created your first portfolio!</h4>
+                        <div>Today</div>
+                    </div>
                 </div>
             );
         } else {
