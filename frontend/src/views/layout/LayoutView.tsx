@@ -7,18 +7,21 @@ import {Product} from "../../models/Products";
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
 
+import DashboardWrapper from "../../wrappers/DashboardWrapper";
 import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
-import DashboardView from "../dashboard/DashboardView";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
 
 export interface Props {
+    account: string;
+    isPortfolio: boolean;
     userData: PlanAfterCalculate;
 }
 
 export interface PropsFromDispatch {
+    fetchPortfolio: (account: string) => void;
     selectProduct: (product: Product) => void;
 }
 
@@ -58,6 +61,9 @@ export default class LayoutView extends React.Component<AllProps, State> {
                 isLogin: true,
             });
         }
+        if (this.props.account !== nextProps.account) {
+            this.props.fetchPortfolio(nextProps.account);
+        }
     }
 
     public render() {
@@ -67,7 +73,12 @@ export default class LayoutView extends React.Component<AllProps, State> {
         } else {
             content = (
                 <div>
-                    <NavbarComponent/>
+                    <NavbarComponent isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null}/>
+                    <Route
+                        exact={true}
+                        path={`/${NAVIGATION.dashboard}`}
+                        component={DashboardWrapper}
+                    />
                     <Route
                         path={`/${NAVIGATION.selectAFund}`}
                         component={SelectAFundWrapper}
@@ -75,10 +86,6 @@ export default class LayoutView extends React.Component<AllProps, State> {
                     <Route
                         path={`/${NAVIGATION.fundAccount}`}
                         component={FundAccountWrapper}
-                    />
-                    <Route
-                        path={`/${NAVIGATION.dashboard}`}
-                        component={DashboardView}
                     />
                 </div>
             );

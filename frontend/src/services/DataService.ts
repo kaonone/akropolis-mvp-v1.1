@@ -19,8 +19,7 @@ export const fetchPortfolio = (account: string) => {
             if (err) {
                 reject(err);
             } else {
-                console.warn(response);
-                resolve(response);
+                resolve(response.c[0]);
             }
         });
     });

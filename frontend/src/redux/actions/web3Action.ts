@@ -1,5 +1,5 @@
 import * as constants from "../../constants/actions";
-import { fetchATMBalance, fetchETHBalance } from "../../services/DataService";
+import { fetchATMBalance, fetchETHBalance, fetchPortfolio } from "../../services/DataService";
 import { fetchAccounts, fetchNetwork } from "../../services/Web3Service";
 import { Action } from "./action";
 
@@ -28,5 +28,12 @@ export function fetchETHBalanceAction(account: string): Action<constants.FETCH_E
     return {
         payload: fetchETHBalance(account),
         type: constants.FETCH_ETH_BALANCE,
+    };
+}
+
+export function fetchPortfolioAction(account: string): Action<constants.FETCH_PORTFOLIO, any> {
+    return {
+        payload: fetchPortfolio(account),
+        type: constants.FETCH_PORTFOLIO,
     };
 }

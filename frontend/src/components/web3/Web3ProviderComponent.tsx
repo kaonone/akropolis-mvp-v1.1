@@ -48,6 +48,7 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
 
     public componentWillReceiveProps(nextProps: AllProps) {
         this.fetchBalances(nextProps.web3Accounts.accountSelected);
+
     }
 
     public componentWillUnmount() {

@@ -1,12 +1,13 @@
 import {connect, Dispatch} from "react-redux";
 
-import {fetchAKTBalanceAction, fetchETHBalanceAction} from "../redux/actions/web3Action";
+import { fetchAKTBalanceAction, fetchETHBalanceAction, fetchPortfolioAction } from "../redux/actions/web3Action";
 import {ApplicationStore} from "../redux/store/store";
 
 import {default as Component, Props, PropsFromDispatch} from "../views/fundAccount/FundAccountView";
 
-export function mapStateToProps({selectAFund, web3, web3Accounts, web3Network}: ApplicationStore) {
+export function mapStateToProps({portfolio, selectAFund, web3, web3Accounts, web3Network}: ApplicationStore) {
     return {
+        isPortfolio: portfolio.portfolioFetched && portfolio.portfolioExist,
         product: selectAFund.productSelected,
         web3,
         web3Accounts,
@@ -18,6 +19,7 @@ export function mapDispatchToProps(dispatch: Dispatch) {
     return {
         fetchAKTBalance: (account: string) => dispatch(fetchAKTBalanceAction(account)),
         fetchETHBalance: (account: string) => dispatch(fetchETHBalanceAction(account)),
+        fetchPortfolio: (account: string) => dispatch(fetchPortfolioAction(account)),
     };
 }
 

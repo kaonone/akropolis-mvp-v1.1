@@ -1,3 +1,6 @@
+/* tslint:disable:no-implicit-dependencies */
+import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../../assets/images/spin-black.svg";
+/* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { StepOne, StepTwo } from "../../../views/fundAccount/FundAccountView";
@@ -6,6 +9,7 @@ import "./c-confirmation-modal.css";
 
 interface Props {
     isOpenProps: boolean;
+    isWaiting: boolean;
     onClick: () => void;
     onClose: () => void;
     resultStepOne: StepOne;
@@ -69,14 +73,20 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                         <FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />
                     </span>
                 </div>
-                <FormattedMessage id="fundAccount.confirm">{
-                    (confirm: string) =>
-                        <button className="o-btn c-confirmation-modal__btn" onClick={this.props.onClick}>{confirm}</button>}
-                </FormattedMessage>
-                <FormattedMessage id="fundAccount.cancel">{
-                    (cancel: string) =>
-                        <button onClick={this.props.onClose} className="o-btn o-btn--reverse c-confirmation-modal__btn">{cancel}</button>}
-                </FormattedMessage>
+                {this.props.isWaiting ? (
+                    <div className="c-confirmation-modal__spinner"><SpinnerBlack /></div>
+                ) : (
+                    <div className="c-confirmation-modal__btns">
+                        <FormattedMessage id="fundAccount.confirm">{
+                            (confirm: string) =>
+                                <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.props.onClick}>{confirm}</button>}
+                        </FormattedMessage>
+                        <FormattedMessage id="fundAccount.cancel">{
+                            (cancel: string) =>
+                                <button onClick={this.props.onClose} className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">{cancel}</button>}
+                        </FormattedMessage>
+                    </div>
+                )}
             </div>
         );
     }

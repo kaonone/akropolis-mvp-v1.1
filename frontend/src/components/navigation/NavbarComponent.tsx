@@ -9,6 +9,7 @@ import {NAVIGATION} from "../../constants";
 import "./c-navbar.css";
 
 interface Props {
+    isPortfolio: boolean;
     message?: string;
 }
 
@@ -39,22 +40,26 @@ export default class NavbarComponent extends React.Component<Props, State> {
         const deleteModal = (
             <div className="c-confirmation-modal__box">
                 <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc" /></h3>
-                <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.deleteData}>
-                    <FormattedMessage id="fundAccount.confirm"/>
-                </button>
-                <button onClick={this.toggleDeleteModal}
-                        className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">
-                    <FormattedMessage id="fundAccount.cancel"/>
-                </button>
+                <div className="c-confirmation-modal__btns">
+                    <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.deleteData}>
+                        <FormattedMessage id="fundAccount.confirm"/>
+                    </button>
+                    <button onClick={this.toggleDeleteModal}
+                            className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">
+                        <FormattedMessage id="fundAccount.cancel"/>
+                    </button>
+                </div>
             </div>
         );
 
         const infoModal = (
             <div className="c-confirmation-modal__box">
                 <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.noPortfolioYet" /></h3>
-                <button onClick={this.toggleModal} className="o-btn o-btn--wide c-confirmation-modal__btn">
-                    <FormattedMessage id="nav.ok"/>
-                </button>
+                <div className="c-confirmation-modal__btns">
+                    <button onClick={this.toggleModal} className="o-btn o-btn--wide c-confirmation-modal__btn">
+                        <FormattedMessage id="nav.ok"/>
+                    </button>
+                </div>
             </div>
         );
 
@@ -63,7 +68,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
                 <header className="c-navbar">
                     <a className="c-navbar__toggle" menu-toggle="true"/>
                     <ul className="c-navbar__wrapper">
-                        {localStorage.getItem("ConfirmModal") === "true" ? (
+                        {this.props.isPortfolio ? (
                             <li className="c-navbar__item">
                                 <NavLink className="c-navbar__link" exact={true}
                                          to={`/${NAVIGATION.dashboard}`}>
