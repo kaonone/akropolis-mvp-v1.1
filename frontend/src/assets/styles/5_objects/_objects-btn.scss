@@ -1,27 +1,16 @@
 .o-btn {
-    background-color: $color-black;
-    border: 0;
-    color: $color-white;
-    padding: $spacing-default;
-    transition: $transition-default;
-    cursor: pointer;
-    outline: 0;
-    font-size: $font-size-h4;
-    text-align: center;
-    box-shadow: $shadow-default;
+    
+    @include btn;
+    background-color: $color-secondary;
+    font-size: $font-size-base;
+    padding: $spacing-default * 15/10 $spacing-default * 4;
+    border: 1px solid $color-secondary;
+    width: fit-content;
+    text-transform: uppercase;
 
     &:hover {
-        opacity: 0.7;
-    }
-
-    &--reverse {
-        background: transparent;
-        color: $color-black;
-        border: 1px solid $color-black;
-    }
-
-    &--wide {
-        width: 100%;
+        color: $color-secondary;
+        background-color: $color-white;
     }
 
     &[disabled],

@@ -1,4 +1,6 @@
 export default {
     "selectAFund.makeInitialContribution": "Make initial contribution",
-    "selectAFund.weVePreSelectedTheMostPopularFundChosenByPeopleInYourAgeGroup": "We've pre-selected the most popular fund chosen by people in your age group.",
+    "selectAFund.pleaseSelectAFund": "Please Select a Fund",
+    "selectAFund.reinforceSecureOwnershipMessage": `Reinforce “secure ownership” message 
+    - fund managers can´t run off with assets as the chain of ownership is stored on the blockchain`,
 };

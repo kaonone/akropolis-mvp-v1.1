@@ -7,14 +7,33 @@
     @include globalPadding;
 
     &__headline {
-        margin-bottom: $spacing-default * 2;
+        margin-bottom: $spacing-default * 13/10;
+        color: $color-grey;
+        font-weight: $font-medium;
     }
 
     &__wrapper-headline {
-        margin-bottom: $spacing-default * 4;
+        margin-bottom: $spacing-default * 23/10;
+        text-align: center;
     }
 
     &__introduction {
+        color: $color-font-paragraph;
         font-weight: normal;
+    }
+
+    &__wrapper-products {
+        background-color: $color-white;
+        box-shadow: $shadow-default;
+        border-radius: $radius-default;
+        overflow: hidden;
+    }
+
+    &__wrapper-btn {
+        border-top: 1px solid $color-grey-lighter;
+        padding-top: $spacing-default * 2;
+        padding-bottom: $spacing-default * 2;
+        display: flex;
+        justify-content: center;
     }
 }

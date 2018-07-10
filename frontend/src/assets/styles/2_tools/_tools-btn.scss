@@ -1,0 +1,15 @@
+@mixin btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    color: $color-white;
+    transition: $transition-default;
+    border-radius: $radius-oval;
+    line-height: $line-height-bigger;
+    text-decoration: none;
+    outline: 0;
+    border: none;
+    overflow: hidden;
+  }

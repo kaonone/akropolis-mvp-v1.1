@@ -3,9 +3,13 @@ html {
     font-size: $font-size-base;
     position: relative;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
-  
-  p {
+    line-height: $line-height-default;
+}
+
+body {
+  background-color: $color-grey-lighter;
+}
+
+p {
     font-size: $font-size-base;
 }

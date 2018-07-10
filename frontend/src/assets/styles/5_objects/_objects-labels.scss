@@ -1,0 +1,16 @@
+.o-labels {
+    
+    @include btn;
+    background-color: $color-grey-lighter;
+    font-size: $font-size-base;
+    padding: $spacing-default * 4/10 $spacing-default * 24/10;
+    width: fit-content;
+    color: $color-grey;
+    font-weight: $font-regular;
+
+    .c-product-row:hover &,
+    .c-product-row--checked & {
+        color: $color-white;
+        background-color: $color-primary;
+    }
+}

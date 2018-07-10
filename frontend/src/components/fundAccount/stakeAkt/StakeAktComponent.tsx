@@ -90,7 +90,7 @@ export default class StakeAktComponent extends React.Component<Props, State> {
                 <p className="c-stake-akt__introduction">
                     <FormattedMessage id="fundAccount.stakingTokensMeansThatTheyWillBeLockedUp"/>
                 </p>
-                <button onClick={() => this.props.onConfirm(this.state.form)} className="o-btn o-btn--wide">
+                <button onClick={() => this.props.onConfirm(this.state.form)} className="o-btn">
                     <FormattedMessage id="fundAccount.confirm"/>
                 </button>
             </>
