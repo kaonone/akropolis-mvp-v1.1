@@ -191,20 +191,18 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {
                 createCommitment(this.props.web3Accounts.accountSelected, data)
                     .then(() => {
-                        console.log("data.stakeAktValue > 0");
+                        localStorage.setItem("ConfirmModal", "true");
                         this.setState({
                             ...this.state,
                             isOpenModal: false,
                             redirect: true,
                         });
-                        localStorage.setItem("ConfirmModal", "true");
                     })
                     .catch((err) => console.error(err));
             });
         } else {
             createCommitment(this.props.web3Accounts.accountSelected, data)
                 .then(() => {
-                    console.log("else");
                     this.setState({
                         ...this.state,
                         isOpenModal: false,
