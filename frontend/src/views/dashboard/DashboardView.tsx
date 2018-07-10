@@ -3,15 +3,24 @@ import { Line } from "react-chartjs-2";
 import { FormattedMessage } from "react-intl";
 import { Redirect } from "react-router";
 
+import { PortfolioStore } from "../../redux/store/portfolioStore";
+
 import { NAVIGATION } from "../../constants";
 
 import "./v-dashboard.css";
+
+export interface Props {
+    account: string;
+    portfolio: PortfolioStore;
+}
 
 export interface PropsFromDispatch {
     fetchDashboardData: (account: string) => void;
 }
 
-export default class DashboardView extends React.Component<any, any> {
+interface AllProps extends Props, PropsFromDispatch {}
+
+export default class DashboardView extends React.Component<AllProps, any> {
 
     constructor(props: any) {
         super(props);
@@ -34,7 +43,7 @@ export default class DashboardView extends React.Component<any, any> {
             labels: ["commitment start", "commitment end"]
         };
 
-        if (localStorage.getItem("ConfirmModal") === "true") {
+        if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist || localStorage.getItem(this.props.account)) {
             return (
                 <div className="v-dashboard">
                     <div className="v-dashboard__wrapper-next-contribution-details">
@@ -56,8 +65,10 @@ export default class DashboardView extends React.Component<any, any> {
                     </div>
                 </div>
             );
+        } else if (this.props.portfolio.portfolioFetched && !this.props.portfolio.portfolioExist) {
+            return <Redirect to={`/${NAVIGATION.selectAFund}`} />;
         } else {
-            return <Redirect to={`/${NAVIGATION.fundAccount}`} />;
+            return null;
         }
     }
 }

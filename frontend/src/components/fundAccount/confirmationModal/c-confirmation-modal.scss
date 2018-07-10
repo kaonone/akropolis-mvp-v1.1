@@ -6,8 +6,6 @@
   &__box {
     border: 2px solid $color-black;
     padding: $spacing-default * 4;
-    margin: $spacing-default * 7 auto 0;
-    max-width: 800px;
     width: 100%;
     background-color: $color-white;
   }
@@ -71,6 +69,16 @@
   }
 
   &__btn {
-    margin-bottom: $spacing-default;
+    margin: 0 $spacing-default $spacing-default;
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__spinner {
+    text-align: center;
   }
 }

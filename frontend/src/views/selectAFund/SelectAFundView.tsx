@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ProductRowComponent from "../../components/productRowComponent/ProductRowComponent";
 import { Product } from "../../models/Products";
 
@@ -9,7 +9,9 @@ import { NAVIGATION } from "../../constants";
 import "./v-select-fund.css";
 
 export interface Props {
+    account: string;
     data: Product[];
+    isPortfolio: boolean;
     selectedProduct: Product | null;
 }
 
@@ -48,6 +50,9 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
     }
 
     public render() {
+        if (this.props.isPortfolio || localStorage.getItem(this.props.account)) {
+            return <Redirect to={`/${NAVIGATION.dashboard}`} />;
+        }
 
         const listOfProducts = this.props.data.map((product: Product, index: number) => {
             return (

@@ -1,8 +1,7 @@
 export const NAVIGATION = {
-    dashboard: "dashboard",
+    dashboard: "",
     dataUsage: "data-usage",
     fundAccount: "fund-account",
-    myWallet: "",
     savingsAndFunds: "savings-and-funds",
     selectAFund: "select-a-fund",
 };
