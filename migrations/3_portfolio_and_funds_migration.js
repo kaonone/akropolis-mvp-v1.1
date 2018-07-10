@@ -17,9 +17,9 @@ module.exports = (deployer, network, accounts) => {
         await deployer.deploy(FundFactory);
         let factory = await FundFactory.deployed();
         let registry = FundRegistry.at(await factory.fundRegistry());
-        await factory.createNewFund(owner, "S&P500 Index", 100, 20, 50, "S&P500 index, capital + dividends", {from: owner});
-        await factory.createNewFund(owner, "Gold Investment", 20, 7, 80, "London gold fix in USD", {from: owner});
-        await factory.createNewFund(owner, "US State Bonds", 5, 3, 100, "US 10-year Treasury Bonds", {from: owner});
+        await factory.createNewFund(owner, "S&P500 Index", 100, 20, 50, "S&P500 index, capital + dividends", "SP500", {from: owner});
+        await factory.createNewFund(owner, "Gold Investment", 20, 7, 80, "London gold fix in USD", "GI", {from: owner});
+        await factory.createNewFund(owner, "US State Bonds", 5, 3, 100, "US 10-year Treasury Bonds", "USSB", {from: owner});
 
         let count = await registry.getFundCount();
         let funds = [];
