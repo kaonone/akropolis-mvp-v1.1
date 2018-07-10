@@ -49,7 +49,7 @@
         height: $spacing-default * 2;
         position: absolute;
         cursor: pointer;
-        box-shadow: inset 0px 2px 0 0 $color-grey-dark;
+        box-shadow: inset 0px 2px 0 0 $color-grey;
         transition: $transition-default;
         right: 0;
 
@@ -61,7 +61,7 @@
         &:after {
             width: $spacing-default * 2;
             height: $spacing-default / 4; 
-            background-color: $color-grey-dark;
+            background-color: $color-grey;
             position: absolute;
             left: 0;
             transition: $transition-default;

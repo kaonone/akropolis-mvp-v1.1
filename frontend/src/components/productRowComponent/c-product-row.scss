@@ -7,20 +7,31 @@
 
     $c: &;
 
-    box-shadow: $shadow-default;
-    border-radius: $radius-default;
-    border: 1px solid $color-black;
-    padding: $spacing-default * 3/2 $spacing-default * 2 $spacing-default $spacing-default * 2;
-    margin-bottom: $spacing-default * 2;
+    padding: $spacing-default * 3/2 $spacing-default * 2 $spacing-default * 2 $spacing-default * 2;
     cursor: pointer;
     transition: $transition-default;
+    position: relative;
+    overflow: hidden;
 
-    &:hover {
-        background-color: $color-grey-light;
+    &:before {
+        content: "";
+        background: $gradient-default;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        opacity: 0;
+        transition: $transition-default;
     }
 
+    &:hover,
     &--checked {
-        background-color: $color-grey-light;
+
+        &:before {
+            opacity: 1;
+        }
     }
 
     &__wrapper-headline {
@@ -30,11 +41,20 @@
 
     &__headline {
         font-weight: $font-regular;
-        margin-bottom: $spacing-default * 3/2;
+        margin-bottom: $spacing-default * 7/10;
+        font-weight: $font-medium;
+        color: $color-grey;
+
+        #{$c}:hover &,
+        #{$c}--checked & {
+            position: relative;
+            color: $color-white;
+            font-weight: $font-medium;
+        }
     }
 
-    &__describe { 
-        color: $color-grey;
+    &__describe {
+        color: $color-font-paragraph;
         position: relative;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -45,16 +65,26 @@
         &--all-decribe {
             white-space: unset;
         }
+
+        #{$c}:hover &,
+        #{$c}--checked & {
+            position: relative;
+            color: $color-white;
+        }
     }
 
     &__fund-value {
-        color: $color-grey;
-        font-weight: $font-regular;
-    }
+        color: rgba($color-grey, 0.4);
+        font-weight: $font-medium;
+        font-size: $font-size-micro;
+        position: absolute;
+        right: $spacing-default * 3/2;
+        top: $spacing-default * 3/2;
 
-    &__wrapper-fund-value {
-        display: flex;
-        justify-content: space-between;
+        #{$c}:hover &,
+        #{$c}--checked & {
+            color: $color-white;
+        }
     }
 
     &__describe-fund-value {
@@ -63,6 +93,20 @@
     }
 
     &__icon {
-        margin-right: $spacing-default / 2;
+        margin-left: $spacing-default / 2;
+        position: relative;
+        top: $spacing-default * 1/10;
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.1;
+        width: 100%;
+    }
+
+    &__labels {
+        position: relative;
     }
 }

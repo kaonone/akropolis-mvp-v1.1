@@ -26,12 +26,12 @@ export default class DownloadingBrowserComponent extends React.Component<any, an
                 </div>
                 <FormattedMessage id="fundAccount.downloadToshiAppIOsAndroid">
                     {(downloadToshiAppIOsAndroid: string) =>
-                        <a href="https://www.toshi.org/" target="_blank" className="o-btn o-btn--wide c-downloading-browser__btn">
+                        <a href="https://www.toshi.org/" target="_blank" className="o-btn c-downloading-browser__btn">
                             {downloadToshiAppIOsAndroid}</a>}
                 </FormattedMessage>
                 <FormattedMessage id="fundAccount.downloadMetamaskDesktop">
                     {(downloadMetamaskDesktop: string) =>
-                        <a href="https://metamask.io/" target="_blank" className="o-btn o-btn--wide c-downloading-browser__btn">
+                        <a href="https://metamask.io/" target="_blank" className="o-btn c-downloading-browser__btn">
                             {downloadMetamaskDesktop}</a>}
                 </FormattedMessage>
             </div>

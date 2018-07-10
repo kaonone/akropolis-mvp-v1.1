@@ -86,7 +86,7 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
                 </div>
                 <p className="c-make-commitment__description"><FormattedMessage
                     id="fundAccount.longerCommitmentsMeanMoreRewards"/></p>
-                <button className="o-btn o-btn--wide"
+                <button className="o-btn"
                         onClick={() => this.props.onConfirm(this.state.form)} disabled={isNotValid}>
                     <FormattedMessage id="fundAccount.makeCommitment"/>
                 </button>

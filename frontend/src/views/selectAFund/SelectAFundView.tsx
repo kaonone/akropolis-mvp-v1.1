@@ -37,7 +37,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
     }
 
     public componentWillMount() {
-        
+
         this.props.fetchProductsData();
         if (this.props.selectedProduct && this.props.selectedProduct.id) {
             this.setState({
@@ -74,7 +74,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
 
             return (
                 <>
-                    <Link className="o-btn o-btn--block o-btn--wide" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
+                    <Link className="o-btn" onClick={this.selectProduct} to={`/${NAVIGATION.fundAccount}`}>
                         <FormattedMessage id="selectAFund.makeInitialContribution" />
                     </Link>
                 </>
@@ -84,13 +84,18 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
         return (
             <div className="v-select-fund">
                 <div className="v-select-fund__wrapper-headline">
-                    <h1 className="v-select-fund__headline"><FormattedMessage id="nav.selectAFund" /></h1>
-                    <h3 className="v-select-fund__introduction">
-                        <FormattedMessage id="selectAFund.weVePreSelectedTheMostPopularFundChosenByPeopleInYourAgeGroup" />
-                    </h3>
+                    <h4 className="v-select-fund__headline"><FormattedMessage id="selectAFund.pleaseSelectAFund" /></h4>
+                    <p className="v-select-fund__introduction">
+                        <FormattedMessage id="selectAFund.reinforceSecureOwnershipMessage" />
+                    </p>
                 </div>
-                {listOfProducts}
-                {initialContributionBtn()}
+                <div className="v-select-fund__wrapper-products">
+                    {listOfProducts}
+                    <div className="v-select-fund__wrapper-btn">
+                        {initialContributionBtn()}
+                    </div>
+                </div>
+
             </div>
         );
     }

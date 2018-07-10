@@ -5,19 +5,17 @@
 // Colors 
 $color-white: #fff;
 $color-black: #000;
-$color-grey-dark: #424242;
-$color-grey: #808080;
-$color-grey-light: #d9d9d9;
-$color-grey-lighter: #F6F6F6;
-$color-red: #A9504F;
+$color-grey: #5b5d67;
+$color-grey-light: #c0c1c9;
+$color-grey-lighter: #f3f4fb;
 
-$color-primary: #0434DA;
-$color-secondary: #68A973;
+$color-primary: #6c64ff;
+$color-secondary: #2dd898;
 
-$text-default-color: $color-grey-dark;
+$text-default-color: $color-grey;
 
 // Fonts
-$font-family: "Open Sans", sans-serif;
+$font-family: "Roboto", sans-serif;
 
 $font-size-base: 12px;
 
@@ -30,15 +28,21 @@ $font-size-milli: 11px;
 $font-size-micro: 10px;
 $font-size-nano: 9px;
 
-$font-light: 300;
 $font-regular: 400;
-$font-bold: 900;
+$font-medium: 500;
+
+// Fonts color
+$color-font-paragraph: rgba($color-grey, 0.55);
+
+// line-height
+$line-height-default: 1.5;
+$line-height-bigger: 2;
 
 // Paths
 $path-images: '../assets/images';
 
 // Spacing
-$spacing-default: 8px;
+$spacing-default: 10px;
 
 // Paddings
 $padding-default: $spacing-default * 2;
@@ -50,15 +54,17 @@ $header-height: $spacing-default * 10;
 $transition-default: all 300ms ease;
 
 // Radius
-$radius-default: 0px;
-$radius-small: 0px;
+$radius-default: 5px;
+$radius-small: 3px;
 $radius-oval: 50px;
 
 // Breakpoints
 $mq-breakpoints: (mobile: 320px, tablet: 740px, desktop: 980px, wide: 1300px);
 
 // Shadows
-$shadow-default: 0 5px 6px rgba($color-black, 0.3);
+$shadow-default: 0 9px 20px rgba($color-black, 0.1);
 
 // Gradients
-$gradient-transparent-to-white: linear-gradient(to right, transparent 0%, #ffffff 100%);
+$color-gradient-start: #7d1aff;
+$color-gradient-stop: $color-primary;
+$gradient-default: linear-gradient(to top, $color-gradient-start 0%, $color-gradient-stop 100%);

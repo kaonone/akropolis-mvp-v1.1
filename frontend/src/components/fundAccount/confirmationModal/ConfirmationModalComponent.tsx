@@ -71,11 +71,11 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                 </div>
                 <FormattedMessage id="fundAccount.confirm">{
                     (confirm: string) =>
-                        <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.props.onClick}>{confirm}</button>}
+                        <button className="o-btn c-confirmation-modal__btn" onClick={this.props.onClick}>{confirm}</button>}
                 </FormattedMessage>
                 <FormattedMessage id="fundAccount.cancel">{
                     (cancel: string) =>
-                        <button onClick={this.props.onClose} className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">{cancel}</button>}
+                        <button onClick={this.props.onClose} className="o-btn o-btn--reverse c-confirmation-modal__btn">{cancel}</button>}
                 </FormattedMessage>
             </div>
         );
