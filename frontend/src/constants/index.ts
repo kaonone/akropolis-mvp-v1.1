@@ -3,6 +3,7 @@ export const NAVIGATION = {
     dataUsage: "data-usage",
     fundAccount: "fund-account",
     myWallet: "",
+    onboarding: "onboarding",
     savingsAndFunds: "savings-and-funds",
     selectAFund: "select-a-fund",
 };
