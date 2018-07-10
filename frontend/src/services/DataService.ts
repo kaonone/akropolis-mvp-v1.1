@@ -1,6 +1,7 @@
 import {config} from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
+import * as FundRegistry from "../contracts/FundRegistry.json";
 import * as PortfolioData from "../contracts/PortfolioData.json";
 import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
 
@@ -68,7 +69,7 @@ export const fetchETHBalance = (account: string) => {
     });
 };
 
-export const getFreeATMToken = (account: string) => {
+export const getFreeAKTToken = (account: string) => {
     return new Promise((resolve, reject) => {
         if (!account) {
             reject("no-account");
@@ -179,6 +180,80 @@ export const createCommitment = (account: string, data: any) => {
                             reject(err);
                         } else {
                             resolve(response);
+                        }
+                    });
+            }
+        });
+    });
+};
+
+export const getCommitment = (account: string) => {
+    return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
+
+        // @ts-ignore
+        const {web3} = window;
+
+        web3.eth.defaultAccount = account;
+
+        const fundRegistry = web3.eth.contract(FundRegistry.abi).at(config.deployment.FundRegistry);
+        const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
+        web3.eth.getGasPrice((error: any, gasPrice: any) => {
+            if (error) {
+                reject(error);
+            } else {
+                const commitment: any = {};
+                portfolioData.user_commitment(
+                    account,
+                    {gasPrice: gasPrice.toNumber()},
+                    (err: any, response: any) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            commitment.period = response[0];
+                            commitment.amountToPay = response[1];
+                            commitment.durationInYears = response[2];
+                            commitment.createdAt = response[4];
+                            if (Object.keys(commitment).length >= 6) {
+                                resolve(commitment);
+                            }
+                        }
+                    });
+                portfolioData.user_allocations(
+                    account, 0,
+                    {gasPrice: gasPrice.toNumber()},
+                    (err: any, response: any) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            commitment.fundAddress = response[2];
+                            fundRegistry.getFundIndexByAddress(
+                                commitment.fundAddress,
+                                {gasPrice: gasPrice.toNumber()},
+                                (err2: any, response2: any) => {
+                                    if (err2) {
+                                        reject(err2);
+                                    } else {
+                                        fundRegistry.funds(
+                                            response2,
+                                            {gasPrice: gasPrice.toNumber()},
+                                            (err3: any, response3: any) => {
+                                                if (err3) {
+                                                    reject(err3);
+                                                } else {
+                                                    commitment.fundName = response3[0];
+                                                    commitment.pastAnnualReturns = response3[4];
+                                                    if (Object.keys(commitment).length >= 6) {
+                                                        resolve(commitment);
+                                                    }
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            );
                         }
                     });
             }
