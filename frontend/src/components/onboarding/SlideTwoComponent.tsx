@@ -1,17 +1,21 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 import {Link} from "react-router-dom";
-import infoIcon from "../../assets/images/info-icon.svg";
-import {PlanValues} from "../../models/Onboarding";
-
 import InputRange from "../inputRange/InputRangeComponent";
 
+import { NAVIGATION } from "../../constants";
+import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
+
+import infoIcon from "../../assets/images/info-icon.svg";
+
 interface Props {
-    onSave: (planValues: PlanValues) => void;
+    onSave: () => void;
+    onChange: (planValues: PlanValues) => void;
+    plan: PlanAfterCalculate;
     planValues: PlanValues;
 }
 
-export default class CreatingPortfolioPartOneComponent extends React.Component<Props, PlanValues> {
+export default class SlideTwoComponent extends React.Component<Props, PlanValues> {
 
     public readonly state: PlanValues = {
         ageAtRetirement: 65,
@@ -28,6 +32,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
         super(props);
 
         this.handleRangeChange = this.handleRangeChange.bind(this);
+        this.save = this.save.bind(this);
     }
 
     public componentWillMount() {
@@ -36,11 +41,40 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
 
     public render() {
 
+        const {plan} = this.props;
+        // const minAgeAtRetirement = this.state.currentAge ? this.state.currentAge + 1 : 0;
+
+        const planNeedToSave = plan.needToSave > 0 ?
+            (
+                <div className="v-onboarding__wrapper-final-value">
+                    <span className="v-onboarding__final-value-currency">$</span>
+                    <div className="v-onboarding__value">{plan.needToSave}</div>
+                    <span className="v-onboarding__period">/mo</span>
+                </div>
+            )
+            :
+            (
+                <div className="v-onboarding__wrapper-final-value">
+                    <span className="v-onboarding__final-value-currency">
+                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything"/>
+                    </span>
+                </div>
+            );
+
         return (
             <div className="v-onboarding__create-portfolio-first-step-slide">
                 <h2 className="v-onboarding__headline">
                     <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio"/>
                 </h2>
+                <div className="v-onboarding__wrapper-final-values">
+                    <div
+                        className="v-onboarding__wrapper-final-value-item v-onboarding__wrapper-final-value-item--first">
+                        <p className="v-onboarding__describe-value">
+                            <FormattedMessage id="onboarding.youNeedToSave"/>
+                        </p>
+                        {planNeedToSave}
+                    </div>
+                </div>
                 <div className="v-onboarding__section">
                     <div className="v-onboarding__section-title">
                         <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement"/>
@@ -55,13 +89,13 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                     <InputRange value={this.state.existingPension} max={2000000} min={0} symbol="$"
                                 onChange={this.handleRangeChange("existingPension")}/>
                 </div>
-                <div className="v-onboarding__section">
-                    <div className="v-onboarding__section-title">
-                        <FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>
-                    </div>
-                    <InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="$"
-                                onChange={this.handleRangeChange("savingPerMonth")}/>
-                </div>
+                {/*<div className="v-onboarding__section">*/}
+                    {/*<div className="v-onboarding__section-title">*/}
+                        {/*<FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>*/}
+                    {/*</div>*/}
+                    {/*<InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="$"*/}
+                                {/*onChange={this.handleRangeChange("savingPerMonth")}/>*/}
+                {/*</div>*/}
                 <div className="v-onboarding__wrapper-age-inputs">
                     <div className="v-onboarding__wrapper-age-input">
                         <p>
@@ -101,14 +135,10 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                         </FormattedMessage>
                     </div>
                 </div>
-                <button
-                    onClick={() => {
-                        this.props.onSave(this.state);
-                    }}
-                    className="o-btn v-onboarding__btn"
-                >
-                    <FormattedMessage id="onboarding.continue"/>
-                </button>
+                <Link to={`/${NAVIGATION.selectAFund}`} onClick={this.save}
+                       className="o-btn v-onboarding__btn">
+                    <FormattedMessage id="onboarding.startSaving"/>
+                </Link>
             </div>
         );
     }
@@ -123,6 +153,7 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 ...this.state,
                 ...newState,
             });
+            this.props.onChange(newState);
         };
     }
 
@@ -157,5 +188,10 @@ export default class CreatingPortfolioPartOneComponent extends React.Component<P
                 ...newState,
             });
         }
+        this.props.onChange(newState);
+    }
+
+    private save() {
+        this.props.onSave();
     }
 }

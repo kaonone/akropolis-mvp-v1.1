@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import CreatingPortfolioPartOneComponent from "../../components/creatingPortfolioPartOne/CreatingPortfolioPartOneComponent";
-import CreatingPortfolioPartTwo from "../../components/creatingPortfolioPartTwo/CreatingPortfolioPartTwoComponent";
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
+import SlideTwoComponent from "../../components/onboarding/SlideTwoComponent";
 import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
 import { calculatePlanValuesService } from "../../services/PlanService";
 
@@ -10,7 +9,7 @@ import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
 
 interface State {
-    numberOfSlide: 1 | 2 | 3;
+    numberOfSlide: 1 | 2;
     plan: PlanAfterCalculate;
     planValues: PlanValues;
 }
@@ -58,6 +57,14 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         this.handleSave = this.handleSave.bind(this);
     }
 
+    public componentWillMount() {
+        const plan = calculatePlanValuesService(this.state.planValues);
+        this.setState({
+            ...this.state,
+            plan
+        });
+    }
+
     public render() {
         return (
             <div className="v-onboarding">
@@ -70,24 +77,18 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
 
                 {
                     this.state.numberOfSlide === 2 &&
-                    <CreatingPortfolioPartOneComponent
+                    <SlideTwoComponent
                         planValues={this.state.planValues}
-                        onSave={this.handleSlideUpdate}
+                        plan={this.state.plan}
+                        onChange={this.handleSlideUpdate}
+                        onSave={this.handleSave}
                     />
                 }
-
-                {
-                    this.state.numberOfSlide === 3 &&
-                    <CreatingPortfolioPartTwo planValues={this.state.planValues} plan={this.state.plan}
-                        changeSlide={this.changeSlide}
-                        onChange={this.handleSlideUpdate}
-                        onSave={this.handleSave} />
-                }
-            </div >
+            </div>
         );
     }
 
-    private changeSlide = (value: 1 | 2 | 3) => {
+    private changeSlide = (value: 1 | 2) => {
         this.setState({
             ...this.state,
             numberOfSlide: value,
@@ -99,7 +100,6 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         const plan = calculatePlanValuesService(planValues);
         this.setState({
             ...this.state,
-            numberOfSlide: 3,
             plan,
             planValues
         });
