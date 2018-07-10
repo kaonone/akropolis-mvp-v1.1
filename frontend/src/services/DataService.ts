@@ -80,18 +80,14 @@ export const getFreeAKTToken = (account: string) => {
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AKTFaucet.abi).at(config.deployment.AKTFaucet);
-        web3.eth.getGasPrice((error: any, gasPrice: any) => {
-            if (error) {
-                reject(error);
-            } else {
-                akropolisToken.emitAKT(account, {gasPrice: gasPrice.toNumber()}, (err: any, response: any) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(response);
-                    }
-                });
-            }
+        executeGasPriced(account, reject, (gasPrice: any) => {
+            akropolisToken.emitAKT(account, {gasPrice}, (err: any, response: any) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(response);
+                }
+            });
         });
 
     });
@@ -109,26 +105,35 @@ export const approveTransfer = (account: string, AKT: number) => {
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AkropolisToken.abi).at(config.deployment.AkropolisToken);
-        web3.eth.getGasPrice((error: any, gasPrice: any) => {
-            if (error) {
-                reject(error);
-            } else {
-                akropolisToken.approve(
-                    config.deployment.PortfolioFunctional,
-                    wei,
-                    {gasPrice: gasPrice.toNumber()},
-                    (err: any, response: any) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            console.warn(response);
-                            resolve(response);
-                        }
-                    });
-            }
+        executeGasPriced(account, reject, (gasPrice: any) => {
+            akropolisToken.approve(
+                config.deployment.PortfolioFunctional,
+                wei,
+                {gasPrice},
+                (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        console.warn(response);
+                        resolve(response);
+                    }
+                });
         });
     });
 };
+
+function executeGasPriced(account: string, reject: any, resolve: any) {
+    // @ts-ignore
+    const {web3} = window;
+    web3.eth.defaultAccount = account;
+    web3.eth.getGasPrice((error: any, gasPrice: any) => {
+        if (error) {
+            reject(error);
+        } else {
+            resolve(3 * gasPrice.toNumber());
+        }
+    });
+}
 
 export const createCommitment = (account: string, data: any) => {
     return new Promise((resolve, reject) => {
@@ -162,10 +167,7 @@ export const createCommitment = (account: string, data: any) => {
 
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
 
-        web3.eth.getGasPrice((error: any, gasPrice: any) => {
-            if (error) {
-                reject(error);
-            } else {
+        executeGasPriced(account, reject, (gasPrice: any) => {
                 portfolioFunctional.createNewUserPortfolio(
                     [100],
                     [eth],
@@ -174,7 +176,7 @@ export const createCommitment = (account: string, data: any) => {
                     eth,
                     data.years,
                     akt,
-                    {value: eth, gasPrice: gasPrice.toNumber()},
+                    {value: eth, gasPrice},
                     (err: any, response: any) => {
                         if (err) {
                             reject(err);
@@ -183,7 +185,7 @@ export const createCommitment = (account: string, data: any) => {
                         }
                     });
             }
-        });
+        );
     });
 };
 
@@ -200,14 +202,11 @@ export const getCommitment = (account: string) => {
 
         const fundRegistry = web3.eth.contract(FundRegistry.abi).at(config.deployment.FundRegistry);
         const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
-        web3.eth.getGasPrice((error: any, gasPrice: any) => {
-            if (error) {
-                reject(error);
-            } else {
+        executeGasPriced(account, reject, (gasPrice: any) => {
                 const commitment: any = {};
                 portfolioData.user_commitment(
                     account,
-                    {gasPrice: gasPrice.toNumber()},
+                    {gasPrice},
                     (err: any, response: any) => {
                         if (err) {
                             reject(err);
@@ -223,7 +222,7 @@ export const getCommitment = (account: string) => {
                     });
                 portfolioData.user_allocations(
                     account, 0,
-                    {gasPrice: gasPrice.toNumber()},
+                    {gasPrice},
                     (err: any, response: any) => {
                         if (err) {
                             reject(err);
@@ -231,14 +230,14 @@ export const getCommitment = (account: string) => {
                             commitment.fundAddress = response[2];
                             fundRegistry.getFundIndexByAddress(
                                 commitment.fundAddress,
-                                {gasPrice: gasPrice.toNumber()},
+                                {gasPrice},
                                 (err2: any, response2: any) => {
                                     if (err2) {
                                         reject(err2);
                                     } else {
                                         fundRegistry.funds(
                                             response2,
-                                            {gasPrice: gasPrice.toNumber()},
+                                            {gasPrice},
                                             (err3: any, response3: any) => {
                                                 if (err3) {
                                                     reject(err3);
@@ -257,6 +256,6 @@ export const getCommitment = (account: string) => {
                         }
                     });
             }
-        });
+        );
     });
 };
