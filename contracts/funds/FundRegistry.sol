@@ -19,6 +19,7 @@ contract FundRegistry is Ownable {
         bool isIndexed;
     }
 
+    mapping(address => Indexed) public fund_by_address;
     mapping(string => Indexed) fund_by_name;
     mapping(uint256 => Fund) public funds;
     uint256 fundCount;
@@ -34,10 +35,12 @@ contract FundRegistry is Ownable {
         uint32 _reputationRating,
         string _description) public onlyOwner {
         require(fund_by_name[_name].isIndexed == false);
+        require(fund_by_address[_contract].isIndexed == false);
         Fund memory fund = Fund(_name, _owner, _contract, _riskRating, _pastAnnualReturns, _reputationRating, _description,
             fundCount);
         Indexed memory idx = Indexed(fund.index, true);
         fund_by_name[fund.name] = idx;
+        fund_by_address[fund.currentAddress] = idx;
         funds[fundCount] = fund;
         fundCount += 1;
         emit Created(_owner, _name, _contract);
@@ -67,6 +70,12 @@ contract FundRegistry is Ownable {
 
     function getFundIndex(string name) public view returns (uint256) {
         Indexed storage idx = fund_by_name[name];
+        require(idx.isIndexed == true);
+        return idx.index;
+    }
+
+    function getFundIndexByAddress(address adr) public view returns (uint256) {
+        Indexed storage idx = fund_by_address[adr];
         require(idx.isIndexed == true);
         return idx.index;
     }

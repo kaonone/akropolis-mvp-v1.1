@@ -18,8 +18,9 @@ contract PortfolioData is Ownable, Portfolio {
         Period period,
         uint256 amountToPay,
         uint256 durationInYears,
-        uint256 aktStake) public onlyOwner {
-        Commitment memory commitment = Commitment(period, amountToPay, durationInYears, aktStake);
+        uint256 aktStake,
+        uint createdAt) public onlyOwner {
+        Commitment memory commitment = Commitment(period, amountToPay, durationInYears, aktStake, createdAt);
         user_commitment[_userAddress] = commitment;
         emit CreatedCommitment(_userAddress, commitment, msg.sender);
     }

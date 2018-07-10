@@ -27,10 +27,30 @@ contract('FundRegistry', function ([owner, holder]) {
         await expectThrow(registry.createNewFund(owner, owner, "TEST1", 0, 0, 0, "Test", {from: holder}));
     });
 
+    it('should disallow adding funds with the same name', async function () {
+        registry.createNewFund(owner, owner, "TEST1", 0, 0, 0, "Test", {from: owner});
+        await expectThrow(registry.createNewFund(owner, holder, "TEST1", 0, 0, 0, "Test", {from: owner}));
+    });
+
+    it('should disallow adding funds with the same address', async function () {
+        registry.createNewFund(owner, owner, "TEST1", 0, 0, 0, "Test", {from: owner});
+        await expectThrow(registry.createNewFund(owner, owner, "TEST2", 0, 0, 0, "Test", {from: owner}));
+    });
+
     it('should return fund by name', async function () {
         let name = "TEST2";
         await registry.createNewFund(owner, owner, name, 0, 0, 0, "Test", {from: owner});
         let idx = await registry.getFundIndex(name, {from: holder});
+        let tuple = await registry.funds(idx, {from: holder});
+        expect(tuple[0]).to.equal(name);
+        expect(tuple[1]).to.equal(owner);
+        expect(await registry.getFundCount({from: holder})).to.equal(toBN(1));
+    });
+
+    it('should return fund by address', async function () {
+        let name = "TEST2";
+        await registry.createNewFund(owner, owner, name, 0, 0, 0, "Test", {from: owner});
+        let idx = await registry.getFundIndexByAddress(owner, {from: holder});
         let tuple = await registry.funds(idx, {from: holder});
         expect(tuple[0]).to.equal(name);
         expect(tuple[1]).to.equal(owner);

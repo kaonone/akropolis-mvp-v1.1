@@ -13,7 +13,7 @@ contract Portfolio {
     enum Period {
         WEEK,
         MONTH,
-        YEAR
+        QUARTER
     }
 
     struct Commitment {
@@ -21,5 +21,6 @@ contract Portfolio {
         uint256 amountToPay;
         uint256 durationInYears;
         uint256 aktStake;
+        uint256 createdAt;
     }
 }

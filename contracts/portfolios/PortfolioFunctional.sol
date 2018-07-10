@@ -50,6 +50,6 @@ contract PortfolioFunctional is Accessible, Ownable, Portfolio {
             fund.invest(_userAddress, _investmentAmounts[i]);
         }
         portfolioData.createNewUserAllocation(_userAddress, _percent, _investmentAmounts, _funds);
-        portfolioData.createNewUserCommitment(_userAddress, _period, _amountToPay, _durationInYears, _aktStake);
+        portfolioData.createNewUserCommitment(_userAddress, _period, _amountToPay, _durationInYears, _aktStake, block.timestamp);
     }
 }
