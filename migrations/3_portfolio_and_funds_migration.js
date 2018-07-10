@@ -6,6 +6,7 @@ const FundFunctional = artifacts.require('./funds/FundFunctional.sol');
 const FundRegistry = artifacts.require('./funds/FundRegistry.sol');
 const PortfolioData = artifacts.require('./portfolios/PortfolioData.sol');
 const PortfolioFunctional = artifacts.require('.portfolios/PortfolioFunctional.sol');
+const ShareToken = artifacts.require('.tokens/ShareToken.sol');
 const releaser = require('../contracts/releaser');
 
 module.exports = (deployer, network, accounts) => {
@@ -14,15 +15,30 @@ module.exports = (deployer, network, accounts) => {
         await deployer.deploy(PortfolioData);
         await deployer.deploy(PortfolioFunctional, AkropolisToken.address, PortfolioData.address);
         (await PortfolioData.deployed()).transferOwnership(PortfolioFunctional.address);
-        await deployer.deploy(FundFactory);
+        await deployer.deploy(FundRegistry);
+        let registry = await FundRegistry.deployed();
+        await deployer.deploy(FundFactory, FundRegistry.address);
+        registry.transferOwnership(FundFactory.address);
         let factory = await FundFactory.deployed();
-        let registry = FundRegistry.at(await factory.fundRegistry());
+        let shares1 = await deployer.deploy(ShareToken, "S&P500 index, capital + dividends", "SP500");
+
+        await shares1.transferOwnership(FundFactory.address);
         await factory.createNewFund(owner, "CBOE Bitcoin Trust", 100, 20, 38,
-            "A leading cryptocurrency ETF offering accessible liquidity and robust custody. Capital at risk.", {from: owner});
+            "A leading cryptocurrency ETF offering accessible liquidity and robust custody. Capital at risk.",
+            shares1.address, {from: owner});
+
+        let shares2 = await deployer.deploy(ShareToken, "London gold fix in USD", "GI");
+        await shares2.transferOwnership(FundFactory.address);
         await factory.createNewFund(owner, "NestEgg Cryptographic Principal Protected Note", 20, 7, 48,
-            "Offers flexible income options with insured downside protection with capped upside.", {from: owner});
+            "Offers flexible income options with insured downside protection with capped upside.",
+            shares2.address, {from: owner});
+
+        let shares3 = await deployer.deploy(ShareToken, "US 10-year Treasury Bonds", "USSB");
+        await shares3.transferOwnership(FundFactory.address);
         await factory.createNewFund(owner, "Asia Real Asset Income Fund", 5, 3, 43,
-            "Tokenised real asset fund offering security and utility.", {from: owner});
+            "Tokenised real asset fund offering security and utility.",
+            shares3.address, {from: owner});
+
 
         let count = await registry.getFundCount();
         let funds = [];

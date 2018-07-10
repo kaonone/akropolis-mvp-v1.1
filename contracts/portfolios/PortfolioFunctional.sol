@@ -47,7 +47,7 @@ contract PortfolioFunctional is Accessible, Ownable, Portfolio {
 
         for (i = 0; i < _funds.length; i++) {
             FundFunctional fund = FundFunctional(_funds[i]);
-            fund.invest(_userAddress, _investmentAmounts[i]);
+            fund.invest.value(_investmentAmounts[i])(_userAddress, _investmentAmounts[i]);
         }
         portfolioData.createNewUserAllocation(_userAddress, _percent, _investmentAmounts, _funds);
         portfolioData.createNewUserCommitment(_userAddress, _period, _amountToPay, _durationInYears, _aktStake, block.timestamp);
@@ -60,7 +60,6 @@ contract PortfolioFunctional is Accessible, Ownable, Portfolio {
         uint256 createdAt = 0;
         (, createdAt) = portfolioData.user_commitment(_userAddress);
         require(createdAt > 0, "No user allocation found");
-        uint256 sumOfInvestedETH = 0;
         for (uint i = 0; i < allocationSize; i++) {
             uint percent_of_portfolio;
             uint eth_invested;
@@ -68,11 +67,9 @@ contract PortfolioFunctional is Accessible, Ownable, Portfolio {
             (percent_of_portfolio, eth_invested, fundAddress) = portfolioData.user_allocations(_userAddress, i);
             FundFunctional fund = FundFunctional(fundAddress);
             fund.divest(_userAddress, eth_invested);
-            sumOfInvestedETH += eth_invested;
         }
 
         portfolioData.deleteUserAllocation(_userAddress);
         portfolioData.deleteUserCommitment(_userAddress);
-        _userAddress.transfer(sumOfInvestedETH);
     }
 }
