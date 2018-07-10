@@ -1,7 +1,8 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import AKTBalance from "../../wrappers/ATKBalanceWrapper";
+import ModalGlobalComponent from "../modalGlobal/ModalGlobalComponent";
 
 import {NAVIGATION} from "../../constants";
 
@@ -11,62 +12,108 @@ interface Props {
     message?: string;
 }
 
-export default class NavbarComponent extends React.Component<Props, {}> {
+interface State {
+    isOpenDashboardModal: boolean;
+    isOpenDeleteModal: boolean;
+}
+
+export default class NavbarComponent extends React.Component<Props, State> {
+
+    public readonly state: State = {
+        isOpenDashboardModal: false,
+        isOpenDeleteModal: false,
+    };
+
+    constructor(props: any) {
+        super(props);
+
+        this.toggleModal = this.toggleModal.bind(this);
+        this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    }
+
+    public componentDidMount() {
+        this.toggleMobileMenuClassName();
+    }
 
     public render() {
+        const deleteModal = (
+            <div className="c-confirmation-modal__box">
+                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc" /></h3>
+                <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.deleteData}>
+                    <FormattedMessage id="fundAccount.confirm"/>
+                </button>
+                <button onClick={this.toggleDeleteModal}
+                        className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">
+                    <FormattedMessage id="fundAccount.cancel"/>
+                </button>
+            </div>
+        );
+
+        const infoModal = (
+            <div className="c-confirmation-modal__box">
+                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.noPortfolioYet" /></h3>
+                <button onClick={this.toggleModal} className="o-btn o-btn--wide c-confirmation-modal__btn">
+                    <FormattedMessage id="nav.ok"/>
+                </button>
+            </div>
+        );
 
         return (
             <div>
                 <header className="c-navbar">
-                    {/* <Link className="c-navbar__logo-link" to="/">Logo Akropolis</Link> */}
                     <a className="c-navbar__toggle" menu-toggle="true"/>
                     <ul className="c-navbar__wrapper">
-                        <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active" exact={true}
-                                     to={`/${NAVIGATION.myWallet}`}>
-                                <FormattedMessage id="nav.myWallet"/>
-                            </NavLink>
-                        </li>
-                        <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active"
-                                     to={`/${NAVIGATION.savingsAndFunds}`}>
-                                <FormattedMessage id="nav.savingsAndFunds"/>
-                            </NavLink>
-                        </li>
-                        <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active"
-                                     to={`/${NAVIGATION.selectAFund}`}>
-                                <FormattedMessage id="nav.selectAFund"/>
-                            </NavLink>
-                        </li>
-                        <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active"
-                                     to={`/${NAVIGATION.dataUsage}`}>
-                                <FormattedMessage id="nav.dataUsage"/>
-                            </NavLink>
-                        </li>
-                        <li className="c-navbar__item">
-                            <NavLink className="c-navbar__link" activeClassName="c-navbar__link--active"
-                                     to={`/${NAVIGATION.dashboard}`}>
+                        {localStorage.getItem("ConfirmModal") === "true" ? (
+                            <li className="c-navbar__item">
+                                <NavLink className="c-navbar__link" exact={true}
+                                         to={`/${NAVIGATION.dashboard}`}>
+                                    <FormattedMessage id="nav.dashboard"/>
+                                </NavLink>
+                            </li>
+                        ) : (
+                            <li className="c-navbar__item">
+                            <span className="c-navbar__link" onClick={this.toggleModal}>
                                 <FormattedMessage id="nav.dashboard"/>
-                            </NavLink>
-                        </li>
+                            </span>
+                            </li>
+                        )}
+
                         <li className="c-navbar__item">
-                            <Link className="c-navbar__link c-navbar__link--active" onClick={this.deleteData} to="">
+                            <span className="c-navbar__link" onClick={this.toggleDeleteModal}>
                                 <FormattedMessage id="nav.deleteMyData"/>
-                            </Link>
+                            </span>
                         </li>
                         <li className="c-navbar__item">
                             <AKTBalance/>
                         </li>
                     </ul>
                 </header>
+                {this.state.isOpenDashboardModal && (
+                    <ModalGlobalComponent onClose={this.toggleModal}>
+                        {infoModal}
+                    </ModalGlobalComponent>
+                )}
+                {this.state.isOpenDeleteModal && (
+                    <ModalGlobalComponent onClose={this.toggleModal}>
+                        {deleteModal}
+                    </ModalGlobalComponent>
+                )}
             </div>
         );
     }
 
-    public componentDidMount() {
-        this.toggleMobileMenuClassName();
+    private toggleModal() {
+        this.setState({
+            ...this.state,
+            isOpenDashboardModal: !this.state.isOpenDashboardModal,
+        });
+    }
+
+    private toggleDeleteModal() {
+        this.setState({
+            ...this.state,
+            isOpenDeleteModal: !this.state.isOpenDeleteModal,
+        });
     }
 
     private toggleMobileMenuClassName() {

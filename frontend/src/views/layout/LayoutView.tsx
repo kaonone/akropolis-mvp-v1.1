@@ -8,15 +8,11 @@ import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
 
 import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
-import MyWalletWrapper from "../../wrappers/MyWalletWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 import DashboardView from "../dashboard/DashboardView";
-import DataUsageView from "../dataUsage/DataUsageView";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
-
-import SavingsAndFundsView from "../savingsAndFunds/SavingsAndFundsView";
 
 export interface Props {
     userData: PlanAfterCalculate;
@@ -73,21 +69,8 @@ export default class LayoutView extends React.Component<AllProps, State> {
                 <div>
                     <NavbarComponent/>
                     <Route
-                        exact={true}
-                        path={`/${NAVIGATION.myWallet}`}
-                        component={MyWalletWrapper}
-                    />
-                    <Route
-                        path={`/${NAVIGATION.savingsAndFunds}`}
-                        component={SavingsAndFundsView}
-                    />
-                    <Route
                         path={`/${NAVIGATION.selectAFund}`}
                         component={SelectAFundWrapper}
-                    />
-                    <Route
-                        path={`/${NAVIGATION.dataUsage}`}
-                        component={DataUsageView}
                     />
                     <Route
                         path={`/${NAVIGATION.fundAccount}`}
