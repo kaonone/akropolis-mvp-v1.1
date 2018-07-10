@@ -12,7 +12,7 @@
  *   },
  */
 let HDWalletProvider = require("truffle-hdwallet-provider");
-// let PrivateKeyProvider = require("truffle-privatekey-provider");
+let PrivateKeyProvider = require("truffle-privatekey-provider");
 const config = require('./test-env-config.json');
 
 
@@ -33,6 +33,14 @@ module.exports = {
                 return new HDWalletProvider(config.mnemonic, "http://akro-test.sparkbit.pl:8686")
             },
             network_id: '*' // Match any network id
-        }
+        },
+        // ropsten: {
+        //     provider: function () {
+        //         return new PrivateKeyProvider("<privKey>",
+        //             "https://ropsten.infura.io/<token>")
+        //     },
+        //     network_id: 3,
+        //     gas: 4612388
+        // }
     }
 };

@@ -6,7 +6,7 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
 
-import { getFreeATMToken } from "../../../services/DataService";
+import { getFreeAKTToken } from "../../../services/DataService";
 
 import "./c-obtaning-tokens.css";
 
@@ -109,7 +109,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             errorMsg: "",
             waiting: true,
         });
-        getFreeATMToken(this.props.account)
+        getFreeAKTToken(this.props.account)
             .then(() => this.props.fetchAKTBalance(this.props.account))
             .catch((err) => {
                 this.setState({
