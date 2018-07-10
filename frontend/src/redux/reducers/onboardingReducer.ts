@@ -14,7 +14,6 @@ export default function reducer(state: PlanAfterCalculate = initialState, action
     switch (action.type) {
         case constants.SAVE_ONBOARDING_DATA:
             const result = {...state, ...action.payload, moreSavingsNeeded: action.payload.needToSave > 0};
-            console.log("OH", result, action.payload.needToSave > 0);
             return result;
         default:
             return state;

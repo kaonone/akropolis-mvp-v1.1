@@ -6,7 +6,9 @@
   &__box {
     border: 2px solid $color-black;
     padding: $spacing-default * 4;
-    margin-top: $spacing-default * 7;
+    margin: $spacing-default * 7 auto 0;
+    max-width: 800px;
+    width: 100%;
     background-color: $color-white;
   }
 

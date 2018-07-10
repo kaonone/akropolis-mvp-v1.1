@@ -1,7 +1,30 @@
 import {config} from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
+import * as PortfolioData from "../contracts/PortfolioData.json";
 import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
+
+export const fetchPortfolio = (account: string) => {
+    return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
+        // @ts-ignore
+        const {web3} = window;
+
+        web3.eth.defaultAccount = account;
+
+        const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
+        portfolioData.user_allocation_size(account, (err: any, response: any) => {
+            if (err) {
+                reject(err);
+            } else {
+                console.warn(response);
+                resolve(response);
+            }
+        });
+    });
+};
 
 export const fetchATMBalance = (account: string) => {
     return new Promise((resolve, reject) => {
