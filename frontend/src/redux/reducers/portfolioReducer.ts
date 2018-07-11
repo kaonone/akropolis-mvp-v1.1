@@ -1,8 +1,21 @@
 import * as constants from "../../constants/actions/index";
-import {Action, ActionType } from "../actions/action";
-import {PortfolioStore} from "../store/portfolioStore";
+import { PrepareCommitment } from "../../models/Commitment";
+import { Action, ActionType } from "../actions/action";
+import { PortfolioStore } from "../store/portfolioStore";
 
 const initialState: PortfolioStore = {
+    commitment: {
+        amountToPay: 0,
+        createdAt: 0,
+        durationInYears: 0,
+        fundAddress: "",
+        fundName: "",
+        pastAnnualReturns: 0,
+        period: 0,
+    },
+    commitmentFetched: false,
+    commitmentFetching: false,
+
     portfolioExist: false,
     portfolioFetched: false,
 };
@@ -22,6 +35,25 @@ export default function reducer(state: PortfolioStore = initialState, action: Ac
                 ...state,
                 portfolioExist: false,
                 portfolioFetched: true,
+            };
+        case constants.FETCH_COMMITMENT_PENDING:
+            return {
+                ...state,
+                commitmentFetching: true,
+            };
+        case constants.FETCH_COMMITMENT_REJECTED:
+            return {
+                ...state,
+                commitmentFetched: false,
+                commitmentFetching: false,
+            };
+        case constants.FETCH_COMMITMENT_FULFILLED:
+            const commitment = PrepareCommitment(action.payload);
+            return {
+                ...state,
+                commitment,
+                commitmentFetched: true,
+                commitmentFetching: false,
             };
         default:
             return state;

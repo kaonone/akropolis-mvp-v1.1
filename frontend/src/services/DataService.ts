@@ -211,8 +211,9 @@ export const getCommitment = (account: string) => {
                         if (err) {
                             reject(err);
                         } else {
+                            const eth = web3.fromWei(response[1], "ether");
                             commitment.period = response[0];
-                            commitment.amountToPay = response[1];
+                            commitment.amountToPay = Math.round(eth.toNumber() * 10000) / 10000;
                             commitment.durationInYears = response[2];
                             commitment.createdAt = response[4];
                             if (Object.keys(commitment).length >= 6) {
@@ -228,31 +229,35 @@ export const getCommitment = (account: string) => {
                             reject(err);
                         } else {
                             commitment.fundAddress = response[2];
-                            fundRegistry.getFundIndexByAddress(
-                                commitment.fundAddress,
-                                {gasPrice},
-                                (err2: any, response2: any) => {
-                                    if (err2) {
-                                        reject(err2);
-                                    } else {
-                                        fundRegistry.funds(
-                                            response2,
-                                            {gasPrice},
-                                            (err3: any, response3: any) => {
-                                                if (err3) {
-                                                    reject(err3);
-                                                } else {
-                                                    commitment.fundName = response3[0];
-                                                    commitment.pastAnnualReturns = response3[4];
-                                                    if (Object.keys(commitment).length >= 6) {
-                                                        resolve(commitment);
+                            try {
+                                fundRegistry.getFundIndexByAddress(
+                                    commitment.fundAddress,
+                                    {gasPrice},
+                                    (err2: any, response2: any) => {
+                                        if (err2) {
+                                            reject(err2);
+                                        } else {
+                                            fundRegistry.funds(
+                                                response2,
+                                                {gasPrice},
+                                                (err3: any, response3: any) => {
+                                                    if (err3) {
+                                                        reject(err3);
+                                                    } else {
+                                                        commitment.fundName = response3[0];
+                                                        commitment.pastAnnualReturns = response3[4];
+                                                        if (Object.keys(commitment).length >= 6) {
+                                                            resolve(commitment);
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        );
+                                            );
+                                        }
                                     }
-                                }
-                            );
+                                );
+                            } catch (err) {
+                                reject(err);
+                            }
                         }
                     });
             }
