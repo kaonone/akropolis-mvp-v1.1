@@ -38,7 +38,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         desiredAnnualIncome: 15000,
         existingPension: 0,
         fees: 0.0105,
-        inflation: 0.025,
+    inflation: 0.025,
         projectedReturns: undefined,
         savingPerMonth: 0
     };
