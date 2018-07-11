@@ -1,51 +1,154 @@
 @import "assets/styles/1_settings/settings-project";
+@import "assets/styles/2_tools/tools-boxes";
 
 .c-stake-akt {
 
-  $c: &;
+    $c: &;
 
-  &__headline {
-    font-weight: normal;
-    margin-bottom: $spacing-default * 4;
-    font-size: 16px;
-  }
-
-  &__box {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid $color-black;
-    padding: $spacing-default * 2;
-    height: $spacing-default * 9;
-    cursor: pointer;
-    margin-bottom: $spacing-default;
-
-    &--active {
-      border: 2px solid;
-      background-color: $color-grey-light;
+    &__header {
+        display: flex;
+        position: relative;
     }
-  }
 
-  &__description {
-    font-size: 16px;
-    align-items: center;
-    display: flex;
-  }
+    &__arrow-back {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: pointer;
 
-  &__value {
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    align-items: center;
-    display: flex;
-    text-align: right;
-  }
+        svg {
 
-  &__introduction {
-    text-align: center;
-    margin-bottom: $spacing-default * 4;
-  }
+            path {
+                stroke: $color-grey;
+            }
+        }
+    }
 
-  &__wrapper-stake-akt {
-    margin-bottom: $spacing-default * 8;
-  }
+    &__headline {
+        margin: 0 auto $spacing-default * 2/10;
+        color: $color-grey;
+        font-weight: $font-medium;
+        text-align: center;
+        // to check
+        position: fixed;
+        color: $color-white;
+        width: 100%;
+        top: $spacing-default * 4;
+    }
+
+    &__box {
+        padding: $spacing-default * 2;
+        cursor: pointer;
+        transition: $transition-default;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:before {
+            content: "";
+            background: $gradient-default;
+            display: block;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            position: absolute;
+            opacity: 0;
+            transition: $transition-default;
+        }
+
+        &:hover,
+        &--active {
+
+            &:before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__description {
+        font-size: 16px;
+        align-items: center;
+        display: flex;
+        position: relative;
+
+        #{$c}__box:hover &,
+        #{$c}__box--active & {
+            color: $color-white;
+        }
+    }
+
+    &__value {
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        align-items: center;
+        display: flex;
+        text-align: right;
+        position: relative
+    }
+
+    &__wrapper-items {
+
+        @include boxContent;
+    }
+
+    &__introduction {
+        color: $color-font-paragraph;
+        font-weight: normal;
+        text-align: center;
+        padding-top: $spacing-default * 2;
+        padding-bottom: $spacing-default * 2;
+        width: 100%;
+        padding-left: $padding-default;
+        padding-right: $padding-default;
+
+        &--lines {
+            border-top: 1px solid $color-grey-lighter;
+            border-bottom: 1px solid $color-grey-lighter;
+        }
+    }
+
+    &__wrapper-stake-akt {
+        margin-bottom: $spacing-default * 8;
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: $spacing-default * 6;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        transition: $transition-default;
+
+        #{$c}__box:hover &,
+        #{$c}__box--active & {
+            top: 0;
+            opacity: 0.1;
+        }
+    }
+
+    &__labels {
+        position: relative;
+        min-width: $spacing-default * 11;
+        text-transform: uppercase;
+    }
+
+    &__wrapper-bottom {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center
+    }
+
+    &__btn {
+        margin-top: $spacing-default * 2;
+        margin-bottom: $spacing-default * 2;
+    }
 }

@@ -1,6 +1,6 @@
 /* tslint:disable:no-implicit-dependencies */
-import PiktoBg from "-!svg-react-loader?name=Icon!../../assets/images/pikto-bg.svg";
-import IconStar from "-!svg-react-loader?name=Icon!../../assets/images/star-icon.svg";
+import PiktoBg from "-!svg-react-loader?name=Icon!../../assets/images/pikto-bg.svg"; 
+import IconStar from "-!svg-react-loader?name=Icon!../../assets/images/star-icon.svg"; 
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import { Product } from "../../models/Products";
@@ -34,9 +34,7 @@ export default class ProductRowComponent extends React.Component<Props, any> {
                     <h4 className="c-product-row__headline">{fundName}</h4>
                 </div>
                 <p className={`c-product-row__describe ${isChecked ? "c-product-row__describe--all-decribe" : ""}`}>{fundDescription}</p>
-                
-                    <h4 className="o-labels c-product-row__labels">{fundRiskRating}</h4>
-                
+                <h4 className="o-labels c-product-row__labels">{fundRiskRating}</h4>
             </div>
         );
     }

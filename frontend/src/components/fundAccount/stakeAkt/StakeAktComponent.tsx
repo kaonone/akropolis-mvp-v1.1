@@ -1,10 +1,10 @@
 /* tslint:disable:no-implicit-dependencies */
 import ArrowBackIcon from "-!svg-react-loader?name=ethIcon!../../../assets/images/arrow-back-icon.svg";
+import PiktoBg from "-!svg-react-loader?name=Icon!../../../assets/images/pikto-bg.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
-import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
-import {StepTwo} from "../../../views/fundAccount/FundAccountView";
+import { FormattedMessage } from "react-intl";
+import { StepTwo } from "../../../views/fundAccount/FundAccountView";
 
 import "./c-stake-akt.css";
 
@@ -69,30 +69,33 @@ export default class StakeAktComponent extends React.Component<Props, State> {
         const stakeAkts = this.state.stakeAkts.map((stakeAkt: any, i: number) => {
             return (
                 <div key={i} onClick={() => this.onClick(stakeAkt.id)}
-                     className={`c-stake-akt__box ${stakeAkt.id === this.state.form.stakeAkt ? "c-stake-akt__box--active" : ""}`}>
+                    className={`c-stake-akt__box ${stakeAkt.id === this.state.form.stakeAkt ? "c-stake-akt__box--active" : ""}`}>
+                    <PiktoBg className="c-stake-akt__pikto-bg" />
                     <div className="c-stake-akt__description">{stakeAkt.description}</div>
-                    <div className="c-stake-akt__value">{getValueLabel(stakeAkt.value)}</div>
+                    <div className="o-labels c-stake-akt__labels">{getValueLabel(stakeAkt.value)}</div>
                 </div>
             );
         });
         return (
             <>
-                <button onClick={() => this.props.back()} className="u-arrow__back"><ArrowBackIcon/></button>
-                <FormattedMessage id="fundAccount.makeCommitment">{
-                    (makeCommitment: string) => <SubNavigationComponent title={makeCommitment} spaceForArrow={true}/>}
-                </FormattedMessage>
-                <h3 className="c-stake-akt__headline">
-                    <FormattedMessage id="fundAccount.getDiscountsOnFeesAccessToPremiumProducts"/>
-                </h3>
-                <div className="c-stake-akt__wrapper-stake-akt">
-                    {stakeAkts}
+                <div className="c-stake-akt__header">
+                    <button onClick={() => this.props.back()} className="c-stake-akt__arrow-back"><ArrowBackIcon /></button>
+                    <h4 className="c-stake-akt__headline"><FormattedMessage id="fundAccount.makeCommitment" /></h4>
                 </div>
                 <p className="c-stake-akt__introduction">
-                    <FormattedMessage id="fundAccount.stakingTokensMeansThatTheyWillBeLockedUp"/>
+                    <FormattedMessage id="fundAccount.getDiscountsOnFeesAccessToPremiumProducts" />
                 </p>
-                <button onClick={() => this.props.onConfirm(this.state.form)} className="o-btn">
-                    <FormattedMessage id="fundAccount.confirm"/>
-                </button>
+                <div className="c-stake-akt__wrapper-items">
+                    {stakeAkts}
+                    <div className="c-stake-akt__wrapper-bottom">
+                        <p className="c-stake-akt__introduction c-stake-akt__introduction--lines">
+                            <FormattedMessage id="fundAccount.stakingTokensMeansThatTheyWillBeLockedUp" />
+                        </p>
+                        <button onClick={() => this.props.onConfirm(this.state.form)} className="o-btn o-btn--wide c-stake-akt__btn">
+                            <FormattedMessage id="fundAccount.confirm" />
+                        </button>
+                    </div>
+                </div>
             </>
         );
     }

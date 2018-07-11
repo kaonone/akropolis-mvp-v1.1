@@ -4,4 +4,48 @@
 .c-balance {
 
     @include elementsFundAccount;
+
+    &__wrapper {
+        display: flex;
+        padding: $spacing-default * 3 $spacing-default * 2 0;
+        margin-bottom: $spacing-default * 3;
+        background-color: $color-primary;
+        color: $color-white;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: $spacing-default * 39;
+        justify-content: space-around;
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: -$spacing-default * 10;
+        left: 0;
+        opacity: 0.1;
+        width: 100%;
+    }
+
+    @for $i from 0 through 3 {
+
+        #Polygon#{$i} {
+            opacity: 0;
+            animation: bgAnimation 4s 200ms * $i ease-out infinite;
+        }
+    }
+
+    @keyframes bgAnimation {
+        0% {
+            opacity: 0;
+            transform: translateY($spacing-default * 40);
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(0);
+        }
+    }
 }

@@ -9,7 +9,9 @@
     font-weight: $font-regular;
 
     .c-product-row:hover &,
-    .c-product-row--checked & {
+    .c-product-row--checked &,
+    .c-stake-akt__box:hover &,
+    .c-stake-akt__box--active & {
         color: $color-white;
         background-color: $color-primary;
     }

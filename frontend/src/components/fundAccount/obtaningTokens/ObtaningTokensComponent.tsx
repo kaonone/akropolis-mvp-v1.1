@@ -1,10 +1,8 @@
 /* tslint:disable:no-implicit-dependencies */
-import MoneyIcon from "-!svg-react-loader?name=moneyIcon!../../../assets/images/money-icon.svg";
 import SpinnerWhite from "-!svg-react-loader?name=moneyIcon!../../../assets/images/spin-white.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import SubNavigationComponent from "../../../components/subNavigation/SubNavigationComponent";
 
 import { getFreeAKTToken } from "../../../services/DataService";
 
@@ -90,10 +88,6 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
 
         return (
             <div className="c-obtaning-tokens__wrapper-options">
-                <FormattedMessage id="fundAccount.fundYourAccount">{
-                    (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount} spaceForArrow={false} />}
-                </FormattedMessage>
-                <MoneyIcon className="c-obtaning-tokens__icon" />
                 {obtainFreeTokensForTest()}
                 <div>
                     {ETHBalance !== 0 ? getFreeAKTForTest() : getFreeETHForTest()}

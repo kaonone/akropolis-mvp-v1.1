@@ -1,5 +1,6 @@
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/_tools-elements-fund-account"; 
+@import "assets/styles/2_tools/tools-boxes";
 
 .c-make-commitment {
 
@@ -7,26 +8,53 @@
 
     @include elementsFundAccount; 
 
+    &__header {
+        display: flex;
+        position: relative;
+    }
+
     &__headline {
         font-weight: normal;
         display: block;
         text-align: center;
-        margin-bottom: $spacing-default * 5;
+        margin-bottom: $spacing-default * 2;
+        text-align: center;
+    }
+
+    &__box {
+
+        @include boxContent(true);
+        position: relative;
+        top: $spacing-default * 20;
+        margin-bottom: $padding-default;
     }
 
     &__label-range {
         margin-bottom: $spacing-default;
-        display: block;
+        display: block; 
+        position: absolute;
     }
 
     &__wrapper-section {
         margin-bottom: $spacing-default * 5;
+        position: relative;
     }
 
     &__wrapper-period {
+        position: relative;
         display: flex;
-        border: 1px solid $color-black;
         padding: 2px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: $spacing-default * 5/10;
+            background-color: $color-grey-lighter;
+            border-radius: $radius-oval;
+        }
     }
 
     &__btn-period {
@@ -34,17 +62,33 @@
         border: 0;
         cursor: pointer;
         width: 100%;
-        font-size: $font-size-h4;
+        font-size: $font-size-base;
         padding: $spacing-default;
+        color: $color-grey-light;
 
         &--active {
-            background: $color-black;
-            color: $color-white;
+            color: $color-grey;
+            position: relative;
+
+            &:after {
+                content: "";
+                width: 100%;
+                left: 0;
+                bottom: -$spacing-default / 5;
+                height: $spacing-default * 5/10;
+                position: absolute;
+                background-color: $color-primary;
+                border-radius: $radius-oval;
+            }
         }
     }
 
     &__description {
         text-align: center;
         margin-bottom: $spacing-default * 2;
+    }
+
+    &__btn {
+        margin: 0 auto;
     }
 }
