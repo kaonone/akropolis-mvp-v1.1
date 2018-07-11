@@ -1,4 +1,5 @@
 import * as React from "react";
+import { numberWithSpaces } from "../../services/DataService";
 
 import "./c-input-range.css";
 
@@ -51,44 +52,21 @@ export default class InputRangeComponent extends React.Component<Props, State> {
     public render() {
         return (
             <div className="c-input-range">
+                <div className="c-input-range__wrapper-value">
+                    <span className="c-input-range__symbol">{this.props.symbol}</span>
+                    <div className="c-input-range__value-of-range">{numberWithSpaces(this.state.value)}</div>
+                </div>
                 <input type="range" className="c-input-range__range"
-                       ref={(c: HTMLInputElement) => {
-                           this.range = c;
-                       }} step={this.props.step}
-                       max={this.state.max} min={this.state.min} value={this.state.value} onChange={this.onChange}/>
-                <span className="c-input-range__symbol">{this.props.symbol}</span>
-                <input type="number" className="o-form__input c-input-range__input"
-                       value={this.state.value} onChange={this.onChange} onKeyDown={this.onKeyDown}
-                       onBlur={this.onBlur}/>
+                    ref={(c: HTMLInputElement) => {
+                        this.range = c;
+                    }} step={this.props.step}
+                    max={this.state.max} min={this.state.min} value={this.state.value} onChange={this.onChange} />
             </div>
         );
     }
 
-    private onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!event.target.value) {
-            const min = parseFloat(this.range.min);
-            const max = parseFloat(this.range.max);
-            const parsedValue = parseFloat(event.target.value) || 0;
-            const value = parsedValue > max ? max : (parsedValue < min ? min : parsedValue);
-
-            this.setState({
-                ...this.state,
-                value,
-            });
-
-            this.setRangeBackground(value, min, max);
-
-            this.props.onChange(value);
-        }
-    }
-
-    private onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.which === 69) {
-            event.preventDefault();
-        }
-    }
-
     private onChange(event: React.ChangeEvent<HTMLInputElement>) {
+
         if (event.target.value) {
             const min = parseFloat(this.range.min);
             const max = parseFloat(this.range.max);
@@ -113,6 +91,6 @@ export default class InputRangeComponent extends React.Component<Props, State> {
 
     private setRangeBackground(value: number, min: number, max: number) {
         const val = ((value - min) / (max - min)) * 100;
-        this.range.style.background = "linear-gradient(to right, #484848, #484848 " + val + "%, #e4e4e4 " + val + "%)";
+        this.range.style.background = "linear-gradient(to right, #6c64ff, #6c64ff " + val + "%, #e4e4e4 " + val + "%)";
     }
 }

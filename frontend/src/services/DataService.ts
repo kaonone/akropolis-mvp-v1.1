@@ -1,4 +1,4 @@
-import {config} from "../config/config";
+import { config } from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
 import * as FundRegistry from "../contracts/FundRegistry.json";
@@ -11,7 +11,7 @@ export const fetchPortfolio = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
@@ -32,7 +32,7 @@ export const fetchATMBalance = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
@@ -54,7 +54,7 @@ export const fetchETHBalance = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
@@ -75,13 +75,13 @@ export const getFreeAKTToken = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AKTFaucet.abi).at(config.deployment.AKTFaucet);
         executeGasPriced(account, reject, (gasPrice: any) => {
-            akropolisToken.emitAKT(account, {gasPrice}, (err: any, response: any) => {
+            akropolisToken.emitAKT(account, { gasPrice }, (err: any, response: any) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -99,7 +99,7 @@ export const approveTransfer = (account: string, AKT: number) => {
             reject("no-account");
         }
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
         const wei = web3.toWei(AKT, "ether");
 
         web3.eth.defaultAccount = account;
@@ -109,7 +109,7 @@ export const approveTransfer = (account: string, AKT: number) => {
             akropolisToken.approve(
                 config.deployment.PortfolioFunctional,
                 wei,
-                {gasPrice},
+                { gasPrice },
                 (err: any, response: any) => {
                     if (err) {
                         reject(err);
@@ -124,7 +124,7 @@ export const approveTransfer = (account: string, AKT: number) => {
 
 function executeGasPriced(account: string, reject: any, resolve: any) {
     // @ts-ignore
-    const {web3} = window;
+    const { web3 } = window;
     web3.eth.defaultAccount = account;
     web3.eth.getGasPrice((error: any, gasPrice: any) => {
         if (error) {
@@ -142,7 +142,7 @@ export const createCommitment = (account: string, data: any) => {
         }
 
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
@@ -168,23 +168,23 @@ export const createCommitment = (account: string, data: any) => {
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
 
         executeGasPriced(account, reject, (gasPrice: any) => {
-                portfolioFunctional.createNewUserPortfolio(
-                    [100],
-                    [eth],
-                    [data.fundAddress],
-                    period,
-                    eth,
-                    data.years,
-                    akt,
-                    {value: eth, gasPrice},
-                    (err: any, response: any) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(response);
-                        }
-                    });
-            }
+            portfolioFunctional.createNewUserPortfolio(
+                [100],
+                [eth],
+                [data.fundAddress],
+                period,
+                eth,
+                data.years,
+                akt,
+                { value: eth, gasPrice },
+                (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(response);
+                    }
+                });
+        }
         );
     });
 };
@@ -196,66 +196,102 @@ export const getCommitment = (account: string) => {
         }
 
         // @ts-ignore
-        const {web3} = window;
+        const { web3 } = window;
 
         web3.eth.defaultAccount = account;
 
         const fundRegistry = web3.eth.contract(FundRegistry.abi).at(config.deployment.FundRegistry);
         const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
         executeGasPriced(account, reject, (gasPrice: any) => {
-                const commitment: any = {};
-                portfolioData.user_commitment(
-                    account,
-                    {gasPrice},
-                    (err: any, response: any) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            commitment.period = response[0];
-                            commitment.amountToPay = response[1];
-                            commitment.durationInYears = response[2];
-                            commitment.createdAt = response[4];
-                            if (Object.keys(commitment).length >= 6) {
-                                resolve(commitment);
-                            }
+            const commitment: any = {};
+            portfolioData.user_commitment(
+                account,
+                { gasPrice },
+                (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        commitment.period = response[0];
+                        commitment.amountToPay = response[1];
+                        commitment.durationInYears = response[2];
+                        commitment.createdAt = response[4];
+                        if (Object.keys(commitment).length >= 6) {
+                            resolve(commitment);
                         }
-                    });
-                portfolioData.user_allocations(
-                    account, 0,
-                    {gasPrice},
-                    (err: any, response: any) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            commitment.fundAddress = response[2];
-                            fundRegistry.getFundIndexByAddress(
-                                commitment.fundAddress,
-                                {gasPrice},
-                                (err2: any, response2: any) => {
-                                    if (err2) {
-                                        reject(err2);
-                                    } else {
-                                        fundRegistry.funds(
-                                            response2,
-                                            {gasPrice},
-                                            (err3: any, response3: any) => {
-                                                if (err3) {
-                                                    reject(err3);
-                                                } else {
-                                                    commitment.fundName = response3[0];
-                                                    commitment.pastAnnualReturns = response3[4];
-                                                    if (Object.keys(commitment).length >= 6) {
-                                                        resolve(commitment);
-                                                    }
+                    }
+                });
+            portfolioData.user_allocations(
+                account, 0,
+                { gasPrice },
+                (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        commitment.fundAddress = response[2];
+                        fundRegistry.getFundIndexByAddress(
+                            commitment.fundAddress,
+                            { gasPrice },
+                            (err2: any, response2: any) => {
+                                if (err2) {
+                                    reject(err2);
+                                } else {
+                                    fundRegistry.funds(
+                                        response2,
+                                        { gasPrice },
+                                        (err3: any, response3: any) => {
+                                            if (err3) {
+                                                reject(err3);
+                                            } else {
+                                                commitment.fundName = response3[0];
+                                                commitment.pastAnnualReturns = response3[4];
+                                                if (Object.keys(commitment).length >= 6) {
+                                                    resolve(commitment);
                                                 }
                                             }
-                                        );
-                                    }
+                                        }
+                                    );
                                 }
-                            );
-                        }
-                    });
-            }
+                            }
+                        );
+                    }
+                });
+        }
         );
     });
+};
+
+export const numberWithSpaces = (value: number | undefined): string => {
+
+    const transformValueArr: string[] = value ? value.toString().split(".") : ["0"];
+    let partBeforeComa = "";
+    let partAfterComa = "";
+
+    if (transformValueArr[0].length > 3) {
+        let numberOfIterate = 1;
+        for (let i = transformValueArr[0].length - 1; i >= 0; i--) {
+
+            partBeforeComa = transformValueArr[0].charAt(i) + partBeforeComa;
+
+            if (numberOfIterate % 3 === 0) {
+                partBeforeComa = " " + partBeforeComa;
+            }
+
+            numberOfIterate++;
+        }
+    } else {
+        partBeforeComa = transformValueArr[0];
+    }
+
+    if (transformValueArr[1]) {
+
+        transformValueArr[1].length > 2 ?
+            partAfterComa = ", " + transformValueArr[1].slice(0, 2)
+            :
+            partAfterComa = ", " + transformValueArr[1] + "0";
+
+    } else {
+        partAfterComa = "";
+    }
+
+    return partBeforeComa + partAfterComa;
 };

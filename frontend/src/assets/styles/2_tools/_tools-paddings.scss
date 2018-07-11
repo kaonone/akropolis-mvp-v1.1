@@ -1,6 +1,11 @@
-@mixin globalPadding($value: $spacing-default * 3/2) {
+@mixin globalPadding($value: $padding-default) {
     margin-left: $value;
     margin-right: $value;
-    padding-top: $spacing-default * 4;
     padding-bottom: $value;
+
+    @include mq($from: tablet) {
+        max-width: $spacing-default * 74 - $padding-default * 2;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

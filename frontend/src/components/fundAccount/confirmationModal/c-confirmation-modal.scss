@@ -2,83 +2,82 @@
 @import "assets/styles/2_tools/tools-mq";
 
 .c-confirmation-modal {
-
-  &__box {
-    border: 2px solid $color-black;
-    padding: $spacing-default * 4;
-    width: 100%;
-    background-color: $color-white;
-  }
-
-  &__headline {
-    text-align: center;
-    font-weight: normal;
-    margin-bottom: $spacing-default * 4;
-  }
-
-  &__introduction {
-    font-weight: normal;
-    text-align: center;
-    margin-bottom: $spacing-default * 4;
-  }
-
-  &__wrapper-underline {
-    border-bottom: 1px solid $color-black;
-  }
-
-  &__value {
-    font-size: $font-size-h1;
-    font-weight: bold;
-
-    @include mq($until: tablet) {
-      font-size: $font-size-h2;
-  }
-  }
-
-  &__unit {
-    font-size: $font-size-h3;
-    text-transform: uppercase;
-    margin-left: $spacing-default;
-  }
-
-  &__base-text {
-    font-size: $font-size-h3;
-    margin-left: $spacing-default * 2;
-    margin-right: $spacing-default * 2;
-
-    &--lower-case {
-      text-transform: lowercase;
+    &__box {
+        border: 2px solid $color-black;
+        padding: $spacing-default * 4;
+        width: 100%;
+        background-color: $color-white;
     }
 
-    &--center {
-      text-align: center;
+    &__headline {
+        text-align: center;
+        font-weight: normal;
+        margin-bottom: $spacing-default * 4;
     }
-  }
 
-  &__wrapper-row {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    margin-bottom: $spacing-default * 3;
-  }
+    &__introduction {
+        font-weight: normal;
+        text-align: center;
+        margin-bottom: $spacing-default * 4;
+    }
 
-  &__wrapper-description {
-    text-align: center;
-    margin-top: $spacing-default * 2;
-    margin-bottom: $spacing-default * 2;
-  }
+    &__wrapper-underline {
+        border-bottom: 1px solid $color-black;
+    }
 
-  &__btn {
-    margin: 0 $spacing-default $spacing-default;
-  }
+    &__value {
+        font-size: $font-size-h1;
+        font-weight: bold;
 
-  &__btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+        @include mq($until: tablet) {
+            font-size: $font-size-h2;
+        }
+    }
 
-  &__spinner {
-    text-align: center;
-  }
+    &__unit {
+        font-size: $font-size-h3;
+        text-transform: uppercase;
+        margin-left: $spacing-default;
+    }
+
+    &__base-text {
+        font-size: $font-size-h3;
+        margin-left: $spacing-default * 2;
+        margin-right: $spacing-default * 2;
+
+        &--lower-case {
+            text-transform: lowercase;
+        }
+
+        &--center {
+            text-align: center;
+        }
+    }
+
+    &__wrapper-row {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        margin-bottom: $spacing-default * 3;
+    }
+
+    &__wrapper-description {
+        text-align: center;
+        margin-top: $spacing-default * 2;
+        margin-bottom: $spacing-default * 2;
+    }
+
+    &__btn {
+        margin: 0 $spacing-default $spacing-default;
+    }
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__spinner {
+        text-align: center;
+    }
 }

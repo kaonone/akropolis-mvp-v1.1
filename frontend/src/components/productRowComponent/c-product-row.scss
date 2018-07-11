@@ -100,10 +100,17 @@
 
     &__pikto-bg {
         position: absolute;
-        top: 0;
+        top: $spacing-default * 6;
         left: 0;
-        opacity: 0.1;
+        opacity: 0;
         width: 100%;
+        transition: $transition-default;
+
+        #{$c}:hover &,
+        #{$c}--checked & {
+            top: 0;
+            opacity: 0.1;
+        }
     }
 
     &__labels {
