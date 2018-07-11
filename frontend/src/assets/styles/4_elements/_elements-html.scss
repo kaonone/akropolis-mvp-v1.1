@@ -8,8 +8,14 @@ html {
 
 body {
   background-color: $color-grey-lighter;
+  color: $color-grey;
 }
 
 p {
     font-size: $font-size-base;
+}
+
+input {
+    color: $color-grey;
+    font-family: $font-family;
 }

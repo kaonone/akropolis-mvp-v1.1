@@ -3,49 +3,54 @@
 .c-input-range {
   $c: &;
   display: flex;
-  align-items: center;
-  padding-top: $spacing-default;
+  flex-direction: column;
+
+  &__wrapper-value {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    margin-bottom: $spacing-default * 2;
+    overflow: hidden;
+  }
 
   &__range {
     flex: 2;
     margin-right: $spacing-default * 2;
     -webkit-appearance: none;
     width: 100%;
-    height: $spacing-default;
+    height: $spacing-default * 6/10;
     border-radius: $spacing-default / 2;
-    background: #E4E4E4;
+    background: $color-grey-lighter;
     outline: none;
 
 
     &::-webkit-slider-runnable-track {
-      height: $spacing-default;
+      height: inherit;
       -webkit-appearance: none;
-      color: #e4e4e4;
+      color: $color-grey-lighter;
     }
 
     &::-webkit-slider-thumb {
-      margin-top: $spacing-default * -1;
+      margin-top: -$spacing-default * 1/10;
       -webkit-appearance: none;
       appearance: none;
-      width: $spacing-default * 3;
-      height: $spacing-default * 3;
+      width: $spacing-default * 2;
+      height: $spacing-default * 2;
       border-radius: 50%;
-      background: #000;
+      background: $color-primary;
       cursor: pointer;
+      box-shadow: $shadow-primary;
     }
   }
 
-  &__input {
-    flex: 1;
+  &__value-of-range {
+    font-size: $font-size-h1;
+    font-weight: $font-medium;
   }
 
   &__symbol {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba($color-grey, 0.3);
-    height: $spacing-default * 3;
-    min-width: $spacing-default * 3;
+    position: relative;
+    top: $spacing-default * 8/10;
     padding: 0 $spacing-default / 2;
   }
 }

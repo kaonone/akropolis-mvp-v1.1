@@ -1,6 +1,7 @@
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/tools-paddings";
 @import "assets/styles/2_tools/tools-mq";
+@import "assets/styles/2_tools/tools-boxes";
 
 .v-onboarding {
 
@@ -10,7 +11,14 @@
 
     display: flex;
     flex-direction: column;
-    margin-bottom: $spacing-default * 4;
+
+    &__box-content {
+
+        @include boxContent(true);
+        position: relative;
+        top: $spacing-default * 20;
+        margin-bottom: $padding-default;
+    }
 
     &__benefits-slide {
         text-align: center;
@@ -22,7 +30,8 @@
     }
 
     &__section {
-        margin-bottom: $spacing-default * 3;
+        margin-bottom: $spacing-default * 4;
+        position: relative;
 
         &--last {
             margin-bottom: unset;
@@ -37,7 +46,10 @@
     &__section-title {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        max-width: $spacing-default * 13;
 
         #{$c}__section--inline & {
             flex: 2;
@@ -67,7 +79,7 @@
     }
 
     &__btn {
-        margin: ($spacing-default * 6) auto 0;
+        margin: ($spacing-default * 3) auto 0;
         width: 100%;
         display: block;
         text-align: center;
@@ -103,6 +115,7 @@
 
     &__wrapper-age-inputs {
         display: flex;
+        margin-top: $spacing-default * 5;
     }
 
     &__wrapper-range {
@@ -112,22 +125,11 @@
 
     &__wrapper-age-input {
         width: 50%;
-        margin-left: $spacing-default;
-        margin-right: $spacing-default;
+        text-align: center;
 
         &:first-child {
-            margin-left: unset;
+            border-right: 1px solid $color-grey-lighter;
         }
-
-        &:last-child {
-            margin-right: unset;
-        }
-    }
-
-    &__wrappper-input-label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     &__input {
@@ -136,16 +138,26 @@
 
     &__wrapper-final-values {
         display: flex;
-        border: 1px solid $color-black;
-        padding: $spacing-default * 2;
+        padding: $spacing-default * 3 $spacing-default * 2 0;
         flex-direction: column;
         margin-bottom: $spacing-default * 3;
+        background-color: $color-primary;
+        color: $color-white;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: $spacing-default * 28;
     }
 
     &__wrapper-final-value {
         display: flex;
         align-items: baseline;
-        margin-left: $spacing-default * 4;
+    }
+
+    &__describe-value {
+        font-weight: $font-medium;
+        margin-bottom: $spacing-default * 3;
     }
 
     &__describe-value,
@@ -154,8 +166,8 @@
     }
 
     &__value {
-        font-size: $spacing-default * 5;
-        font-weight: bold;
+        font-size: $font-size-xxl;
+        font-weight: $font-medium;
 
         &--smaller {
             font-size: $spacing-default * 3;
@@ -164,26 +176,26 @@
 
     &__period {
         margin-left: $spacing-default / 2;
+        font-size: $font-size-h2;
     }
 
     &__final-value-currency {
         margin-right: $spacing-default;
+        font-size: $font-size-h2;
+
+        &--message {
+            text-align: center;
+            font-size: $font-size-h3;
+        }
     }
 
     &__wrapper-final-value-item {
         display: flex;
+        flex-direction: column;
         width: 100%;
         align-items: baseline;
         margin-bottom: $spacing-default * 2;
-
-        &--first {
-            min-height: $spacing-default * 6;
-            align-items: flex-end;
-        }
-
-        &:last-child {
-            margin-bottom: unset;
-        }
+        align-items: center;
     }
 
     &__correct-basics {
@@ -207,6 +219,36 @@
 
         #{$c}__section--inline & {
             flex: 1;
+        }
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: -$spacing-default * 10;
+        left: 0;
+        opacity: 0.1;
+        width: 100%;
+    }
+
+    @for $i from 0 through 3 {
+
+        #Polygon#{$i} {
+            opacity: 0;
+            animation: bgAnimation 4s 200ms * $i ease-out infinite;
+        }
+    }
+
+    @keyframes bgAnimation {
+        0% {
+            opacity: 0;
+            transform: translateY($spacing-default * 40);
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(0);
         }
     }
 }

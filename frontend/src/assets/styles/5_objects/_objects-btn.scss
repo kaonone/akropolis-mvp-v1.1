@@ -3,7 +3,7 @@
     @include btn;
     background-color: $color-secondary;
     font-size: $font-size-base;
-    padding: $spacing-default * 15/10 $spacing-default * 4;
+    padding: $spacing-default * 15/10 $spacing-default * 4 $spacing-default * 14/10;
     border: 1px solid $color-secondary;
     width: fit-content;
     text-transform: uppercase;
@@ -23,8 +23,9 @@
         }
     }
 
-    &--block {
-        display: block;
+    &--wide {
+        padding-left: $spacing-default * 8;
+        padding-right: $spacing-default * 8;
     }
 
     > svg {

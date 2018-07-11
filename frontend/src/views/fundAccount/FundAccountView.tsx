@@ -183,7 +183,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                 resultStepOne={this.state.stepOne}
                                 resultStepTwo={this.state.stepTwo}
                                 isOpenProps={this.state.isOpenModal}
-                                isWaiting={this.state.waiting}
+                                isWaiting={this.state.waiting} 
                                 onClick={this.handleOnClick}
                                 onClose={this.handleOnCloseModal}/>
                         </ModalGlobalComponent>

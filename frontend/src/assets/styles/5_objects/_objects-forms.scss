@@ -1,7 +1,7 @@
 .o-form {
 
     &__input {
-        background-color: rgba($color-grey, 0.3);
+        background-color: transparent;
         border: unset;
         outline: 0;
         padding: $spacing-default / 2 $spacing-default;
@@ -9,6 +9,17 @@
         display: block;
         overflow: hidden;
         width: 100%;
+        font-size: $font-size-h1;
+        font-weight: $font-medium;
+        margin-bottom: $spacing-default;
+        text-align: center;
+
+        &--number {
+
+            &::-webkit-inner-spin-button {
+                display: none;
+              }
+        }
     }
 
     &__checkbox {
@@ -51,45 +62,6 @@
             }
         }
     }
-
-    &__radio {
-        position: relative;
-        cursor: pointer;
-
-        &:before {
-            content: "";
-            width: $spacing-default * 2;
-            height: $spacing-default * 2;
-            background-color: $color-white;
-            border: 1px solid $color-black;
-            border-radius: $radius-small;
-            position: absolute;
-            left: 0;
-            top: 0;
-            transition: $transition-default;
-        }
-
-        &:after {
-            content: "";
-            height: $spacing-default;
-            width: $spacing-default;
-            position: absolute;
-            left: $spacing-default;
-            top: $spacing-default;
-            opacity: 0;
-            transition: $transition-default;
-        }
-
-        &:checked {
-
-            &:before {
-                border: 1px solid $color-black;
-                background-color: $color-black;
-            }
-
-            &:after {
-                opacity: 1;
-            }
-        }
-    }
 }
+
+@include placeholder($color-grey-light);

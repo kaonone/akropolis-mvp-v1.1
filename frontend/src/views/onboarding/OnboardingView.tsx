@@ -5,7 +5,6 @@ import SlideTwoComponent from "../../components/onboarding/SlideTwoComponent";
 import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
 import { calculatePlanValuesService } from "../../services/PlanService";
 
-import logoAkropolis from "../../assets/images/logo-akropolis.svg";
 import "./v-onboarding.css";
 
 interface State {
@@ -68,8 +67,6 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     public render() {
         return (
             <div className="v-onboarding">
-                <img className="v-onboarding__logo" src={logoAkropolis} />
-                
                 {
                     this.state.numberOfSlide === 1 &&
                     <SlideOneComponent changeSlide={this.changeSlide} />

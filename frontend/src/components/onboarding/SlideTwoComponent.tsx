@@ -1,12 +1,13 @@
+/* tslint:disable:no-implicit-dependencies */
+import PiktoBg from "-!svg-react-loader?name=Icon!../../assets/images/pikto-bg.svg";
+/* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
-import {Link} from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 import InputRange from "../inputRange/InputRangeComponent";
 
 import { NAVIGATION } from "../../constants";
 import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
-
-import infoIcon from "../../assets/images/info-icon.svg";
 
 interface Props {
     onSave: () => void;
@@ -36,12 +37,12 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
     }
 
     public componentWillMount() {
-        this.setState({...this.props.planValues});
+        this.setState({ ...this.props.planValues });
     }
 
     public render() {
 
-        const {plan} = this.props;
+        const { plan } = this.props;
         // const minAgeAtRetirement = this.state.currentAge ? this.state.currentAge + 1 : 0;
 
         const planNeedToSave = plan.needToSave > 0 ?
@@ -55,90 +56,87 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
             :
             (
                 <div className="v-onboarding__wrapper-final-value">
-                    <span className="v-onboarding__final-value-currency">
-                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything"/>
+                    <span className="v-onboarding__final-value-currency v-onboarding__final-value-currency--message">
+                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything" />
                     </span>
                 </div>
             );
 
         return (
             <div className="v-onboarding__create-portfolio-first-step-slide">
-                <h2 className="v-onboarding__headline">
-                    <FormattedMessage id="onboarding.letSCreateYourFirstPortfolio"/>
-                </h2>
                 <div className="v-onboarding__wrapper-final-values">
                     <div
-                        className="v-onboarding__wrapper-final-value-item v-onboarding__wrapper-final-value-item--first">
-                        <p className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.youNeedToSave"/>
-                        </p>
+                        className="v-onboarding__wrapper-final-value-item">
+                        <h4 className="v-onboarding__describe-value">
+                            <FormattedMessage id="onboarding.youNeedToSave" />
+                        </h4>
                         {planNeedToSave}
                     </div>
+                    <PiktoBg className="v-onboarding__pikto-bg" />
                 </div>
-                <div className="v-onboarding__section">
-                    <div className="v-onboarding__section-title">
-                        <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement"/>
+                <div className="v-onboarding__box-content">
+                    <div className="v-onboarding__section">
+                        <div className="v-onboarding__section-title">
+                            <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement" />
+                        </div>
+                        <InputRange value={this.state.desiredAnnualIncome} max={200000} min={0} symbol="$"
+                            onChange={this.handleRangeChange("desiredAnnualIncome")} />
                     </div>
-                    <InputRange value={this.state.desiredAnnualIncome} max={200000} min={0} symbol="$"
-                                onChange={this.handleRangeChange("desiredAnnualIncome")}/>
-                </div>
-                <div className="v-onboarding__section">
-                    <div className="v-onboarding__section-title">
-                        <FormattedMessage id="onboarding.valueOfMyExistingPensionPots"/>
+                    <div className="v-onboarding__section">
+                        <div className="v-onboarding__section-title">
+                            <FormattedMessage id="onboarding.valueOfMyExistingPensionPots" />
+                        </div>
+                        <InputRange value={this.state.existingPension} max={2000000} min={0} symbol="$"
+                            onChange={this.handleRangeChange("existingPension")} />
                     </div>
-                    <InputRange value={this.state.existingPension} max={2000000} min={0} symbol="$"
-                                onChange={this.handleRangeChange("existingPension")}/>
-                </div>
-                {/*<div className="v-onboarding__section">*/}
+                    {/*<div className="v-onboarding__section">*/}
                     {/*<div className="v-onboarding__section-title">*/}
-                        {/*<FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>*/}
+                    {/*<FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>*/}
                     {/*</div>*/}
                     {/*<InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="$"*/}
-                                {/*onChange={this.handleRangeChange("savingPerMonth")}/>*/}
-                {/*</div>*/}
-                <div className="v-onboarding__wrapper-age-inputs">
-                    <div className="v-onboarding__wrapper-age-input">
-                        <p>
-                            <FormattedMessage id="onboarding.myCurrentAge"/>
-                        </p>
-                        <FormattedMessage id="onboarding.enterAge">
-                            {(enterAge: string) => <input
-                                min="0"
-                                max="100"
-                                value={this.state.currentAge}
-                                onChange={this.onChange}
-                                onKeyDown={this.onKeyDown}
-                                className="o-form__input v-onboarding__input"
-                                type="number"
-                                name="currentAge"
-                                placeholder={enterAge}/>}
-                        </FormattedMessage>
-                    </div>
-                    <div className="v-onboarding__wrapper-age-input">
-                        <div className="v-onboarding__wrappper-input-label">
-                            <p>
-                                <FormattedMessage id="onboarding.ageAtRetirement"/>
-                            </p>
-                            <Link to=""><img className="v-onboarding__icon--info" src={infoIcon}/></Link>
+                    {/*onChange={this.handleRangeChange("savingPerMonth")}/>*/}
+                    {/*</div>*/}
+                    <div className="v-onboarding__wrapper-age-inputs">
+                        <div className="v-onboarding__wrapper-age-input">
+                            <FormattedMessage id="onboarding.enterAge">
+                                {(enterAge: string) => <input
+                                    min="0"
+                                    max="100"
+                                    value={this.state.currentAge}
+                                    onChange={this.onChange}
+                                    onKeyDown={this.onKeyDown}
+                                    className="o-form__input o-form__input--number"
+                                    type="number"
+                                    name="currentAge"
+                                    placeholder={enterAge} />}
+                            </FormattedMessage>
+                            <label className="o-form__input-label">
+                                <FormattedMessage id="onboarding.myCurrentAge" />
+                            </label>
                         </div>
-                        <FormattedMessage id="onboarding.ageAtRetirement">
-                            {(ageAtRetirement: string) => <input
-                                min="0"
-                                max="100"
-                                value={this.state.ageAtRetirement}
-                                onChange={this.onChange}
-                                onKeyDown={this.onKeyDown}
-                                className="o-form__input v-onboarding__input"
-                                type="number"
-                                name="ageAtRetirement"
-                                placeholder={ageAtRetirement}/>}
-                        </FormattedMessage>
+                        <div className="v-onboarding__wrapper-age-input">
+                            <FormattedMessage id="onboarding.ageAtRetirement">
+                                {(ageAtRetirement: string) => <input
+                                    min="0"
+                                    max="100"
+                                    value={this.state.ageAtRetirement}
+                                    onChange={this.onChange}
+                                    onKeyDown={this.onKeyDown}
+                                    className="o-form__input o-form__input--number"
+                                    type="number"
+                                    name="ageAtRetirement"
+                                    placeholder={ageAtRetirement} />}
+                            </FormattedMessage>
+                            <label className="o-form__input-label">
+                                <FormattedMessage id="onboarding.ageAtRetirement" />
+                            </label>
+                        </div>
                     </div>
+                    <Link to={`/${NAVIGATION.selectAFund}`} onClick={this.save}
+                        className="o-btn o-btn--wide v-onboarding__btn">
+                        <FormattedMessage id="onboarding.startSaving" />
+                    </Link>
                 </div>
-                <Link to={`/${NAVIGATION.selectAFund}`} onClick={this.save}
-                       className="o-btn v-onboarding__btn">
-                    <FormattedMessage id="onboarding.startSaving"/>
-                </Link>
             </div>
         );
     }
