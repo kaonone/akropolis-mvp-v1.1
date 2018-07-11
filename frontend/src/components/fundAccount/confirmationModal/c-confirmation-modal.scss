@@ -2,32 +2,32 @@
 @import "assets/styles/2_tools/tools-mq";
 
 .c-confirmation-modal {
+  
     &__box {
-        border: 2px solid $color-black;
-        padding: $spacing-default * 4;
         width: 100%;
-        background-color: $color-white;
     }
 
     &__headline {
-        text-align: center;
-        font-weight: normal;
-        margin-bottom: $spacing-default * 4;
+        font-weight: $font-medium;
+        margin-bottom: $spacing-default / 2;
     }
 
     &__introduction {
-        font-weight: normal;
-        text-align: center;
-        margin-bottom: $spacing-default * 4;
+        opacity: 0.7;
     }
 
-    &__wrapper-underline {
-        border-bottom: 1px solid $color-black;
+    &__wrapper-item-value {
+        display: flex;
+        flex-direction: column;
+
+        @include mq($until: mobileLandscape) {
+            margin-bottom: $spacing-default;
+        }
     }
 
     &__value {
         font-size: $font-size-h1;
-        font-weight: bold;
+        font-weight: $font-medium;
 
         @include mq($until: tablet) {
             font-size: $font-size-h2;
@@ -40,44 +40,44 @@
         margin-left: $spacing-default;
     }
 
-    &__base-text {
-        font-size: $font-size-h3;
-        margin-left: $spacing-default * 2;
-        margin-right: $spacing-default * 2;
-
-        &--lower-case {
-            text-transform: lowercase;
-        }
-
-        &--center {
-            text-align: center;
-        }
+    &__label {
+        font-size: $font-size-base;
+        opacity: 0.7;
     }
 
     &__wrapper-row {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: baseline;
-        margin-bottom: $spacing-default * 3;
-    }
+        margin-bottom: $spacing-default * 7;
+        margin-top: $spacing-default * 3;
 
-    &__wrapper-description {
-        text-align: center;
-        margin-top: $spacing-default * 2;
-        margin-bottom: $spacing-default * 2;
-    }
-
-    &__btn {
-        margin: 0 $spacing-default $spacing-default;
+        @include mq($until: mobileLandscape) {
+            flex-direction: column;
+        }
     }
 
     &__btns {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
+        background-color: $color-white;
+        height: $spacing-default * 7;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
     }
 
     &__spinner {
         text-align: center;
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: -$spacing-default * 10;
+        left: 0;
+        opacity: 0.1;
+        width: 100%;
     }
 }

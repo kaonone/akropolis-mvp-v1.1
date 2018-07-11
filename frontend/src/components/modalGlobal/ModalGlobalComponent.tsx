@@ -5,15 +5,24 @@ import "./c-modal-global.css";
 
 const modalElement = document.getElementById("modal") as HTMLElement;
 
-export default class ModalGlobalComponent extends React.Component<any, {}> {
+interface Props {
+    isAbove?: boolean;
+    onClose: () => void;
+}
+
+export default class ModalGlobalComponent extends React.Component<Props, {}> {
 
     private wrapperModal = document.createElement("div");
 
     public render() {
         return ReactDOM.createPortal(
-            <div className="c-modal-global__overlay" onClick={this.props.onClose}>
-                <div onClick={this.eventStopPropagation} className="c-modal-global__wrapper">
-                    {this.props.children}
+            <div className={`c-modal-global__overlay ${this.props.isAbove ? "c-modal-global__overlay--no-overlay" : ""}`} onClick={this.props.onClose}>
+                <div className="c-modal-global__wrapper-height">
+                    <div onClick={this.eventStopPropagation} className="c-modal-global__wrapper">
+                        <div className="c-modal-global__wrapper-content">
+                            {this.props.children}
+                        </div>
+                    </div>
                 </div>
             </div>,
             this.wrapperModal,

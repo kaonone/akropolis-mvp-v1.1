@@ -41,12 +41,12 @@ export default class NavbarComponent extends React.Component<Props, State> {
             <div className="c-confirmation-modal__box">
                 <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc" /></h3>
                 <div className="c-confirmation-modal__btns">
-                    <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.deleteData}>
-                        <FormattedMessage id="fundAccount.confirm"/>
+                    <button className="o-btn o-btn--basic o-btn--cancel" onClick={this.deleteData}>
+                        <FormattedMessage id="fundAccount.cancel"/>
                     </button>
                     <button onClick={this.toggleDeleteModal}
-                            className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">
-                        <FormattedMessage id="fundAccount.cancel"/>
+                            className="o-btn o-btn--basic">
+                        <FormattedMessage id="fundAccount.confirm"/>
                     </button>
                 </div>
             </div>
@@ -56,7 +56,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
             <div className="c-confirmation-modal__box">
                 <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.noPortfolioYet" /></h3>
                 <div className="c-confirmation-modal__btns">
-                    <button onClick={this.toggleModal} className="o-btn o-btn--wide c-confirmation-modal__btn">
+                    <button onClick={this.toggleModal} className="o-btn o-btn--basic">
                         <FormattedMessage id="nav.ok"/>
                     </button>
                 </div>

@@ -1,4 +1,5 @@
 /* tslint:disable:no-implicit-dependencies */
+import PiktoBg from "-!svg-react-loader?name=Icon!../../../assets/images/pikto-bg.svg";
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../../assets/images/spin-black.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
@@ -28,65 +29,60 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
 
         return (
             <div className="c-confirmation-modal__box">
-                <h1 className="c-confirmation-modal__headline"><FormattedMessage id="fundAccount.confirmContribution" /></h1>
-                <h3 className="c-confirmation-modal__introduction"><FormattedMessage id="fundAccount.youAreMakingACommitmentToContribute" /></h3>
+                <h4 className="c-confirmation-modal__headline"><FormattedMessage id="fundAccount.confirmContribution" /></h4>
+                <p className="c-confirmation-modal__introduction"><FormattedMessage id="fundAccount.youAreMakingACommitmentToContribute" /></p>
                 <div className="c-confirmation-modal__wrapper-row">
-                    <span className="c-confirmation-modal__wrapper-underline">
-                        <span className="c-confirmation-modal__value">{rangeEth}</span>
-                        <span className="c-confirmation-modal__unit">eth</span>
-                    </span>
-                    <span className="c-confirmation-modal__base-text c-confirmation-modal__base-text--lower-case">
-                        <FormattedMessage id="fundAccount.every" />
-                    </span>
-                    <span className="c-confirmation-modal__wrapper-underline">
+
+                    <div className="c-confirmation-modal__wrapper-item-value">
+                        <span className="c-confirmation-modal__label">
+                            <FormattedMessage id="fundAccount.every" />
+                        </span>
+                        <span className="c-confirmation-modal__value">
+                            {rangeEth}
+                            <span className="c-confirmation-modal__unit">eth</span>
+                        </span>
+                    </div>
+
+                    <div className="c-confirmation-modal__wrapper-item-value">
+                        <span className="c-confirmation-modal__label">
+                            <FormattedMessage id="fundAccount.every" />
+                        </span>
                         <span className="c-confirmation-modal__value">
                             <FormattedMessage id={`fundAccount.${period}`} />
                         </span>
-                    </span>
-                </div>
-                <div className="c-confirmation-modal__wrapper-row">
-                    <span className="c-confirmation-modal__base-text">
-                        <FormattedMessage id="fundAccount.for" />
-                    </span>
-                </div>
-                <div className="c-confirmation-modal__wrapper-row">
-                    <span className="c-confirmation-modal__wrapper-underline">
-                        <span className="c-confirmation-modal__value">{years}</span><span className="c-confirmation-modal__unit">
-                            <FormattedMessage id="fundAccount.years" />
+                    </div>
+
+                    <div className="c-confirmation-modal__wrapper-item-value">
+                        <span className="c-confirmation-modal__label">
+                            <FormattedMessage id="fundAccount.period" />
                         </span>
-                    </span>
-                </div>
-                <div className="c-confirmation-modal__wrapper-row">
-                    <span className="c-confirmation-modal__wrapper-description">
-                        <span className="c-confirmation-modal__base-text">
-                            <FormattedMessage id="fundAccount.theFirstContributionOf" />
+                        <span className="c-confirmation-modal__value">
+                            {years}
+                            <span className="c-confirmation-modal__unit">
+                                <FormattedMessage id="fundAccount.years" />
+                            </span>
                         </span>
-                        <span className="c-confirmation-modal__value">{rangeEth}</span>
-                        <span className="c-confirmation-modal__unit">eth</span>
-                        <span className="c-confirmation-modal__base-text">
-                            <FormattedMessage id="fundAccount.willBePaidImmediately" />
-                        </span>
-                    </span>
+                    </div>
                 </div>
-                <div className="c-confirmation-modal__wrapper-row">
-                    <span className="c-confirmation-modal__base-text c-confirmation-modal__base-text--center">
-                        <FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />
-                    </span>
-                </div>
+                <span className="c-confirmation-modal__introduction">
+                    <FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />
+                </span>
+                <PiktoBg className="c-confirmation-modal__pikto-bg" />
                 {this.props.isWaiting ? (
                     <div className="c-confirmation-modal__spinner"><SpinnerBlack /></div>
                 ) : (
-                    <div className="c-confirmation-modal__btns">
-                        <FormattedMessage id="fundAccount.confirm">{
-                            (confirm: string) =>
-                                <button className="o-btn o-btn--wide c-confirmation-modal__btn" onClick={this.props.onClick}>{confirm}</button>}
-                        </FormattedMessage>
-                        <FormattedMessage id="fundAccount.cancel">{
-                            (cancel: string) =>
-                                <button onClick={this.props.onClose} className="o-btn o-btn--reverse o-btn--wide c-confirmation-modal__btn">{cancel}</button>}
-                        </FormattedMessage>
-                    </div>
-                )}
+                        <div className="c-confirmation-modal__btns">
+                            <FormattedMessage id="fundAccount.cancel">{
+                                (cancel: string) =>
+                                    <button onClick={this.props.onClose}
+                                        className="o-btn o-btn--basic o-btn--cancel">{cancel}</button>}
+                            </FormattedMessage>
+                            <FormattedMessage id="fundAccount.confirm">{
+                                (confirm: string) =>
+                                    <button className="o-btn o-btn--basic" onClick={this.props.onClick}>{confirm}</button>}
+                            </FormattedMessage>
+                        </div>
+                    )}
             </div>
         );
     }
