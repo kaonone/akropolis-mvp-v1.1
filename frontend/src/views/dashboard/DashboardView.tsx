@@ -9,6 +9,7 @@ import LoaderComponent from "../../components/loader/LoaderComponent";
 import { PortfolioStore } from "../../redux/store/portfolioStore";
 
 import { NAVIGATION } from "../../constants";
+import {getNextContributionDate} from "../../services/DashboardService";
 
 import "./v-dashboard.css";
 
@@ -32,7 +33,6 @@ export default class DashboardView extends React.Component<AllProps, any> {
 
     public componentWillMount() {
         if (this.props.account) {
-            console.warn("MOUNT");
             this.props.fetchCommitment(this.props.account);
         }
     }
@@ -58,7 +58,10 @@ export default class DashboardView extends React.Component<AllProps, any> {
                 <div className="v-dashboard">
                     <div className="v-dashboard__wrapper-next-contribution-details">
                         <div className="v-dashboard__next-contribution-details">
-                            <FormattedMessage id="dashboard.myNextContributionDetails"/>, 25 July 2018
+                            <FormattedMessage id="dashboard.myNextContributionDetails"/>,&nbsp;
+                            {this.props.portfolio.commitmentFetched && (
+                                getNextContributionDate(this.props.portfolio.commitment)
+                            )}
                         </div>
                         <button className="o-btn"><FormattedMessage id="dashboard.topUpYourPension"/></button>
                     </div>

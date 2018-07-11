@@ -65,6 +65,7 @@
         font-size: $font-size-base;
         padding: $spacing-default;
         color: $color-grey-light;
+        background:transparent;
 
         &--active {
             color: $color-grey;
