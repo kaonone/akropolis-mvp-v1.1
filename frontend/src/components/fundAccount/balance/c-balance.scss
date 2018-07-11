@@ -19,6 +19,21 @@
         justify-content: space-around;
     }
 
+    &__headline {
+        margin: 0 auto $spacing-default * 2/10;
+        color: $color-grey;
+        font-weight: $font-medium;
+        text-align: center;
+        // to check
+        position: fixed;
+        color: $color-white;
+        width: 100%;
+        top: $spacing-default * 4;
+        z-index: 1000;
+        z-index: 1;
+        left: 0;
+    }
+
     &__pikto-bg {
         position: absolute;
         top: -$spacing-default * 10;
