@@ -66,7 +66,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
 
     public render() {
         return (
-            <div className="v-onboarding">
+            <div className={`v-onboarding ${this.state.numberOfSlide === 1 && "v-onboarding--fullpage"}`}>
                 {
                     this.state.numberOfSlide === 1 &&
                     <SlideOneComponent changeSlide={this.changeSlide} />
