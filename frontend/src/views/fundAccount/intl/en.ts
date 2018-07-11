@@ -3,6 +3,7 @@ export default {
     "fundAccount.akt": "akt",
     "fundAccount.aktBalance": "AKT balance",
     "fundAccount.cancel": `Cancel`,
+    "fundAccount.commitmentForRegularSavign": "Commitment for regular savign",
     "fundAccount.confirm": `Confirm`,
     "fundAccount.confirmContribution": "Confirm contribution",
     "fundAccount.downloadMetamaskDesktop": "Download Metamask (desktop)",
@@ -25,7 +26,6 @@ export default {
     "fundAccount.longerCommitmentsMeanMoreRewards": `Longer commitments mean more rewards. 
         If you break your commitment early you will forfeit any rewards accured.`,
     "fundAccount.makeCommitment": "Make commitment",
-    "fundAccount.makeCommitmentToSaving": "Make commitment to regular saving",
     "fundAccount.month": "Month",
     "fundAccount.obtainingFree": "Obtaining free {currency}",
     "fundAccount.quarter": "Quarter",

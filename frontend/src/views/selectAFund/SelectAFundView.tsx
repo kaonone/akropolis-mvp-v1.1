@@ -70,7 +70,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
             }
 
             const checkedProduct: Product = this.props.data.filter((product: Product) => {
-                return product.id === this.state.idOfcheckedProduct;
+                return product.id === this.state.idOfcheckedProduct;  
             })[0];
 
             if (!checkedProduct) {
@@ -100,7 +100,6 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
                         {initialContributionBtn()}
                     </div>
                 </div>
-
             </div>
         );
     }

@@ -1,5 +1,6 @@
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/_tools-elements-fund-account";
+@import "assets/styles/2_tools/tools-boxes";
 
 .c-obtaning-tokens {
 
@@ -7,10 +8,14 @@
 
     &__wrapper-options {
         text-align: center;
-    }
 
-    &__icon {
-        margin-bottom: $spacing-default * 3;
+        @include boxContent(true);
+        position: relative;
+        top: $spacing-default * 20;
+        margin-bottom: $padding-default;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     &__btn {

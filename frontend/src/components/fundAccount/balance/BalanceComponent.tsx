@@ -1,4 +1,5 @@
 /* tslint:disable:no-implicit-dependencies */
+import PiktoBg from "-!svg-react-loader?name=Icon!../../../assets/images/pikto-bg.svg";
 import CheckIcon from "-!svg-react-loader?name=moneyIcon!../../../assets/images/check-icon.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
@@ -31,7 +32,7 @@ export default class BalanceComponent extends React.Component<Props, State> {
         const { AKTBalance, ETHBalance } = this.props;
 
         return (
-            <div className="c-balance__wrapper-balances">
+            <div className="c-balance__wrapper">
                 {this.state.ETHBalanceChanged && (
                     <div className="c-balance__info-balance">
                         <CheckIcon className="c-balance__icon c-balance__icon-info" />
@@ -40,7 +41,6 @@ export default class BalanceComponent extends React.Component<Props, State> {
                 )}
                 <div className="c-balance__wrapper-balance">
                     <div className="c-balance__balance">{ETHBalance}
-                        <span className="c-balance__unit">eth</span>
                     </div>
                     <FormattedMessage id="fundAccount.ethBalance">
                         {(fundAccount: string) => <label className="c-balance__label">{fundAccount}</label>}
@@ -48,12 +48,12 @@ export default class BalanceComponent extends React.Component<Props, State> {
                 </div>
                 <div className="c-balance__wrapper-balance">
                     <div className="c-balance__balance">{AKTBalance}
-                        <span className="c-balance__unit">akt</span>
                     </div>
                     <FormattedMessage id="fundAccount.aktBalance">
                         {(aktBalance: string) => <label className="c-balance__label">{aktBalance}</label>}
                     </FormattedMessage>
                 </div>
+                <PiktoBg className="c-balance__pikto-bg"/>
             </div>
         );
     }

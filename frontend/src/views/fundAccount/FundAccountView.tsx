@@ -165,6 +165,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                         account={this.props.web3Accounts.accountSelected}
                         fetchAKTBalance={this.props.fetchAKTBalance} />
                 )}
+                
                 {(this.state.AKTBalance !== 0 && this.state.ETHBalance !== 0) && (
                     <>
                         {this.state.step === 1 ? (

@@ -16,10 +16,12 @@
     &[disabled],
     &--disabled {
         background-color: $color-grey-light;
+        border: 1px solid $color-grey-light;
         cursor: not-allowed;
 
         &:hover {
             opacity: unset;
+            color: $color-white;
         }
     }
 
