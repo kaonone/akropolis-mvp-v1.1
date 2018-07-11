@@ -1,4 +1,4 @@
-import { config } from "../config/config";
+import {config} from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
 import * as FundRegistry from "../contracts/FundRegistry.json";
@@ -11,10 +11,9 @@ export const fetchPortfolio = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
-
         const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
         portfolioData.user_allocation_size(account, (err: any, response: any) => {
             if (err) {
@@ -32,7 +31,7 @@ export const fetchATMBalance = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
@@ -54,7 +53,7 @@ export const fetchETHBalance = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
@@ -75,13 +74,13 @@ export const getFreeAKTToken = (account: string) => {
             reject("no-account");
         }
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
         const akropolisToken = web3.eth.contract(AKTFaucet.abi).at(config.deployment.AKTFaucet);
         executeGasPriced(account, reject, (gasPrice: any) => {
-            akropolisToken.emitAKT(account, { gasPrice }, (err: any, response: any) => {
+            akropolisToken.emitAKT(account, {gasPrice}, (err: any, response: any) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -99,7 +98,7 @@ export const approveTransfer = (account: string, AKT: number) => {
             reject("no-account");
         }
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
         const wei = web3.toWei(AKT, "ether");
 
         web3.eth.defaultAccount = account;
@@ -109,7 +108,7 @@ export const approveTransfer = (account: string, AKT: number) => {
             akropolisToken.approve(
                 config.deployment.PortfolioFunctional,
                 wei,
-                { gasPrice },
+                {gasPrice},
                 (err: any, response: any) => {
                     if (err) {
                         reject(err);
@@ -124,7 +123,7 @@ export const approveTransfer = (account: string, AKT: number) => {
 
 function executeGasPriced(account: string, reject: any, resolve: any) {
     // @ts-ignore
-    const { web3 } = window;
+    const {web3} = window;
     web3.eth.defaultAccount = account;
     web3.eth.getGasPrice((error: any, gasPrice: any) => {
         if (error) {
@@ -142,7 +141,7 @@ export const createCommitment = (account: string, data: any) => {
         }
 
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
@@ -168,23 +167,23 @@ export const createCommitment = (account: string, data: any) => {
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
 
         executeGasPriced(account, reject, (gasPrice: any) => {
-            portfolioFunctional.createNewUserPortfolio(
-                [100],
-                [eth],
-                [data.fundAddress],
-                period,
-                eth,
-                data.years,
-                akt,
-                { value: eth, gasPrice },
-                (err: any, response: any) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(response);
-                    }
-                });
-        }
+                portfolioFunctional.createNewUserPortfolio(
+                    [100],
+                    [eth],
+                    [data.fundAddress],
+                    period,
+                    eth,
+                    data.years,
+                    akt,
+                    {value: eth, gasPrice},
+                    (err: any, response: any) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(response);
+                        }
+                    });
+            }
         );
     });
 };
@@ -196,7 +195,7 @@ export const getCommitment = (account: string) => {
         }
 
         // @ts-ignore
-        const { web3 } = window;
+        const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
@@ -299,4 +298,29 @@ export const numberWithSpaces = (value: number | undefined): string => {
     }
 
     return partBeforeComa + partAfterComa;
+};
+
+export const removeCommitment = (account: string) => {
+    return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
+        // @ts-ignore
+        const {web3} = window;
+
+        web3.eth.defaultAccount = account;
+        const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
+        executeGasPriced(account, reject, (gasPrice: any) => {
+            portfolioFunctional.deleteUserPortfolio(
+                {gas: 400000, gasPrice},
+                (err: any, response: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        console.warn(response);
+                        resolve(response);
+                    }
+                });
+        });
+    });
 };

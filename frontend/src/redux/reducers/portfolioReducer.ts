@@ -1,7 +1,7 @@
 import * as constants from "../../constants/actions/index";
-import { PrepareCommitment } from "../../models/Commitment";
-import { Action, ActionType } from "../actions/action";
-import { PortfolioStore } from "../store/portfolioStore";
+import {PrepareCommitment} from "../../models/Commitment";
+import {Action, ActionType} from "../actions/action";
+import {PortfolioStore} from "../store/portfolioStore";
 
 const initialState: PortfolioStore = {
     commitment: {

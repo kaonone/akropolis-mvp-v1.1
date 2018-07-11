@@ -7,8 +7,10 @@ import "zeppelin-solidity/contracts/math/SafeMath.sol";
 contract PortfolioData is Ownable, Portfolio {
     using SafeMath for uint256;
     event CreatedCommitment(address indexed userAccount, Commitment valueSet, address indexed authorisingAccount);
+    event DeletedCommitment(address indexed userAccount, address indexed authorisingAccount);
 
     event CreatedAllocation(address indexed userAccount, Allocation[] valueSet, address indexed authorisingAccount);
+    event DeletedAllocation(address indexed userAccount, address indexed authorisingAccount);
 
     mapping(address => Allocation[]) public user_allocations;
     mapping(address => uint) public user_allocation_size;
@@ -39,6 +41,19 @@ contract PortfolioData is Ownable, Portfolio {
         }
         require(sumOfPercent == 100);
         emit CreatedAllocation(_userAddress, array, msg.sender);
+    }
+
+    function deleteUserAllocation(address _userAddress) public onlyOwner {
+        require(user_allocation_size[_userAddress] > 0, "No user allocation found");
+        delete user_allocation_size[_userAddress];
+        delete user_allocations[_userAddress];
+        emit DeletedAllocation(_userAddress, msg.sender);
+    }
+
+    function deleteUserCommitment(address _userAddress) public onlyOwner {
+        require(user_commitment[_userAddress].createdAt > 0, "No user commitment found");
+        delete user_commitment[_userAddress];
+        emit DeletedCommitment(_userAddress, msg.sender);
     }
 
 }

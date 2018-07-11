@@ -16,20 +16,28 @@ contract FundData is Ownable {
     function createNewBalance(address _userAddress, uint _balance) public onlyOwner {
         users_balances[_userAddress] = _balance;
 
-        emit Created(_userAddress, _balance, tx.origin);
+        emit Created(_userAddress, _balance, _userAddress);
     }
 
-    function updateBalance(address _userAddress, uint _balanceChange) public onlyOwner {
+    function addBalance(address _userAddress, uint _balanceChange) public onlyOwner {
         uint balance = users_balances[_userAddress];
         uint total = SafeMath.add(balance, _balanceChange);
-        users_balances[_userAddress] = balance;
+        users_balances[_userAddress] = total;
 
-        emit Updated(_userAddress, total, tx.origin);
+        emit Updated(_userAddress, total, _userAddress);
+    }
+
+    function subtractBalance(address _userAddress, uint _balanceChange) public onlyOwner {
+        uint balance = users_balances[_userAddress];
+        uint total = SafeMath.sub(balance, _balanceChange);
+        users_balances[_userAddress] = total;
+
+        emit Updated(_userAddress, total, _userAddress);
     }
 
     function deleteBalance(address _userAddress) public onlyOwner {
         delete users_balances[_userAddress];
-        emit Deleted(_userAddress, tx.origin);
+        emit Deleted(_userAddress, _userAddress);
     }
 }
 

@@ -25,7 +25,7 @@ const ErrorWeb3: any = (account: Web3AccountsStore, network: Web3NetworkStore) =
     }
 
     if (!failed && config.network && !isCorrectNetwork(network, config.network)) {
-        error = <ErrorNetwork />;
+        error = <ErrorNetwork/>;
     }
 
     return error;
