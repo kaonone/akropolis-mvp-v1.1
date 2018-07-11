@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/web3": "1.0.0",
     "@types/chart.js": "2.7.27",
+    "@types/web3": "1.0.0",
     "bignumber": "1.1.0",
     "chart.js": "2.7.2",
+    "moment": "2.22.2",
     "react": "16.4.1",
     "react-chartjs-2": "2.7.2",
     "react-dom": "16.4.1",
