@@ -12,6 +12,16 @@
     display: flex;
     flex-direction: column;
 
+    &--fullpage {
+        max-width: 100%;
+        min-height: 100vh;
+        margin-left: 0;
+        margin-right: 0;
+        padding-bottom: 0;
+        background: $gradient-default;
+        overflow: hidden;
+    }
+
     &__box-content {
 
         @include boxContent(true);
@@ -79,13 +89,44 @@
     }
 
     &__btn {
-        margin: ($spacing-default * 3) auto 0;
+        margin: ($spacing-default * 2) auto 0;
         width: 100%;
         display: block;
         text-align: center;
 
         @include mq($from: tablet) {
             width: $spacing-default * 20;
+        }
+
+        #{$c}__s1 & {
+            min-width: 320px;
+
+            @include mq($until: tablet) {
+                min-width: 0;
+                padding-left: $spacing-default;
+                padding-right: $spacing-default;
+            }
+        }
+    }
+
+    &__btn-blue {
+        cursor: default;
+    }
+
+    &__btn-blue-1 {
+
+        #{$c}__btn-blue:hover & {
+            display: none;
+        }
+    }
+
+    &__btn-blue-2 {
+
+        #{$c}__btn-blue & {
+            display: none;
+        }
+        #{$c}__btn-blue:hover & {
+            display: inline;
         }
     }
 
@@ -250,5 +291,52 @@
             opacity: 0;
             transform: translateY(0);
         }
+    }
+
+    &__s1 {
+        margin: 0 auto;
+        text-align: center;
+        padding: $spacing-default * 3;
+    }
+
+    &__s1-logo {
+        position: relative;
+        margin-bottom: $spacing-default * 5;
+    }
+
+    &__s1-logo-svg {
+        width: $spacing-default * 8;
+        z-index: 2;
+    }
+
+    &__s1-logo-bg {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, calc(-50% - 20px));
+        opacity: .15;
+        z-index: 1;
+    }
+
+    &__s1-section {
+        color: $color-white;
+        margin-bottom: $spacing-default * 3;
+
+        &:last-of-type {
+            margin-bottom: $spacing-default * 6;
+        }
+    }
+
+    &__s1-section-title {
+        font-size: 16px;
+    }
+
+    &__s1-section-desc {
+        font-size: 12px;
+        max-width: 250px;
+        margin: 0 auto;
+        opacity: .5;
     }
 }

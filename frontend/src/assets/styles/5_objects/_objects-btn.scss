@@ -3,6 +3,7 @@
     @include btn;
     background-color: $color-secondary;
     font-size: $font-size-base;
+    font-weight: bold;
     padding: $spacing-default * 15/10 $spacing-default * 4 $spacing-default * 14/10;
     border: 1px solid $color-secondary;
     width: fit-content;
@@ -44,5 +45,15 @@
         width: 14px;
         height: 14px;
         margin-right: $spacing-default;
+    }
+
+    &--blue {
+        background-color: $color-blue;
+        border: 1px solid $color-blue;
+
+        &:hover {
+            color: $color-white;
+            background-color: $color-blue;
+        }
     }
 }
