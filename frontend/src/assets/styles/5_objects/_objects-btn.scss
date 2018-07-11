@@ -7,6 +7,7 @@
     border: 1px solid $color-secondary;
     width: fit-content;
     text-transform: uppercase;
+    cursor: pointer;
 
     &:hover {
         color: $color-secondary;
@@ -26,6 +27,17 @@
     &--wide {
         padding-left: $spacing-default * 8;
         padding-right: $spacing-default * 8;
+    }
+
+    &--basic {
+        background-color: transparent;
+        color: $color-grey;
+        border: unset;
+        font-size: $font-size-h4;
+    }
+
+    &--cancel {
+        opacity: 0.5;
     }
 
     > svg {
