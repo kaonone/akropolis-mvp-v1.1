@@ -15,6 +15,10 @@ export type ActionType =
     constants.FETCH_PORTFOLIO |
     constants.FETCH_PORTFOLIO_FULFILLED |
     constants.FETCH_PORTFOLIO_REJECTED |
+    constants.FETCH_COMMITMENT |
+    constants.FETCH_COMMITMENT_FULFILLED |
+    constants.FETCH_COMMITMENT_REJECTED |
+    constants.FETCH_COMMITMENT_PENDING |
     constants.FETCH_ACCOUNT |
     constants.FETCH_ACCOUNT_FULFILLED |
     constants.SELECT_PRODUCT |

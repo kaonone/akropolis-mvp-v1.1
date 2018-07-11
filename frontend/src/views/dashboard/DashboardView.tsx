@@ -1,7 +1,10 @@
 import * as React from "react";
-import { Line } from "react-chartjs-2";
+
 import { FormattedMessage } from "react-intl";
 import { Redirect } from "react-router";
+
+import DashboardChartComponent from "../../components/dashboard/dashboardChart/DashboardChartComponent";
+import LoaderComponent from "../../components/loader/LoaderComponent";
 
 import { PortfolioStore } from "../../redux/store/portfolioStore";
 
@@ -15,10 +18,11 @@ export interface Props {
 }
 
 export interface PropsFromDispatch {
-    fetchDashboardData: (account: string) => void;
+    fetchCommitment: (account: string) => void;
 }
 
-interface AllProps extends Props, PropsFromDispatch {}
+interface AllProps extends Props, PropsFromDispatch {
+}
 
 export default class DashboardView extends React.Component<AllProps, any> {
 
@@ -26,37 +30,45 @@ export default class DashboardView extends React.Component<AllProps, any> {
         super(props);
     }
 
+    public componentWillMount() {
+        if (this.props.account) {
+            console.warn("MOUNT");
+            this.props.fetchCommitment(this.props.account);
+        }
+    }
+
+    public componentWillReceiveProps(nextProps: Props) {
+        if (this.props.account !== nextProps.account) {
+            this.props.fetchCommitment(nextProps.account);
+        }
+    }
+
     public render() {
 
-        const data = {
-            datasets: [{
-                backgroundColor: [
-                    "rgba(0, 0, 0, 0.2)",
-                ],
-                borderColor: [
-                    "rgba(0, 0, 0, 1)",
-                ],
-                borderWidth: 1,
-                data: [52, 76],
-                label: "% of gains",
-            }],
-            labels: ["commitment start", "commitment end"]
-        };
+        if (this.props.portfolio.commitmentFetching) {
+            return (
+                <div className="v-dashboard ">
+                    <LoaderComponent/>
+                </div>
+            );
+        }
 
         if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist || localStorage.getItem(this.props.account)) {
             return (
                 <div className="v-dashboard">
                     <div className="v-dashboard__wrapper-next-contribution-details">
                         <div className="v-dashboard__next-contribution-details">
-                            <FormattedMessage id="dashboard.myNextContributionDetails" />, 25 July 2018
+                            <FormattedMessage id="dashboard.myNextContributionDetails"/>, 25 July 2018
                         </div>
-                        <button className="o-btn"><FormattedMessage id="dashboard.topUpYourPension" /></button>
+                        <button className="o-btn"><FormattedMessage id="dashboard.topUpYourPension"/></button>
                     </div>
-                    <FormattedMessage id="dashboard.graphOfProjectedPortfolioPerformance" />
-                    <Line data={data} />
-                    <h3><FormattedMessage id="dashboard.notifications" /></h3>
+                    <FormattedMessage id="dashboard.graphOfProjectedPortfolioPerformance"/>
+                    {this.props.portfolio.commitmentFetched && (
+                        <DashboardChartComponent commitment={this.props.portfolio.commitment}/>
+                    )}
+                    <h3><FormattedMessage id="dashboard.notifications"/></h3>
                     <div>
-                        <h4>Fund manager update:  July 2018</h4>
+                        <h4>Fund manager update: July 2018</h4>
                         <div>Today</div>
                     </div>
                     <div>
@@ -66,7 +78,7 @@ export default class DashboardView extends React.Component<AllProps, any> {
                 </div>
             );
         } else if (this.props.portfolio.portfolioFetched && !this.props.portfolio.portfolioExist) {
-            return <Redirect to={`/${NAVIGATION.selectAFund}`} />;
+            return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
         } else {
             return null;
         }
