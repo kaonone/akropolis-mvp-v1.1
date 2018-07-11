@@ -17,6 +17,7 @@ contract('PortfolioFunctional', function ([owner, holder, other]) {
     beforeEach(async function () {
         token = await AkropolisToken.new();
         await token.mint(holder, 100);
+        await token.mint(other, 100);
         fundData = await FundData.new();
         fundFunctional = await FundFunctional.new(fundData.address, "Test Fund");
         await fundData.transferOwnership(fundFunctional.address);
@@ -39,6 +40,7 @@ contract('PortfolioFunctional', function ([owner, holder, other]) {
         expect(commitment[2]).to.equal(toBN(20));
         expect(await web3.eth.getBalance(portfolioFunctional.address)).to.equal(toBN(100));
         expect(await token.balanceOf(holder)).to.equal(toBN(0));
+        expect(await token.balanceOf(portfolioFunctional.address)).to.equal(toBN(100));
     });
 
     it('should create a portfolio for a user with 0 stake', async function () {
@@ -58,6 +60,30 @@ contract('PortfolioFunctional', function ([owner, holder, other]) {
             from: owner,
             value: 100
         }));
+    });
+
+    it('should delete a portfolio with stake', async function () {
+        await token.approve(portfolioFunctional.address, 100, {from: other});
+        let startingETHBalance = await web3.eth.getBalance(other);
+        let twoEth = web3.toWei(2, "ether");
+        let eightEth = web3.toWei(8, "ether");
+        let tenEth = web3.toWei(10, "ether");
+        await portfolioFunctional.createNewUserPortfolio([20, 80], [twoEth, eightEth], [fundAddress, fundAddress], 0, tenEth, 20, 100, {
+            from: other,
+            value: tenEth
+        });
+        await portfolioFunctional.deleteUserPortfolio({from: other});
+        let size = await portfolioData.user_allocation_size(other);
+        expect(size).to.equal(toBN(0));
+        let commitment = await portfolioData.user_commitment(other);
+        expect(commitment[4]).to.equal(toBN(0));
+        expect(await web3.eth.getBalance(portfolioFunctional.address)).to.equal(toBN(0));
+        let afterDeletionBalance = await web3.eth.getBalance(other);
+        let diff = web3.fromWei(startingETHBalance.toNumber() - afterDeletionBalance.toNumber(), "ether");
+        expect(Math.abs(diff)).to.be.below(0.1);
+        expect(await portfolioData.user_allocation_size(other)).to.equal(toBN(0));
+        expect(await token.balanceOf(other)).to.equal(toBN(0));
+        expect(await token.balanceOf(portfolioFunctional.address)).to.equal(toBN(100));
     });
 
 });

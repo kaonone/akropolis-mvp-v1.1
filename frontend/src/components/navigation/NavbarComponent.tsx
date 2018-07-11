@@ -5,12 +5,15 @@ import AKTBalance from "../../wrappers/ATKBalanceWrapper";
 import ModalGlobalComponent from "../modalGlobal/ModalGlobalComponent";
 
 import {NAVIGATION} from "../../constants";
+import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
+import {removeCommitment} from "../../services/DataService";
 
 import "./c-navbar.css";
 
 interface Props {
     isPortfolio: boolean;
     message?: string;
+    web3Accounts: Web3AccountsStore;
 }
 
 interface State {
@@ -30,6 +33,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
 
         this.toggleModal = this.toggleModal.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+        this.deleteData = this.deleteData.bind(this);
     }
 
     public componentDidMount() {
@@ -39,12 +43,12 @@ export default class NavbarComponent extends React.Component<Props, State> {
     public render() {
         const deleteModal = (
             <div className="c-confirmation-modal__box">
-                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc" /></h3>
+                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc"/></h3>
                 <div className="c-confirmation-modal__btns">
-                    <button className="o-btn o-btn--basic o-btn--cancel" onClick={this.deleteData}>
+                    <button className="o-btn o-btn--basic o-btn--cancel" onClick={this.toggleDeleteModal}>
                         <FormattedMessage id="fundAccount.cancel"/>
                     </button>
-                    <button onClick={this.toggleDeleteModal}
+                    <button onClick={this.deleteData}
                             className="o-btn o-btn--basic">
                         <FormattedMessage id="fundAccount.confirm"/>
                     </button>
@@ -54,7 +58,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
 
         const infoModal = (
             <div className="c-confirmation-modal__box">
-                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.noPortfolioYet" /></h3>
+                <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.noPortfolioYet"/></h3>
                 <div className="c-confirmation-modal__btns">
                     <button onClick={this.toggleModal} className="o-btn o-btn--basic">
                         <FormattedMessage id="nav.ok"/>
@@ -134,7 +138,14 @@ export default class NavbarComponent extends React.Component<Props, State> {
     }
 
     private deleteData() {
-        localStorage.clear();
-        window.location.reload();
+        console.log("delete?");
+        removeCommitment(this.props.web3Accounts.accountSelected)
+            .then(() => {
+                localStorage.clear();
+                window.location.reload();
+            })
+            .catch((err) => {
+                this.toggleDeleteModal();
+            });
     }
 }

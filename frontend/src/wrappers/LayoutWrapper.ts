@@ -13,6 +13,7 @@ export function mapStateToProps({portfolio, userData, web3Accounts}: Application
         account: web3Accounts.accountSelected,
         isPortfolio: portfolio.portfolioFetched && portfolio.portfolioExist,
         userData,
+        web3Accounts
     };
 }
 

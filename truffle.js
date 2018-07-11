@@ -36,8 +36,8 @@ module.exports = {
         },
         // ropsten: {
         //     provider: function () {
-        //         return new PrivateKeyProvider("<privKey>",
-        //             "https://ropsten.infura.io/<token>")
+        //         return new PrivateKeyProvider("<>",
+        //             "https://ropsten.infura.io/<>")
         //     },
         //     network_id: 3,
         //     gas: 4612388

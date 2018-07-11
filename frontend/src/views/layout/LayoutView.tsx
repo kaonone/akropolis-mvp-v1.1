@@ -13,11 +13,13 @@ import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 
 import {PlanAfterCalculate} from "../../models/Onboarding";
+import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
 
 export interface Props {
     account: string;
     isPortfolio: boolean;
     userData: PlanAfterCalculate;
+    web3Accounts: Web3AccountsStore;
 }
 
 export interface PropsFromDispatch {
@@ -73,7 +75,8 @@ export default class LayoutView extends React.Component<AllProps, State> {
         } else {
             content = (
                 <div>
-                    <NavbarComponent isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null}/>
+                    <NavbarComponent web3Accounts={this.props.web3Accounts}
+                                     isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null}/>
                     <Route
                         exact={true}
                         path={`/${NAVIGATION.dashboard}`}
