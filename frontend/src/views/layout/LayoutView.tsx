@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Route} from "react-router-dom";
+import { Route } from "react-router-dom";
 
-import {NAVIGATION} from "../../constants";
-import {Product} from "../../models/Products";
+import { NAVIGATION } from "../../constants";
+import { Product } from "../../models/Products";
 
 import NavbarComponent from "../../components/navigation/NavbarComponent";
 import Web3Provider from "../../components/web3/Web3ProviderComponent";
@@ -12,8 +12,9 @@ import FundAccountWrapper from "../../wrappers/FundAccountWrapper";
 import OnboardingWrapper from "../../wrappers/OnboardingWrapper";
 import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 
-import {PlanAfterCalculate} from "../../models/Onboarding";
-import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
+import NavigationWrapperComponent from "../../components/navigationWrapper/NavigationWrapperComponent";
+import { PlanAfterCalculate } from "../../models/Onboarding";
+import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
 
 export interface Props {
     account: string;
@@ -67,12 +68,14 @@ export default class LayoutView extends React.Component<AllProps, State> {
     public render() {
         let content = null;
         if (!this.state.isLogin) {
-            content = <OnboardingWrapper/>;
+            content = <OnboardingWrapper />;
         } else {
             content = (
                 <div>
-                    <NavbarComponent web3Accounts={this.props.web3Accounts}
-                                     isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null}/>
+                    <NavigationWrapperComponent>
+                        <NavbarComponent web3Accounts={this.props.web3Accounts}
+                            isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null} />
+                    </NavigationWrapperComponent>
                     <Route
                         exact={true}
                         path={`/${NAVIGATION.dashboard}`}
@@ -92,7 +95,7 @@ export default class LayoutView extends React.Component<AllProps, State> {
 
         return (
             <div>
-                <Web3Provider/>
+                <Web3Provider />
                 {content}
             </div>
         );
