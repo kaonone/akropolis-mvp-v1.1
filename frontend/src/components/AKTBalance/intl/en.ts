@@ -1,3 +1,3 @@
 export default {
-    "AKTBalance.desc": "AKT balance, {balance} AKT",
+    "AKTBalance.desc": "AKT Balance: {balance} AKT",
 };

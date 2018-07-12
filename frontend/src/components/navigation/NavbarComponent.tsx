@@ -89,9 +89,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
                             </span>
                         </li>
                         <li className="c-navbar__item">
-                            <span className="c-navbar__link">
-                                <AKTBalance />
-                            </span>
+                            <AKTBalance />
                         </li>
                     </ul>
                 </header>

@@ -57,7 +57,8 @@ export default class LayoutView extends React.Component<AllProps, State> {
 
     public componentWillReceiveProps(nextProps: Props) {
         if (this.props.userData.pensionValue !== nextProps.userData.pensionValue
-            || this.props.userData.moreSavingsNeeded !== nextProps.userData.moreSavingsNeeded) {
+            || this.props.userData.moreSavingsNeeded !== nextProps.userData.moreSavingsNeeded
+            || this.props.isPortfolio) {
             this.setState({
                 ...this.state,
                 isLogin: true,
@@ -74,7 +75,7 @@ export default class LayoutView extends React.Component<AllProps, State> {
                 <div>
                     <NavigationWrapperComponent>
                         <NavbarComponent web3Accounts={this.props.web3Accounts}
-                            isPortfolio={this.props.isPortfolio || localStorage.getItem(this.props.account) !== null} />
+                            isPortfolio={this.props.isPortfolio} />
                     </NavigationWrapperComponent>
                     <Route
                         exact={true}

@@ -24,7 +24,8 @@ export interface Props {
 }
 
 export interface PropsFromDispatch {
-    fetchCommitment: (account: string) => void;
+    commitmentCreatedAction: (commitment: any) => void;
+    fetchCommitmentAction: (account: string) => void;
 }
 
 interface AllProps extends Props, PropsFromDispatch {
@@ -37,10 +38,6 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public componentWillMount() {
-        if (this.props.account && this.props.portfolio.portfolioExist) {
-            this.props.fetchCommitment(this.props.account);
-        }
-
         const bodyElement = document.querySelector("body");
         if (!bodyElement) {
             return;
@@ -49,12 +46,17 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public shouldComponentUpdate(nextProps: Props, nextState: any) {
-        return !_.isEqual(nextProps, this.props) || !_.isEqual(nextState, this.state);
+        return !_.isEqual(nextProps.portfolio, this.props.portfolio) || this.props.account !== nextProps.account;
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        if (this.accountChangedOrPortfolioWasCreated(this.props, nextProps)) {
-            this.props.fetchCommitment(nextProps.account);
+        const storedCommitment = localStorage.getItem(nextProps.account);
+        if ((this.props.account !== nextProps.account) && storedCommitment && !this.props.portfolio.portfolioExist) {
+            const commitment: any = JSON.parse(storedCommitment ? storedCommitment : "{}");
+            this.props.commitmentCreatedAction(commitment);
+        } else if (nextProps.account && nextProps.portfolio.portfolioExist && !nextProps.portfolio.commitmentFetching
+            && !nextProps.portfolio.commitmentFetched) {
+            this.props.fetchCommitmentAction(nextProps.account);
         }
     }
 
@@ -77,7 +79,7 @@ export default class DashboardView extends React.Component<AllProps, any> {
             );
         }
 
-        if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist || localStorage.getItem(this.props.account)) {
+        if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist) {
             return (
                 <div className="v-dashboard">
 
@@ -132,14 +134,7 @@ export default class DashboardView extends React.Component<AllProps, any> {
         }
     }
 
-    private accountChangedOrPortfolioWasCreated(props: Props, nextProps: Props) {
-        return props.account !== nextProps.account
-            || (props.portfolio.portfolioExist !== nextProps.portfolio.portfolioExist
-                && nextProps.portfolio.portfolioExist);
-    }
-
     private waitingForCommitmentOrPortfolioCreate() {
-        return this.props.portfolio.commitmentFetching && this.props.portfolio.portfolioExist
-            || localStorage.getItem(this.props.account) && !this.props.portfolio.portfolioExist;
+        return this.props.portfolio.commitmentFetching;
     }
 }

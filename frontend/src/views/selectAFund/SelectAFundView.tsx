@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProductRowComponent from "../../components/productRowComponent/ProductRowComponent";
 import { Product } from "../../models/Products";
 
@@ -50,10 +50,6 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
     }
 
     public render() {
-        if (this.props.isPortfolio || localStorage.getItem(this.props.account)) {
-            return <Redirect to={`/${NAVIGATION.dashboard}`} />;
-        }
-
         const listOfProducts = this.props.data.map((product: Product, index: number) => {
             return (
                 <ProductRowComponent

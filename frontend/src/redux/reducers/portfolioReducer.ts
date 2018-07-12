@@ -39,12 +39,13 @@ export default function reducer(state: PortfolioStore = initialState, action: Ac
         case constants.FETCH_COMMITMENT_PENDING:
             return {
                 ...state,
+                commitmentFetched: false,
                 commitmentFetching: true,
             };
         case constants.FETCH_COMMITMENT_REJECTED:
             return {
                 ...state,
-                commitmentFetched: false,
+                commitmentFetched: true,
                 commitmentFetching: false,
             };
         case constants.FETCH_COMMITMENT_FULFILLED:
@@ -54,6 +55,15 @@ export default function reducer(state: PortfolioStore = initialState, action: Ac
                 commitment,
                 commitmentFetched: true,
                 commitmentFetching: false,
+            };
+        case constants.COMMITMENT_CREATED:
+            return {
+                ...state,
+                commitment: action.payload,
+                commitmentFetched: true,
+                commitmentFetching: false,
+                portfolioExist: true,
+                portfolioFetched: true,
             };
         default:
             return state;
