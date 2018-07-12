@@ -35,7 +35,7 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
 
                     <div className="c-confirmation-modal__wrapper-item-value">
                         <span className="c-confirmation-modal__label">
-                            <FormattedMessage id="fundAccount.every" />
+                            <FormattedMessage id="fundAccount.amount" />
                         </span>
                         <span className="c-confirmation-modal__value">
                             {rangeEth}
@@ -59,7 +59,7 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                         <span className="c-confirmation-modal__value">
                             {years}
                             <span className="c-confirmation-modal__unit">
-                                <FormattedMessage id="fundAccount.years" />
+                                <FormattedMessage id="fundAccount.years" values={{years}} />
                             </span>
                         </span>
                     </div>
