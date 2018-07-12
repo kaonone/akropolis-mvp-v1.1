@@ -89,7 +89,7 @@ export default class ObtaningTokensComponent extends React.Component<Props, Stat
             return (
                 <div className="c-obtaning-tokens__wrapper-description">
                     {obtainFreeTokensForTest()}
-                    <a href="http://faucet.ropsten.be:3001/" target="_blank" className="o-btn c-obtaning-tokens__btn">
+                    <a href="https://faucet.metamask.io/" target="_blank" className="o-btn c-obtaning-tokens__btn">
                         <FormattedMessage id="fundAccount.goToEthFaucet" values={{ currency }} />
                     </a>
                 </div>
