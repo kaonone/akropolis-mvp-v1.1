@@ -6,10 +6,11 @@ import { Redirect } from "react-router";
 import DashboardChartComponent from "../../components/dashboard/dashboardChart/DashboardChartComponent";
 import LoaderComponent from "../../components/loader/LoaderComponent";
 
+import { getNextContributionDate } from "../../services/DashboardService";
+
 import { PortfolioStore } from "../../redux/store/portfolioStore";
 
 import { NAVIGATION } from "../../constants";
-import {getNextContributionDate} from "../../services/DashboardService";
 
 import "./v-dashboard.css";
 
@@ -32,23 +33,27 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public componentWillMount() {
-        if (this.props.account) {
+        if (this.props.account && this.props.portfolio.portfolioExist) {
             this.props.fetchCommitment(this.props.account);
         }
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        if (this.props.account !== nextProps.account) {
+        if (this.props.account !== nextProps.account
+            || (this.props.portfolio.portfolioExist !== nextProps.portfolio.portfolioExist
+                && nextProps.portfolio.portfolioExist)) {
             this.props.fetchCommitment(nextProps.account);
         }
     }
 
     public render() {
 
-        if (this.props.portfolio.commitmentFetching) {
+        if (this.props.portfolio.commitmentFetching && this.props.portfolio.portfolioExist
+            || localStorage.getItem(this.props.account) && !this.props.portfolio.portfolioExist) {
             return (
                 <div className="v-dashboard ">
                     <LoaderComponent/>
+                    <p className="v-dashboard__loading"><FormattedMessage id="dashboard.waitingForData"/></p>
                 </div>
             );
         }

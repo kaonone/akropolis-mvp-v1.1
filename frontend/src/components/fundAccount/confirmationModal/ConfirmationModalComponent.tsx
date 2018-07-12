@@ -1,6 +1,6 @@
 /* tslint:disable:no-implicit-dependencies */
 import PiktoBg from "-!svg-react-loader?name=Icon!../../../assets/images/pikto-bg.svg";
-import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../../assets/images/spin-black.svg";
+import SpinnerWhite from "-!svg-react-loader?name=moneyIcon!../../../assets/images/spin-white.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -69,7 +69,7 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                 </span>
                 <PiktoBg className="c-confirmation-modal__pikto-bg" />
                 {this.props.isWaiting ? (
-                    <div className="c-confirmation-modal__spinner"><SpinnerBlack /></div>
+                    <div className="c-confirmation-modal__spinner"><SpinnerWhite /></div>
                 ) : (
                         <div className="c-confirmation-modal__btns">
                             <FormattedMessage id="fundAccount.cancel">{
