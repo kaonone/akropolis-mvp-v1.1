@@ -1,13 +1,13 @@
+@import "assets/styles/2_tools/tools-mq";
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/_tools-elements-fund-account";
+@import "assets/styles/2_tools/tools-paddings";
 
 .c-balance {
-
     @include elementsFundAccount;
 
     &__wrapper {
-        display: flex;
-        padding: $spacing-default * 3 $spacing-default * 2 0;
+        padding: ($spacing-default * 3) ($spacing-default * 2) 0;
         margin-bottom: $spacing-default * 3;
         background-color: $color-primary;
         color: $color-white;
@@ -16,11 +16,17 @@
         right: 0;
         top: 0;
         height: $spacing-default * 39;
+    }
+
+    &__wrapper-content {
+        @include globalPadding;
+
         justify-content: space-around;
+        display: flex;
     }
 
     &__headline {
-        margin: 0 auto $spacing-default * 2/10;
+        margin: 0 auto ($spacing-default * 2 / 10);
         color: $color-grey;
         font-weight: $font-medium;
         text-align: center;
@@ -40,27 +46,5 @@
         left: 0;
         opacity: 0.1;
         width: 100%;
-    }
-
-    @for $i from 0 through 3 {
-
-        #Polygon#{$i} {
-            opacity: 0;
-            animation: bgAnimation 4s 200ms * $i ease-out infinite;
-        }
-    }
-
-    @keyframes bgAnimation {
-        0% {
-            opacity: 0;
-            transform: translateY($spacing-default * 40);
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-            transform: translateY(0);
-        }
     }
 }

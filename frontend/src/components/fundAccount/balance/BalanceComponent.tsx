@@ -34,27 +34,29 @@ export default class BalanceComponent extends React.Component<Props, State> {
         return (
             <>
                 <div className="c-balance__wrapper">
-                    {this.state.ETHBalanceChanged && (
-                        <div className="c-balance__info-balance">
-                            <CheckIcon className="c-balance__icon c-balance__icon-info" />
-                            {ETHBalance}<FormattedMessage id="fundAccount.ethObtainedForTest" />
+                    <div className="c-balance__wrapper-content">
+                        {this.state.ETHBalanceChanged && (
+                            <div className="c-balance__info-balance">
+                                <CheckIcon className="c-balance__icon c-balance__icon-info" />
+                                {ETHBalance}<FormattedMessage id="fundAccount.ethObtainedForTest" />
+                            </div>
+                        )}
+                        <div className="c-balance__wrapper-balance">
+                            <div className="c-balance__balance">{ETHBalance}
+                            </div>
+                            <FormattedMessage id="fundAccount.ethBalance">
+                                {(fundAccount: string) => <label className="c-balance__label">{fundAccount}</label>}
+                            </FormattedMessage>
                         </div>
-                    )}
-                    <div className="c-balance__wrapper-balance">
-                        <div className="c-balance__balance">{ETHBalance}
+                        <div className="c-balance__wrapper-balance">
+                            <div className="c-balance__balance">{AKTBalance}
+                            </div>
+                            <FormattedMessage id="fundAccount.aktBalance">
+                                {(aktBalance: string) => <label className="c-balance__label">{aktBalance}</label>}
+                            </FormattedMessage>
                         </div>
-                        <FormattedMessage id="fundAccount.ethBalance">
-                            {(fundAccount: string) => <label className="c-balance__label">{fundAccount}</label>}
-                        </FormattedMessage>
+                        <PiktoBg className="c-balance__pikto-bg" />
                     </div>
-                    <div className="c-balance__wrapper-balance">
-                        <div className="c-balance__balance">{AKTBalance}
-                        </div>
-                        <FormattedMessage id="fundAccount.aktBalance">
-                            {(aktBalance: string) => <label className="c-balance__label">{aktBalance}</label>}
-                        </FormattedMessage>
-                    </div>
-                    <PiktoBg className="c-balance__pikto-bg" />
                 </div>
             </>
         );
