@@ -39,17 +39,14 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        if (this.props.account !== nextProps.account
-            || (this.props.portfolio.portfolioExist !== nextProps.portfolio.portfolioExist
-                && nextProps.portfolio.portfolioExist)) {
+        if (this.accountChangedOrPortfolioWasCreated(this.props, nextProps)) {
             this.props.fetchCommitment(nextProps.account);
         }
     }
 
     public render() {
 
-        if (this.props.portfolio.commitmentFetching && this.props.portfolio.portfolioExist
-            || localStorage.getItem(this.props.account) && !this.props.portfolio.portfolioExist) {
+        if (this.waitingForCommitmentOrPortfolioCreate()) {
             return (
                 <div className="v-dashboard ">
                     <LoaderComponent/>
@@ -90,5 +87,16 @@ export default class DashboardView extends React.Component<AllProps, any> {
         } else {
             return null;
         }
+    }
+
+    private accountChangedOrPortfolioWasCreated(props: Props, nextProps: Props) {
+        return props.account !== nextProps.account
+            || (props.portfolio.portfolioExist !== nextProps.portfolio.portfolioExist
+                && nextProps.portfolio.portfolioExist);
+    }
+
+    private waitingForCommitmentOrPortfolioCreate() {
+        return this.props.portfolio.commitmentFetching && this.props.portfolio.portfolioExist
+            || localStorage.getItem(this.props.account) && !this.props.portfolio.portfolioExist;
     }
 }
