@@ -3,4 +3,5 @@ export default {
     "dashboard.myNextContributionDetails": "My next contribution details", 
     "dashboard.notifications": "Notifications", 
     "dashboard.topUpYourPension": "Top up your pension", 
+    "dashboard.waitingForData": "Waiting for data.",
 };

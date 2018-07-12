@@ -2,10 +2,11 @@ import * as React from "react";
 import {connect, Dispatch} from "react-redux";
 
 import {
-    fetchAccountAction, 
+    fetchAccountAction,
     fetchAKTBalanceAction,
     fetchETHBalanceAction,
-    fetchNetworkAction
+    fetchNetworkAction,
+    fetchPortfolioAction
 } from "../../redux/actions/web3Action";
 import {ApplicationStore} from "../../redux/store/store";
 import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
@@ -19,6 +20,7 @@ export interface PropsFromDispatch {
     fetchAKTBalance: (account: string) => void;
     fetchETHBalance: (account: string) => void;
     fetchNetwork: () => void;
+    fetchPortfolio: (account: string) => void;
 }
 
 interface AllProps extends Props, PropsFromDispatch {
@@ -37,6 +39,7 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
         super(props);
 
         this.fetchBalances = this.fetchBalances.bind(this);
+        this.fetchPortfolio = this.fetchPortfolio.bind(this);
     }
 
     public componentDidMount() {
@@ -48,7 +51,7 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
 
     public componentWillReceiveProps(nextProps: AllProps) {
         this.fetchBalances(nextProps.web3Accounts.accountSelected);
-
+        this.fetchPortfolio(nextProps.web3Accounts.accountSelected);
     }
 
     public componentWillUnmount() {
@@ -76,6 +79,10 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
         this.props.fetchAKTBalance(account);
         this.props.fetchETHBalance(account);
     }
+
+    private fetchPortfolio(account: string) {
+        this.props.fetchPortfolio(account);
+    }
 }
 
 function mapStateToProps({web3Accounts}: ApplicationStore) {
@@ -90,6 +97,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
         fetchAccount: () => dispatch(fetchAccountAction()),
         fetchETHBalance: (account: string) => dispatch(fetchETHBalanceAction(account)),
         fetchNetwork: () => dispatch(fetchNetworkAction()),
+        fetchPortfolio: (account: string) => dispatch(fetchPortfolioAction(account)),
     };
 }
 

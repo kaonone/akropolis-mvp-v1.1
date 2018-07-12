@@ -23,7 +23,6 @@ export interface Props {
 }
 
 export interface PropsFromDispatch {
-    fetchPortfolio: (account: string) => void;
     selectProduct: (product: Product) => void;
 }
 
@@ -62,9 +61,6 @@ export default class LayoutView extends React.Component<AllProps, State> {
                 ...this.state,
                 isLogin: true,
             });
-        }
-        if (this.props.account !== nextProps.account) {
-            this.props.fetchPortfolio(nextProps.account);
         }
     }
 

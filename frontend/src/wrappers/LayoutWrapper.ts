@@ -3,7 +3,6 @@ import { connect, Dispatch } from "react-redux";
 import { Product } from "../models/Products";
 
 import { selectProductAction } from "../redux/actions/selectAFundAction";
-import { fetchPortfolioAction } from "../redux/actions/web3Action";
 import { ApplicationStore } from "../redux/store/store";
 
 import { default as Component, Props, PropsFromDispatch } from "../views/layout/LayoutView";
@@ -19,7 +18,6 @@ export function mapStateToProps({portfolio, userData, web3Accounts}: Application
 
 export function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        fetchPortfolio: (account: string) => dispatch(fetchPortfolioAction(account)),
         selectProduct: (product: Product) => dispatch(selectProductAction(product)),
     };
 }

@@ -200,28 +200,38 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
     private handleOnClick = () => {
         const data = { ...this.state.stepOne, ...this.state.stepTwo, ...this.props.product };
+        this.setState({
+            ...this.state,
+            waiting: true,
+        });
         if (data.stakeAktValue > 0) {
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {
                 createCommitment(this.props.web3Accounts.accountSelected, data)
                     .then(() => {
                         this.handleSuccess();
                     })
-                    .catch((err) => console.error(err));
+                    .catch((err) => {
+                        this.setState({
+                            ...this.state,
+                            waiting: false,
+                        });
+                    });
             });
         } else {
             createCommitment(this.props.web3Accounts.accountSelected, data)
                 .then((response) => {
                     this.handleSuccess();
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    this.setState({
+                        ...this.state,
+                        waiting: false,
+                    });
+                });
         }
     }
 
     private handleSuccess() {
-        this.setState({
-            ...this.state,
-            waiting: true,
-        });
         const fn = () => {
             this.setState({
                 ...this.state,
