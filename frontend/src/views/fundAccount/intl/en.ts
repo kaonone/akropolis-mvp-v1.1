@@ -4,7 +4,7 @@ export default {
     "fundAccount.aktBalance": "AKT balance",
     "fundAccount.amount": "Amount",
     "fundAccount.cancel": `Cancel`,
-    "fundAccount.commitmentForRegularSavign": "Commitment for regular savign",
+    "fundAccount.commitmentForRegularSavign": "Commitment for regular saving",
     "fundAccount.confirm": `Confirm`,
     "fundAccount.confirmContribution": "Confirm contribution",
     "fundAccount.downloadMetamaskDesktop": "Download Metamask (desktop)",
@@ -21,15 +21,15 @@ export default {
         "Get discounts on fees, access to premium products and participate in our reward pool by staking AKT tokens.",
     "fundAccount.getFreeEth": "Get free",
     "fundAccount.goToEthFaucet": "Go to ETH faucet",
-    "fundAccount.iWillMakeARegularPaymentOf": "I will make a regular payment of",
+    "fundAccount.iWillMakeARegularPaymentOf": "Regular payment of",
     "fundAccount.incorrectNetwork": "Please switch to {network} network.",
     "fundAccount.longerCommitmentsMeanMoreRewards": `Longer commitments mean more rewards. 
     If you break your commitment early you will forfeit any rewards accured.`,
     "fundAccount.makeCommitment": "Make commitment",
-    "fundAccount.month": "Month",
+    "fundAccount.monthly": "Monthly",
     "fundAccount.obtainingFree": "Obtaining free {currency}",
     "fundAccount.period": "Period",
-    "fundAccount.quarter": "Quarter",
+    "fundAccount.quarterly": "Quarterly",
     "fundAccount.stakingTokensMeansThatTheyWillBeLockedUp": "Staking tokens means that they will be locked up for the duration of your commitment period.",
     "fundAccount.theFirstContributionOf": "The first contribution of",
     "fundAccount.thisWillTrigger_1Transaction": `
@@ -38,7 +38,7 @@ export default {
     "fundAccount.thisWillTrigger_2Transactions": `This will trigger 2 transactions. 
     The first will approve the transfer of the staked {stakeAKTValue} AKT. 
     The second will  transfer {eth} ETH as the initial contribution.`,
-    "fundAccount.week": "Week",
+    "fundAccount.weekly": "Weekly",
     "fundAccount.years": "years",
     "fundAccount.youAreMakingACommitmentToContribute": "You are making a commitment to contribute",
     "fundAccount.youWillNeedSomeTestEtherToFundYourAccount": `You will need some test ether to fund your account.`,
