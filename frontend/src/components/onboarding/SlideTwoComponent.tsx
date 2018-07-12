@@ -20,7 +20,7 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
 
     public readonly state: PlanValues = {
         ageAtRetirement: 65,
-        currentAge: 0,
+        currentAge: 30,
         desiredAnnualIncome: 15000,
         existingPension: 0,
         fees: 0.0105,
@@ -77,7 +77,7 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
                 <div className="v-onboarding__box-content">
                     <div className="v-onboarding__section">
                         <div className="v-onboarding__section-title">
-                            <FormattedMessage id="onboarding.myDesiredAnnualIncomeAfterRetirement" />
+                            <FormattedMessage id="onboarding.desiredAnnualIncomeAfterRetirement" />
                         </div>
                         <InputRange value={this.state.desiredAnnualIncome} max={200000} min={0} symbol="$"
                             onChange={this.handleRangeChange("desiredAnnualIncome")} />
@@ -86,16 +86,9 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
                         <div className="v-onboarding__section-title">
                             <FormattedMessage id="onboarding.valueOfMyExistingPensionPots" />
                         </div>
-                        <InputRange value={this.state.existingPension} max={2000000} min={0} symbol="$"
+                        <InputRange value={this.state.existingPension} max={1000000} min={0} symbol="$"
                             onChange={this.handleRangeChange("existingPension")} />
                     </div>
-                    {/*<div className="v-onboarding__section">*/}
-                    {/*<div className="v-onboarding__section-title">*/}
-                    {/*<FormattedMessage id="onboarding.howMuchIAmSavingPerMonth"/>*/}
-                    {/*</div>*/}
-                    {/*<InputRange value={this.state.savingPerMonth} max={20000} min={0} symbol="$"*/}
-                    {/*onChange={this.handleRangeChange("savingPerMonth")}/>*/}
-                    {/*</div>*/}
                     <div className="v-onboarding__wrapper-age-inputs">
                         <div className="v-onboarding__wrapper-age-input">
                             <FormattedMessage id="onboarding.enterAge">
