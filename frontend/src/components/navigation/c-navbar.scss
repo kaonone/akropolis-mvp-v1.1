@@ -4,13 +4,7 @@
 
 .c-navbar {
 
-    $c: &; // @include globalPadding;
-    // display: flex;c-na
-    // justify-content: space-between;
-    // top: $spacing-default * 7/10;
-    // margin-bottom: $spacing-default * 4;
-    // position: relative;
-    &__logo-link {}
+    $c: &;
 
     &__wrapper {
         margin-left: auto;

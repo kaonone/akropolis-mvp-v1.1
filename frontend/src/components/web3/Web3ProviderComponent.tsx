@@ -26,7 +26,7 @@ export interface PropsFromDispatch {
 interface AllProps extends Props, PropsFromDispatch {
 }
 
-const ONE_SECOND = 100000000000;
+const ONE_SECOND = 1000;
 const POOLING_INTERVAL_IN_MS = ONE_SECOND;
 const ETH_NETWORK_POOLING_INTERVAL_IN_MS = ONE_SECOND * 15;
 let interval: any = null;
