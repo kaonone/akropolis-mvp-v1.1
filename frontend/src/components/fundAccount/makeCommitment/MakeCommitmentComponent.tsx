@@ -59,13 +59,13 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
                         <div className="c-make-commitment__wrapper-period">
                             <button
                                 className={`c-make-commitment__btn-period ${period === "week" && "c-make-commitment__btn-period--active"}`}
-                                onClick={this.setPeriod("week")}><FormattedMessage id="fundAccount.week" /></button>
+                                onClick={this.setPeriod("week")}><FormattedMessage id="fundAccount.weekly" /></button>
                             <button
                                 className={`c-make-commitment__btn-period ${period === "month" && "c-make-commitment__btn-period--active"}`}
-                                onClick={this.setPeriod("month")}><FormattedMessage id="fundAccount.month" /></button>
+                                onClick={this.setPeriod("month")}><FormattedMessage id="fundAccount.monthly" /></button>
                             <button
                                 className={`c-make-commitment__btn-period ${period === "quarter" && "c-make-commitment__btn-period--active"}`}
-                                onClick={this.setPeriod("quarter")}><FormattedMessage id="fundAccount.quarter" /></button>
+                                onClick={this.setPeriod("quarter")}><FormattedMessage id="fundAccount.quarterly" /></button>
                         </div>
                     </div>
                     <div className="c-make-commitment__wrapper-section">
