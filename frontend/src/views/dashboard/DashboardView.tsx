@@ -86,13 +86,13 @@ export default class DashboardView extends React.Component<AllProps, any> {
                         <PiktoBg className="v-dashboard__pikto-bg" />
                     </div>
                     <div className="v-dashboard__box-content">
-                        <h4 className="v-dashboard__headline"><FormattedMessage id="dashboard.myNextContributionDetails" /></h4>
+                        <h4 className="v-dashboard__headline"><FormattedMessage id="dashboard.myNextContribution" /></h4>
                         <div className="v-dashboard__wrapper-next-contribution">
                             <div className="v-dashboard__next-contribution">{this.props.portfolio.commitmentFetched && (
                                 getNextContributionDate(this.props.portfolio.commitment)
                             )}</div>
                             <div className="v-dashboard__next-contribution">
-                                <span className="v-dashboard__unit">£</span>218<span className="v-dashboard__unit">/mo</span></div>
+                                <span className="v-dashboard__unit">ETH</span>218</div>
                         </div>
                     </div>
 

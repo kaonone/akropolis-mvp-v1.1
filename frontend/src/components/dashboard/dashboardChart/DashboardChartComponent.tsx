@@ -13,8 +13,11 @@ export default class DashboardChartComponent extends React.Component<Props, {}> 
     public render() {
         const { period, pastAnnualReturns, durationInYears, createdAt, amountToPay } = this.props.commitment;
         const chartData = prepareChartData(createdAt, durationInYears, amountToPay, period, pastAnnualReturns);
+        const primaryColor = "rgba(108, 100, 255, 1)";
+        const secondaryColor = "rgba(45, 216, 152, 1)";
 
         const data = (canvas: any) => {
+
             const ctx = canvas.getContext("2d");
             const gradient = ctx.createLinearGradient(0, 0, 0, 300);
             gradient.addColorStop(0, "rgba(45, 216, 152, 0.5)");
@@ -25,14 +28,15 @@ export default class DashboardChartComponent extends React.Component<Props, {}> 
                     backgroundColor: gradient
                     ,
                     borderColor: [
-                        "rgba(45, 216, 152, 1)",
+                        secondaryColor,
                     ],
                     borderWidth: 4,
                     data: chartData.data,
                     label: "ETH",
-                    pointBorderColor: "rgba(45, 216, 152, 1)",
+                    pointBorderColor: secondaryColor
                 }],
                 labels: chartData.labels,
+
             };
         };
 
@@ -54,8 +58,8 @@ export default class DashboardChartComponent extends React.Component<Props, {}> 
                         display: false
                     },
                     scaleLabel: {
-                        display: false,
-                        labelString: "Value"
+                        display: true,
+                        labelString: "Time"
                     },
                 }],
                 yAxes: [{
@@ -64,13 +68,17 @@ export default class DashboardChartComponent extends React.Component<Props, {}> 
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: "Value"
+                        labelString: "Value (ETH)"
                     },
                     ticks: {
-                        display: false
+                        display: true
                     },
                 }]
             },
+            tooltips: {
+                backgroundColor: primaryColor,
+                borderColor: "blue",
+            }
         };
 
         return (
