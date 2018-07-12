@@ -34,7 +34,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
 
     public readonly initStateOfPlanValues: PlanValues = {
         ageAtRetirement: 65,
-        currentAge: 0,
+        currentAge: 30,
         desiredAnnualIncome: 15000,
         existingPension: 0,
         fees: 0.0105,
