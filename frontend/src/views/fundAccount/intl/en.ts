@@ -18,7 +18,7 @@ export default {
     "fundAccount.fullAccessToAkropolis": "Full access to Akropolis",
     "fundAccount.fundYourAccount": "Fund your account",
     "fundAccount.getDiscountsOnFeesAccessToPremiumProducts":
-    "Get discounts on fees, access to premium products and participate in our reward pool by staking AKT tokens.",
+        "Get discounts on fees, access to premium products and participate in our reward pool by staking AKT tokens.",
     "fundAccount.getFreeEth": "Get free",
     "fundAccount.goToEthFaucet": "Go to ETH faucet",
     "fundAccount.iWillMakeARegularPaymentOf": "I will make a regular payment of",
@@ -32,6 +32,9 @@ export default {
     "fundAccount.quarter": "Quarter",
     "fundAccount.stakingTokensMeansThatTheyWillBeLockedUp": "Staking tokens means that they will be locked up for the duration of your commitment period.",
     "fundAccount.theFirstContributionOf": "The first contribution of",
+    "fundAccount.thisWillTrigger_1Transaction": `
+    This will trigger a single transaction. It will transfer {eth} ETH as the initial contribution.
+    `,
     "fundAccount.thisWillTrigger_2Transactions": `This will trigger 2 transactions. 
     The first will approve the transfer of the staked {stakeAKTValue} AKT. 
     The second will  transfer {eth} ETH as the initial contribution.`,

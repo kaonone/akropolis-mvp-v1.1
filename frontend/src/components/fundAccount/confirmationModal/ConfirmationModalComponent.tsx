@@ -65,7 +65,10 @@ export default class ConfirmationModalComponent extends React.Component<Props, a
                     </div>
                 </div>
                 <span className="c-confirmation-modal__introduction">
-                    <FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />
+                    {stakeAktValue > 0 ?
+                        (<FormattedMessage id="fundAccount.thisWillTrigger_2Transactions" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />) :
+                        (<FormattedMessage id="fundAccount.thisWillTrigger_1Transaction" values={{ stakeAKTValue: stakeAktValue, eth: rangeEth }} />)}
+
                 </span>
                 <PiktoBg className="c-confirmation-modal__pikto-bg" />
                 {this.props.isWaiting ? (
