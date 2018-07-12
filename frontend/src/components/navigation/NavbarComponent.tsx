@@ -138,14 +138,21 @@ export default class NavbarComponent extends React.Component<Props, State> {
     }
 
     private deleteData() {
-        console.log("delete?");
-        removeCommitment(this.props.web3Accounts.accountSelected)
-            .then(() => {
-                localStorage.clear();
-                window.location.reload();
-            })
-            .catch((err) => {
-                this.toggleDeleteModal();
-            });
+        if (this.props.isPortfolio) {
+            removeCommitment(this.props.web3Accounts.accountSelected)
+                .then(() => {
+                    this.clearStorageAndRedirect();
+                })
+                .catch((err) => {
+                    this.toggleDeleteModal();
+                });
+        } else {
+            this.clearStorageAndRedirect();
+        }
+    }
+
+    private clearStorageAndRedirect() {
+        localStorage.clear();
+        window.location.reload();
     }
 }
