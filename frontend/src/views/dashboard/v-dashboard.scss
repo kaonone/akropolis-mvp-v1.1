@@ -1,6 +1,7 @@
 @import "assets/styles/1_settings/settings-project";
 @import "assets/styles/2_tools/tools-mq";
 @import "assets/styles/2_tools/tools-paddings";
+@import "assets/styles/2_tools/tools-boxes";
 
 .v-dashboard {
 
@@ -14,5 +15,96 @@
 
     &__loading {
         text-align: center;
+    }
+
+    &__wrapper-final-values {
+        display: flex;
+        padding: $spacing-default * 3 $spacing-default * 2 0;
+        flex-direction: column;
+        margin-bottom: $spacing-default * 3;
+        background: $gradient-default;
+        color: $color-white;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: $spacing-default * 28;
+    }
+
+    &__wrapper-final-value-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: baseline;
+        margin-bottom: $spacing-default * 2;
+        align-items: center;
+    }
+
+    &__describe-value {
+        font-weight: $font-medium;
+        margin-bottom: $spacing-default * 3;
+    }
+
+    &__pikto-bg {
+        position: absolute;
+        top: -$spacing-default * 10;
+        left: 0;
+        opacity: 0.1;
+        width: 100%;
+    }
+
+    &__box-content {
+        @include boxContent(true);
+        position: relative;
+        top: $spacing-default * 5;
+        margin-bottom: $padding-default;
+        text-align: center;
+
+        &--empty {
+            box-shadow: unset;
+            width: unset;
+            background-color: transparent;
+            margin-left: -$padding-default;
+            margin-right: -$padding-default;
+            border-radius: unset;
+            text-align: left;
+            padding-top: $spacing-default;
+        }
+    }
+
+    &__headline {
+        font-weight: $font-medium;
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+    }
+
+    &__unit {
+        font-size: $font-size-base;
+        margin-right: $spacing-default / 2;
+    }
+
+    &__wrapper-next-contribution {
+        display: flex;
+        justify-content: space-evenly;
+        color: $color-primary;
+        margin-top: $spacing-default;
+    }
+
+    &__next-contribution {
+        font-size: $font-size-h3;
+        font-weight: $font-medium;
+    }
+
+    &__notification {
+        background-color: $color-grey;
+        margin-top: $spacing-default / 2;
+        padding: $padding-default;
+        color: $color-white;
+    }
+
+    &__healine-notification {
+        font-weight: $font-medium;
     }
 }

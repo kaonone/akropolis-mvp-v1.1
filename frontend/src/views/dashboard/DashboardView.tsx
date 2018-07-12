@@ -1,3 +1,6 @@
+/* tslint:disable:no-implicit-dependencies */
+import PiktoBg from "-!svg-react-loader?name=Icon!../../assets/images/pikto-bg.svg";
+/* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 
 import { FormattedMessage } from "react-intl";
@@ -36,6 +39,12 @@ export default class DashboardView extends React.Component<AllProps, any> {
         if (this.props.account && this.props.portfolio.portfolioExist) {
             this.props.fetchCommitment(this.props.account);
         }
+
+        const bodyElement = document.querySelector("body");
+        if (!bodyElement) {
+            return;
+        }
+        bodyElement.classList.add("isBalance");
     }
 
     public componentWillReceiveProps(nextProps: Props) {
@@ -44,13 +53,21 @@ export default class DashboardView extends React.Component<AllProps, any> {
         }
     }
 
+    public componentWillUnmount() {
+        const bodyElement = document.querySelector("body");
+        if (!bodyElement) {
+            return;
+        }
+        bodyElement.classList.remove("isBalance");
+    }
+
     public render() {
 
         if (this.waitingForCommitmentOrPortfolioCreate()) {
             return (
                 <div className="v-dashboard ">
-                    <LoaderComponent/>
-                    <p className="v-dashboard__loading"><FormattedMessage id="dashboard.waitingForData"/></p>
+                    <LoaderComponent />
+                    <p className="v-dashboard__loading"><FormattedMessage id="dashboard.waitingForData" /></p>
                 </div>
             );
         }
@@ -58,32 +75,48 @@ export default class DashboardView extends React.Component<AllProps, any> {
         if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist || localStorage.getItem(this.props.account)) {
             return (
                 <div className="v-dashboard">
-                    <div className="v-dashboard__wrapper-next-contribution-details">
-                        <div className="v-dashboard__next-contribution-details">
-                            <FormattedMessage id="dashboard.myNextContributionDetails"/>,&nbsp;
-                            {this.props.portfolio.commitmentFetched && (
-                                getNextContributionDate(this.props.portfolio.commitment)
-                            )}
+
+                    <div className="v-dashboard__wrapper-final-values">
+                        <div
+                            className="v-dashboard__wrapper-final-value-item">
+                            <h4 className="v-dashboard__describe-value">
+                                <FormattedMessage id="dashboard.dashboard" />
+                            </h4>
                         </div>
-                        <button className="o-btn"><FormattedMessage id="dashboard.topUpYourPension"/></button>
+                        <PiktoBg className="v-dashboard__pikto-bg" />
                     </div>
-                    <FormattedMessage id="dashboard.graphOfProjectedPortfolioPerformance"/>
-                    {this.props.portfolio.commitmentFetched && (
-                        <DashboardChartComponent commitment={this.props.portfolio.commitment}/>
-                    )}
-                    <h3><FormattedMessage id="dashboard.notifications"/></h3>
-                    <div>
-                        <h4>Fund manager update: July 2018</h4>
-                        <div>Today</div>
+                    <div className="v-dashboard__box-content">
+                        <h4 className="v-dashboard__headline"><FormattedMessage id="dashboard.myNextContributionDetails" /></h4>
+                        <div className="v-dashboard__wrapper-next-contribution">
+                            <div className="v-dashboard__next-contribution">{this.props.portfolio.commitmentFetched && (
+                                getNextContributionDate(this.props.portfolio.commitment)
+                            )}</div>
+                            <div className="v-dashboard__next-contribution">
+                                <span className="v-dashboard__unit">£</span>218<span className="v-dashboard__unit">/mo</span></div>
+                        </div>
                     </div>
-                    <div>
-                        <h4>Congratulations, you’ve created your first portfolio!</h4>
-                        <div>Today</div>
+
+                    <div className="v-dashboard__box-content">
+                    <h4 className="v-dashboard__headline"><FormattedMessage id="dashboard.graphOfProjectedPortfolioPerformance" /></h4>
+                        {this.props.portfolio.commitmentFetched && (
+                            <DashboardChartComponent commitment={this.props.portfolio.commitment} />
+                        )}
+                    </div>
+                    <div className="v-dashboard__box-content v-dashboard__box-content--empty">
+                        <h4 className="v-dashboard__headline v-dashboard__headline--uppercase"><FormattedMessage id="dashboard.notifications" /></h4>
+                        <div className="v-dashboard__notification">
+                            <h4 className="v-dashboard__healine-notification">Fund manager update: July 2018</h4>
+                            <div>Today</div>
+                        </div>
+                        <div className="v-dashboard__notification">
+                            <h4 className="v-dashboard__healine-notification">Congratulations, you’ve created your first portfolio!</h4>
+                            <div>Today</div>
+                        </div>
                     </div>
                 </div>
             );
         } else if (this.props.portfolio.portfolioFetched && !this.props.portfolio.portfolioExist) {
-            return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
+            return <Redirect to={`/${NAVIGATION.selectAFund}`} />;
         } else {
             return null;
         }

@@ -1,4 +1,5 @@
 export default {
+    "dashboard.dashboard": "Dashboard",
     "dashboard.graphOfProjectedPortfolioPerformance": "Graph of projected portfolio performance", 
     "dashboard.myNextContributionDetails": "My next contribution details", 
     "dashboard.notifications": "Notifications", 
