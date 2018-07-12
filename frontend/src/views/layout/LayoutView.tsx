@@ -15,6 +15,7 @@ import SelectAFundWrapper from "../../wrappers/SelectAFundWrapper";
 import NavigationWrapperComponent from "../../components/navigationWrapper/NavigationWrapperComponent";
 import { PlanAfterCalculate } from "../../models/Onboarding";
 import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
+import { isntEthereumBrowser } from "../../services/Web3Service";
 
 export interface Props {
     account: string;
@@ -95,7 +96,7 @@ export default class LayoutView extends React.Component<AllProps, State> {
 
         return (
             <div>
-                <Web3Provider />
+                {!isntEthereumBrowser() && <Web3Provider />}
                 {content}
             </div>
         );
