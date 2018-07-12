@@ -6,7 +6,7 @@ import {
     fetchAKTBalanceAction,
     fetchETHBalanceAction,
     fetchNetworkAction,
-    fetchPortfolioAction
+    fetchPortfolioAction 
 } from "../../redux/actions/web3Action";
 import {ApplicationStore} from "../../redux/store/store";
 import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
@@ -28,7 +28,7 @@ interface AllProps extends Props, PropsFromDispatch {
 
 const ONE_SECOND = 1000;
 const POOLING_INTERVAL_IN_MS = ONE_SECOND;
-const ETH_NETWORK_POOLING_INTERVAL_IN_MS = ONE_SECOND * 15;
+const ETH_NETWORK_POOLING_INTERVAL_IN_MS = ONE_SECOND * 1500;
 let interval: any = null;
 let networkInterval: any = null;
 

@@ -41,5 +41,15 @@
         color: $color-white;
         box-shadow: $shadow-big;
         border-radius: $radius-small;
+
+        &--reset-margin-bottom {
+            padding-bottom: $spacing-default * 4;
+        }
+
+        &--reset-attribute {
+            background: unset;
+            box-shadow: unset;
+            padding: unset;
+        }
     }
 }

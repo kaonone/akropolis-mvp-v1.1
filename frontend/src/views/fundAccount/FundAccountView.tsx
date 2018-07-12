@@ -115,31 +115,6 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             return <Redirect to={`/${NAVIGATION.dashboard}`} />;
         }
 
-        if (isntEthereumBrowser()) {
-            return (
-                <div className="v-fund-account">
-                    <DownloadingBrowserComponent />
-                </div>
-            );
-        }
-
-        if (!isAccountExist(this.props.web3Accounts)) {
-            return (
-                <div className="v-fund-account v-fund-account--error">
-                    <FormattedMessage id="fundAccount.fundYourAccount">{
-                        (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount}
-                            spaceForArrow={false} />}
-                    </FormattedMessage>
-                    <SpinnerBlack className="v-fund-account__icon" />
-                    <FormattedMessage id="web3.errorAccount.desc">
-                        {(desc: string) => (
-                            <p dangerouslySetInnerHTML={{ __html: desc }} />
-                        )}
-                    </FormattedMessage>
-                </div>
-            );
-        }
-
         if (config.network && !isCorrectNetwork(this.props.web3Network, config.network)) {
             return (
                 <div className="v-fund-account v-fund-account--error">
@@ -160,7 +135,28 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         return (
             <div className="v-fund-account">
                 {this.state.step !== 2 &&
-                    <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
+                    <>
+                        <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
+
+                        {isntEthereumBrowser() || !isAccountExist(this.props.web3Accounts) && 
+                        <ModalGlobalComponent onClose={this.handleOnCloseModal} areBottomOptions={false} isBackground={false}>
+                            {isntEthereumBrowser() &&
+                                <div className="u-modal__wrapper">
+                                    <DownloadingBrowserComponent />
+                                </div>
+                            }
+                            {!isAccountExist(this.props.web3Accounts) &&
+                                <div className="u-modal__wrapper">
+                                    <SpinnerBlack className="v-fund-account__icon" />
+                                    <FormattedMessage id="web3.errorAccount.desc">
+                                        {(desc: string) => (
+                                            <h3 className="u-modal__headline" dangerouslySetInnerHTML={{ __html: desc }} />
+                                        )}
+                                    </FormattedMessage>
+                                </div>
+                            }
+                        </ModalGlobalComponent>}
+                    </>
                 }
 
                 {(this.state.AKTBalance === 0 || this.state.ETHBalance === 0) && (
