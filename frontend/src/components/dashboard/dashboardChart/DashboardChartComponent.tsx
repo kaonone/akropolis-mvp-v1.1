@@ -14,34 +14,67 @@ export default class DashboardChartComponent extends React.Component<Props, {}> 
         const { period, pastAnnualReturns, durationInYears, createdAt, amountToPay } = this.props.commitment;
         const chartData = prepareChartData(createdAt, durationInYears, amountToPay, period, pastAnnualReturns);
 
-        const data = {
-            datasets: [{
-                backgroundColor: [
-                    "rgba(0, 0, 0, 0.2)",
-                ],
-                borderColor: [
-                    "rgba(0, 0, 0, 1)",
-                ],
-                borderWidth: 1,
-                data: chartData.data,
-                label: "ETH",
-            }],
-            labels: chartData.labels,
+        const data = (canvas: any) => {
+            const ctx = canvas.getContext("2d");
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, "rgba(45, 216, 152, 0.5)");
+            gradient.addColorStop(1, "rgba(108, 100, 255, 0.5)");
+
+            return {
+                datasets: [{
+                    backgroundColor: gradient
+                    ,
+                    borderColor: [
+                        "rgba(45, 216, 152, 1)",
+                    ],
+                    borderWidth: 4,
+                    data: chartData.data,
+                    label: "ETH",
+                    pointBorderColor: "rgba(45, 216, 152, 1)",
+                }],
+                labels: chartData.labels,
+            };
         };
 
         const options = {
+            layout: {
+                padding: {
+                    bottom: 0,
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                }
+            },
+            legend: {
+                display: false
+            },
             scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    },
+                    scaleLabel: {
+                        display: false,
+                        labelString: "Value"
+                    },
+                }],
                 yAxes: [{
+                    gridLines: {
+                        display: false
+                    },
                     scaleLabel: {
                         display: true,
-                        labelString: "ETH"
-                    }
+                        labelString: "Value"
+                    },
+                    ticks: {
+                        display: false
+                    },
                 }]
-            }
+            },
         };
 
         return (
-            <Line data={data} options={options}/>
+            <Line data={data} options={options} />
         );
     }
 }

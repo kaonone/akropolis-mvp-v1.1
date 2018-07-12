@@ -12,7 +12,7 @@ $color-grey-lighter: #f3f4fb;
 $color-red: #A9504F;
 
 $color-primary: #6c64ff;
-$color-secondary: #2dd898;
+$color-secondary: rgb(45, 216, 152);
 
 $text-default-color: $color-grey;
 
@@ -74,3 +74,4 @@ $shadow-big: 0 20px 40px rgba($color-black, 0.3);
 $color-gradient-start: #7d1aff;
 $color-gradient-stop: $color-primary;
 $gradient-default: linear-gradient(to top, $color-gradient-start 0%, $color-gradient-stop 100%);
+$gradient-chart: linear-gradient(to top, $color-secondary 0%, $color-primary 100%);
