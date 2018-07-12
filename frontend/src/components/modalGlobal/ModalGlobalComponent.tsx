@@ -17,15 +17,14 @@ export default class ModalGlobalComponent extends React.Component<Props, {}> {
     private wrapperModal = document.createElement("div");
 
     public render() {
-        console.log(this.props.areBottomOptions);
         
         return ReactDOM.createPortal(
             <div className={`c-modal-global__overlay ${this.props.isAbove ? "c-modal-global__overlay--no-overlay" : ""}`} onClick={this.props.onClose}>
                 <div className="c-modal-global__wrapper-height">
                     <div onClick={this.eventStopPropagation} className="c-modal-global__wrapper">
                         <div className={`c-modal-global__wrapper-content 
-                        ${!this.props.areBottomOptions ? "c-modal-global__wrapper-content--reset-margin-bottom" : ""}
-                        ${!this.props.isBackground ? "c-modal-global__wrapper-content--reset-attribute" : ""}`
+                        ${this.props.areBottomOptions ? "c-modal-global__wrapper-content--reset-margin-bottom" : ""}
+                        ${this.props.isBackground ? "c-modal-global__wrapper-content--reset-attribute" : ""}`
                         }>
                             {this.props.children}
                         </div>

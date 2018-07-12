@@ -23,7 +23,6 @@ import MakeCommitmentComponent from "../../components/fundAccount/makeCommitment
 import ObtaningTokensComponent from "../../components/fundAccount/obtaningTokens/ObtaningTokensComponent";
 import StakeAktComponent from "../../components/fundAccount/stakeAkt/StakeAktComponent";
 import ModalGlobalComponent from "../../components/modalGlobal/ModalGlobalComponent";
-import SubNavigationComponent from "../../components/subNavigation/SubNavigationComponent";
 
 import "./v-fund-account.css";
 /* tslint:enable:no-implicit-dependencies */
@@ -115,37 +114,21 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             return <Redirect to={`/${NAVIGATION.dashboard}`} />;
         }
 
-        if (config.network && !isCorrectNetwork(this.props.web3Network, config.network)) {
-            return (
-                <div className="v-fund-account v-fund-account--error">
-                    <FormattedMessage id="fundAccount.fundYourAccount">{
-                        (fundYourAccount: string) => <SubNavigationComponent title={fundYourAccount}
-                            spaceForArrow={false} />}
-                    </FormattedMessage>
-                    <SpinnerBlack className="v-fund-account__icon" />
-                    <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network: config.network }}>
-                        {(desc: string) => (
-                            <p dangerouslySetInnerHTML={{ __html: desc }} />
-                        )}
-                    </FormattedMessage>
-                </div>
-            );
-        }
-
         return (
             <div className="v-fund-account">
                 {this.state.step !== 2 &&
                     <>
                         <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
 
-                        {isntEthereumBrowser() || !isAccountExist(this.props.web3Accounts) && 
-                        <ModalGlobalComponent onClose={this.handleOnCloseModal} areBottomOptions={false} isBackground={false}>
+                        {(isntEthereumBrowser() || !isAccountExist(this.props.web3Accounts)
+                            || (config.network && !isCorrectNetwork(this.props.web3Network, config.network))) &&
+                        <ModalGlobalComponent onClose={this.handleOnCloseModal} areBottomOptions={true} isBackground={true}>
                             {isntEthereumBrowser() &&
                                 <div className="u-modal__wrapper">
                                     <DownloadingBrowserComponent />
                                 </div>
                             }
-                            {!isAccountExist(this.props.web3Accounts) &&
+                            {(!isntEthereumBrowser() && !isAccountExist(this.props.web3Accounts)) &&
                                 <div className="u-modal__wrapper">
                                     <SpinnerBlack className="v-fund-account__icon" />
                                     <FormattedMessage id="web3.errorAccount.desc">
@@ -154,6 +137,17 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                         )}
                                     </FormattedMessage>
                                 </div>
+                            }
+                            {(!isntEthereumBrowser() && isAccountExist(this.props.web3Accounts) &&
+                                (config.network && !isCorrectNetwork(this.props.web3Network, config.network))) &&
+                            <div className="u-modal__wrapper">
+                                <SpinnerBlack className="v-fund-account__icon" />
+                                <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network: config.network }}>
+                                    {(desc: string) => (
+                                        <p dangerouslySetInnerHTML={{ __html: desc }} />
+                                    )}
+                                </FormattedMessage>
+                            </div>
                             }
                         </ModalGlobalComponent>}
                     </>
