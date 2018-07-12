@@ -1,15 +1,18 @@
+import * as moment from "moment";
 import {config} from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
 import * as FundRegistry from "../contracts/FundRegistry.json";
 import * as PortfolioData from "../contracts/PortfolioData.json";
 import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
+import {Commitment} from "../models/Commitment";
 
 export const fetchPortfolio = (account: string) => {
     return new Promise((resolve, reject) => {
         if (!account) {
             reject("no-account");
         }
+
         // @ts-ignore
         const {web3} = window;
 
@@ -19,7 +22,7 @@ export const fetchPortfolio = (account: string) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(response.c[0]);
+                resolve(response.toNumber());
             }
         });
     });
@@ -139,13 +142,12 @@ export const createCommitment = (account: string, data: any) => {
         if (!account) {
             reject("no-account");
         }
-
         // @ts-ignore
         const {web3} = window;
 
         web3.eth.defaultAccount = account;
 
-        let period = 0;
+        let period: 0 | 1 | 2 = 0;
         switch (data.period) {
             case "week":
                 period = 0;
@@ -165,7 +167,15 @@ export const createCommitment = (account: string, data: any) => {
         const akt = web3.toWei(data.stakeAktValue, "ether");
 
         const portfolioFunctional = web3.eth.contract(PortfolioFunctional.abi).at(config.deployment.PortfolioFunctional);
-
+        const commitment: Commitment = {
+            amountToPay: data.rangeEth,
+            createdAt: moment().unix(),
+            durationInYears: data.years,
+            fundAddress: data.fundAddress,
+            fundName: data.fundName,
+            pastAnnualReturns: data.fundPastReturns,
+            period
+        };
         executeGasPriced(account, reject, (gasPrice: any) => {
                 portfolioFunctional.createNewUserPortfolio(
                     [100],
@@ -180,7 +190,7 @@ export const createCommitment = (account: string, data: any) => {
                         if (err) {
                             reject(err);
                         } else {
-                            resolve(response);
+                            resolve(commitment);
                         }
                     });
             }

@@ -1,7 +1,8 @@
 import * as constants from "../../constants/actions";
-import { fetchATMBalance, fetchETHBalance, fetchPortfolio, getCommitment } from "../../services/DataService";
-import { fetchAccounts, fetchNetwork } from "../../services/Web3Service";
-import { Action } from "./action";
+import {Commitment} from "../../models/Commitment";
+import {fetchATMBalance, fetchETHBalance, fetchPortfolio, getCommitment} from "../../services/DataService";
+import {fetchAccounts, fetchNetwork} from "../../services/Web3Service";
+import {Action} from "./action";
 
 export function fetchAccountAction(): Action<constants.FETCH_ACCOUNT, any> {
     return {
@@ -42,5 +43,12 @@ export function fetchCommitmentAction(account: string): Action<constants.FETCH_C
     return {
         payload: getCommitment(account),
         type: constants.FETCH_COMMITMENT,
+    };
+}
+
+export function commitmentCreatedAction(commitment: Commitment): Action<constants.COMMITMENT_CREATED, any> {
+    return {
+        payload: commitment,
+        type: constants.COMMITMENT_CREATED,
     };
 }

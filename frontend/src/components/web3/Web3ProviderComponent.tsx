@@ -6,7 +6,7 @@ import {
     fetchAKTBalanceAction,
     fetchETHBalanceAction,
     fetchNetworkAction,
-    fetchPortfolioAction 
+    fetchPortfolioAction
 } from "../../redux/actions/web3Action";
 import {ApplicationStore} from "../../redux/store/store";
 import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
@@ -50,7 +50,10 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
     }
 
     public componentWillReceiveProps(nextProps: AllProps) {
-        if (nextProps.web3Accounts.accountSelected) {
+        if (this.props.web3Accounts.accountSelected && (this.props.web3Accounts.accountSelected !== nextProps.web3Accounts.accountSelected)) {
+            localStorage.clear();
+            window.location.reload();
+        } else if (nextProps.web3Accounts.accountSelected) {
             this.fetchBalances(nextProps.web3Accounts.accountSelected);
             this.fetchPortfolio(nextProps.web3Accounts.accountSelected);
         }

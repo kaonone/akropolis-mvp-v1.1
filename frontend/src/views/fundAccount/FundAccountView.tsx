@@ -4,6 +4,7 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Redirect } from "react-router";
 import { NAVIGATION } from "../../constants";
+import { Commitment } from "../../models/Commitment";
 
 import { config } from "../../config/config";
 
@@ -36,6 +37,7 @@ export interface Props {
 }
 
 export interface PropsFromDispatch {
+    commitmentCreated: (commitment: Commitment) => void;
     fetchAKTBalance: (account: string) => void;
     fetchETHBalance: (account: string) => void;
     fetchPortfolio: (account: string) => void;
@@ -111,7 +113,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
     public render() {
         if (this.props.isPortfolio || localStorage.getItem(this.props.web3Accounts.accountSelected)) {
-            return <Redirect to={`/${NAVIGATION.dashboard}`} />;
+            return <Redirect to={`/${NAVIGATION.dashboard}`}/>;
         }
 
         return (
@@ -197,8 +199,8 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         if (data.stakeAktValue > 0) {
             approveTransfer(this.props.web3Accounts.accountSelected, data.stakeAktValue).then(() => {
                 createCommitment(this.props.web3Accounts.accountSelected, data)
-                    .then(() => {
-                        this.handleSuccess();
+                    .then((commitment: any) => {
+                        this.handleSuccess(commitment);
                     })
                     .catch((err) => {
                         this.setState({
@@ -209,8 +211,8 @@ export default class FundAccountView extends React.Component<AllProps, State> {
             });
         } else {
             createCommitment(this.props.web3Accounts.accountSelected, data)
-                .then((response) => {
-                    this.handleSuccess();
+                .then((commitment: any) => {
+                    this.handleSuccess(commitment);
                 })
                 .catch((err) => {
                     this.setState({
@@ -221,14 +223,15 @@ export default class FundAccountView extends React.Component<AllProps, State> {
         }
     }
 
-    private handleSuccess() {
+    private handleSuccess(commitment: Commitment) {
         const fn = () => {
             this.setState({
                 ...this.state,
                 showModal: false,
                 waiting: false,
             });
-            localStorage.setItem(this.props.web3Accounts.accountSelected, JSON.stringify(true));
+            localStorage.setItem(this.props.web3Accounts.accountSelected, JSON.stringify(commitment));
+            this.props.commitmentCreated(commitment);
         };
         setTimeout(fn, TIMEOUT);
     }
