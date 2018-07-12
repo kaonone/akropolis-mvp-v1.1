@@ -11,11 +11,11 @@
         margin-bottom: $spacing-default * 3;
         background-color: $color-primary;
         color: $color-white;
-        position: fixed;
+        position: absolute;
         left: 0;
         right: 0;
         top: 0;
-        height: $spacing-default * 37;
+        height: 280px;
     }
 
     &__wrapper-content {

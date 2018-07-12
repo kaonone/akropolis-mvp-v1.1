@@ -24,11 +24,11 @@
         margin-bottom: $spacing-default * 3;
         background: $gradient-default;
         color: $color-white;
-        position: fixed;
+        position: absolute;
         left: 0;
         right: 0;
         top: 0;
-        height: $spacing-default * 28;
+        height: 280px;
     }
 
     &__wrapper-final-value-item {
