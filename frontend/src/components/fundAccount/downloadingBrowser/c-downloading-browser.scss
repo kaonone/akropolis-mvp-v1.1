@@ -1,6 +1,10 @@
 @import "assets/styles/1_settings/settings-project";
 
 .c-downloading-browser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: $spacing-default * 2;
 
     &__wrapper-introduction {
         display: flex;

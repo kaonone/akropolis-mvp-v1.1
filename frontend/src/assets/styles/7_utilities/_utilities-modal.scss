@@ -1,0 +1,19 @@
+.u-modal {
+
+    &__wrapper {
+        background: $gradient-default;
+        padding: $padding-default * 3;
+        overflow: hidden;
+        position: relative;
+        color: $color-white;
+        box-shadow: $shadow-big;
+        border-radius: $radius-small;
+        margin: $spacing-default * 2 $spacing-default * 2 $spacing-default * 4 $spacing-default * 2;
+        text-align: center;
+        font-weight: $font-medium;
+    }
+
+    &__headline {
+        font-weight: $font-regular;
+    }
+}
