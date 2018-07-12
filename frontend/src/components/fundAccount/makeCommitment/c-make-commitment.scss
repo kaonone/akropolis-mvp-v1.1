@@ -14,11 +14,19 @@
     }
 
     &__headline {
-        font-weight: normal;
-        display: block;
+        font-weight: $font-medium;
+        text-align: center;
+        position: fixed;
+        color: $color-white;
+        width: 100%;
+        top: $spacing-default * 4;
+        left: 0;
+    }
+
+    &__headline-description {
+        font-weight: $font-medium;
         text-align: center;
         margin-bottom: $spacing-default * 2;
-        text-align: center;
     }
 
     &__box {

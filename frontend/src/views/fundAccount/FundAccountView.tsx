@@ -112,7 +112,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
     public render() {
         if (this.props.isPortfolio || localStorage.getItem(this.props.web3Accounts.accountSelected)) {
-            return <Redirect to={`/${NAVIGATION.dashboard}`}/>;
+            return <Redirect to={`/${NAVIGATION.dashboard}`} />;
         }
 
         if (isntEthereumBrowser()) {
@@ -159,13 +159,16 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
         return (
             <div className="v-fund-account">
-                <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
+                {this.state.step !== 2 &&
+                    <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
+                }
+
                 {(this.state.AKTBalance === 0 || this.state.ETHBalance === 0) && (
                     <ObtaningTokensComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}
                         account={this.props.web3Accounts.accountSelected}
                         fetchAKTBalance={this.props.fetchAKTBalance} />
                 )}
-                
+
                 {(this.state.AKTBalance !== 0 && this.state.ETHBalance !== 0) && (
                     <>
                         {this.state.step === 1 ? (
@@ -179,15 +182,15 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                     back={this.handleBack} />
                             )}
                         {this.state.showModal &&
-                        <ModalGlobalComponent onClose={this.handleOnCloseModal}>
-                            <ConfirmationModalComponent
-                                resultStepOne={this.state.stepOne}
-                                resultStepTwo={this.state.stepTwo}
-                                isOpenProps={this.state.isOpenModal}
-                                isWaiting={this.state.waiting} 
-                                onClick={this.handleOnClick}
-                                onClose={this.handleOnCloseModal}/>
-                        </ModalGlobalComponent>
+                            <ModalGlobalComponent onClose={this.handleOnCloseModal}>
+                                <ConfirmationModalComponent
+                                    resultStepOne={this.state.stepOne}
+                                    resultStepTwo={this.state.stepTwo}
+                                    isOpenProps={this.state.isOpenModal}
+                                    isWaiting={this.state.waiting}
+                                    onClick={this.handleOnClick}
+                                    onClose={this.handleOnCloseModal} />
+                            </ModalGlobalComponent>
                         }
                     </>
                 )}

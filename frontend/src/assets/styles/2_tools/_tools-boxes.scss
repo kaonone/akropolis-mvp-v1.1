@@ -3,6 +3,7 @@
     box-shadow: $shadow-default;
     border-radius: $radius-default;
     overflow: hidden;
+    width: 100%;
 
     @if $padding == true {
         padding: $padding-default * 2 $padding-default;
