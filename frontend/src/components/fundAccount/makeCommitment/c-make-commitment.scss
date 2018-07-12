@@ -19,7 +19,7 @@
         position: fixed;
         color: $color-white;
         width: 100%;
-        top: $spacing-default * 4;
+        top: $spacing-default * 3;
         left: 0;
     }
 
@@ -33,7 +33,7 @@
 
         @include boxContent(true);
         position: relative;
-        top: $spacing-default * 20;
+        top: $spacing-default * 23;
         margin-bottom: $padding-default;
     }
 

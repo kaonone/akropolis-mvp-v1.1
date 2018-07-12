@@ -28,6 +28,22 @@ export default class BalanceComponent extends React.Component<Props, State> {
         });
     }
 
+    public componentWillMount() {
+        const bodyElement = document.querySelector("body");
+        if (!bodyElement) {
+            return;
+        }
+        bodyElement.classList.add("isBalance");
+    }
+
+    public componentWillUnmount() {
+        const bodyElement = document.querySelector("body");
+        if (!bodyElement) {
+            return;
+        }
+        bodyElement.classList.remove("isBalance");
+    }
+
     public render() {
         const { AKTBalance, ETHBalance } = this.props;
 

@@ -2,6 +2,7 @@
     margin-left: $value;
     margin-right: $value;
     padding-bottom: $value;
+    padding-top: $value * 2;
 
     @include mq($from: tablet) {
         max-width: $spacing-default * 74 - $padding-default * 2;
