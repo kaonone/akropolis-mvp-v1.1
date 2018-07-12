@@ -51,11 +51,11 @@ export default class MakeCommitmentComponent extends React.Component<Props, Stat
         return (
             <>
                 <div className="c-make-commitment__header">
-                    <h4 className="c-stake-akt__headline"><FormattedMessage id="fundAccount.makeCommitment" /></h4>
+                    <h4 className="c-make-commitment__headline"><FormattedMessage id="fundAccount.makeCommitment" /></h4>
                 </div>
                 <div className="c-make-commitment__box">
                     <div className="c-make-commitment__wrapper-section">
-                        <h4 className="c-make-commitment__headline"><FormattedMessage id="fundAccount.commitmentForRegularSavign" /></h4>
+                        <h4 className="c-make-commitment__headline-description"><FormattedMessage id="fundAccount.commitmentForRegularSavign" /></h4>
                         <div className="c-make-commitment__wrapper-period">
                             <button
                                 className={`c-make-commitment__btn-period ${period === "week" && "c-make-commitment__btn-period--active"}`}

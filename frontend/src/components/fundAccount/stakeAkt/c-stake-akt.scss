@@ -28,15 +28,12 @@
     }
 
     &__headline {
-        margin: 0 auto $spacing-default * 2/10;
-        color: $color-grey;
         font-weight: $font-medium;
         text-align: center;
-        // to check
-        position: fixed;
-        color: $color-white;
+        color: $color-grey;
         width: 100%;
         top: $spacing-default * 4;
+        left: 0;
     }
 
     &__box {

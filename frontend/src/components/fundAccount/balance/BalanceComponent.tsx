@@ -33,7 +33,7 @@ export default class BalanceComponent extends React.Component<Props, State> {
 
         return (
             <>
-            <h4 className="c-balance__headline"><FormattedMessage id="fundAccount.fundYourAccount" /></h4> 
+            {/* <h4 className="c-balance__headline"><FormattedMessage id="fundAccount.fundYourAccount" /></h4>  */}
                 <div className="c-balance__wrapper">
                     {this.state.ETHBalanceChanged && (
                         <div className="c-balance__info-balance">
