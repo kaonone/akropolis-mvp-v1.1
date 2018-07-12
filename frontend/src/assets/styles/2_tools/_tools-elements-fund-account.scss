@@ -2,12 +2,19 @@
 
     &__wrapper-balance {
         display: flex;
+        flex: 1;
         flex-direction: column;
         text-align: center;
-        margin-left: $spacing-default * 4;
-        margin-right: $spacing-default * 4;
         position: relative;
-        margin-top: $spacing-default * 7;
+        margin-top: 30px;
+
+        &:first-of-type {
+            padding-right: $spacing-default;
+        }
+
+        &:last-of-type {
+            padding-left: $spacing-default;
+        }
     }
 
     &__label {

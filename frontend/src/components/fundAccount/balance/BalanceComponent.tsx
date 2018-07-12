@@ -1,6 +1,5 @@
 /* tslint:disable:no-implicit-dependencies */
 import PiktoBg from "-!svg-react-loader?name=Icon!../../../assets/images/pikto-bg.svg";
-import CheckIcon from "-!svg-react-loader?name=moneyIcon!../../../assets/images/check-icon.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -51,12 +50,6 @@ export default class BalanceComponent extends React.Component<Props, State> {
             <>
                 <div className="c-balance__wrapper">
                     <div className="c-balance__wrapper-content">
-                        {this.state.ETHBalanceChanged && (
-                            <div className="c-balance__info-balance">
-                                <CheckIcon className="c-balance__icon c-balance__icon-info" />
-                                {ETHBalance}<FormattedMessage id="fundAccount.ethObtainedForTest" />
-                            </div>
-                        )}
                         <div className="c-balance__wrapper-balance">
                             <div className="c-balance__balance">{ETHBalance}
                             </div>

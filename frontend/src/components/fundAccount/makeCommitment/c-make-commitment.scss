@@ -16,10 +16,10 @@
     &__headline {
         font-weight: $font-medium;
         text-align: center;
-        position: fixed;
+        position: absolute;
         color: $color-white;
         width: 100%;
-        top: $spacing-default * 3;
+        top: 0;
         left: 0;
     }
 
@@ -33,7 +33,7 @@
 
         @include boxContent(true);
         position: relative;
-        top: $spacing-default * 23;
+        top: 200px;
         margin-bottom: $padding-default;
     }
 
