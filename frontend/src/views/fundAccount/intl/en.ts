@@ -26,9 +26,11 @@ export default {
     "fundAccount.longerCommitmentsMeanMoreRewards": `Longer commitments mean more rewards. 
     If you break your commitment early you will forfeit any rewards accured.`,
     "fundAccount.makeCommitment": "Make commitment",
+    "fundAccount.month": "Month",
     "fundAccount.monthly": "Monthly",
     "fundAccount.obtainingFree": "Obtaining free {currency}",
     "fundAccount.period": "Period",
+    "fundAccount.quarter": "Quarter",
     "fundAccount.quarterly": "Quarterly",
     "fundAccount.stakingTokensMeansThatTheyWillBeLockedUp": "Staking tokens means that they will be locked up for the duration of your commitment period.",
     "fundAccount.theFirstContributionOf": "The first contribution of",
@@ -38,8 +40,9 @@ export default {
     "fundAccount.thisWillTrigger_2Transactions": `This will trigger 2 transactions. 
     The first will approve the transfer of the staked {stakeAKTValue} AKT. 
     The second will  transfer {eth} ETH as the initial contribution.`,
+    "fundAccount.week": "Week",
     "fundAccount.weekly": "Weekly",
-    "fundAccount.years": "years",
+    "fundAccount.years": "{years, plural, one {year} other {years}}",
     "fundAccount.youAreMakingACommitmentToContribute": "You are making a commitment to contribute",
     "fundAccount.youWillNeedSomeTestEtherToFundYourAccount": `You will need some test ether to fund your account.`,
     "fundAccount.youWillNeedToHaveAnEthereumEnabledBrowserToProceed": "You will need to have an Ethereum enabled browser to proceed.",
