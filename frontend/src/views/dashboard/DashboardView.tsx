@@ -92,7 +92,7 @@ export default class DashboardView extends React.Component<AllProps, any> {
                                 getNextContributionDate(this.props.portfolio.commitment)
                             )}</div>
                             <div className="v-dashboard__next-contribution">
-                                <span className="v-dashboard__unit">ETH</span>218</div>
+                                <span className="v-dashboard__unit">ETH</span>{(this.props.portfolio.commitment.amountToPay)}</div>
                         </div>
                     </div>
 
