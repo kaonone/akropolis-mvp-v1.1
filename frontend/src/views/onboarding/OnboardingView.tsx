@@ -1,3 +1,7 @@
+/* tslint:disable:no-implicit-dependencies */
+import bgMain from "../../assets/images/bg_main.png";
+/* tslint:enable:no-implicit-dependencies */
+
 import * as React from "react";
 
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
@@ -20,7 +24,7 @@ interface State {
 export interface Props {
     changeSlide: (value: number) => void;
     calculatePlanValuesServiceProps?: (value: any) => PlanAfterCalculate | void;
-    planAfterCalculate?: PlanAfterCalculate;
+    planAfterCalculate?: PlanAfterCalculate; 
 }
 
 export interface PropsFromDispatch {
@@ -73,7 +77,8 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
             return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
         }
         return (
-            <div className={`v-onboarding ${this.state.numberOfSlide === 1 && "v-onboarding--fullpage"}`}>
+            <div className={`v-onboarding ${this.state.numberOfSlide === 1 && "v-onboarding--fullpage"}`}
+                style={{ backgroundImage: `url(${bgMain})` }}>
                 {
                     this.state.numberOfSlide === 1 &&
                     <SlideOneComponent changeSlide={this.changeSlide}/>
