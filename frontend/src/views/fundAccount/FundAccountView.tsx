@@ -137,7 +137,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                         {(desc: string) => (
                                             <h3 className="u-modal__headline" dangerouslySetInnerHTML={{ __html: desc }} />
                                         )}
-                                    </FormattedMessage>
+                                    </FormattedMessage> 
                                 </div>
                             }
                             {(!isntEthereumBrowser() && isAccountExist(this.props.web3Accounts) &&

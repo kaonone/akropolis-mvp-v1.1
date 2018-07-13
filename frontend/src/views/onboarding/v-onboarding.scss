@@ -189,6 +189,7 @@
         right: 0;
         top: 0;
         height: $spacing-default * 28;
+        overflow: hidden;
     }
 
     &__wrapper-final-value {
