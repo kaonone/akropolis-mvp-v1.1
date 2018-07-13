@@ -1,3 +1,6 @@
+/* tslint:disable:no-implicit-dependencies */
+import SpinnerWhite from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-white.svg";
+/* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 import {NavLink} from "react-router-dom";
@@ -20,6 +23,7 @@ interface Props {
 interface State {
     isOpenDashboardModal: boolean;
     isOpenDeleteModal: boolean;
+    isWaiting: boolean;
 }
 
 export default class NavbarComponent extends React.Component<Props, State> {
@@ -27,6 +31,7 @@ export default class NavbarComponent extends React.Component<Props, State> {
     public readonly state: State = {
         isOpenDashboardModal: false,
         isOpenDeleteModal: false,
+        isWaiting: false
     };
 
     constructor(props: any) {
@@ -41,15 +46,18 @@ export default class NavbarComponent extends React.Component<Props, State> {
         const deleteModal = (
             <div className="c-confirmation-modal__box">
                 <h3 className="c-confirmation-modal__headline"><FormattedMessage id="nav.deleteMyDataDesc"/></h3>
-                <div className="c-confirmation-modal__btns">
-                    <button className="o-btn o-btn--basic o-btn--cancel" onClick={this.toggleDeleteModal}>
-                        <FormattedMessage id="fundAccount.cancel"/>
-                    </button>
-                    <button onClick={this.deleteData}
-                            className="o-btn o-btn--basic">
-                        <FormattedMessage id="fundAccount.confirm"/>
-                    </button>
-                </div>
+                {this.state.isWaiting ? (
+                    <div className="c-confirmation-modal__spinner"><SpinnerWhite/></div>
+                ) : (
+                    <div className="c-confirmation-modal__btns">
+                        <button className="o-btn o-btn--basic o-btn--cancel" onClick={this.toggleDeleteModal}>
+                            <FormattedMessage id="fundAccount.cancel"/>
+                        </button>
+                        <button onClick={this.deleteData} className="o-btn o-btn--basic">
+                            <FormattedMessage id="fundAccount.confirm"/>
+                        </button>
+                    </div>
+                )}
             </div>
         );
 
@@ -131,12 +139,20 @@ export default class NavbarComponent extends React.Component<Props, State> {
     }
 
     private deleteData() {
+        this.setState({
+            ...this.state,
+            isWaiting: true
+        });
         if (this.props.isPortfolio) {
             removeCommitment(this.props.web3Accounts.accountSelected)
                 .then(() => {
                     this.clearStorageAndRedirect();
                 })
                 .catch((err) => {
+                    this.setState({
+                        ...this.state,
+                        isWaiting: false
+                    });
                     this.toggleDeleteModal();
                 });
         } else {
@@ -145,6 +161,10 @@ export default class NavbarComponent extends React.Component<Props, State> {
     }
 
     private clearStorageAndRedirect() {
+        this.setState({
+            ...this.state,
+            isWaiting: false
+        });
         clearStorage();
         window.location.reload();
     }

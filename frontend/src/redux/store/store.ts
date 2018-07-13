@@ -17,7 +17,7 @@ import {Web3AccountsStore} from "./web3AccountsStore";
 import {Web3NetworkStore} from "./web3NetworkStore";
 import {Web3Store} from "./web3Store";
 
-const middleware = process.env.REACT_APP_STAGE === "prod" ? applyMiddleware(promise(), thunk, createLogger()) : applyMiddleware(promise(), thunk);
+const middleware = process.env.REACT_APP_STAGE !== "prod" ? applyMiddleware(promise(), thunk, createLogger()) : applyMiddleware(promise(), thunk);
 const reducers = combineReducers({
     portfolio: portfolioReducer,
     selectAFund: selectAFundReducer,

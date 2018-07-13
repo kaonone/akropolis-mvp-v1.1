@@ -8,6 +8,8 @@ import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
 import {Commitment} from "../models/Commitment";
 import {storeCommitment} from "./StorageService";
 
+import * as _ from "lodash";
+
 export const fetchPortfolio = (account: string) => {
     return new Promise((resolve, reject) => {
         if (!account) {
@@ -314,6 +316,30 @@ export const numberWithSpaces = (value: number | undefined): string => {
 };
 
 export const removeCommitment = (account: string) => {
+    function pollTransaction(superResolve: any, superReject: any, tx: string) {
+        const fn = () => {
+            // @ts-ignore
+            const {web3} = window;
+            web3.eth.getTransactionReceipt(tx, (error: any, result: any) => {
+                if (error) {
+                    superReject(error);
+                } else {
+                    if (_.isNull(result.blockNumber)) {
+                        pollTransaction(superResolve, superReject, tx);
+                    } else {
+                        if ((+result.status) === 0) {
+                            superReject("Transaction status fetch failed");
+                        } else {
+                            superResolve("Ok");
+                        }
+                    }
+                }
+
+            });
+        };
+        setTimeout(fn, 1000);
+    }
+
     return new Promise((resolve, reject) => {
         if (!account) {
             reject("no-account");
@@ -330,8 +356,7 @@ export const removeCommitment = (account: string) => {
                     if (err) {
                         reject(err);
                     } else {
-                        console.warn(response);
-                        resolve(response);
+                        pollTransaction(resolve, reject, response);
                     }
                 });
         });
