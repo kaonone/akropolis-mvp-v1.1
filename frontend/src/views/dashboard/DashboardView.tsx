@@ -9,13 +9,13 @@ import {Redirect} from "react-router";
 
 import DashboardChartComponent from "../../components/dashboard/dashboardChart/DashboardChartComponent";
 import LoaderComponent from "../../components/loader/LoaderComponent";
-
 import {getNextContributionDate} from "../../services/DashboardService";
 
 import {PortfolioStore} from "../../redux/store/portfolioStore";
 
 import {NAVIGATION} from "../../constants";
 
+import {getOnboardingData, getSelectedFund, getStoredCommitment, isEmpty} from "../../services/StorageService";
 import "./v-dashboard.css";
 
 export interface Props {
@@ -46,17 +46,13 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public shouldComponentUpdate(nextProps: Props, nextState: any) {
-        return !_.isEqual(nextProps.portfolio, this.props.portfolio) || this.props.account !== nextProps.account;
+        return !_.isEqual(nextProps.portfolio, this.props.portfolio);
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        const storedCommitment = localStorage.getItem(nextProps.account);
-        if ((this.props.account !== nextProps.account) && storedCommitment && !this.props.portfolio.portfolioExist) {
-            const commitment: any = JSON.parse(storedCommitment ? storedCommitment : "{}");
-            this.props.commitmentCreatedAction(commitment);
-        } else if (nextProps.account && nextProps.portfolio.portfolioExist && !nextProps.portfolio.commitmentFetching
-            && !nextProps.portfolio.commitmentFetched) {
-            this.props.fetchCommitmentAction(nextProps.account);
+        const storedCommitment = getStoredCommitment();
+        if (!isEmpty(storedCommitment) && isEmpty(nextProps.portfolio.commitment)) {
+            this.props.commitmentCreatedAction(storedCommitment);
         }
     }
 
@@ -69,7 +65,6 @@ export default class DashboardView extends React.Component<AllProps, any> {
     }
 
     public render() {
-
         if (this.waitingForCommitmentOrPortfolioCreate()) {
             return (
                 <div className="v-dashboard ">
@@ -79,7 +74,7 @@ export default class DashboardView extends React.Component<AllProps, any> {
             );
         }
 
-        if (this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist) {
+        if ((this.props.portfolio.portfolioFetched && this.props.portfolio.portfolioExist) || !isEmpty(getStoredCommitment())) {
             return (
                 <div className="v-dashboard">
 
@@ -127,10 +122,14 @@ export default class DashboardView extends React.Component<AllProps, any> {
                     </div>
                 </div>
             );
-        } else if (this.props.portfolio.portfolioFetched && !this.props.portfolio.portfolioExist) {
-            return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
         } else {
-            return null;
+            if (getSelectedFund() && isEmpty(getStoredCommitment())) {
+                return <Redirect to={`/${NAVIGATION.fundAccount}`}/>;
+            } else if (getOnboardingData()) {
+                return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
+            } else {
+                return <Redirect to={`/${NAVIGATION.onboarding}`}/>;
+            }
         }
     }
 

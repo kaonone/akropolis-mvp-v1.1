@@ -3,8 +3,7 @@ import {connect, Dispatch} from "react-redux";
 import {
     commitmentCreatedAction,
     fetchAKTBalanceAction,
-    fetchETHBalanceAction,
-    fetchPortfolioAction
+    fetchETHBalanceAction
 } from "../redux/actions/web3Action";
 import {ApplicationStore} from "../redux/store/store";
 
@@ -25,8 +24,7 @@ export function mapDispatchToProps(dispatch: Dispatch) {
     return {
         commitmentCreated: (commitment: Commitment) => dispatch(commitmentCreatedAction(commitment)),
         fetchAKTBalance: (account: string) => dispatch(fetchAKTBalanceAction(account)),
-        fetchETHBalance: (account: string) => dispatch(fetchETHBalanceAction(account)),
-        fetchPortfolio: (account: string) => dispatch(fetchPortfolioAction(account))
+        fetchETHBalance: (account: string) => dispatch(fetchETHBalanceAction(account))
     };
 }
 

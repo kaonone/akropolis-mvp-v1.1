@@ -1,21 +1,21 @@
 /* tslint:disable:no-implicit-dependencies */
 import SpinnerBlack from "-!svg-react-loader?name=moneyIcon!../../assets/images/spin-black.svg";
 import * as React from "react";
-import { FormattedMessage } from "react-intl";
-import { Redirect } from "react-router";
-import { NAVIGATION } from "../../constants";
-import { Commitment } from "../../models/Commitment";
+import {FormattedMessage} from "react-intl";
+import {Redirect} from "react-router";
+import {NAVIGATION} from "../../constants";
+import {Commitment} from "../../models/Commitment";
 
-import { config } from "../../config/config";
+import {config} from "../../config/config";
 
-import { approveTransfer, createCommitment } from "../../services/DataService";
-import { isAccountExist, isCorrectNetwork, isntEthereumBrowser } from "../../services/Web3Service";
+import {approveTransfer, createCommitment} from "../../services/DataService";
+import {isAccountExist, isCorrectNetwork, isntEthereumBrowser} from "../../services/Web3Service";
 
-import { Product } from "../../models/Products";
+import {Product} from "../../models/Products";
 
-import { Web3AccountsStore } from "../../redux/store/web3AccountsStore";
-import { Web3NetworkStore } from "../../redux/store/web3NetworkStore";
-import { Web3Store } from "../../redux/store/web3Store";
+import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
+import {Web3NetworkStore} from "../../redux/store/web3NetworkStore";
+import {Web3Store} from "../../redux/store/web3Store";
 
 import BalanceComponent from "../../components/fundAccount/balance/BalanceComponent";
 import ConfirmationModalComponent from "../../components/fundAccount/confirmationModal/ConfirmationModalComponent";
@@ -25,7 +25,11 @@ import ObtaningTokensComponent from "../../components/fundAccount/obtaningTokens
 import StakeAktComponent from "../../components/fundAccount/stakeAkt/StakeAktComponent";
 import ModalGlobalComponent from "../../components/modalGlobal/ModalGlobalComponent";
 
+import {getStoredCommitment, isEmpty, storeCommitment} from "../../services/StorageService";
 import "./v-fund-account.css";
+
+import * as _ from "lodash";
+
 /* tslint:enable:no-implicit-dependencies */
 
 export interface Props {
@@ -40,7 +44,6 @@ export interface PropsFromDispatch {
     commitmentCreated: (commitment: Commitment) => void;
     fetchAKTBalance: (account: string) => void;
     fetchETHBalance: (account: string) => void;
-    fetchPortfolio: (account: string) => void;
 }
 
 export interface StepOne {
@@ -105,22 +108,25 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        this.setState({
+        const newState = {
             ...this.state,
             ...nextProps.web3,
-        });
+        };
+        if (!_.isEqual(this.state, newState)) {
+            this.setState(newState);
+        }
     }
 
     public render() {
-        if (this.props.isPortfolio || localStorage.getItem(this.props.web3Accounts.accountSelected)) {
+        if (this.props.isPortfolio || !isEmpty(getStoredCommitment())) {
             return <Redirect to={`/${NAVIGATION.dashboard}`}/>;
         }
 
         return (
             <div className="v-fund-account">
                 {this.state.step !== 2 &&
-                    <>
-                        <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance} />
+                <>
+                    <BalanceComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}/>
 
                         {(isntEthereumBrowser() || !isAccountExist(this.props.web3Accounts)
                             || (config.network && !isCorrectNetwork(this.props.web3Network, config.network))) &&
@@ -135,7 +141,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                                         {(desc: string) => (
                                             <h3 className="u-modal__headline" dangerouslySetInnerHTML={{ __html: desc }} />
                                         )}
-                                    </FormattedMessage> 
+                                    </FormattedMessage>
                                 </>
                             }
                             {(!isntEthereumBrowser() && isAccountExist(this.props.web3Accounts) &&
@@ -155,32 +161,32 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
                 {(this.state.AKTBalance === 0 || this.state.ETHBalance === 0) && (
                     <ObtaningTokensComponent AKTBalance={this.state.AKTBalance} ETHBalance={this.state.ETHBalance}
-                        account={this.props.web3Accounts.accountSelected}
-                        fetchAKTBalance={this.props.fetchAKTBalance} />
+                                             account={this.props.web3Accounts.accountSelected}
+                                             fetchAKTBalance={this.props.fetchAKTBalance}/>
                 )}
 
                 {(this.state.AKTBalance !== 0 && this.state.ETHBalance !== 0) && (
                     <>
                         {this.state.step === 1 ? (
                             <MakeCommitmentComponent AKTBalance={this.state.AKTBalance}
-                                ETHBalance={this.state.ETHBalance}
-                                form={this.state.stepOne}
-                                onConfirm={this.handleStepOneConfirm} />
+                                                     ETHBalance={this.state.ETHBalance}
+                                                     form={this.state.stepOne}
+                                                     onConfirm={this.handleStepOneConfirm}/>
                         ) : (
-                                <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
-                                    form={this.state.stepTwo}
-                                    back={this.handleBack} />
-                            )}
+                            <StakeAktComponent onConfirm={this.handleStepTwoConfirm}
+                                               form={this.state.stepTwo}
+                                               back={this.handleBack}/>
+                        )}
                         {this.state.showModal &&
-                            <ModalGlobalComponent onClose={this.handleOnCloseModal}>
-                                <ConfirmationModalComponent
-                                    resultStepOne={this.state.stepOne}
-                                    resultStepTwo={this.state.stepTwo}
-                                    isOpenProps={this.state.isOpenModal}
-                                    isWaiting={this.state.waiting}
-                                    onClick={this.handleOnClick}
-                                    onClose={this.handleOnCloseModal} />
-                            </ModalGlobalComponent>
+                        <ModalGlobalComponent onClose={this.handleOnCloseModal}>
+                            <ConfirmationModalComponent
+                                resultStepOne={this.state.stepOne}
+                                resultStepTwo={this.state.stepTwo}
+                                isOpenProps={this.state.isOpenModal}
+                                isWaiting={this.state.waiting}
+                                onClick={this.handleOnClick}
+                                onClose={this.handleOnCloseModal}/>
+                        </ModalGlobalComponent>
                         }
                     </>
                 )}
@@ -189,7 +195,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
     }
 
     private handleOnClick = () => {
-        const data = { ...this.state.stepOne, ...this.state.stepTwo, ...this.props.product };
+        const data = {...this.state.stepOne, ...this.state.stepTwo, ...this.props.product};
         this.setState({
             ...this.state,
             waiting: true,
@@ -228,7 +234,7 @@ export default class FundAccountView extends React.Component<AllProps, State> {
                 showModal: false,
                 waiting: false,
             });
-            localStorage.setItem(this.props.web3Accounts.accountSelected, JSON.stringify(commitment));
+            storeCommitment(commitment);
             this.props.commitmentCreated(commitment);
         };
         setTimeout(fn, TIMEOUT);
