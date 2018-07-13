@@ -124,32 +124,30 @@ export default class FundAccountView extends React.Component<AllProps, State> {
 
                         {(isntEthereumBrowser() || !isAccountExist(this.props.web3Accounts)
                             || (config.network && !isCorrectNetwork(this.props.web3Network, config.network))) &&
-                        <ModalGlobalComponent onClose={this.handleOnCloseModal} areBottomOptions={true} isBackground={true}>
+                        <ModalGlobalComponent onClose={this.handleOnCloseModal} areBottomOptions={true}>
                             {isntEthereumBrowser() &&
-                                <div className="u-modal__wrapper">
                                     <DownloadingBrowserComponent />
-                                </div>
                             }
                             {(!isntEthereumBrowser() && !isAccountExist(this.props.web3Accounts)) &&
-                                <div className="u-modal__wrapper">
+                                <>
                                     <SpinnerBlack className="v-fund-account__icon" />
                                     <FormattedMessage id="web3.errorAccount.desc">
                                         {(desc: string) => (
                                             <h3 className="u-modal__headline" dangerouslySetInnerHTML={{ __html: desc }} />
                                         )}
                                     </FormattedMessage> 
-                                </div>
+                                </>
                             }
                             {(!isntEthereumBrowser() && isAccountExist(this.props.web3Accounts) &&
                                 (config.network && !isCorrectNetwork(this.props.web3Network, config.network))) &&
-                            <div className="u-modal__wrapper">
+                            <>
                                 <SpinnerBlack className="v-fund-account__icon" />
                                 <FormattedMessage id="fundAccount.incorrectNetwork" values={{ network: config.network }}>
                                     {(desc: string) => (
                                         <p dangerouslySetInnerHTML={{ __html: desc }} />
                                     )}
                                 </FormattedMessage>
-                            </div>
+                            </>
                             }
                         </ModalGlobalComponent>}
                     </>
