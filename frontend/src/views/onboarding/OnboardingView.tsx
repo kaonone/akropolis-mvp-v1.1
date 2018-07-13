@@ -2,10 +2,14 @@ import * as React from "react";
 
 import SlideOneComponent from "../../components/onboarding/SlideOneComponent";
 import SlideTwoComponent from "../../components/onboarding/SlideTwoComponent";
-import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
-import { calculatePlanValuesService } from "../../services/PlanService";
+import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
+import {calculatePlanValuesService} from "../../services/PlanService";
 
+import {getOnboardingData, storeOnboardingData} from "../../services/StorageService";
 import "./v-onboarding.css";
+
+import {Redirect} from "react-router";
+import {NAVIGATION} from "../../constants";
 
 interface State {
     numberOfSlide: 1 | 2;
@@ -38,15 +42,15 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         desiredAnnualIncome: 15000,
         existingPension: 0,
         fees: 0.0105,
-    inflation: 0.025,
+        inflation: 0.025,
         projectedReturns: undefined,
         savingPerMonth: 0
     };
 
     public readonly state: State = {
         numberOfSlide: 1,
-        plan: { ...this.initStateOfPlan },
-        planValues: { ...this.initStateOfPlanValues },
+        plan: {...this.initStateOfPlan},
+        planValues: {...this.initStateOfPlanValues},
     };
 
     constructor(props: any) {
@@ -65,11 +69,14 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     }
 
     public render() {
+        if (getOnboardingData()) {
+            return <Redirect to={`/${NAVIGATION.selectAFund}`}/>;
+        }
         return (
             <div className={`v-onboarding ${this.state.numberOfSlide === 1 && "v-onboarding--fullpage"}`}>
                 {
                     this.state.numberOfSlide === 1 &&
-                    <SlideOneComponent changeSlide={this.changeSlide} />
+                    <SlideOneComponent changeSlide={this.changeSlide}/>
                 }
 
                 {
@@ -89,7 +96,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
         this.setState({
             ...this.state,
             numberOfSlide: value,
-            planValues: value === 2 ? { ...this.initStateOfPlanValues } : { ...this.state.planValues },
+            planValues: value === 2 ? {...this.initStateOfPlanValues} : {...this.state.planValues},
         });
     }
 
@@ -103,7 +110,7 @@ export default class OnboardingView extends React.Component<PropsFromDispatch, S
     }
 
     private handleSave() {
-        localStorage.setItem("userData", JSON.stringify(this.state.plan));
+        storeOnboardingData(this.state.plan);
         this.props.saveData(this.state.plan);
     }
 }

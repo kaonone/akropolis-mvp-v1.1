@@ -6,6 +6,7 @@ import { Product } from "../../models/Products";
 
 import { NAVIGATION } from "../../constants";
 
+import {storeSelectedFund} from "../../services/StorageService";
 import "./v-select-fund.css";
 
 export interface Props {
@@ -109,7 +110,7 @@ export default class SelectAFundView extends React.Component<AllProps, State> {
 
     private selectProduct() {
         const product = this.props.data.filter((p: Product) => p.id === this.state.idOfcheckedProduct)[0];
-        localStorage.setItem("product", JSON.stringify(product));
+        storeSelectedFund(product);
         this.props.selectProduct(product);
     }
 }

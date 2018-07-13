@@ -6,6 +6,7 @@ import * as FundRegistry from "../contracts/FundRegistry.json";
 import * as PortfolioData from "../contracts/PortfolioData.json";
 import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
 import {Commitment} from "../models/Commitment";
+import {storeCommitment} from "./StorageService";
 
 export const fetchPortfolio = (account: string) => {
     return new Promise((resolve, reject) => {
@@ -116,7 +117,6 @@ export const approveTransfer = (account: string, AKT: number) => {
                     if (err) {
                         reject(err);
                     } else {
-                        console.warn(response);
                         resolve(response);
                     }
                 });
@@ -132,7 +132,8 @@ function executeGasPriced(account: string, reject: any, resolve: any) {
         if (error) {
             reject(error);
         } else {
-            resolve(3 * gasPrice.toNumber());
+            const minGasPrice = Math.max(3, 3 * web3.fromWei(gasPrice, "gwei").toNumber());
+            resolve(web3.toWei(minGasPrice, "gwei"));
         }
     });
 }
@@ -199,11 +200,16 @@ export const createCommitment = (account: string, data: any) => {
 };
 
 export const getCommitment = (account: string) => {
+    const tryResolveCommitment = (commitment: any, resolve: any) => {
+        if (Object.keys(commitment).length >= 6) {
+            storeCommitment(commitment);
+            resolve(commitment);
+        }
+    };
     return new Promise((resolve, reject) => {
         if (!account) {
             reject("no-account");
         }
-
         // @ts-ignore
         const {web3} = window;
 
@@ -213,6 +219,7 @@ export const getCommitment = (account: string) => {
         const portfolioData = web3.eth.contract(PortfolioData.abi).at(config.deployment.PortfolioData);
         executeGasPriced(account, reject, (gasPrice: any) => {
                 const commitment: any = {};
+
                 portfolioData.user_commitment(
                     account,
                     {gasPrice},
@@ -225,9 +232,7 @@ export const getCommitment = (account: string) => {
                             commitment.amountToPay = Math.round(eth.toNumber() * 10000) / 10000;
                             commitment.durationInYears = response[2];
                             commitment.createdAt = response[4];
-                            if (Object.keys(commitment).length >= 6) {
-                                resolve(commitment);
-                            }
+                            tryResolveCommitment(commitment, resolve);
                         }
                     });
                 portfolioData.user_allocations(
@@ -255,9 +260,7 @@ export const getCommitment = (account: string) => {
                                                     } else {
                                                         commitment.fundName = response3[0];
                                                         commitment.pastAnnualReturns = response3[4];
-                                                        if (Object.keys(commitment).length >= 6) {
-                                                            resolve(commitment);
-                                                        }
+                                                        tryResolveCommitment(commitment, resolve);
                                                     }
                                                 }
                                             );

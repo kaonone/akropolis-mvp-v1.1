@@ -1,5 +1,6 @@
 import * as React from "react";
 import {connect, Dispatch} from "react-redux";
+import {clearStorage, getStoredCommitment} from "../../services/StorageService";
 
 import {
     fetchAccountAction,
@@ -51,11 +52,13 @@ class Web3ProviderComponent extends React.Component<AllProps, {}> {
 
     public componentWillReceiveProps(nextProps: AllProps) {
         if (this.props.web3Accounts.accountSelected && (this.props.web3Accounts.accountSelected !== nextProps.web3Accounts.accountSelected)) {
-            localStorage.clear();
+            clearStorage();
             window.location.reload();
         } else if (nextProps.web3Accounts.accountSelected) {
             this.fetchBalances(nextProps.web3Accounts.accountSelected);
-            this.fetchPortfolio(nextProps.web3Accounts.accountSelected);
+            if (!getStoredCommitment()) {
+                this.fetchPortfolio(nextProps.web3Accounts.accountSelected);
+            }
         }
     }
 
