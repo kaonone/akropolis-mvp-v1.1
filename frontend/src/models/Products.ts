@@ -1,5 +1,5 @@
 export enum ProductRating {
-    CONSERVATIVE, BALANCED, AGGRESSIVE
+    DEFENSIVE, BALANCED, AGGRESSIVE
 }
 
 export interface Product {
@@ -18,12 +18,12 @@ function riskRatingToProductRating(risk: any) {
     } else if (risk > 50) {
         return ProductRating.BALANCED;
     } else {
-        return ProductRating.CONSERVATIVE;
+        return ProductRating.DEFENSIVE;
     }
 }
 
 function reputationRatingToStars(reputation: any): string {
-    return "" + (Math.round((reputation / 20) * 10) / 10);
+    return "" + (reputation / 10);
 }
 
 export function tupleToProduct(tuple: any): Product {
