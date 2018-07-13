@@ -41,6 +41,29 @@
       cursor: pointer;
       box-shadow: $shadow-primary;
     }
+
+    &::-moz-range-progress {
+      height: 4px;
+      background-color: $shadow-primary;
+      -moz-appearance: none;
+    }
+
+    &::-moz-range-track {
+      height: $spacing-default * 4/10;
+      background-color: transparent;
+    }
+
+    &::-moz-range-thumb {
+      margin-top: -$spacing-default * 1/10;
+      -webkit-appearance: none;
+      appearance: none;
+      width: $spacing-default * 2;
+      height: $spacing-default * 2;
+      border-radius: 50%;
+      background: $color-primary;
+      cursor: pointer;
+      box-shadow: $shadow-primary;
+    }
   }
 
   &__value-of-range {

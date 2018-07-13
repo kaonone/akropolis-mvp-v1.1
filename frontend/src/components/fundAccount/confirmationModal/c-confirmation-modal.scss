@@ -71,6 +71,8 @@
 
     &__spinner {
         text-align: center;
+        position: relative;
+        top: $spacing-default * 5;
     }
 
     &__pikto-bg {
