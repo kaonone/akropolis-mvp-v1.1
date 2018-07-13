@@ -245,6 +245,10 @@ export const getCommitment = (account: string) => {
                             reject(err);
                         } else {
                             commitment.fundAddress = response[2];
+                            if (!commitment.fundAddress || commitment.fundAddress.length < 3) {
+                                reject("Invalid address");
+                                return;
+                            }
                             try {
                                 fundRegistry.getFundIndexByAddress(
                                     commitment.fundAddress,
@@ -324,7 +328,7 @@ export const removeCommitment = (account: string) => {
                 if (error) {
                     superReject(error);
                 } else {
-                    if (_.isNull(result.blockNumber)) {
+                    if (!result || _.isNull(result.blockNumber)) {
                         pollTransaction(superResolve, superReject, tx);
                     } else {
                         if ((+result.status) === 0) {
