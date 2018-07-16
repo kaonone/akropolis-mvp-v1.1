@@ -24,7 +24,6 @@ import {PortfolioStore} from "../../redux/store/portfolioStore";
 
 export interface Props {
     account: string;
-    isPortfolio: boolean;
     portfolio: PortfolioStore;
     userData: PlanAfterCalculate;
     web3Accounts: Web3AccountsStore;
@@ -91,7 +90,7 @@ export default class LayoutView extends React.Component<AllProps, State> {
                 <div>
                     <NavigationWrapperComponent>
                         <NavbarComponent web3Accounts={this.props.web3Accounts}
-                                         isPortfolio={this.props.isPortfolio}/>
+                                         portfolio={this.props.portfolio}/>
                     </NavigationWrapperComponent>
                     <Route
                         exact={true}
