@@ -2,9 +2,11 @@ import * as moment from "moment";
 import {config} from "../config/config";
 import * as AkropolisToken from "../contracts/AkropolisToken.json";
 import * as AKTFaucet from "../contracts/AKTFaucet.json";
+import * as FundFunctional from "../contracts/FundFunctional.json";
 import * as FundRegistry from "../contracts/FundRegistry.json";
 import * as PortfolioData from "../contracts/PortfolioData.json";
 import * as PortfolioFunctional from "../contracts/PortfolioFunctional.json";
+import * as ShareToken from "../contracts/ShareToken.json";
 import {Commitment} from "../models/Commitment";
 import {storeCommitment} from "./StorageService";
 
@@ -361,6 +363,48 @@ export const removeCommitment = (account: string) => {
                         reject(err);
                     } else {
                         pollTransaction(resolve, reject, response);
+                    }
+                });
+        });
+    });
+};
+
+export const approveSharesTransfer = (account: string, commitment: Commitment) => {
+    return new Promise((resolve, reject) => {
+        if (!account) {
+            reject("no-account");
+        }
+        // @ts-ignore
+        const {web3} = window;
+
+        web3.eth.defaultAccount = account;
+        const fundFunctional = web3.eth.contract(FundFunctional.abi).at(commitment.fundAddress);
+        executeGasPriced(account, reject, (gasPrice: any) => {
+            fundFunctional.getShares(
+                account,
+                (err: any, shareBalance: any) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        fundFunctional.shares((err2: any, sharesAddress: any) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                const shares = web3.eth.contract(ShareToken.abi).at(sharesAddress);
+                                shares.increaseApproval(
+                                    commitment.fundAddress,
+                                    shareBalance,
+                                    {gasPrice},
+                                    (err3: any, response: any) => {
+                                        if (err3) {
+                                            reject(err3);
+                                        } else {
+                                            resolve(response);
+                                        }
+                                    });
+                            }
+                        });
+
                     }
                 });
         });

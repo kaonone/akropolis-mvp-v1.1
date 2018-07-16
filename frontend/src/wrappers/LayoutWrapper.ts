@@ -12,7 +12,6 @@ import { default as Component, Props, PropsFromDispatch } from "../views/layout/
 export function mapStateToProps({portfolio, userData, web3Accounts}: ApplicationStore) {
     return {
         account: web3Accounts.accountSelected,
-        isPortfolio: portfolio.portfolioFetched && portfolio.portfolioExist,
         portfolio,
         userData,
         web3Accounts

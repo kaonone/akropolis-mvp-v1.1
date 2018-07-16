@@ -8,14 +8,15 @@ import AKTBalance from "../../wrappers/ATKBalanceWrapper";
 import ModalGlobalComponent from "../modalGlobal/ModalGlobalComponent";
 
 import {NAVIGATION} from "../../constants";
+import {PortfolioStore} from "../../redux/store/portfolioStore";
 import {Web3AccountsStore} from "../../redux/store/web3AccountsStore";
-import {removeCommitment} from "../../services/DataService";
+import {approveSharesTransfer, removeCommitment} from "../../services/DataService";
 
 import {clearStorage} from "../../services/StorageService";
 import "./c-navbar.css";
 
 interface Props {
-    isPortfolio: boolean;
+    portfolio: PortfolioStore;
     message?: string;
     web3Accounts: Web3AccountsStore;
 }
@@ -71,13 +72,14 @@ export default class NavbarComponent extends React.Component<Props, State> {
                 </div>
             </div>
         );
-
+        const portfolio = this.props.portfolio;
+        const isPortfolio = (portfolio.portfolioFetched && portfolio.portfolioExist);
         return (
             <div>
                 <header className="c-navbar">
                     <a className="c-navbar__toggle" onClick={this.toggleMobileMenuClassName}/>
                     <ul className="c-navbar__wrapper">
-                        {this.props.isPortfolio ? (
+                        {isPortfolio ? (
                             <li className="c-navbar__item">
                                 <NavLink className="c-navbar__link" exact={true}
                                          to={`/${NAVIGATION.dashboard}`}>
@@ -143,18 +145,22 @@ export default class NavbarComponent extends React.Component<Props, State> {
             ...this.state,
             isWaiting: true
         });
-        if (this.props.isPortfolio) {
-            removeCommitment(this.props.web3Accounts.accountSelected)
+        const portfolio = this.props.portfolio;
+        if (portfolio.portfolioFetched && portfolio.portfolioExist) {
+            approveSharesTransfer(this.props.web3Accounts.accountSelected, portfolio.commitment)
                 .then(() => {
-                    this.clearStorageAndRedirect();
+                    return removeCommitment(this.props.web3Accounts.accountSelected);
                 })
-                .catch((err) => {
-                    this.setState({
-                        ...this.state,
-                        isWaiting: false
-                    });
+                .then(() => {
                     this.toggleDeleteModal();
+                    this.clearStorageAndRedirect();
+                }).catch((err: any) => {
+                console.log("err", err);
+                this.setState({
+                    ...this.state,
+                    isWaiting: false
                 });
+            });
         } else {
             this.clearStorageAndRedirect();
         }
