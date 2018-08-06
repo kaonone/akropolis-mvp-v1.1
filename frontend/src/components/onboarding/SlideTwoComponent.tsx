@@ -2,12 +2,12 @@
 import PiktoBg from "-!svg-react-loader?name=Icon!../../assets/images/pikto-bg.svg";
 /* tslint:enable:no-implicit-dependencies */
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
-import {Link} from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 import InputRange from "../inputRange/InputRangeComponent";
 
-import {NAVIGATION} from "../../constants";
-import {PlanAfterCalculate, PlanValues} from "../../models/Onboarding";
+import { NAVIGATION } from "../../constants";
+import { PlanAfterCalculate, PlanValues } from "../../models/Onboarding";
 
 interface Props {
     onSave: () => void;
@@ -37,12 +37,12 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
     }
 
     public componentWillMount() {
-        this.setState({...this.props.planValues});
+        this.setState({ ...this.props.planValues });
     }
 
     public render() {
 
-        const {plan} = this.props;
+        const { plan } = this.props;
         // const minAgeAtRetirement = this.state.currentAge ? this.state.currentAge + 1 : 0;
 
         const planNeedToSave = plan.needToSave > 0 ?
@@ -57,7 +57,7 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
             (
                 <div className="v-onboarding__wrapper-final-value">
                     <span className="v-onboarding__final-value-currency v-onboarding__final-value-currency--message">
-                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything"/>
+                        <FormattedMessage id="onboarding.itSeemsYouDonTNeedToSaveAnything" />
                     </span>
                 </div>
             );
@@ -68,26 +68,26 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
                     <div
                         className="v-onboarding__wrapper-final-value-item">
                         <h4 className="v-onboarding__describe-value">
-                            <FormattedMessage id="onboarding.youNeedToSave"/>
+                            <FormattedMessage id="onboarding.youNeedToSave" />
                         </h4>
                         {planNeedToSave}
                     </div>
-                    <PiktoBg className="v-onboarding__pikto-bg"/>
+                    <PiktoBg className="v-onboarding__pikto-bg" />
                 </div>
                 <div className="v-onboarding__box-content">
                     <div className="v-onboarding__section">
                         <div className="v-onboarding__section-title">
-                            <FormattedMessage id="onboarding.desiredAnnualIncomeAfterRetirement"/>
+                            <FormattedMessage id="onboarding.desiredAnnualIncomeAfterRetirement" />
                         </div>
                         <InputRange value={this.state.desiredAnnualIncome} max={200000} min={0} symbol="$"
-                                    onChange={this.handleRangeChange("desiredAnnualIncome")}/>
+                            onChange={this.handleRangeChange("desiredAnnualIncome")} />
                     </div>
                     <div className="v-onboarding__section">
                         <div className="v-onboarding__section-title">
-                            <FormattedMessage id="onboarding.valueOfMyExistingPensionPots"/>
+                            <FormattedMessage id="onboarding.valueOfMyExistingPensionPots" />
                         </div>
                         <InputRange value={this.state.existingPension} max={1000000} min={0} symbol="$"
-                                    onChange={this.handleRangeChange("existingPension")}/>
+                            onChange={this.handleRangeChange("existingPension")} />
                     </div>
                     <div className="v-onboarding__wrapper-age-inputs">
                         <div className="v-onboarding__wrapper-age-input">
@@ -97,15 +97,14 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
                                     max="100"
                                     value={this.state.currentAge}
                                     onChange={this.onChange}
-                                    onBlur={this.onBlur}
                                     onKeyDown={this.onKeyDown}
                                     className="o-form__input o-form__input--number"
                                     type="number"
                                     name="currentAge"
-                                    placeholder={enterAge}/>}
+                                    placeholder={enterAge} />}
                             </FormattedMessage>
                             <label className="o-form__input-label">
-                                <FormattedMessage id="onboarding.myCurrentAge"/>
+                                <FormattedMessage id="onboarding.myCurrentAge" />
                             </label>
                         </div>
                         <div className="v-onboarding__wrapper-age-input">
@@ -115,21 +114,20 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
                                     max="100"
                                     value={this.state.ageAtRetirement}
                                     onChange={this.onChange}
-                                    onBlur={this.onBlur}
                                     onKeyDown={this.onKeyDown}
                                     className="o-form__input o-form__input--number"
                                     type="number"
                                     name="ageAtRetirement"
-                                    placeholder={ageAtRetirement}/>}
+                                    placeholder={ageAtRetirement} />}
                             </FormattedMessage>
                             <label className="o-form__input-label">
-                                <FormattedMessage id="onboarding.ageAtRetirement"/>
+                                <FormattedMessage id="onboarding.ageAtRetirement" />
                             </label>
                         </div>
                     </div>
                     <Link to={`/${NAVIGATION.selectAFund}`} onClick={this.save}
-                          className="o-btn o-btn--wide v-onboarding__btn">
-                        <FormattedMessage id="onboarding.startSaving"/>
+                        className="o-btn o-btn--wide v-onboarding__btn">
+                        <FormattedMessage id="onboarding.startSaving" />
                     </Link>
                 </div>
             </div>
@@ -157,26 +155,6 @@ export default class SlideTwoComponent extends React.Component<Props, PlanValues
     }
 
     private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState = {
-            ...this.state,
-        };
-        if (event.target.value) {
-            newState[event.target.name] = parseFloat(event.target.value) || 0;
-            this.setState({
-                ...this.state,
-                ...newState,
-            });
-        } else {
-            newState[event.target.name] = undefined;
-            this.setState({
-                ...this.state,
-                ...newState,
-            });
-        }
-        this.props.onChange(newState);
-    }
-
-    private onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newState = {
             ...this.state,
         };
