@@ -3,6 +3,9 @@
 [![CircleCI](https://circleci.com/gh/akropolisio/akropolis-poc.svg?style=shield&circle-token=1c036c16b034cd36ffb33011c518a2ec6af2d2dc)](https://circleci.com/gh/akropolisio/akropolis-poc)
 
 ### Overview
+
+This project contains the MVP Version 1.1 for the Akropolis Project. We are currently iterating on this project and creating new software. 
+
 ### Installation
 ### Running tests
 ### Running locally
